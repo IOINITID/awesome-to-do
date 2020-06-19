@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-// import PropTypes from 'prop-types';
 
 import './search.css';
 
@@ -10,7 +9,7 @@ export default class Search extends Component {
 
   render() {
     return (
-      <input className="search" type="text" value="" placeholder="Type to search..." />
+      <input className="search" type="search" placeholder="Type to search..." />
     );
   }
 }

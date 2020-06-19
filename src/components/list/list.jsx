@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-// import PropTypes from 'prop-types';
 import Item from '../item/item.jsx';
 
 import './list.css';
@@ -12,6 +11,8 @@ export default class List extends Component {
   render() {
     return (
       <ul className="list">
+        <Item />
+        <Item />
         <Item />
       </ul>
     );

@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-// import PropTypes from 'prop-types';
 
 import './item.css';
 
@@ -11,9 +10,9 @@ export default class Item extends Component {
   render() {
     return (
       <p className="item">
-        <span>Item one...</span>
-        <button>Del</button>
-        <button>Add</button>
+        <span className="item__title">Something to do...</span>
+        <button className="item__delete">Delete</button>
+        <button className="item__add">Add</button>
       </p>
     );
   }
