@@ -25,6 +25,10 @@ export default class Form extends Component {
       evt.preventDefault();
 
       this.props.onAdd(this.state.title);
+
+      this.setState({
+        title: ``
+      });
     };
   }
 
@@ -33,7 +37,7 @@ export default class Form extends Component {
 
     return (
       <form className="form" onSubmit={this.onFormSubmit}>
-        <input type="text" className="form__input" onChange={this.onFormInputChange} placeholder="What should be done?" required/>
+        <input type="text" className="form__input" onChange={this.onFormInputChange} value={this.state.title} placeholder="What should be done?" required/>
         <button className="form_button">Add</button>
       </form>
     );
