@@ -53,22 +53,48 @@ export default class App extends Component {
     };
 
     this.onItemDone = (id) => {
-      console.log(`Is done ${id}`);
+      this.setState((state) => {
+        const itemsData = state.itemsData.slice();
+
+        itemsData.map((item) => {
+          if (item.id === id) {
+            item.isDone = !item.isDone;
+          }
+        });
+
+        return {
+          itemsData
+        };
+      });
     };
 
     this.onItemFixed = (id) => {
-      console.log(`Is fixed ${id}`);
+      this.setState((state) => {
+        const itemsData = state.itemsData.slice();
+
+        itemsData.map((item) => {
+          if (item.id === id) {
+            item.isFixed = !item.isFixed;
+          }
+        });
+
+        return {
+          itemsData
+        };
+      });
     };
   }
 
   render() {
     const {itemsData} = this.state;
+    const itemsDone = itemsData.filter((item) => item.isDone).length;
+    const itemsNotDone = itemsData.filter((item) => !item.isDone).length;
 
     return (
       <div className="wrapper">
         <Header
-          toDoQuantity={3}
-          toDoDone={1}
+          toDoQuantity={itemsNotDone}
+          toDoDone={itemsDone}
         />
         <div className="search-and-filter">
           <Search />

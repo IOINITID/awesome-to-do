@@ -11,10 +11,20 @@ export default class Form extends Component {
   constructor() {
     super();
 
-    this.onFormButtonClick = (evt) => {
+    this.state = {
+      title: ``
+    };
+
+    this.onFormInputChange = (evt) => {
+      this.setState({
+        title: evt.target.value
+      });
+    };
+
+    this.onFormSubmit = (evt) => {
       evt.preventDefault();
 
-      this.props.onAdd(`Hello!`);
+      this.props.onAdd(this.state.title);
     };
   }
 
@@ -22,9 +32,9 @@ export default class Form extends Component {
     // const {onAdd} = this.props;
 
     return (
-      <form className="form">
-        <input type="text" className="form__input" placeholder="What should be done?" />
-        <button className="form_button" onClick={this.onFormButtonClick}>Add</button>
+      <form className="form" onSubmit={this.onFormSubmit}>
+        <input type="text" className="form__input" onChange={this.onFormInputChange} placeholder="What should be done?" required/>
+        <button className="form_button">Add</button>
       </form>
     );
   }
