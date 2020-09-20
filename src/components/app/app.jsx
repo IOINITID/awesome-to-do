@@ -8,11 +8,17 @@ import Form from '../form/form.jsx';
 import './app.css';
 
 export default class App extends Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   render() {
+    const itemsData = [
+      {title: `Дело номер один`},
+      {title: `Дело номер два`},
+      {title: `Дело номер три`},
+    ];
+
     return (
       <div className="wrapper">
         <Header
@@ -23,7 +29,7 @@ export default class App extends Component {
           <Search />
           <Filter />
         </div>
-        <List />
+        <List itemsData={itemsData} />
         <Form />
       </div>
     );
