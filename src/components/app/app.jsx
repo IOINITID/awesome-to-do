@@ -18,9 +18,9 @@ export default class App extends Component {
 
     this.state = {
       itemsData: [
-        {title: `Дело номер один`, isDone: false, id: uuid()},
-        {title: `Дело номер два`, isDone: false, id: uuid()},
-        {title: `Дело номер три`, isDone: false, id: uuid()}
+        {title: `Дело номер один`, isDone: false, isFixed: false, id: uuid()},
+        {title: `Дело номер два`, isDone: false, isFixed: false, id: uuid()},
+        {title: `Дело номер три`, isDone: false, isFixed: false, id: uuid()}
       ]
     };
 
@@ -40,6 +40,7 @@ export default class App extends Component {
         const itemData = {
           title: description,
           isDone: false,
+          isFixed: false,
           id: uuid()
         };
 
@@ -49,6 +50,14 @@ export default class App extends Component {
           itemsData
         };
       });
+    };
+
+    this.onItemDone = (id) => {
+      console.log(`Is done ${id}`);
+    };
+
+    this.onItemFixed = (id) => {
+      console.log(`Is fixed ${id}`);
     };
   }
 
@@ -65,7 +74,7 @@ export default class App extends Component {
           <Search />
           <Filter />
         </div>
-        <List itemsData={itemsData} onDelete={this.onItemDelete}/>
+        <List itemsData={itemsData} onDelete={this.onItemDelete} onDone={this.onItemDone} onFixed={this.onItemFixed}/>
         <Form onAdd={this.onItemAdd} />
       </div>
     );
