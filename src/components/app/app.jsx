@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {v4 as uuid} from 'uuid';
 import Header from '../header/header.jsx';
 import Search from '../search/search.jsx';
 import Filter from '../filter/filter.jsx';
@@ -17,15 +18,32 @@ export default class App extends Component {
 
     this.state = {
       itemsData: [
-        {title: `Дело номер один`, isDone: false, id: 1},
-        {title: `Дело номер два`, isDone: false, id: 2},
-        {title: `Дело номер три`, isDone: false, id: 3}
+        {title: `Дело номер один`, isDone: false, id: uuid()},
+        {title: `Дело номер два`, isDone: false, id: uuid()},
+        {title: `Дело номер три`, isDone: false, id: uuid()}
       ]
     };
 
     this.onItemDelete = (id) => {
       this.setState((state) => {
         const itemsData = state.itemsData.filter((item) => item.id !== id);
+
+        return {
+          itemsData
+        };
+      });
+    };
+
+    this.onItemAdd = (description) => {
+      this.setState((state) => {
+        const itemsData = state.itemsData.slice();
+        const itemData = {
+          title: description,
+          isDone: false,
+          id: uuid()
+        };
+
+        itemsData.push(itemData);
 
         return {
           itemsData
@@ -48,7 +66,7 @@ export default class App extends Component {
           <Filter />
         </div>
         <List itemsData={itemsData} onDelete={this.onItemDelete}/>
-        <Form />
+        <Form onAdd={this.onItemAdd} />
       </div>
     );
   }
