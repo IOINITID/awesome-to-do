@@ -10,16 +10,15 @@ export default class List extends Component {
   // }
 
   render() {
-    const {itemsData} = this.props;
+    const {itemsData, onDelete} = this.props;
 
     return (
       <ul className="list">
         {
-          itemsData.map((item, index) => {
-            const key = `${item}-${index}`;
+          itemsData.map((item) => {
             const {title} = item;
 
-            return <Item key={key} title={title}/>;
+            return <Item key={item.id} title={title} onDelete={() => onDelete(item.id)}/>;
           })
         }
       </ul>
@@ -28,5 +27,6 @@ export default class List extends Component {
 }
 
 List.propTypes = {
-  itemsData: PropTypes.array.isRequired
+  itemsData: PropTypes.array.isRequired,
+  onDelete: PropTypes.func.isRequired
 };

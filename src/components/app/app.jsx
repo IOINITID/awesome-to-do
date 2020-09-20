@@ -12,12 +12,30 @@ export default class App extends Component {
   //   super(props);
   // }
 
+  constructor() {
+    super();
+
+    this.state = {
+      itemsData: [
+        {title: `Дело номер один`, isDone: false, id: 1},
+        {title: `Дело номер два`, isDone: false, id: 2},
+        {title: `Дело номер три`, isDone: false, id: 3}
+      ]
+    };
+
+    this.onItemDelete = (id) => {
+      this.setState((state) => {
+        const itemsData = state.itemsData.filter((item) => item.id !== id);
+
+        return {
+          itemsData
+        };
+      });
+    };
+  }
+
   render() {
-    const itemsData = [
-      {title: `Дело номер один`},
-      {title: `Дело номер два`},
-      {title: `Дело номер три`},
-    ];
+    const {itemsData} = this.state;
 
     return (
       <div className="wrapper">
@@ -29,7 +47,7 @@ export default class App extends Component {
           <Search />
           <Filter />
         </div>
-        <List itemsData={itemsData} />
+        <List itemsData={itemsData} onDelete={this.onItemDelete}/>
         <Form />
       </div>
     );
