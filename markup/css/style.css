@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "SF Pro Display";
+  font-weight: 400;
+  src: url("../fonts/SFProDisplay-Regular.woff2") format("woff2"),
+    url("../fonts/SFProDisplay-Regular.woff") format("woff"),
+    url("../fonts/SFProDisplay-Regular.ttf") format("truetype");
+}
+
 *,
 *::before,
 *::after {
@@ -27,16 +35,26 @@ body {
   clip: rect(0 0 0 0);
 }
 
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(252, 252, 252, 0.3);
+  z-index: 10;
+}
+
 .main {
   flex-grow: 1;
   position: relative;
 }
 
 .container {
-  /* width: 100%; */
-  max-width: 1380px;
+  width: 100%;
+  /* max-width: 1380px; */
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 70px;
 }
 
 .container--flex {
@@ -244,6 +262,10 @@ body {
 .menu__link {
   color: #ffffff;
   text-decoration: none;
+  font-family: "SF Pro Display", "Arial", sans-serif;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 29px;
 }
 
 .menu__icon {}
@@ -277,7 +299,7 @@ body {
   transition: 0.75s ease-in-out;
 }
 
-.form__button {
+.form__link {
   /* position: absolute; */
   /* top: 3px; */
   /* left: 5px; */
@@ -295,7 +317,7 @@ body {
   position: relative;
   transition: 0.75s ease-in-out;
   cursor: pointer;
-  outline: none;
+  /* outline: none; */
 }
 
 .form__icon {
@@ -305,26 +327,26 @@ body {
   transform: translate(-50%, -50%);
 }
 
-.form__button:hover .form__icon path,
-.form__button:focus .form__icon path {
+.form__link:hover .form__icon path,
+.form__link:focus .form__icon path {
   fill: rgba(255, 255, 255, 0.7);
 }
 
-.form__button:hover::before,
-.form__button:focus::before {
+.form__link:hover::before,
+.form__link:focus::before {
   opacity: 0.5;
 }
 
-.form__button:active::before {
+.form__link:active::before {
   /* content: none; */
   visibility: hidden;
 }
 
-.form__button:active .form__icon path {
+.form__link:active .form__icon path {
   fill: #ffffff;
 }
 
-.form__button::before {
+.form__link::before {
   content: "";
   width: 40px;
   height: 40px;
@@ -344,6 +366,11 @@ body {
   /* appearance: none; */
   outline: none;
   transition: 0.75s ease-in-out;
+  display: none;
+}
+
+.from__search::-webkit-search-cancel-button {
+  display: none;
 }
 
 .form--active {
@@ -360,4 +387,18 @@ body {
   width: 100%;
   height: 100%;
   margin: 0 20px;
+  display: block;
+}
+
+.tasks {}
+
+.tasks__title {
+  font-family: "SF Pro Display", "Arial", sans-serif;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 36px;
+  color: #ffffff;
+  margin: 0;
+  margin-top: 30px;
+  margin-bottom: 11px;
 }
