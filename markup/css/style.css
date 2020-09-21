@@ -114,6 +114,9 @@ body {
   box-shadow: -4px -4px 16px rgba(88, 76, 98, 0.25), 3px 3px 12px rgba(0, 0, 0, 0.2), inset 4px 4px 8px rgba(0, 0, 0, 0.35);
   border-radius: 10px;
   /* outline: none; */
+  border: none;
+  padding: 0;
+  margin: 0;
 }
 
 .navigation__link::before {
@@ -299,7 +302,7 @@ body {
   transition: 0.75s ease-in-out;
 }
 
-.form__link {
+.form__button {
   /* position: absolute; */
   /* top: 3px; */
   /* left: 5px; */
@@ -315,7 +318,7 @@ body {
   align-items: center;
   justify-content: center;
   position: relative;
-  transition: 0.75s ease-in-out;
+  /* transition: 0.75s ease-in-out; */
   cursor: pointer;
   /* outline: none; */
 }
@@ -327,26 +330,26 @@ body {
   transform: translate(-50%, -50%);
 }
 
-.form__link:hover .form__icon path,
-.form__link:focus .form__icon path {
+.form__button:hover .form__icon path,
+.form__button:focus .form__icon path {
   fill: rgba(255, 255, 255, 0.7);
 }
 
-.form__link:hover::before,
-.form__link:focus::before {
+.form__button:hover::before,
+.form__button:focus::before {
   opacity: 0.5;
 }
 
-.form__link:active::before {
+.form__button:active::before {
   /* content: none; */
   visibility: hidden;
 }
 
-.form__link:active .form__icon path {
+.form__button:active .form__icon path {
   fill: #ffffff;
 }
 
-.form__link::before {
+.form__button::before {
   content: "";
   width: 40px;
   height: 40px;
@@ -400,5 +403,34 @@ body {
   color: #ffffff;
   margin: 0;
   margin-top: 30px;
-  margin-bottom: 11px;
+  margin-bottom: 15px;
+}
+
+.tasks__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tasks__item {
+  max-width: 1130px;
+  min-height: 60px;
+  background: linear-gradient(140.4deg, #271827 3%, #2C2535 115.66%);
+  box-shadow: -4px -4px 16px rgba(88, 76, 98, 0.25), 3px 3px 12px rgba(0, 0, 0, 0.2), inset 4px 4px 8px rgba(0, 0, 0, 0.35);
+  border-radius: 10px;
+  padding: 19px 30px 20px 30px;
+  margin-bottom: 20px;
+}
+
+.tasks__item:last-child {
+  margin-bottom: 0;
+}
+
+.tasks__description {
+  margin: 0;
+  font-family: "SF Pro Display", "Arial", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21px;
+  color: #ffffff;
 }
