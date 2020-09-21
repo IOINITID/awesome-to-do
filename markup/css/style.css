@@ -155,7 +155,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: 0.5s ease-in-out;
+  transition: 0.75s ease-in-out;
   transform: translateX(0);
   /* transform: translateX(51px); */
   position: relative;
@@ -198,7 +198,11 @@ body {
   top: 0;
   left: 0;
   transition: 0.75s ease-in-out;
-  /* transform: translateX(-376px); */
+  transform: translateX(-376px);
+}
+
+.menu--active {
+  transform: translateX(0);
 }
 
 .menu__list {
@@ -254,7 +258,7 @@ body {
   position: relative;
   width: 52px;
   height: 52px;
-  transition: 0.5s ease-in-out;
+  transition: 0.75s ease-in-out;
 }
 
 .from__label {
@@ -270,7 +274,7 @@ body {
   /* justify-content: center; */
   position: relative;
   padding: 3px 5px;
-  transition: 0.5s ease-in-out;
+  transition: 0.75s ease-in-out;
 }
 
 .form__button {
@@ -289,7 +293,7 @@ body {
   align-items: center;
   justify-content: center;
   position: relative;
-  transition: 0.5s ease-in-out;
+  transition: 0.75s ease-in-out;
   cursor: pointer;
   outline: none;
 }
@@ -339,7 +343,7 @@ body {
   color: #ffffff;
   /* appearance: none; */
   outline: none;
-  transition: 0.5s ease-in-out;
+  transition: 0.75s ease-in-out;
 }
 
 .form--active {
