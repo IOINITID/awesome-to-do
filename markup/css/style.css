@@ -172,10 +172,16 @@ body {
   align-items: center;
   justify-content: center;
   transition: 0.75s ease-in-out;
-  transform: translateX(0);
-  /* transform: translateX(51px); */
   position: relative;
   z-index: 1;
+}
+
+.theme--dark .theme__button {
+  transform: translateX(0);
+}
+
+.theme--light .theme__button {
+  transform: translateX(51px);
 }
 
 .theme__button::before {
