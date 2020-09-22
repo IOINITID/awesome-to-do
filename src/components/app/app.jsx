@@ -1,12 +1,12 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import {v4 as uuid} from 'uuid';
 import Header from '../header/header.jsx';
-import Search from '../search/search.jsx';
-import Filter from '../filter/filter.jsx';
-import List from '../list/list.jsx';
-import Form from '../form/form.jsx';
+// import Search from '../search/search.jsx';
+// import Filter from '../filter/filter.jsx';
+// import List from '../list/list.jsx';
+// import Form from '../form/form.jsx';
 
-import './app.css';
+// import './app.css';
 
 export default class App extends Component {
   // constructor(props) {
@@ -86,23 +86,26 @@ export default class App extends Component {
   }
 
   render() {
-    const {itemsData} = this.state;
-    const itemsDone = itemsData.filter((item) => item.isDone).length;
-    const itemsNotDone = itemsData.filter((item) => !item.isDone).length;
+    // const {itemsData} = this.state;
+    // const itemsDone = itemsData.filter((item) => item.isDone).length;
+    // const itemsNotDone = itemsData.filter((item) => !item.isDone).length;
 
     return (
-      <div className="wrapper">
-        <Header
-          toDoQuantity={itemsNotDone}
-          toDoDone={itemsDone}
-        />
-        <div className="search-and-filter">
-          <Search />
-          <Filter />
-        </div>
-        <List itemsData={itemsData} onDelete={this.onItemDelete} onDone={this.onItemDone} onFixed={this.onItemFixed}/>
-        <Form onAdd={this.onItemAdd} />
-      </div>
+      <Fragment>
+        <Header></Header>
+      </Fragment>
+      // <div className="wrapper">
+      //   <Header
+      //     toDoQuantity={itemsNotDone}
+      //     toDoDone={itemsDone}
+      //   />
+      //   <div className="search-and-filter">
+      //     <Search />
+      //     <Filter />
+      //   </div>
+      //   <List itemsData={itemsData} onDelete={this.onItemDelete} onDone={this.onItemDone} onFixed={this.onItemFixed}/>
+      //   <Form onAdd={this.onItemAdd} />
+      // </div>
     );
   }
 }
