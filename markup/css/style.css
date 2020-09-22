@@ -397,13 +397,34 @@ body {
   color: #ffffff;
   margin: 0;
   margin-top: 30px;
-  margin-bottom: 15px;
+  /* margin-bottom: 15px; */
+  margin-bottom: 5px;
 }
 
 .tasks__list {
   list-style: none;
   padding: 0;
   margin: 0;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  max-height: 560px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.tasks__list::-webkit-scrollbar {
+  width: 9px;
+  background: linear-gradient(140.4deg, #271827 3%, #2C2535 115.66%);
+  box-shadow: -4px -4px 16px rgba(88, 76, 98, 0.25), 3px 3px 12px rgba(0, 0, 0, 0.2), inset 4px 4px 8px rgba(0, 0, 0, 0.35);
+  border-radius: 10px;
+}
+
+.tasks__list::-webkit-scrollbar-thumb {
+  width: 5px;
+  border: 2px solid #1A1523;
+  background: linear-gradient(154.25deg, #4D3C50 21.96%, #1A1523 100.49%);
+  box-shadow: 3px 3px 16px #000000;
+  border-radius: 8px;
 }
 
 .tasks__item {
@@ -412,8 +433,27 @@ body {
   background: linear-gradient(140.4deg, #271827 3%, #2C2535 115.66%);
   box-shadow: -4px -4px 16px rgba(88, 76, 98, 0.25), 3px 3px 12px rgba(0, 0, 0, 0.2), inset 4px 4px 8px rgba(0, 0, 0, 0.35);
   border-radius: 10px;
-  padding: 19px 30px 20px 30px;
+  padding: 0px 30px;
   margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.tasks__item--fixed::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: 3px;
+  width: 29px;
+  height: 29px;
+  background-image: url("../img/task-pin-icon.svg");
+}
+
+.tasks__item--done {
+  background: linear-gradient(154.25deg, #4D3C50 21.96%, #1A1523 100.49%);
+  /* box-shadow: 3px 3px 16px #000000; */
+  border-radius: 8px;
 }
 
 .tasks__item:last-child {
@@ -427,4 +467,179 @@ body {
   font-size: 18px;
   line-height: 21px;
   color: #ffffff;
+  margin-right: auto;
+}
+
+.button {
+  position: relative;
+  width: 46px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(140.4deg, #271827 3%, #2C2535 115.66%);
+  box-shadow: -4px -4px 16px rgba(88, 76, 98, 0.25), 3px 3px 12px rgba(0, 0, 0, 0.2), inset 4px 4px 8px rgba(0, 0, 0, 0.35);
+  border-radius: 10px;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.button::before {
+  content: "";
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(154.25deg, #4D3C50 21.96%, #1A1523 100.49%);
+  box-shadow: 3px 3px 16px #000000;
+  border-radius: 8px;
+}
+
+.button--active::before {
+  visibility: hidden;
+}
+
+.button:hover .button__icon,
+.button:focus .button__icon {
+  /* fill: rgba(255, 255, 255, 0.7); */
+  opacity: 0.7;
+}
+
+.button:hover::before,
+.button:focus::before {
+  opacity: 0.5;
+}
+
+.button:active::before {
+  visibility: hidden;
+}
+
+.button:active .button__icon {
+  /* fill: #ffffff; */
+  opacity: 1;
+}
+
+.button__icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.tasks__done {
+  /* margin-left: auto; */
+  margin-right: 30px;
+}
+
+.more {
+  position: absolute;
+  top: 0;
+  right: -140px;
+  width: 135px;
+  height: 75px;
+  background: linear-gradient(140.4deg, #271827 3%, #2C2535 115.66%);
+  box-shadow: -4px -4px 16px rgba(88, 76, 98, 0.25), 3px 3px 12px rgba(0, 0, 0, 0.2), inset 4px 4px 8px rgba(0, 0, 0, 0.35);
+  border-radius: 10px;
+}
+
+.more__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  padding: 7px 13px 7px 10px;
+}
+
+.more__item {
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.more__item:last-child {
+  margin-bottom: 0;
+}
+
+.more__icon {
+  position: absolute;
+  left: 10px;
+}
+
+.more__link {
+  font-family: "SF Pro Display", "Arial", sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 17px;
+  color: #ffffff;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.more__item--edit .more__link:hover,
+.more__item--edit .more__link:focus {
+  color: #f9e4b0;
+  opacity: 0.7;
+}
+
+.more__item--edit .more__link:hover .more__icon path,
+.more__item--edit .more__link:focus .more__icon path {
+  fill: #f9e4b0;
+}
+
+.more__item--edit .more__link:active {
+  color: #f9e4b0;
+  opacity: 1;
+}
+
+.more__item--fixed .more__link:hover,
+.more__item--fixed .more__link:focus {
+  color: #f9e4b0;
+  opacity: 0.7;
+}
+
+.more__item--fixed .more__link:hover .more__icon path,
+.more__item--fixed .more__link:focus .more__icon path {
+  fill: #f9e4b0;
+}
+
+.more__item--fixed .more__link:active {
+  color: #f9e4b0;
+  opacity: 1;
+}
+
+.more__item--delete .more__link:hover,
+.more__item--delete .more__link:focus {
+  color: #e06767;
+  opacity: 0.7;
+}
+
+.more__item--delete .more__link:hover .more__icon path,
+.more__item--delete .more__link:focus .more__icon path {
+  fill: #e06767;
+}
+
+.more__item--delete .more__link:active {
+  color: #e06767;
+  opacity: 1;
+}
+
+.tasks__item--done .more {
+  height: 53px;
+}
+
+.more__item--undone .more__link:hover,
+.more__item--undone .more__link:focus {
+  color: #f9e4b0;
+  opacity: 0.7;
+}
+
+.more__item--undone .more__link:active {
+  color: #f9e4b0;
+  opacity: 1;
+}
+
+.more__item--undone .more__link:hover .more__icon path,
+.more__item--undone .more__link:focus .more__icon path {
+  fill: #f9e4b0;
 }
