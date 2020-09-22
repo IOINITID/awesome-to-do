@@ -8,8 +8,41 @@ export default class Header extends Component {
   //   super(props);
   // }
 
+  constructor() {
+    super();
+
+    this.state = {
+      isFormActive: false,
+      isThemeDefault: true
+    };
+
+    this.onFormButtonClick = (evt) => {
+      evt.preventDefault();
+
+      this.setState((state) => {
+        return {
+          isFormActive: !state.isFormActive
+        };
+      });
+    };
+
+    this.onThemeButtonClick = (evt) => {
+      evt.preventDefault();
+
+      this.setState((state) => {
+        return {
+          isThemeDefault: !state.isThemeDefault
+        };
+      });
+    };
+  }
+
   render() {
+    const {isFormActive, isThemeDefault} = this.state;
     // const {toDoQuantity, toDoDone} = this.props;
+
+    let formClassName = isFormActive ? `form form--active` : `form`;
+    let themeClassName = isThemeDefault ? `theme theme--dark` : `theme theme--light`;
 
     return (
       <header className="header container container--flex">
@@ -37,9 +70,9 @@ export default class Header extends Component {
             </li>
           </ul>
         </nav>
-        <form className="form">
+        <form className={formClassName}>
           <label className="from__label" htmlFor="search-field">
-            <button className="form__button" type="button">
+            <button className="form__button" onClick={this.onFormButtonClick} type="button">
               <svg className="form__icon" width="16" height="16" viewBox="0 0 16 16" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -50,8 +83,8 @@ export default class Header extends Component {
             <input className="from__search" type="search" name="search" id="search-field" placeholder="Поиск по задачам" />
           </label>
         </form>
-        <div className="theme">
-          <button className="theme__button">
+        <div className={themeClassName}>
+          <button className="theme__button" onClick={this.onThemeButtonClick}>
             <svg className="theme__icon theme__icon--moon" width="16" height="16" viewBox="0 0 16 16" fill="none"
               xmlns="http://www.w3.org/2000/svg">
               <path
