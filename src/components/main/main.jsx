@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-import './main.css';
+// import './main.css';
 
 export default class Main extends Component {
   // constructor(props) {

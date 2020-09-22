@@ -37,7 +37,7 @@
   width: 17px;
   height: 17px;
   margin-right: 22px;
-  background-image: url('/img/fixed-icon.svg');
+  background-image: url('./img/fixed-icon.svg');
   background-repeat: no-repeat;
 }
 
@@ -47,7 +47,7 @@
   width: 17px;
   height: 17px;
   margin-right: 23px;
-  background-image: url('/img/add-icon.svg');
+  background-image: url('./img/add-icon.svg');
   background-repeat: no-repeat;
 }
 
