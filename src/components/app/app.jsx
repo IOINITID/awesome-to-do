@@ -1,7 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import {v4 as uuid} from 'uuid';
 import Header from '../header/header.jsx';
-// import Search from '../search/search.jsx';
+import Main from '../main/main.jsx';
 // import Filter from '../filter/filter.jsx';
 // import List from '../list/list.jsx';
 // import Form from '../form/form.jsx';
@@ -21,7 +21,8 @@ export default class App extends Component {
         {title: `Дело номер один`, isDone: false, isFixed: false, id: uuid()},
         {title: `Дело номер два`, isDone: false, isFixed: false, id: uuid()},
         {title: `Дело номер три`, isDone: false, isFixed: false, id: uuid()}
-      ]
+      ],
+      isMenuOpen: false
     };
 
     this.onItemDelete = (id) => {
@@ -83,16 +84,25 @@ export default class App extends Component {
         };
       });
     };
+
+    this.onMenuClick = () => {
+      this.setState((state) => {
+        return {
+          isMenuOpen: !state.isMenuOpen
+        };
+      });
+    };
   }
 
   render() {
-    // const {itemsData} = this.state;
+    const {isMenuOpen} = this.state;
     // const itemsDone = itemsData.filter((item) => item.isDone).length;
     // const itemsNotDone = itemsData.filter((item) => !item.isDone).length;
 
     return (
       <Fragment>
-        <Header></Header>
+        <Header onMenuClick={this.onMenuClick}></Header>
+        <Main isMenuOpen={isMenuOpen}></Main>
       </Fragment>
       // <div className="wrapper">
       //   <Header

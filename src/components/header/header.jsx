@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import './header.css';
 
@@ -39,7 +39,7 @@ export default class Header extends Component {
 
   render() {
     const {isFormActive, isThemeDefault} = this.state;
-    // const {toDoQuantity, toDoDone} = this.props;
+    const {onMenuClick} = this.props;
 
     let formClassName = isFormActive ? `form form--active` : `form`;
     let themeClassName = isThemeDefault ? `theme theme--dark` : `theme theme--light`;
@@ -49,7 +49,7 @@ export default class Header extends Component {
         <nav className="navigation">
           <ul className="navigation__list">
             <li className="navigation__item">
-              <button className="navigation__link" type="button">
+              <button className="navigation__link" onClick={onMenuClick} type="button">
                 <svg className="navigation__icon" width="19" height="16" viewBox="0 0 19 16" fill="none"
                   xmlns="http://www.w3.org/2000/svg">
                   <path fillRule="evenodd" clipRule="evenodd"
@@ -140,6 +140,5 @@ export default class Header extends Component {
 }
 
 Header.propTypes = {
-  // toDoQuantity: PropTypes.number.isRequired,
-  // toDoDone: PropTypes.number.isRequired
+  onMenuClick: PropTypes.func.isRequired
 };
