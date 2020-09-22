@@ -18,7 +18,7 @@ export default class Main extends Component {
     let menuClassName = isMenuOpen ? `menu menu--active` : `menu`;
 
     return (
-      <main className="main">
+      <main className="main container">
         <section className={menuClassName}>
           <ul className="menu__list">
             <li className="menu__item">
