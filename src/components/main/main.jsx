@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 // import PropTypes from 'prop-types';
 
 import Task from '../task/task.jsx';
@@ -15,7 +15,7 @@ export default class Main extends Component {
   }
 
   render() {
-    const { itemsData, isMenuOpen } = this.props;
+    const {itemsData, isMenuOpen, onDone} = this.props;
 
     let menuClassName = isMenuOpen ? `menu menu--active` : `menu`;
 
@@ -49,9 +49,18 @@ export default class Main extends Component {
               itemsData.map((item) => {
                 const {title, isDone, isFixed} = item;
 
-                console.log(isDone);
+                let tasksItemClassName;
 
-                let tasksItemClassName = isDone ? `tasks__item tasks__item--done` : `tasks__item`;
+                switch (true) {
+                  case isDone:
+                    tasksItemClassName = `tasks__item tasks__item--done`;
+                    break;
+                  case isFixed:
+                    tasksItemClassName = `tasks__item tasks__item--fixed`;
+                    break;
+                  default:
+                    tasksItemClassName = `tasks__item`;
+                }
 
                 return (
                   <li key={item.id} className={tasksItemClassName}>
