@@ -15,7 +15,7 @@ export default class Main extends Component {
   }
 
   render() {
-    const {itemsData, isMenuOpen, onDone, onDelete} = this.props;
+    const {itemsData, isMenuOpen, onDone, onDelete, onFixed} = this.props;
 
     let menuClassName = isMenuOpen ? `menu menu--active` : `menu`;
 

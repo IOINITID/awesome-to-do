@@ -18,9 +18,9 @@ export default class App extends Component {
 
     this.state = {
       itemsData: [
-        {title: `Дело номер один`, isDone: false, isFixed: true, id: uuid()},
+        {title: `Дело номер один`, isDone: false, isFixed: false, id: uuid()},
         {title: `Дело номер два`, isDone: false, isFixed: false, id: uuid()},
-        {title: `Дело номер три`, isDone: true, isFixed: false, id: uuid()}
+        {title: `Дело номер три`, isDone: false, isFixed: false, id: uuid()}
       ],
       isMenuOpen: false
     };
@@ -102,7 +102,7 @@ export default class App extends Component {
     return (
       <Fragment>
         <Header onMenuClick={this.onMenuClick}></Header>
-        <Main isMenuOpen={isMenuOpen} itemsData={itemsData} onDone={this.onItemDone} onDelete={this.onItemDelete}></Main>
+        <Main isMenuOpen={isMenuOpen} itemsData={itemsData} onDone={this.onItemDone} onDelete={this.onItemDelete} onFixed={this.onItemFixed}></Main>
       </Fragment>
       // <div className="wrapper">
       //   <Header
