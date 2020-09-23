@@ -2,6 +2,7 @@ import React, {Component, Fragment} from 'react';
 import {v4 as uuid} from 'uuid';
 import Header from '../header/header.jsx';
 import Main from '../main/main.jsx';
+import Modal from '../modal/modal.jsx';
 // import Filter from '../filter/filter.jsx';
 // import List from '../list/list.jsx';
 // import Form from '../form/form.jsx';
@@ -22,7 +23,18 @@ export default class App extends Component {
         {title: `Дело номер два`, isDone: false, isFixed: false, id: uuid()},
         {title: `Дело номер три`, isDone: false, isFixed: false, id: uuid()}
       ],
-      isMenuOpen: false
+      isMenuOpen: false,
+      isThemeDefault: true
+    };
+
+    this.onThemeButtonClick = (evt) => {
+      evt.preventDefault();
+
+      this.setState((state) => {
+        return {
+          isThemeDefault: !state.isThemeDefault
+        };
+      });
     };
 
     this.onItemDelete = (id) => {
@@ -102,7 +114,7 @@ export default class App extends Component {
     return (
       <Fragment>
         <Header onMenuClick={this.onMenuClick}></Header>
-        <Main isMenuOpen={isMenuOpen} itemsData={itemsData} onDone={this.onItemDone} onDelete={this.onItemDelete} onFixed={this.onItemFixed}></Main>
+        <Main isMenuOpen={isMenuOpen} itemsData={itemsData} onThemeChange={this.onThemeButtonClick} onDone={this.onItemDone} onDelete={this.onItemDelete} onFixed={this.onItemFixed}></Main>
       </Fragment>
       // <div className="wrapper">
       //   <Header

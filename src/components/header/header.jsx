@@ -12,8 +12,7 @@ export default class Header extends Component {
     super();
 
     this.state = {
-      isFormActive: false,
-      isThemeDefault: true
+      isFormActive: false
     };
 
     this.onFormButtonClick = (evt) => {
@@ -22,16 +21,6 @@ export default class Header extends Component {
       this.setState((state) => {
         return {
           isFormActive: !state.isFormActive
-        };
-      });
-    };
-
-    this.onThemeButtonClick = (evt) => {
-      evt.preventDefault();
-
-      this.setState((state) => {
-        return {
-          isThemeDefault: !state.isThemeDefault
         };
       });
     };
