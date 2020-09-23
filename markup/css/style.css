@@ -75,7 +75,7 @@ body {
   background: linear-gradient(117.98deg, #3A3D4E 46.98%, #1F1523 95.78%);
   box-shadow: 660px 4px 250px rgba(32, 23, 36, 0.7), 5px 10px 50px #2E303E;
   /* padding: 17px 0; */
-  z-index: 1;
+  z-index: 5;
 }
 
 .navigation {
@@ -221,6 +221,7 @@ body {
   left: 0;
   transition: 0.75s ease-in-out;
   transform: translateX(-376px);
+  z-index: 4;
 }
 
 .menu--active {
@@ -407,7 +408,7 @@ body {
   margin: 0;
   overflow-x: hidden;
   overflow-y: auto;
-  max-height: 560px;
+  height: 560px;
   padding-top: 10px;
   padding-bottom: 10px;
 }
