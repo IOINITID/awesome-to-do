@@ -102,7 +102,7 @@ export default class App extends Component {
     return (
       <Fragment>
         <Header onMenuClick={this.onMenuClick}></Header>
-        <Main isMenuOpen={isMenuOpen} itemsData={itemsData} onDone={this.onItemDone}></Main>
+        <Main isMenuOpen={isMenuOpen} itemsData={itemsData} onDone={this.onItemDone} onDelete={this.onItemDelete}></Main>
       </Fragment>
       // <div className="wrapper">
       //   <Header

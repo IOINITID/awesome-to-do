@@ -66,7 +66,7 @@ export default class Task extends Component {
               isDone ?
                 <Fragment>
                   <li className="more__item more__item--undone">
-                    <a className="more__link" href="#">
+                    <a className="more__link" onClick={onDone} href="#">
                       <svg className="more__icon" width="14" height="10" viewBox="0 0 14 10" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -76,7 +76,7 @@ export default class Task extends Component {
                     Невыполненное</a>
                   </li>
                   <li className="more__item more__item--delete">
-                    <a className="more__link" href="#">
+                    <a className="more__link" onClick={onDelete} href="#">
                       <svg className="more__icon" width="8" height="10" viewBox="0 0 8 10" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -105,7 +105,7 @@ export default class Task extends Component {
                       </svg>Закрепить</a>
                   </li>
                   <li className="more__item more__item--delete">
-                    <a className="more__link" href="#">
+                    <a className="more__link" onClick={onDelete} href="#">
                       <svg className="more__icon" width="8" height="10" viewBox="0 0 8 10" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
