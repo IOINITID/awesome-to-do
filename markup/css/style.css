@@ -541,6 +541,11 @@ body {
   background: linear-gradient(140.4deg, #271827 3%, #2C2535 115.66%);
   box-shadow: -4px -4px 16px rgba(88, 76, 98, 0.25), 3px 3px 12px rgba(0, 0, 0, 0.2), inset 4px 4px 8px rgba(0, 0, 0, 0.35);
   border-radius: 10px;
+  display: none;
+}
+
+.more--active {
+  display: block;
 }
 
 .more__list {
