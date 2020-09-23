@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import Item from '../item/item.jsx';
+import Task from '../task/task.jsx';
 
-import './list.css';
+import './tasks.css';
 
 export default class List extends Component {
   // constructor(props) {
@@ -18,7 +18,7 @@ export default class List extends Component {
           itemsData.map((item) => {
             const {title, isDone, isFixed} = item;
 
-            return <Item key={item.id} title={title} isDone={isDone} isFixed={isFixed} onDelete={() => onDelete(item.id)} onDone={() => onDone(item.id)} onFixed={() => onFixed(item.id)}/>;
+            return <Task key={item.id} title={title} isDone={isDone} isFixed={isFixed} onDelete={() => onDelete(item.id)} onDone={() => onDone(item.id)} onFixed={() => onFixed(item.id)}/>;
           })
         }
       </ul>

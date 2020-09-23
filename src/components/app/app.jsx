@@ -18,7 +18,7 @@ export default class App extends Component {
 
     this.state = {
       itemsData: [
-        {title: `Дело номер один`, isDone: false, isFixed: false, id: uuid()},
+        {title: `Дело номер один`, isDone: true, isFixed: false, id: uuid()},
         {title: `Дело номер два`, isDone: false, isFixed: false, id: uuid()},
         {title: `Дело номер три`, isDone: false, isFixed: false, id: uuid()}
       ],
@@ -95,14 +95,14 @@ export default class App extends Component {
   }
 
   render() {
-    const {isMenuOpen} = this.state;
+    const {itemsData, isMenuOpen} = this.state;
     // const itemsDone = itemsData.filter((item) => item.isDone).length;
     // const itemsNotDone = itemsData.filter((item) => !item.isDone).length;
 
     return (
       <Fragment>
         <Header onMenuClick={this.onMenuClick}></Header>
-        <Main isMenuOpen={isMenuOpen}></Main>
+        <Main isMenuOpen={isMenuOpen} itemsData={itemsData}></Main>
       </Fragment>
       // <div className="wrapper">
       //   <Header

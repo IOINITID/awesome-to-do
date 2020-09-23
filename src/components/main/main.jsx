@@ -1,5 +1,7 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+// import PropTypes from 'prop-types';
+
+import Task from '../task/task.jsx';
 
 // import './main.css';
 
@@ -13,12 +15,13 @@ export default class Main extends Component {
   }
 
   render() {
-    const {isMenuOpen} = this.props;
+    const { itemsData, isMenuOpen } = this.props;
 
     let menuClassName = isMenuOpen ? `menu menu--active` : `menu`;
 
     return (
       <main className="main container">
+
         <section className={menuClassName}>
           <ul className="menu__list">
             <li className="menu__item">
@@ -38,11 +41,33 @@ export default class Main extends Component {
             </li>
           </ul>
         </section>
+
+        <section className="tasks">
+          <h2 className="tasks__title">Все задачи</h2>
+          <ul className="tasks__list">
+            {
+              itemsData.map((item) => {
+                const {title, isDone, isFixed} = item;
+
+                console.log(isDone);
+
+                let tasksItemClassName = isDone ? `tasks__item tasks__item--done` : `tasks__item`;
+
+                return (
+                  <li key={item.id} className={tasksItemClassName}>
+                    <Task title={title} isDone={isDone} isFixed={isFixed} onDelete={() => onDelete(item.id)} onDone={() => onDone(item.id)} onFixed={() => onFixed(item.id)} />
+                  </li>
+                );
+              })
+            }
+          </ul>
+        </section>
+
       </main>
     );
   }
 }
 
-Main.propTypes = {
-  isMenuOpen: PropTypes.bool.isRequired
-};
+// Main.propTypes = {
+//   isMenuOpen: PropTypes.bool.isRequired
+// };
