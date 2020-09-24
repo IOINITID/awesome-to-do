@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 // import './header.css';
 
@@ -27,7 +27,7 @@ export default class Header extends Component {
   }
 
   render() {
-    const {isFormActive} = this.state;
+    // const {isFormActive} = this.state;
     const {onThemeSwitch, onMenuSwitch} = this.props;
 
     // let formClassName = isFormActive ? `form form--active` : `form`;
@@ -133,5 +133,6 @@ export default class Header extends Component {
 }
 
 Header.propTypes = {
-// onMenuClick: PropTypes.func.isRequired
+  onThemeSwitch: PropTypes.func.isRequired,
+  onMenuSwitch: PropTypes.func.isRequired
 };
