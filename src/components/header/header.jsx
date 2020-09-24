@@ -28,7 +28,7 @@ export default class Header extends Component {
 
   render() {
     const {isFormActive} = this.state;
-    const {onThemeSwitch} = this.props;
+    const {onThemeSwitch, onMenuSwitch} = this.props;
 
     // let formClassName = isFormActive ? `form form--active` : `form`;
 
@@ -39,7 +39,7 @@ export default class Header extends Component {
           <nav className="navigation">
             <ul className="navigation__list">
               <li className="navigation__item">
-                <button className="button" type="button">
+                <button className="button" type="button" onClick={onMenuSwitch}>
                   <svg className="button__icon" width="19" height="16" viewBox="0 0 19 16" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <path fillRule="evenodd" clipRule="evenodd"

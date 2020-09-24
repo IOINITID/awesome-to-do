@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {v4 as uuid} from 'uuid';
 import Header from '../header/header.jsx';
-// import Main from '../main/main.jsx';
+import Main from '../main/main.jsx';
 // import Modal from '../modal/modal.jsx';
 // import Filter from '../filter/filter.jsx';
 // import List from '../list/list.jsx';
@@ -23,8 +23,8 @@ export default class App extends Component {
         {title: `Дело номер два`, isDone: false, isFixed: false, id: uuid()},
         {title: `Дело номер три`, isDone: false, isFixed: false, id: uuid()}
       ],
-      isMenuOpen: false,
-      themeDefault: true
+      themeDefault: true,
+      menuDefault: true,
     };
 
     this.onThemeButtonClick = (evt) => {
@@ -97,10 +97,10 @@ export default class App extends Component {
       });
     };
 
-    this.onMenuClick = () => {
+    this.onMenuSwitch = () => {
       this.setState((state) => {
         return {
-          isMenuOpen: !state.isMenuOpen
+          menuDefault: !state.menuDefault
         };
       });
     };
@@ -115,14 +115,15 @@ export default class App extends Component {
   }
 
   render() {
-    const {themeDefault} = this.state;
+    const {themeDefault, menuDefault} = this.state;
     // const itemsDone = itemsData.filter((item) => item.isDone).length;
     // const itemsNotDone = itemsData.filter((item) => !item.isDone).length;
     const themeClassName = themeDefault ? `theme theme--dark` : `theme theme--light`;
 
     return (
       <div className={themeClassName}>
-        <Header onThemeSwitch={this.onThemeSwitch}></Header>
+        <Header onThemeSwitch={this.onThemeSwitch} onMenuSwitch={this.onMenuSwitch}></Header>
+        <Main menuDefault={menuDefault}></Main>
       </div >
       // <div className="wrapper">
       //   <Header
