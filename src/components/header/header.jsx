@@ -34,7 +34,7 @@ export default class Header extends Component {
 
     return (
       <header className="header">
-        <div className="container container--flex header__container">
+        <div className="container container--flex">
 
           <nav className="navigation">
             <ul className="navigation__list">
