@@ -28,7 +28,7 @@ export default class Header extends Component {
 
   render() {
     // const {isFormActive} = this.state;
-    const {onThemeSwitch, onMenuSwitch} = this.props;
+    const {onThemeSwitch, onMenuSwitch, onModalSwitch} = this.props;
 
     // let formClassName = isFormActive ? `form form--active` : `form`;
 
@@ -49,7 +49,7 @@ export default class Header extends Component {
                 </button>
               </li>
               <li className="navigation__item">
-                <button className="button" type="button">
+                <button className="button" type="button" onClick={onModalSwitch}>
                   <svg className="button__icon" width="16" height="16" viewBox="0 0 16 16" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -134,5 +134,6 @@ export default class Header extends Component {
 
 Header.propTypes = {
   onThemeSwitch: PropTypes.func.isRequired,
-  onMenuSwitch: PropTypes.func.isRequired
+  onMenuSwitch: PropTypes.func.isRequired,
+  onModalSwitch: PropTypes.func.isRequired
 };

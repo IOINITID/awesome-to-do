@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {v4 as uuid} from 'uuid';
 import Header from '../header/header.jsx';
 import Main from '../main/main.jsx';
-// import Modal from '../modal/modal.jsx';
+import Modal from '../modal/modal.jsx';
 // import Filter from '../filter/filter.jsx';
 // import List from '../list/list.jsx';
 // import Form from '../form/form.jsx';
@@ -25,16 +25,7 @@ export default class App extends Component {
       ],
       themeDefault: true,
       menuDefault: true,
-    };
-
-    this.onThemeButtonClick = (evt) => {
-      evt.preventDefault();
-
-      this.setState((state) => {
-        return {
-          isThemeDefault: !state.isThemeDefault
-        };
-      });
+      modalDefault: true
     };
 
     this.onItemDelete = (id) => {
@@ -47,7 +38,7 @@ export default class App extends Component {
       });
     };
 
-    this.onItemAdd = (description) => {
+    this.onTaskAdd = (description) => {
       this.setState((state) => {
         const itemsData = state.itemsData.slice();
         const itemData = {
@@ -60,7 +51,7 @@ export default class App extends Component {
         itemsData.push(itemData);
 
         return {
-          itemsData
+          itemsData,
         };
       });
     };
@@ -112,18 +103,27 @@ export default class App extends Component {
         };
       });
     };
+
+    this.onModalSwitch = () => {
+      this.setState((state) => {
+        return {
+          modalDefault: !state.modalDefault
+        };
+      });
+    };
   }
 
   render() {
-    const {themeDefault, menuDefault} = this.state;
+    const {themeDefault, menuDefault, modalDefault} = this.state;
     // const itemsDone = itemsData.filter((item) => item.isDone).length;
     // const itemsNotDone = itemsData.filter((item) => !item.isDone).length;
     const themeClassName = themeDefault ? `theme theme--dark` : `theme theme--light`;
 
     return (
       <div className={themeClassName}>
-        <Header onThemeSwitch={this.onThemeSwitch} onMenuSwitch={this.onMenuSwitch}></Header>
+        <Header onThemeSwitch={this.onThemeSwitch} onMenuSwitch={this.onMenuSwitch} onModalSwitch={this.onModalSwitch}></Header>
         <Main menuDefault={menuDefault}></Main>
+        {modalDefault ? null : <Modal onModalSwitch={this.onModalSwitch}></Modal>}
       </div >
       // <div className="wrapper">
       //   <Header
