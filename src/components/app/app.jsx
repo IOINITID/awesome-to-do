@@ -1,8 +1,8 @@
-import React, {Component, Fragment} from 'react';
+import React, {Component} from 'react';
 import {v4 as uuid} from 'uuid';
 import Header from '../header/header.jsx';
-import Main from '../main/main.jsx';
-import Modal from '../modal/modal.jsx';
+// import Main from '../main/main.jsx';
+// import Modal from '../modal/modal.jsx';
 // import Filter from '../filter/filter.jsx';
 // import List from '../list/list.jsx';
 // import Form from '../form/form.jsx';
@@ -24,7 +24,7 @@ export default class App extends Component {
         {title: `Дело номер три`, isDone: false, isFixed: false, id: uuid()}
       ],
       isMenuOpen: false,
-      isThemeDefault: true
+      themeDefault: true
     };
 
     this.onThemeButtonClick = (evt) => {
@@ -104,18 +104,26 @@ export default class App extends Component {
         };
       });
     };
+
+    this.onThemeSwitch = () => {
+      this.setState((state) => {
+        return {
+          themeDefault: !state.themeDefault
+        };
+      });
+    };
   }
 
   render() {
-    const {itemsData, isMenuOpen} = this.state;
+    const {themeDefault} = this.state;
     // const itemsDone = itemsData.filter((item) => item.isDone).length;
     // const itemsNotDone = itemsData.filter((item) => !item.isDone).length;
+    const themeClassName = themeDefault ? `theme theme--dark` : `theme theme--light`;
 
     return (
-      <Fragment>
-        <Header onMenuClick={this.onMenuClick}></Header>
-        <Main isMenuOpen={isMenuOpen} itemsData={itemsData} onThemeChange={this.onThemeButtonClick} onDone={this.onItemDone} onDelete={this.onItemDelete} onFixed={this.onItemFixed}></Main>
-      </Fragment>
+      <div className={themeClassName}>
+        <Header onThemeSwitch={this.onThemeSwitch}></Header>
+      </div >
       // <div className="wrapper">
       //   <Header
       //     toDoQuantity={itemsNotDone}
