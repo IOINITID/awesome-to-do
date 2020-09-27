@@ -12,25 +12,25 @@ export default class Header extends Component {
     super();
 
     this.state = {
-      isFormActive: false
+      searchDefault: true
     };
 
-    this.onFormButtonClick = (evt) => {
+    this.onSearchSwitch = (evt) => {
       evt.preventDefault();
 
       this.setState((state) => {
         return {
-          isFormActive: !state.isFormActive
+          searchDefault: !state.searchDefault
         };
       });
     };
   }
 
   render() {
-    // const {isFormActive} = this.state;
+    const {searchDefault} = this.state;
     const {onThemeSwitch, onMenuSwitch, onModalSwitch} = this.props;
 
-    // let formClassName = isFormActive ? `form form--active` : `form`;
+    let searchClassName = searchDefault ? `search` : `search search--active`;
 
     return (
       <header className="header">
@@ -61,9 +61,9 @@ export default class Header extends Component {
             </ul>
           </nav>
 
-          <form className="search">
+          <form className={searchClassName}>
             <label className="search__label" htmlFor="search-field">
-              <button className="button" type="button">
+              <button className="button" type="button" onClick={this.onSearchSwitch}>
                 <svg className="button__icon" width="16" height="16" viewBox="0 0 16 16" fill="none"
                   xmlns="http://www.w3.org/2000/svg">
                   <path
