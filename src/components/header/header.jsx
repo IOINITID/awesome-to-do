@@ -31,6 +31,7 @@ export default class Header extends Component {
     const {onThemeSwitch, onMenuSwitch, onModalSwitch} = this.props;
 
     let searchClassName = searchDefault ? `search` : `search search--active`;
+    let searchButtonClassName = searchDefault ? `button` : `button button--active`;
 
     return (
       <header className="header">
@@ -63,7 +64,7 @@ export default class Header extends Component {
 
           <form className={searchClassName}>
             <label className="search__label" htmlFor="search-field">
-              <button className="button" type="button" onClick={this.onSearchSwitch}>
+              <button className={searchButtonClassName} type="button" onClick={this.onSearchSwitch}>
                 <svg className="button__icon" width="16" height="16" viewBox="0 0 16 16" fill="none"
                   xmlns="http://www.w3.org/2000/svg">
                   <path
