@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Menu from '../menu/menu.jsx';
+import Tasks from '../tasks/tasks.jsx';
 
 export default class Main extends Component {
   constructor() {
@@ -8,7 +9,7 @@ export default class Main extends Component {
   }
 
   render() {
-    const {menuDefault} = this.props;
+    const {itemsData, menuDefault, onDoneSwitch, onTaskFixed, onTaskDelete} = this.props;
 
     return (
       <main className="main">
@@ -17,11 +18,19 @@ export default class Main extends Component {
           <Menu menuDefault={menuDefault}></Menu>
         </div>
 
+        <div className="container">
+          <Tasks itemsData={itemsData} onDoneSwitch={onDoneSwitch} onTaskFixed={onTaskFixed} onTaskDelete={onTaskDelete}></Tasks>
+        </div>
+
       </main>
     );
   }
 }
 
 Main.propTypes = {
-  menuDefault: PropTypes.bool.isRequired
+  itemsData: PropTypes.array.isRequired,
+  menuDefault: PropTypes.bool.isRequired,
+  onDoneSwitch: PropTypes.func.isRequired,
+  onTaskFixed: PropTypes.func.isRequired,
+  onTaskDelete: PropTypes.func.isRequired
 };

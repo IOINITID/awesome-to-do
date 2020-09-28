@@ -4,9 +4,34 @@ import PropTypes from 'prop-types';
 export default class Modal extends Component {
   constructor() {
     super();
+
+    this.state = {
+      title: ``
+    };
+
+    this.onInputChange = (evt) => {
+      const value = evt.target.value;
+
+      this.setState({
+        title: value
+      });
+    };
+
+    this.onFormSubmit = (evt) => {
+      evt.preventDefault();
+
+      this.props.onTaskAdd(this.state.title);
+
+      this.setState({
+        title: ``
+      });
+
+      this.props.onModalSwitch();
+    };
   }
 
   render() {
+    const {title} = this.state;
     const {onModalSwitch} = this.props;
 
     return (
@@ -24,9 +49,9 @@ export default class Modal extends Component {
               </svg>
             </a>
           </div>
-          <form className="modal__form">
+          <form className="modal__form" onSubmit={this.onFormSubmit}>
             <label className="modal__label" htmlFor="task-field">
-              <input className="modal__field" type="text" name="task" id="task-field" placeholder="Введите новую задачу" />
+              <input className="modal__field" type="text" name="task" id="task-field" value={title} placeholder="Введите новую задачу" onChange={this.onInputChange} />
             </label>
             <button className="button modal__button" type="submit">
               <svg className="button__icon button__icon--add" width="28" height="22" viewBox="0 0 28 22" fill="none"
@@ -49,5 +74,6 @@ export default class Modal extends Component {
 }
 
 Modal.propTypes = {
-  onModalSwitch: PropTypes.func.isRequired
+  onModalSwitch: PropTypes.func.isRequired,
+  onTaskAdd: PropTypes.func.isRequired
 };

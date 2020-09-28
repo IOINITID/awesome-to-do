@@ -8,25 +8,46 @@ export default class Tasks extends Component {
   }
 
   render() {
-    const {itemsData, onDelete, onDone, onFixed} = this.props;
+    const {itemsData, onDoneSwitch, onTaskFixed, onTaskDelete} = this.props;
 
     return (
-      <ul className="list">
-        {
-          itemsData.map((item) => {
-            const {title, isDone, isFixed} = item;
+      <section className="tasks">
+        <h2 className="tasks__title">Все задачи</h2>
+        <ul className="tasks__list">
+          {
+            itemsData.map((item) => {
+              const {id, title, done, fixed} = item;
 
-            return <Task key={item.id} title={title} isDone={isDone} isFixed={isFixed} onDelete={() => onDelete(item.id)} onDone={() => onDone(item.id)} onFixed={() => onFixed(item.id)}/>;
-          })
-        }
-      </ul>
+              let tasksItemClassName;
+
+              switch (true) {
+                case fixed:
+                  tasksItemClassName = `tasks__item tasks__item--fixed`;
+                  break;
+                case done:
+                  tasksItemClassName = `tasks__item tasks__item--done`;
+                  break;
+                default:
+                  tasksItemClassName = `tasks__item`;
+                  break;
+              }
+
+              return (
+                <li key={id} className={tasksItemClassName}>
+                  <Task id={id} title={title} done={done} fixed={fixed} onDoneSwitch={onDoneSwitch} onTaskFixed={onTaskFixed} onTaskDelete={onTaskDelete} />
+                </li>
+              );
+            })
+          }
+        </ul>
+      </section>
     );
   }
 }
 
 Tasks.propTypes = {
   itemsData: PropTypes.array.isRequired,
-  onDelete: PropTypes.func.isRequired,
-  onDone: PropTypes.func.isRequired,
-  onFixed: PropTypes.func.isRequired
+  onDoneSwitch: PropTypes.func.isRequired,
+  onTaskFixed: PropTypes.func.isRequired,
+  onTaskDelete: PropTypes.func.isRequired
 };
