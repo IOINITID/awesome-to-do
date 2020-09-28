@@ -36,7 +36,7 @@ export default class Modal extends Component {
 
     return (
       <Fragment>
-        <div className="overlay"></div>
+        <div className="overlay" onClick={onModalSwitch}></div>
         <div className="modal modal--active modal--add">
           <div className="modal__info">
             <h2 className="modal__title">Добавить задачу</h2>
@@ -51,7 +51,7 @@ export default class Modal extends Component {
           </div>
           <form className="modal__form" onSubmit={this.onFormSubmit}>
             <label className="modal__label" htmlFor="task-field">
-              <input className="modal__field" type="text" name="task" id="task-field" value={title} placeholder="Введите новую задачу" onChange={this.onInputChange} />
+              <input className="modal__field" type="text" name="task" id="task-field" value={title} placeholder="Введите новую задачу" onChange={this.onInputChange} required />
             </label>
             <button className="button modal__button" type="submit">
               <svg className="button__icon button__icon--add" width="28" height="22" viewBox="0 0 28 22" fill="none"
