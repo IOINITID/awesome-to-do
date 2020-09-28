@@ -50,6 +50,7 @@ export default class App extends Component {
         itemsData.map((item) => {
           if (item.id === id) {
             item.done = !item.done;
+            item.fixed = false;
           }
         });
 
