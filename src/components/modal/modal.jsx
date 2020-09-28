@@ -1,4 +1,5 @@
 import React, {Component, Fragment} from 'react';
+import PropTypes from 'prop-types';
 
 export default class Modal extends Component {
   constructor() {
@@ -46,3 +47,7 @@ export default class Modal extends Component {
     );
   }
 }
+
+Modal.propTypes = {
+  onModalSwitch: PropTypes.func.isRequired
+};

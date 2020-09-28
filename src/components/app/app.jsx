@@ -3,87 +3,26 @@ import {v4 as uuid} from 'uuid';
 import Header from '../header/header.jsx';
 import Main from '../main/main.jsx';
 import Modal from '../modal/modal.jsx';
-// import Filter from '../filter/filter.jsx';
-// import List from '../list/list.jsx';
-// import Form from '../form/form.jsx';
-
-// import './app.css';
 
 export default class App extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
-
   constructor() {
     super();
 
     this.state = {
       itemsData: [
-        {title: `Дело номер один`, isDone: false, isFixed: false, id: uuid()},
-        {title: `Дело номер два`, isDone: false, isFixed: false, id: uuid()},
-        {title: `Дело номер три`, isDone: false, isFixed: false, id: uuid()}
+        {title: `Дело номер один`, done: false, fixed: false, id: uuid()},
+        {title: `Дело номер два`, done: false, fixed: false, id: uuid()},
+        {title: `Дело номер три`, done: false, fixed: false, id: uuid()}
       ],
       themeDefault: true,
       menuDefault: true,
       modalDefault: true
     };
 
-    this.onItemDelete = (id) => {
+    this.onThemeSwitch = () => {
       this.setState((state) => {
-        const itemsData = state.itemsData.filter((item) => item.id !== id);
-
         return {
-          itemsData
-        };
-      });
-    };
-
-    this.onTaskAdd = (description) => {
-      this.setState((state) => {
-        const itemsData = state.itemsData.slice();
-        const itemData = {
-          title: description,
-          isDone: false,
-          isFixed: false,
-          id: uuid()
-        };
-
-        itemsData.push(itemData);
-
-        return {
-          itemsData,
-        };
-      });
-    };
-
-    this.onItemDone = (id) => {
-      this.setState((state) => {
-        const itemsData = state.itemsData.slice();
-
-        itemsData.map((item) => {
-          if (item.id === id) {
-            item.isDone = !item.isDone;
-          }
-        });
-
-        return {
-          itemsData
-        };
-      });
-    };
-
-    this.onItemFixed = (id) => {
-      this.setState((state) => {
-        const itemsData = state.itemsData.slice();
-
-        itemsData.map((item) => {
-          if (item.id === id) {
-            item.isFixed = !item.isFixed;
-          }
-        });
-
-        return {
-          itemsData
+          themeDefault: !state.themeDefault
         };
       });
     };
@@ -96,14 +35,6 @@ export default class App extends Component {
       });
     };
 
-    this.onThemeSwitch = () => {
-      this.setState((state) => {
-        return {
-          themeDefault: !state.themeDefault
-        };
-      });
-    };
-
     this.onModalSwitch = () => {
       this.setState((state) => {
         return {
@@ -111,12 +42,72 @@ export default class App extends Component {
         };
       });
     };
+
+    // this.onItemDelete = (id) => {
+    //   this.setState((state) => {
+    //     const itemsData = state.itemsData.filter((item) => item.id !== id);
+
+    //     return {
+    //       itemsData
+    //     };
+    //   });
+    // };
+
+    // this.onTaskAdd = (description) => {
+    //   this.setState((state) => {
+    //     const itemsData = state.itemsData.slice();
+    //     const itemData = {
+    //       title: description,
+    //       isDone: false,
+    //       isFixed: false,
+    //       id: uuid()
+    //     };
+
+    //     itemsData.push(itemData);
+
+    //     return {
+    //       itemsData,
+    //     };
+    //   });
+    // };
+
+    // this.onItemDone = (id) => {
+    //   this.setState((state) => {
+    //     const itemsData = state.itemsData.slice();
+
+    //     itemsData.map((item) => {
+    //       if (item.id === id) {
+    //         item.isDone = !item.isDone;
+    //       }
+    //     });
+
+    //     return {
+    //       itemsData
+    //     };
+    //   });
+    // };
+
+    // this.onItemFixed = (id) => {
+    //   this.setState((state) => {
+    //     const itemsData = state.itemsData.slice();
+
+    //     itemsData.map((item) => {
+    //       if (item.id === id) {
+    //         item.isFixed = !item.isFixed;
+    //       }
+    //     });
+
+    //     return {
+    //       itemsData
+    //     };
+    //   });
+    // };
   }
 
   render() {
     const {themeDefault, menuDefault, modalDefault} = this.state;
-    // const itemsDone = itemsData.filter((item) => item.isDone).length;
-    // const itemsNotDone = itemsData.filter((item) => !item.isDone).length;
+    // const itemsDone = itemsData.filter((item) => item.done).length;
+    // const itemsNotDone = itemsData.filter((item) => !item.done).length;
     const themeClassName = themeDefault ? `theme theme--dark` : `theme theme--light`;
 
     return (
@@ -125,18 +116,6 @@ export default class App extends Component {
         <Main menuDefault={menuDefault}></Main>
         {modalDefault ? null : <Modal onModalSwitch={this.onModalSwitch}></Modal>}
       </div >
-      // <div className="wrapper">
-      //   <Header
-      //     toDoQuantity={itemsNotDone}
-      //     toDoDone={itemsDone}
-      //   />
-      //   <div className="search-and-filter">
-      //     <Search />
-      //     <Filter />
-      //   </div>
-      //   <List itemsData={itemsData} onDelete={this.onItemDelete} onDone={this.onItemDone} onFixed={this.onItemFixed}/>
-      //   <Form onAdd={this.onItemAdd} />
-      // </div>
     );
   }
 }

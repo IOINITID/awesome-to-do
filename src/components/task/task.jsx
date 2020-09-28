@@ -1,12 +1,7 @@
 import React, {Component, Fragment} from 'react';
-// import PropTypes from 'prop-types';
-// import './task.css';
+import PropTypes from 'prop-types';
 
 export default class Task extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
-
   constructor() {
     super();
 
@@ -27,18 +22,16 @@ export default class Task extends Component {
 
   render() {
     const {isMoreActive} = this.state;
-    const {title, isDone, isFixed, onDelete, onDone, onFixed} = this.props;
+    const {title, done, fixed, onDelete, onDone, onFixed} = this.props;
 
-    // let itemClassName = isDone ? `item item--done` : `item`;
-    // let itemAddStyles = isFixed ? {fontWeight: 700} : {fontWeight: 400};
-
+    // let itemClassName = done ? `item item--done` : `item`;
     let moreButtonClassName = isMoreActive ? `more more--active` : `more`;
 
     return (
       <Fragment>
         <p className="tasks__description">{title}</p>
         {
-          isDone ? null : <button className="button tasks__done" onClick={onDone} type="button">
+          done ? null : <button className="button tasks__done" onClick={onDone} type="button">
             <svg className="button__icon" width="22" height="17" viewBox="0 0 22 17" fill="none"
               xmlns="http://www.w3.org/2000/svg">
               <path d="M2 9.42857L7.4 15L20 2" stroke="white" strokeWidth="3" strokeLinecap="round"
@@ -63,7 +56,7 @@ export default class Task extends Component {
         <div className={moreButtonClassName}>
           <ul className="more__list">
             {
-              isDone ?
+              done ?
                 <Fragment>
                   <li className="more__item more__item--undone">
                     <a className="more__link" onClick={onDone} href="#">
@@ -102,7 +95,7 @@ export default class Task extends Component {
                         <path
                           d="M3.83261 9.881C3.75282 9.881 3.673 9.85091 3.61167 9.79053C3.48769 9.6685 3.48609 9.4691 3.60813 9.34509L8.85753 4.0115C9.53994 3.31811 9.5428 2.19278 8.86384 1.50292L8.62736 1.26263C8.30131 0.931346 7.86756 0.748934 7.406 0.748934C6.94089 0.748934 6.50289 0.933746 6.17263 1.26927L0.955077 6.51313C0.521265 6.95384 0.519419 7.67105 0.95203 8.11065L1.11552 8.27675C1.33347 8.49821 1.63958 8.62523 1.95535 8.62523C2.2502 8.62523 2.5208 8.51526 2.71737 8.31555L7.40116 3.55661C7.57758 3.37734 7.57862 3.08665 7.40338 2.90861L7.31608 2.81986C7.23331 2.73576 7.12333 2.68945 7.00646 2.68945C6.88836 2.68945 6.77688 2.73666 6.69254 2.82232L2.36338 7.22108C2.24134 7.34503 2.04194 7.34663 1.91794 7.22462C1.79396 7.10262 1.79236 6.90319 1.9144 6.77918L6.24362 2.38045C6.44732 2.17348 6.71826 2.05951 7.00649 2.05951C7.2935 2.05951 7.5629 2.17262 7.76506 2.37802L7.85236 2.46679C8.26737 2.88839 8.26636 3.57554 7.85012 3.99846L3.16638 8.75742C2.85045 9.0784 2.42043 9.25518 1.95541 9.25518C1.47197 9.25518 1.00225 9.05963 0.666597 8.71859L0.50311 8.55252C-0.169362 7.86925 -0.167454 6.75564 0.507357 6.07L5.72491 0.82617C6.17331 0.370542 6.77076 0.118988 7.40603 0.118988C8.03773 0.118988 8.63096 0.368234 9.07634 0.820785L9.31282 1.06108C10.2315 1.99458 10.2287 3.51637 9.30645 4.45341L4.05708 9.78697C3.99545 9.84958 3.91403 9.881 3.83261 9.881Z"
                           fill="white" />
-                      </svg>{isFixed ? `Открепить` : `Закрепить`}</a>
+                      </svg>{fixed ? `Открепить` : `Закрепить`}</a>
                   </li>
                   <li className="more__item more__item--delete">
                     <a className="more__link" onClick={onDelete} href="#">
@@ -118,20 +111,15 @@ export default class Task extends Component {
           </ul>
         </div>
       </Fragment>
-      // <p className={itemClassName}>
-      //   <span onClick={onDone} className="item__title" style={itemAddStyles}>{title}</span>
-      //   <button onClick={onDelete} className="item__delete">Delete</button>
-      //   <button onClick={onFixed} className="item__add">Add</button>
-      // </p>
     );
   }
 }
 
-// Task.propTypes = {
-//   title: PropTypes.string.isRequired,
-//   isDone: PropTypes.bool.isRequired,
-//   isFixed: PropTypes.bool.isRequired,
-//   onDelete: PropTypes.func.isRequired,
-//   onDone: PropTypes.func.isRequired,
-//   onFixed: PropTypes.func.isRequired
-// };
+Task.propTypes = {
+  title: PropTypes.string.isRequired,
+  done: PropTypes.bool.isRequired,
+  fixed: PropTypes.bool.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onDone: PropTypes.func.isRequired,
+  onFixed: PropTypes.func.isRequired
+};

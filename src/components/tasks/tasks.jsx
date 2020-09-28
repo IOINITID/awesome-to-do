@@ -2,12 +2,10 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Task from '../task/task.jsx';
 
-import './tasks.css';
-
-export default class List extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
+export default class Tasks extends Component {
+  constructor() {
+    super();
+  }
 
   render() {
     const {itemsData, onDelete, onDone, onFixed} = this.props;
@@ -26,7 +24,7 @@ export default class List extends Component {
   }
 }
 
-List.propTypes = {
+Tasks.propTypes = {
   itemsData: PropTypes.array.isRequired,
   onDelete: PropTypes.func.isRequired,
   onDone: PropTypes.func.isRequired,
