@@ -114,7 +114,7 @@ export default class App extends Component {
     return (
       <div className={themeClassName}>
         <Header onThemeSwitch={this.onThemeSwitch} onMenuSwitch={this.onMenuSwitch} onModalSwitch={this.onModalSwitch}></Header>
-        <Main itemsData={itemsData} menuDefault={menuDefault} onDoneSwitch={this.onDoneSwitch} onTaskFixed={this.onTaskFixed} onTaskDelete={this.onTaskDelete}></Main>
+        <Main itemsData={itemsData} menuDefault={menuDefault} onModalSwitch={this.onModalSwitch} onDoneSwitch={this.onDoneSwitch} onTaskFixed={this.onTaskFixed} onTaskDelete={this.onTaskDelete}></Main>
         {modalDefault ? null : <Modal onModalSwitch={this.onModalSwitch} onTaskAdd={this.onTaskAdd}></Modal>}
       </div >
     );

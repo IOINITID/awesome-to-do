@@ -4,6 +4,12 @@ import PropTypes from 'prop-types';
 export default class Menu extends Component {
   constructor() {
     super();
+
+    this.onAddLinkClick = (evt) => {
+      evt.preventDefault();
+
+      this.props.onModalSwitch();
+    };
   }
 
   render() {
@@ -43,7 +49,7 @@ export default class Menu extends Component {
                   Закреплённые</a>
           </li>
           <li className="menu__item menu__item--add">
-            <a className="menu__link" href="#">
+            <a className="menu__link" href="#" onClick={this.onAddLinkClick}>
               <svg className="menu__icon" width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M16.3359 7.83594H9.16406V0.664062C9.16406 0.297301 8.86676 0 8.5 0C8.13324 0 7.83594 0.297301 7.83594 0.664062V7.83594H0.664062C0.297301 7.83594 0 8.13324 0 8.5C0 8.86676 0.297301 9.16406 0.664062 9.16406H7.83594V16.3359C7.83594 16.7027 8.13324 17 8.5 17C8.86676 17 9.16406 16.7027 9.16406 16.3359V9.16406H16.3359C16.7027 9.16406 17 8.86676 17 8.5C17 8.13324 16.7027 7.83594 16.3359 7.83594Z"
@@ -59,5 +65,6 @@ export default class Menu extends Component {
 
 Menu.propTypes = {
   itemsData: PropTypes.array.isRequired,
-  menuDefault: PropTypes.bool.isRequired
+  menuDefault: PropTypes.bool.isRequired,
+  onModalSwitch: PropTypes.func.isRequired
 };
