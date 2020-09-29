@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Menu from '../menu/menu.jsx';
 import Tasks from '../tasks/tasks.jsx';
+import Greeting from '../greeting/greeting.jsx';
 
 export default class Main extends Component {
   constructor() {
@@ -18,9 +19,13 @@ export default class Main extends Component {
           <Menu menuDefault={menuDefault}></Menu>
         </div>
 
-        <div className="container">
-          <Tasks itemsData={itemsData} onDoneSwitch={onDoneSwitch} onTaskFixed={onTaskFixed} onTaskDelete={onTaskDelete}></Tasks>
-        </div>
+        {
+          itemsData.length ? <div className="container">
+            <Tasks itemsData={itemsData} onDoneSwitch={onDoneSwitch} onTaskFixed={onTaskFixed} onTaskDelete={onTaskDelete}></Tasks>
+          </div> : <div className="container">
+            <Greeting></Greeting>
+          </div>
+        }
 
       </main>
     );

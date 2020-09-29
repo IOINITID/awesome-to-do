@@ -10,9 +10,9 @@ export default class App extends Component {
 
     this.state = {
       itemsData: [
-        {id: uuid(), title: `Покормить кошку`, done: false, fixed: false},
-        {id: uuid(), title: `Закрепленная задача`, done: false, fixed: true},
-        {id: uuid(), title: `Выполненная задача`, done: true, fixed: false}
+        // {id: uuid(), title: `Покормить кошку`, done: false, fixed: false},
+        // {id: uuid(), title: `Закрепленная задача`, done: false, fixed: true},
+        // {id: uuid(), title: `Выполненная задача`, done: true, fixed: false}
       ],
       themeDefault: true,
       menuDefault: true,
