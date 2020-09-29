@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 export default class Search extends Component {
   constructor() {
     super();
 
     this.state = {
-      searchDefault: true
+      searchDefault: true,
+      searchData: ``
     };
 
     this.onSearchSwitch = (evt) => {
@@ -18,16 +19,30 @@ export default class Search extends Component {
         };
       });
     };
+
+    this.onSearchChange = (evt) => {
+      const searchData = evt.target.value;
+
+      this.setState({
+        searchData
+      });
+
+      this.props.onSearchChange(searchData);
+    };
+
+    this.onSearchFormSubmit = (evt) => {
+      evt.preventDefault();
+    };
   }
 
   render() {
-    const {searchDefault} = this.state;
+    const {searchData, searchDefault} = this.state;
 
     let searchClassName = searchDefault ? `search` : `search search--active`;
     let searchButtonClassName = searchDefault ? `button` : `button button--active`;
 
     return (
-      <form className={searchClassName}>
+      <form className={searchClassName} onSubmit={this.onSearchFormSubmit}>
         <label className="search__label" htmlFor="search-field">
           <button className={searchButtonClassName} type="button" onClick={this.onSearchSwitch}>
             <svg className="button__icon" width="16" height="16" viewBox="0 0 16 16" fill="none"
@@ -37,11 +52,13 @@ export default class Search extends Component {
                 fill="white" />
             </svg>
           </button>
-          <input className="search__field" type="search" name="search" id="search-field" placeholder="Поиск по задачам" />
+          <input className="search__field" type="search" name="search" id="search-field" value={searchData} onChange={this.onSearchChange} placeholder="Поиск по задачам" />
         </label>
       </form>
     );
   }
 }
 
-// Search.propTypes = {};
+Search.propTypes = {
+  onSearchChange: PropTypes.func.isRequired
+};

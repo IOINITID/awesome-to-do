@@ -16,7 +16,8 @@ export default class App extends Component {
       ],
       themeDefault: true,
       menuDefault: true,
-      modalDefault: true
+      modalDefault: true,
+      searchData: ``
     };
 
     this.onThemeSwitch = () => {
@@ -103,18 +104,33 @@ export default class App extends Component {
         };
       });
     };
+
+    this.onSearch = (itemsData, searchData) => {
+      if (itemsData.length) {
+        return itemsData.filter((item) => item.title.toLowerCase().indexOf(searchData.toLowerCase()) > -1);
+      }
+
+      return itemsData;
+    };
+
+    this.onSearchChange = (searchData) => {
+      this.setState({
+        searchData
+      });
+    };
   }
 
   render() {
-    const {itemsData, themeDefault, menuDefault, modalDefault} = this.state;
+    const {itemsData, themeDefault, menuDefault, modalDefault, searchData} = this.state;
+    const itemsDataToShow = this.onSearch(itemsData, searchData);
     // const itemsDone = itemsData.filter((item) => item.done).length;
     // const itemsNotDone = itemsData.filter((item) => !item.done).length;
     const themeClassName = themeDefault ? `theme theme--dark` : `theme theme--light`;
 
     return (
       <div className={themeClassName}>
-        <Header onThemeSwitch={this.onThemeSwitch} onMenuSwitch={this.onMenuSwitch} onModalSwitch={this.onModalSwitch}></Header>
-        <Main itemsData={itemsData} menuDefault={menuDefault} onModalSwitch={this.onModalSwitch} onDoneSwitch={this.onDoneSwitch} onTaskFixed={this.onTaskFixed} onTaskDelete={this.onTaskDelete}></Main>
+        <Header onSearchChange={this.onSearchChange} onThemeSwitch={this.onThemeSwitch} onMenuSwitch={this.onMenuSwitch} onModalSwitch={this.onModalSwitch}></Header>
+        <Main itemsData={itemsDataToShow} menuDefault={menuDefault} onModalSwitch={this.onModalSwitch} onDoneSwitch={this.onDoneSwitch} onTaskFixed={this.onTaskFixed} onTaskDelete={this.onTaskDelete}></Main>
         {modalDefault ? null : <Modal onModalSwitch={this.onModalSwitch} onTaskAdd={this.onTaskAdd}></Modal>}
       </div >
     );
