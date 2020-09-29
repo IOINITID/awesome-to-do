@@ -7,7 +7,10 @@ export default class Menu extends Component {
   }
 
   render() {
-    const {menuDefault} = this.props;
+    const {itemsData, menuDefault} = this.props;
+    const itemsAll = itemsData.length;
+    const itemsDone = itemsData.filter((item) => item.done).length;
+    const itemsNotDone = itemsData.filter((item) => !item.done).length;
 
     let menuClassName = menuDefault ? `menu` : `menu menu--active`;
 
@@ -15,20 +18,27 @@ export default class Menu extends Component {
       <section className={menuClassName}>
         <ul className="menu__list">
           <li className="menu__item">
-            <a className="menu__link" href="#">Все задачи</a>
+            <a className="menu__link" href="#">Все задачи<sup className="menu__quantity">{itemsAll}</sup></a>
           </li>
           <li className="menu__item">
-            <a className="menu__link" href="#">Текущие</a>
+            <a className="menu__link" href="#">Текущие<sup className="menu__quantity">{itemsNotDone}</sup></a>
           </li>
           <li className="menu__item">
-            <a className="menu__link" href="#">Выполненные</a>
+            <a className="menu__link" href="#">Выполненные<sup className="menu__quantity">{itemsDone}</sup></a>
           </li>
           <li className="menu__item menu__item--fixed">
             <a className="menu__link" href="#">
               <svg className="menu__icon" width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M6.51544 17C6.37979 17 6.2441 16.9476 6.13984 16.8425C5.92908 16.6299 5.92636 16.2827 6.13383 16.0667L15.0578 6.7786C16.2179 5.57109 16.2228 3.61139 15.0685 2.41004L14.6665 1.99158C14.1122 1.41467 13.3749 1.09702 12.5902 1.09702C11.7995 1.09702 11.0549 1.41885 10.4935 2.00316L1.62363 11.135C0.886152 11.9025 0.883013 13.1515 1.61845 13.917L1.89638 14.2063C2.2669 14.5919 2.78729 14.8131 3.3241 14.8131C3.82535 14.8131 4.28537 14.6216 4.61953 14.2739L12.582 5.98643C12.8819 5.67424 12.8837 5.16801 12.5858 4.85796L12.4373 4.70342C12.2966 4.55697 12.1097 4.47632 11.911 4.47632C11.7102 4.47632 11.5207 4.55852 11.3773 4.70771L4.01775 12.3679C3.81028 12.5837 3.47131 12.5865 3.26049 12.3741C3.04973 12.1616 3.04701 11.8143 3.25448 11.5984L10.6142 3.93821C10.9605 3.57779 11.4211 3.3793 11.911 3.3793C12.399 3.3793 12.8569 3.57629 13.2006 3.93398L13.349 4.08857C14.0545 4.82276 14.0528 6.01939 13.3452 6.75588L5.38285 15.0434C4.84578 15.6023 4.11473 15.9102 3.32421 15.9102C2.50235 15.9102 1.70382 15.5696 1.13322 14.9757L0.855288 14.6865C-0.287915 13.4966 -0.284672 11.5574 0.862507 10.3634L9.73235 1.23152C10.4946 0.438067 11.5103 0 12.5903 0C13.6641 0 14.6726 0.434048 15.4298 1.22214L15.8318 1.64059C17.3936 3.26624 17.3888 5.91634 15.821 7.54815L6.89704 16.8362C6.79227 16.9453 6.65385 17 6.51544 17Z"
-                  fill="#F9E4B0" />
+                <g clipPath="url(#clip0)">
+                  <path
+                    d="M13.0971 12.1102L16.7924 8.41098C16.9616 8.24312 17.033 8.0009 16.9856 7.76718C16.9375 7.53415 16.7755 7.3401 16.554 7.25229C14.0468 6.25152 12.1481 6.46825 11.3435 6.64178L6.87892 2.83985C6.96738 1.33552 6.15923 0.310689 6.12172 0.263944C5.99646 0.107409 5.80964 0.0117947 5.60866 0.000473745C5.40979 -0.00659773 5.21166 0.0656442 5.07012 0.207273L0.207182 5.07441C0.0642475 5.21676 -0.0107859 5.41437 0.00125525 5.61622C0.0125666 5.81738 0.109526 6.00505 0.268052 6.12971C1.13704 6.82096 2.2233 6.89393 2.80005 6.87906L6.63269 11.3878C6.49327 12.1938 6.31355 14.1705 7.26178 16.5538C7.34952 16.7755 7.54271 16.937 7.77554 16.9858C7.82367 16.995 7.87107 17 7.91847 17C8.10459 17 8.28505 16.9271 8.41879 16.7925L12.0965 13.1117L15.7734 16.7925C15.9114 16.9306 16.0926 17 16.2737 17C16.4549 17 16.6361 16.9306 16.7741 16.7925C17.0507 16.5156 17.0507 16.0679 16.7741 15.791L13.0971 12.1102Z"
+                    fill="#F9E4B0" />
+                </g>
+                <defs>
+                  <clipPath id="clip0">
+                    <rect width="17" height="17" fill="white" />
+                  </clipPath>
+                </defs>
               </svg>
                   Закреплённые</a>
           </li>
@@ -48,5 +58,6 @@ export default class Menu extends Component {
 }
 
 Menu.propTypes = {
+  itemsData: PropTypes.array.isRequired,
   menuDefault: PropTypes.bool.isRequired
 };

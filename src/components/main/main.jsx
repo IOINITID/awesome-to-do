@@ -16,7 +16,7 @@ export default class Main extends Component {
       <main className="main">
 
         <div className="container">
-          <Menu menuDefault={menuDefault}></Menu>
+          <Menu itemsData={itemsData} menuDefault={menuDefault}></Menu>
         </div>
 
         {
