@@ -10,7 +10,7 @@ export default class App extends Component {
 
     this.state = {
       itemsData: [
-        {id: uuid(), title: `Покормить кошку`, done: false, fixed: false},
+        // {id: uuid(), title: `Покормить кошку`, done: false, fixed: false},
         // {id: uuid(), title: `Закрепленная задача`, done: false, fixed: true},
         // {id: uuid(), title: `Выполненная задача`, done: true, fixed: false}
       ],
@@ -92,16 +92,16 @@ export default class App extends Component {
     };
 
     this.onTaskEdit = (id, title) => {
-      const modalTask = this.state.itemsData.slice();
+      const modalTasks = this.state.itemsData.slice();
 
-      const editedTask = modalTask.map((item) => {
+      const editedTasks = modalTasks.map((item) => {
         if (item.id === id) {
           item.title = title;
         }
       });
 
       return {
-        itemsData: editedTask
+        itemsData: editedTasks
       };
     };
 
@@ -144,6 +144,20 @@ export default class App extends Component {
         searchData
       });
     };
+  }
+
+  componentDidUpdate() {
+    window.localStorage.setItem(`itemsData`, JSON.stringify(this.state.itemsData));
+  }
+
+  componentDidMount() {
+    const localItemData = window.localStorage.getItem(`itemsData`);
+
+    if (localItemData) {
+      this.setState({
+        itemsData: JSON.parse(localItemData)
+      });
+    }
   }
 
   render() {
