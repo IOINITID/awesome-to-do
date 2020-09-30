@@ -21,7 +21,7 @@ export default class Task extends Component {
 
   render() {
     const {moreDefault} = this.state;
-    const {id, title, done, fixed, onDoneSwitch, onTaskFixed, onTaskDelete} = this.props;
+    const {id, title, done, fixed, onDoneSwitch, onTaskFixed, onModalSwitch} = this.props;
 
     let moreButtonClassName = moreDefault ? `button tasks__more` : `button button--active tasks__more`;
 
@@ -51,7 +51,7 @@ export default class Task extends Component {
               fill="white" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </button>
-        <More id={id} done={done} fixed={fixed} moreDefault={moreDefault} onDoneSwitch={onDoneSwitch} onTaskFixed={onTaskFixed} onTaskDelete={onTaskDelete} onMoreSwitch={this.onMoreSwitch}></More>
+        <More id={id} done={done} fixed={fixed} moreDefault={moreDefault} onDoneSwitch={onDoneSwitch} onTaskFixed={onTaskFixed} onMoreSwitch={this.onMoreSwitch} onModalSwitch={onModalSwitch}></More>
       </Fragment>
     );
   }
@@ -64,5 +64,5 @@ Task.propTypes = {
   fixed: PropTypes.bool.isRequired,
   onDoneSwitch: PropTypes.func.isRequired,
   onTaskFixed: PropTypes.func.isRequired,
-  onTaskDelete: PropTypes.func.isRequired,
+  onModalSwitch: PropTypes.func.isRequired
 };

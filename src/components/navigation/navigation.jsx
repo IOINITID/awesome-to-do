@@ -4,10 +4,16 @@ import PropTypes from 'prop-types';
 export default class Navigation extends Component {
   constructor() {
     super();
+
+    this.onAddButtonClick = (evt) => {
+      const modalType = evt.target.dataset.type;
+
+      this.props.onModalSwitch(modalType);
+    };
   }
 
   render() {
-    const {onMenuSwitch, onModalSwitch} = this.props;
+    const {onMenuSwitch} = this.props;
 
     return (
       <nav className="navigation">
@@ -23,7 +29,7 @@ export default class Navigation extends Component {
             </button>
           </li>
           <li className="navigation__item">
-            <button className="button" type="button" onClick={onModalSwitch}>
+            <button className="button" type="button" data-type="add" onClick={this.onAddButtonClick}>
               <svg className="button__icon" width="16" height="16" viewBox="0 0 16 16" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <path

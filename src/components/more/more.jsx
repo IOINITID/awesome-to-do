@@ -12,6 +12,15 @@ export default class More extends Component {
       this.props.onMoreSwitch();
     };
 
+    this.onEditLinkClick = (evt) => {
+      evt.preventDefault();
+
+      const modalType = evt.target.dataset.type;
+
+      this.props.onMoreSwitch();
+      this.props.onModalSwitch(this.props.id, modalType);
+    };
+
     this.onFixedLinkClick = (evt) => {
       evt.preventDefault();
 
@@ -22,8 +31,10 @@ export default class More extends Component {
     this.onDeleteLinkClick = (evt) => {
       evt.preventDefault();
 
-      this.props.onTaskDelete(this.props.id);
+      const modalType = evt.target.dataset.type;
+
       this.props.onMoreSwitch();
+      this.props.onModalSwitch(this.props.id, modalType);
     };
   }
 
@@ -47,7 +58,7 @@ export default class More extends Component {
             </li> :
               <Fragment>
                 <li className="more__item more__item--edit">
-                  <a className="more__link" href="#">
+                  <a className="more__link" href="#" data-type="edit" onClick={this.onEditLinkClick}>
                     <svg className="more__icon" width="10" height="10" viewBox="0 0 10 10" fill="none"
                       xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -67,7 +78,7 @@ export default class More extends Component {
               </Fragment>
           }
           <li className="more__item more__item--delete">
-            <a className="more__link" href="#" onClick={this.onDeleteLinkClick}>
+            <a className="more__link" href="#" data-type="delete" onClick={this.onDeleteLinkClick}>
               <svg className="more__icon" width="8" height="10" viewBox="0 0 8 10" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -88,6 +99,6 @@ More.propTypes = {
   moreDefault: PropTypes.bool.isRequired,
   onDoneSwitch: PropTypes.func.isRequired,
   onTaskFixed: PropTypes.func.isRequired,
-  onTaskDelete: PropTypes.func.isRequired,
-  onMoreSwitch: PropTypes.func.isRequired
+  onMoreSwitch: PropTypes.func.isRequired,
+  onModalSwitch: PropTypes.func.isRequired
 };

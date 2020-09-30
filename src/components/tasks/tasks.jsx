@@ -8,7 +8,7 @@ export default class Tasks extends Component {
   }
 
   render() {
-    const {itemsData, onDoneSwitch, onTaskFixed, onTaskDelete} = this.props;
+    const {itemsData, onDoneSwitch, onTaskFixed, onModalSwitch} = this.props;
 
     return (
       <section className="tasks">
@@ -34,7 +34,7 @@ export default class Tasks extends Component {
 
               return (
                 <li key={id} className={tasksItemClassName}>
-                  <Task id={id} title={title} done={done} fixed={fixed} onDoneSwitch={onDoneSwitch} onTaskFixed={onTaskFixed} onTaskDelete={onTaskDelete} />
+                  <Task id={id} title={title} done={done} fixed={fixed} onDoneSwitch={onDoneSwitch} onTaskFixed={onTaskFixed} onModalSwitch={onModalSwitch} />
                 </li>
               );
             })
@@ -49,5 +49,5 @@ Tasks.propTypes = {
   itemsData: PropTypes.array.isRequired,
   onDoneSwitch: PropTypes.func.isRequired,
   onTaskFixed: PropTypes.func.isRequired,
-  onTaskDelete: PropTypes.func.isRequired
+  onModalSwitch: PropTypes.func.isRequired
 };

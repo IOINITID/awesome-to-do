@@ -10,7 +10,7 @@ export default class Main extends Component {
   }
 
   render() {
-    const {itemsData, menuDefault, onModalSwitch, onDoneSwitch, onTaskFixed, onTaskDelete} = this.props;
+    const {itemsData, menuDefault, onModalSwitch, onDoneSwitch, onTaskFixed} = this.props;
 
     return (
       <main className="main">
@@ -21,7 +21,7 @@ export default class Main extends Component {
 
         {
           itemsData.length ? <div className="container">
-            <Tasks itemsData={itemsData} onDoneSwitch={onDoneSwitch} onTaskFixed={onTaskFixed} onTaskDelete={onTaskDelete}></Tasks>
+            <Tasks itemsData={itemsData} onDoneSwitch={onDoneSwitch} onTaskFixed={onTaskFixed} onModalSwitch={onModalSwitch}></Tasks>
           </div> : <div className="container">
             <Greeting></Greeting>
           </div>
@@ -37,6 +37,5 @@ Main.propTypes = {
   menuDefault: PropTypes.bool.isRequired,
   onModalSwitch: PropTypes.func.isRequired,
   onDoneSwitch: PropTypes.func.isRequired,
-  onTaskFixed: PropTypes.func.isRequired,
-  onTaskDelete: PropTypes.func.isRequired
+  onTaskFixed: PropTypes.func.isRequired
 };

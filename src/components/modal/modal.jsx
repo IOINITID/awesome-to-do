@@ -20,7 +20,11 @@ export default class Modal extends Component {
     this.onFormSubmit = (evt) => {
       evt.preventDefault();
 
-      this.props.onTaskAdd(this.state.title);
+      if (this.props.modalType === `edit`) {
+        this.props.onTaskEdit(this.props.currentId, this.state.title);
+      } else {
+        this.props.onTaskAdd(this.state.title);
+      }
 
       this.setState({
         title: ``
@@ -28,18 +32,51 @@ export default class Modal extends Component {
 
       this.props.onModalSwitch();
     };
+
+    this.onDeleteButtonClick = () => {
+      this.props.onTaskDelete(this.props.currentId);
+      this.props.onModalSwitch();
+    };
+  }
+
+  componentDidMount() {
+    this.setState({
+      title: this.props.modalField
+    });
   }
 
   render() {
     const {title} = this.state;
-    const {onModalSwitch} = this.props;
+    const {onModalSwitch, modalType} = this.props;
+
+    let modalTitle;
+    let modalClassName;
+
+    switch (true) {
+      case modalType === `add`:
+        modalTitle = `Добавить задачу`;
+        modalClassName = `modal modal--active modal--add`;
+        break;
+      case modalType === `edit`:
+        modalTitle = `Редактировать задачу`;
+        modalClassName = `modal modal--active modal--edit`;
+        break;
+      case modalType === `delete`:
+        modalTitle = `Удалить задачу`;
+        modalClassName = `modal modal--active modal--delete`;
+        break;
+      default:
+        modalTitle = `Добавить задачу`;
+        modalClassName = `modal modal--active modal--add`;
+        break;
+    }
 
     return (
       <Fragment>
         <div className="overlay" onClick={onModalSwitch}></div>
-        <div className="modal modal--active modal--add">
+        <div className={modalClassName}>
           <div className="modal__info">
-            <h2 className="modal__title">Добавить задачу</h2>
+            <h2 className="modal__title">{modalTitle}</h2>
             <a className="modal__link" href="#" onClick={onModalSwitch}>
               <svg className="modal__icon" width="21" height="21" viewBox="0 0 21 21" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
@@ -51,21 +88,24 @@ export default class Modal extends Component {
           </div>
           <form className="modal__form" onSubmit={this.onFormSubmit}>
             <label className="modal__label" htmlFor="task-field">
-              <input className="modal__field" type="text" name="task" id="task-field" value={title} placeholder="Введите новую задачу" onChange={this.onInputChange} required />
+              <input className="modal__field" type="text" name="task" id="task-field" value={title} placeholder="Введите новую задачу" onChange={this.onInputChange} required disabled={modalType === `delete` ? true : false} />
             </label>
-            <button className="button modal__button" type="submit">
-              <svg className="button__icon button__icon--add" width="28" height="22" viewBox="0 0 28 22" fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <path d="M2 12.2857L9.2 20L26 2" stroke="white" strokeWidth="3" strokeLinecap="round"
-                  strokeLinejoin="round" />
-              </svg>
-              <svg className="button__icon button__icon--delete" width="18" height="22" viewBox="0 0 18 22" fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M1.28571 19.5556C1.28571 20.9 2.44286 22 3.85714 22H14.1429C15.5571 22 16.7143 20.9 16.7143 19.5556V4.88889H1.28571V19.5556ZM18 1.22222H13.5L12.2143 0H5.78571L4.5 1.22222H0V3.66667H18V1.22222Z"
-                  fill="white" />
-              </svg>
-            </button>
+            {
+              modalType === `delete` ? <button className="button modal__button" type="button" onClick={this.onDeleteButtonClick}>
+                <svg className="button__icon button__icon--delete" width="18" height="22" viewBox="0 0 18 22" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M1.28571 19.5556C1.28571 20.9 2.44286 22 3.85714 22H14.1429C15.5571 22 16.7143 20.9 16.7143 19.5556V4.88889H1.28571V19.5556ZM18 1.22222H13.5L12.2143 0H5.78571L4.5 1.22222H0V3.66667H18V1.22222Z"
+                    fill="white" />
+                </svg>
+              </button> : <button className="button modal__button" type="submit">
+                <svg className="button__icon button__icon--add" width="28" height="22" viewBox="0 0 28 22" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path d="M2 12.2857L9.2 20L26 2" stroke="white" strokeWidth="3" strokeLinecap="round"
+                    strokeLinejoin="round" />
+                </svg>
+              </button>
+            }
           </form>
         </div>
       </Fragment>
@@ -74,6 +114,11 @@ export default class Modal extends Component {
 }
 
 Modal.propTypes = {
+  currentId: PropTypes.string.isRequired,
   onModalSwitch: PropTypes.func.isRequired,
-  onTaskAdd: PropTypes.func.isRequired
+  onTaskAdd: PropTypes.func.isRequired,
+  modalType: PropTypes.string.isRequired,
+  modalField: PropTypes.string.isRequired,
+  onTaskEdit: PropTypes.func.isRequired,
+  onTaskDelete: PropTypes.func.isRequired
 };

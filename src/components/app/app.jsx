@@ -10,14 +10,17 @@ export default class App extends Component {
 
     this.state = {
       itemsData: [
-        // {id: uuid(), title: `Покормить кошку`, done: false, fixed: false},
+        {id: uuid(), title: `Покормить кошку`, done: false, fixed: false},
         // {id: uuid(), title: `Закрепленная задача`, done: false, fixed: true},
         // {id: uuid(), title: `Выполненная задача`, done: true, fixed: false}
       ],
       themeDefault: true,
       menuDefault: true,
       modalDefault: true,
-      searchData: ``
+      searchData: ``,
+      modalType: ``,
+      modalField: ``,
+      currentId: ``
     };
 
     this.onThemeSwitch = () => {
@@ -36,10 +39,19 @@ export default class App extends Component {
       });
     };
 
-    this.onModalSwitch = () => {
+    this.onModalSwitch = (id, type = `add`) => {
+      const modalTask = this.state.itemsData.filter((item) => item.id === id);
+      const [{title: modalField = ``} = {}] = modalTask;
+
+      this.setState({
+        currentId: id || ``
+      });
+
       this.setState((state) => {
         return {
-          modalDefault: !state.modalDefault
+          modalDefault: !state.modalDefault,
+          modalType: type,
+          modalField
         };
       });
     };
@@ -77,6 +89,20 @@ export default class App extends Component {
           itemsData
         };
       });
+    };
+
+    this.onTaskEdit = (id, title) => {
+      const modalTask = this.state.itemsData.slice();
+
+      const editedTask = modalTask.map((item) => {
+        if (item.id === id) {
+          item.title = title;
+        }
+      });
+
+      return {
+        itemsData: editedTask
+      };
     };
 
     this.onTaskFixed = (id) => {
@@ -121,7 +147,7 @@ export default class App extends Component {
   }
 
   render() {
-    const {itemsData, themeDefault, menuDefault, modalDefault, searchData} = this.state;
+    const {itemsData, themeDefault, menuDefault, modalDefault, searchData, modalType, modalField, currentId} = this.state;
     const itemsDataToShow = this.onSearch(itemsData, searchData);
     // const itemsDone = itemsData.filter((item) => item.done).length;
     // const itemsNotDone = itemsData.filter((item) => !item.done).length;
@@ -130,8 +156,8 @@ export default class App extends Component {
     return (
       <div className={themeClassName}>
         <Header onSearchChange={this.onSearchChange} onThemeSwitch={this.onThemeSwitch} onMenuSwitch={this.onMenuSwitch} onModalSwitch={this.onModalSwitch}></Header>
-        <Main itemsData={itemsDataToShow} menuDefault={menuDefault} onModalSwitch={this.onModalSwitch} onDoneSwitch={this.onDoneSwitch} onTaskFixed={this.onTaskFixed} onTaskDelete={this.onTaskDelete}></Main>
-        {modalDefault ? null : <Modal onModalSwitch={this.onModalSwitch} onTaskAdd={this.onTaskAdd}></Modal>}
+        <Main itemsData={itemsDataToShow} menuDefault={menuDefault} onModalSwitch={this.onModalSwitch} onDoneSwitch={this.onDoneSwitch} onTaskFixed={this.onTaskFixed}></Main>
+        {modalDefault ? null : <Modal currentId={currentId} modalType={modalType} modalField={modalField} onModalSwitch={this.onModalSwitch} onTaskAdd={this.onTaskAdd} onTaskEdit={this.onTaskEdit} onTaskDelete={this.onTaskDelete}></Modal>}
       </div >
     );
   }
