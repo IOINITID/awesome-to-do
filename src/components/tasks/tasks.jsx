@@ -8,11 +8,31 @@ export default class Tasks extends Component {
   }
 
   render() {
-    const {itemsData, onDoneSwitch, onTaskFixed, onModalSwitch} = this.props;
+    const {itemsData, filterType, onDoneSwitch, onTaskFixed, onModalSwitch} = this.props;
+
+    let tasksTitle;
+
+    switch (filterType) {
+      case `all`:
+        tasksTitle = `Все задачи`;
+        break;
+      case `done`:
+        tasksTitle = `Выполненные`;
+        break;
+      case `undone`:
+        tasksTitle = `Текущие`;
+        break;
+      case `fixed`:
+        tasksTitle = `Закреплённые`;
+        break;
+      default:
+        tasksTitle = `Все задачи`;
+        break;
+    }
 
     return (
       <section className="tasks">
-        <h2 className="tasks__title">Все задачи</h2>
+        <h2 className="tasks__title">{tasksTitle}</h2>
         <ul className="tasks__list">
           {
             itemsData.map((item) => {
@@ -49,5 +69,6 @@ Tasks.propTypes = {
   itemsData: PropTypes.array.isRequired,
   onDoneSwitch: PropTypes.func.isRequired,
   onTaskFixed: PropTypes.func.isRequired,
-  onModalSwitch: PropTypes.func.isRequired
+  onModalSwitch: PropTypes.func.isRequired,
+  filterType: PropTypes.string.isRequired
 };
