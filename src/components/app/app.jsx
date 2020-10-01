@@ -146,12 +146,6 @@ export default class App extends Component {
       });
     };
 
-    this.onFilterChange = (filterType) => {
-      this.setState({
-        filterType
-      });
-    };
-
     this.onFilter = (itemsData, filterType) => {
       switch (filterType) {
         case `all`:
@@ -163,6 +157,12 @@ export default class App extends Component {
         default:
           return itemsData;
       }
+    };
+
+    this.onFilterChange = (filterType) => {
+      this.setState({
+        filterType
+      });
     };
   }
 
@@ -182,9 +182,8 @@ export default class App extends Component {
 
   render() {
     const {itemsData, themeDefault, menuDefault, modalDefault, searchData, modalType, modalField, currentId, filterType} = this.state;
-    const itemsDataToShow = this.onFilter(this.onSearch(itemsData, searchData), filterType);
-    // const itemsDone = itemsData.filter((item) => item.done).length;
-    // const itemsNotDone = itemsData.filter((item) => !item.done).length;
+    const itemsDataSorted = itemsData.slice().sort((a, b) => b.fixed - a.fixed).sort((a, b) => a.done - b.done);
+    const itemsDataToShow = this.onFilter(this.onSearch(itemsDataSorted, searchData), filterType);
     const themeClassName = themeDefault ? `theme theme--dark` : `theme theme--light`;
 
     return (
