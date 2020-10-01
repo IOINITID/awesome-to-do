@@ -20,7 +20,8 @@ export default class App extends Component {
       searchData: ``,
       modalType: ``,
       modalField: ``,
-      currentId: ``
+      currentId: ``,
+      filterType: ``
     };
 
     this.onThemeSwitch = () => {
@@ -144,6 +145,25 @@ export default class App extends Component {
         searchData
       });
     };
+
+    this.onFilterChange = (filterType) => {
+      this.setState({
+        filterType
+      });
+    };
+
+    this.onFilter = (itemsData, filterType) => {
+      switch (filterType) {
+        case `all`:
+          return itemsData;
+        case `done`:
+          return itemsData.filter((item) => item.done);
+        case `undone`:
+          return itemsData.filter((item) => !item.done);
+        default:
+          return itemsData;
+      }
+    };
   }
 
   componentDidUpdate() {
@@ -161,8 +181,8 @@ export default class App extends Component {
   }
 
   render() {
-    const {itemsData, themeDefault, menuDefault, modalDefault, searchData, modalType, modalField, currentId} = this.state;
-    const itemsDataToShow = this.onSearch(itemsData, searchData);
+    const {itemsData, themeDefault, menuDefault, modalDefault, searchData, modalType, modalField, currentId, filterType} = this.state;
+    const itemsDataToShow = this.onFilter(this.onSearch(itemsData, searchData), filterType);
     // const itemsDone = itemsData.filter((item) => item.done).length;
     // const itemsNotDone = itemsData.filter((item) => !item.done).length;
     const themeClassName = themeDefault ? `theme theme--dark` : `theme theme--light`;
@@ -170,7 +190,7 @@ export default class App extends Component {
     return (
       <div className={themeClassName}>
         <Header onSearchChange={this.onSearchChange} onThemeSwitch={this.onThemeSwitch} onMenuSwitch={this.onMenuSwitch} onModalSwitch={this.onModalSwitch}></Header>
-        <Main itemsData={itemsDataToShow} menuDefault={menuDefault} onModalSwitch={this.onModalSwitch} onDoneSwitch={this.onDoneSwitch} onTaskFixed={this.onTaskFixed}></Main>
+        <Main itemsData={itemsDataToShow} onMenuSwitch={this.onMenuSwitch} onFilterChange={this.onFilterChange} menuDefault={menuDefault} onModalSwitch={this.onModalSwitch} onDoneSwitch={this.onDoneSwitch} onTaskFixed={this.onTaskFixed}></Main>
         {modalDefault ? null : <Modal currentId={currentId} modalType={modalType} modalField={modalField} onModalSwitch={this.onModalSwitch} onTaskAdd={this.onTaskAdd} onTaskEdit={this.onTaskEdit} onTaskDelete={this.onTaskDelete}></Modal>}
       </div >
     );

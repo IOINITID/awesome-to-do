@@ -10,6 +10,15 @@ export default class Menu extends Component {
 
       this.props.onModalSwitch();
     };
+
+    this.onFilterItemClick = (evt) => {
+      evt.preventDefault();
+
+      const filterType = evt.target.dataset.type;
+
+      this.props.onFilterChange(filterType);
+      this.props.onMenuSwitch();
+    };
   }
 
   render() {
@@ -24,13 +33,13 @@ export default class Menu extends Component {
       <section className={menuClassName}>
         <ul className="menu__list">
           <li className="menu__item">
-            <a className="menu__link" href="#">Все задачи<sup className="menu__quantity">{itemsAll}</sup></a>
+            <a className="menu__link" href="#" data-type="all" onClick={this.onFilterItemClick}>Все задачи<sup className="menu__quantity">{itemsAll}</sup></a>
           </li>
           <li className="menu__item">
-            <a className="menu__link" href="#">Текущие<sup className="menu__quantity">{itemsNotDone}</sup></a>
+            <a className="menu__link" href="#" data-type="undone" onClick={this.onFilterItemClick}>Текущие<sup className="menu__quantity">{itemsNotDone}</sup></a>
           </li>
           <li className="menu__item">
-            <a className="menu__link" href="#">Выполненные<sup className="menu__quantity">{itemsDone}</sup></a>
+            <a className="menu__link" href="#" data-type="done" onClick={this.onFilterItemClick}>Выполненные<sup className="menu__quantity">{itemsDone}</sup></a>
           </li>
           <li className="menu__item menu__item--fixed">
             <a className="menu__link" href="#">
@@ -66,5 +75,7 @@ export default class Menu extends Component {
 Menu.propTypes = {
   itemsData: PropTypes.array.isRequired,
   menuDefault: PropTypes.bool.isRequired,
-  onModalSwitch: PropTypes.func.isRequired
+  onModalSwitch: PropTypes.func.isRequired,
+  onFilterChange: PropTypes.func.isRequired,
+  onMenuSwitch: PropTypes.func.isRequired
 };
