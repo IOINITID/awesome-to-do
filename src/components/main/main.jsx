@@ -10,13 +10,13 @@ export default class Main extends Component {
   }
 
   render() {
-    const {itemsData, menuDefault, onModalSwitch, onDoneSwitch, onTaskFixed, onFilterChange, onMenuSwitch} = this.props;
+    const {itemsData, menuDefault, onModalSwitch, onDoneSwitch, onTaskFixed, onFilterChange, onMenuSwitch, itemsQuantity} = this.props;
 
     return (
       <main className="main">
 
         <div className="container">
-          <Menu itemsData={itemsData} onModalSwitch={onModalSwitch} menuDefault={menuDefault} onFilterChange={onFilterChange} onMenuSwitch={onMenuSwitch}></Menu>
+          <Menu itemsQuantity={itemsQuantity} onModalSwitch={onModalSwitch} menuDefault={menuDefault} onFilterChange={onFilterChange} onMenuSwitch={onMenuSwitch}></Menu>
         </div>
 
         {
@@ -39,5 +39,6 @@ Main.propTypes = {
   onDoneSwitch: PropTypes.func.isRequired,
   onTaskFixed: PropTypes.func.isRequired,
   onFilterChange: PropTypes.func.isRequired,
-  onMenuSwitch: PropTypes.func.isRequired
+  onMenuSwitch: PropTypes.func.isRequired,
+  itemsQuantity: PropTypes.array.isRequired
 };

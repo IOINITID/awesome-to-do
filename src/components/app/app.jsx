@@ -154,6 +154,8 @@ export default class App extends Component {
           return itemsData.filter((item) => item.done);
         case `undone`:
           return itemsData.filter((item) => !item.done);
+        case `fixed`:
+          return itemsData.filter((item) => item.fixed);
         default:
           return itemsData;
       }
@@ -184,12 +186,15 @@ export default class App extends Component {
     const {itemsData, themeDefault, menuDefault, modalDefault, searchData, modalType, modalField, currentId, filterType} = this.state;
     const itemsDataSorted = itemsData.slice().sort((a, b) => b.fixed - a.fixed).sort((a, b) => a.done - b.done);
     const itemsDataToShow = this.onFilter(this.onSearch(itemsDataSorted, searchData), filterType);
+    const itemsAll = itemsData.length;
+    const itemsDone = itemsData.filter((item) => item.done).length;
+    const itemsNotDone = itemsData.filter((item) => !item.done).length;
     const themeClassName = themeDefault ? `theme theme--dark` : `theme theme--light`;
 
     return (
       <div className={themeClassName}>
         <Header onSearchChange={this.onSearchChange} onThemeSwitch={this.onThemeSwitch} onMenuSwitch={this.onMenuSwitch} onModalSwitch={this.onModalSwitch}></Header>
-        <Main itemsData={itemsDataToShow} onMenuSwitch={this.onMenuSwitch} onFilterChange={this.onFilterChange} menuDefault={menuDefault} onModalSwitch={this.onModalSwitch} onDoneSwitch={this.onDoneSwitch} onTaskFixed={this.onTaskFixed}></Main>
+        <Main itemsQuantity={[itemsAll, itemsDone, itemsNotDone]} itemsData={itemsDataToShow} onMenuSwitch={this.onMenuSwitch} onFilterChange={this.onFilterChange} menuDefault={menuDefault} onModalSwitch={this.onModalSwitch} onDoneSwitch={this.onDoneSwitch} onTaskFixed={this.onTaskFixed}></Main>
         {modalDefault ? null : <Modal currentId={currentId} modalType={modalType} modalField={modalField} onModalSwitch={this.onModalSwitch} onTaskAdd={this.onTaskAdd} onTaskEdit={this.onTaskEdit} onTaskDelete={this.onTaskDelete}></Modal>}
       </div >
     );

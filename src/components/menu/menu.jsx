@@ -9,6 +9,7 @@ export default class Menu extends Component {
       evt.preventDefault();
 
       this.props.onModalSwitch();
+      this.props.onMenuSwitch();
     };
 
     this.onFilterItemClick = (evt) => {
@@ -22,10 +23,8 @@ export default class Menu extends Component {
   }
 
   render() {
-    const {itemsData, menuDefault} = this.props;
-    const itemsAll = itemsData.length;
-    const itemsDone = itemsData.filter((item) => item.done).length;
-    const itemsNotDone = itemsData.filter((item) => !item.done).length;
+    const {itemsQuantity, menuDefault} = this.props;
+    const [itemsAll, itemsDone, itemsNotDone] = itemsQuantity;
 
     let menuClassName = menuDefault ? `menu` : `menu menu--active`;
 
@@ -42,7 +41,7 @@ export default class Menu extends Component {
             <a className="menu__link" href="#" data-type="done" onClick={this.onFilterItemClick}>Выполненные<sup className="menu__quantity">{itemsDone}</sup></a>
           </li>
           <li className="menu__item menu__item--fixed">
-            <a className="menu__link" href="#">
+            <a className="menu__link" href="#" data-type="fixed" onClick={this.onFilterItemClick}>
               <svg className="menu__icon" width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clipPath="url(#clip0)">
                   <path
@@ -73,7 +72,7 @@ export default class Menu extends Component {
 }
 
 Menu.propTypes = {
-  itemsData: PropTypes.array.isRequired,
+  itemsQuantity: PropTypes.array.isRequired,
   menuDefault: PropTypes.bool.isRequired,
   onModalSwitch: PropTypes.func.isRequired,
   onFilterChange: PropTypes.func.isRequired,
