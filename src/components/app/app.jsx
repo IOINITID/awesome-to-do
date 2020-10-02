@@ -14,7 +14,7 @@ export default class App extends Component {
         // {id: uuid(), title: `Закрепленная задача`, done: false, fixed: true},
         // {id: uuid(), title: `Выполненная задача`, done: true, fixed: false}
       ],
-      themeDefault: true,
+      themeDefault: `true`,
       menuDefault: true,
       modalDefault: true,
       searchData: ``,
@@ -25,9 +25,17 @@ export default class App extends Component {
     };
 
     this.onThemeSwitch = () => {
+      let themeDefault;
+
       this.setState((state) => {
+        if (state.themeDefault === `true`) {
+          themeDefault = `false`;
+        } else {
+          themeDefault = `true`;
+        }
+
         return {
-          themeDefault: !state.themeDefault
+          themeDefault
         };
       });
     };
@@ -170,14 +178,17 @@ export default class App extends Component {
 
   componentDidUpdate() {
     window.localStorage.setItem(`itemsData`, JSON.stringify(this.state.itemsData));
+    window.localStorage.setItem(`themeDefault`, this.state.themeDefault);
   }
 
   componentDidMount() {
     const localItemData = window.localStorage.getItem(`itemsData`);
+    const localThemeDefault = window.localStorage.getItem(`themeDefault`);
 
     if (localItemData) {
       this.setState({
-        itemsData: JSON.parse(localItemData)
+        itemsData: JSON.parse(localItemData),
+        themeDefault: localThemeDefault
       });
     }
   }
@@ -189,7 +200,7 @@ export default class App extends Component {
     const itemsAll = itemsData.length;
     const itemsDone = itemsData.filter((item) => item.done).length;
     const itemsNotDone = itemsData.filter((item) => !item.done).length;
-    const themeClassName = themeDefault ? `theme theme--dark` : `theme theme--light`;
+    const themeClassName = themeDefault === `true` ? `theme theme--dark` : `theme theme--light`;
 
     return (
       <div className={themeClassName}>
