@@ -23,6 +23,12 @@ export default class Search extends Component {
     this.onSearchChange = (evt) => {
       const searchData = evt.target.value;
 
+      if (searchData.length) {
+        this.props.onSearching(true);
+      } else {
+        this.props.onSearching(false);
+      }
+
       this.setState({
         searchData
       });

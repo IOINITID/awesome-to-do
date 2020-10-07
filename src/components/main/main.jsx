@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Menu from '../menu/menu.jsx';
 import Tasks from '../tasks/tasks.jsx';
 import Greeting from '../greeting/greeting.jsx';
-// import Info from '../info/info.jsx';
+import Info from '../info/info.jsx';
 
 export default class Main extends Component {
   constructor() {
@@ -11,7 +11,18 @@ export default class Main extends Component {
   }
 
   render() {
-    const {itemsData, filterType, menuDefault, onModalSwitch, onDoneSwitch, onTaskFixed, onFilterChange, onMenuSwitch, itemsQuantity} = this.props;
+    const {itemsData, searching, wellcomeDefault, filterType, menuDefault, onModalSwitch, onDoneSwitch, onTaskFixed, onFilterChange, onMenuSwitch, itemsQuantity} = this.props;
+
+    const getNoTasksComponent = () => {
+      switch (wellcomeDefault) {
+        case `true`:
+          return <Greeting />;
+        case `false`:
+          return <Info filterType={filterType} searching={searching} />;
+        default:
+          return <Greeting />;
+      }
+    };
 
     return (
       <main className="main">
@@ -24,7 +35,7 @@ export default class Main extends Component {
           itemsData.length ? <div className="container">
             <Tasks itemsData={itemsData} filterType={filterType} onDoneSwitch={onDoneSwitch} onTaskFixed={onTaskFixed} onModalSwitch={onModalSwitch}></Tasks>
           </div> : <div className="container">
-            <Greeting />
+            {getNoTasksComponent()}
           </div>
         }
 

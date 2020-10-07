@@ -17,7 +17,23 @@ export default class App extends Component {
       modalType: ``,
       modalField: ``,
       currentId: ``,
-      filterType: ``
+      filterType: ``,
+      wellcomeDefault: `true`,
+      searching: false
+    };
+
+    this.onSearching = (value) => {
+      if (value) {
+        this.setState({searching: true});
+      } else {
+        this.setState({searching: false});
+      }
+    };
+
+    this.onWellcomeSwitch = () => {
+      if (this.state.wellcomeDefault === `true`) {
+        this.setState({wellcomeDefault: `false`});
+      }
     };
 
     this.onThemeSwitch = () => {
@@ -90,10 +106,13 @@ export default class App extends Component {
 
         itemsData.push(itemData);
 
+
         return {
           itemsData
         };
       });
+
+      this.onWellcomeSwitch();
     };
 
     this.onTaskEdit = (id, title) => {
@@ -175,16 +194,19 @@ export default class App extends Component {
   componentDidUpdate() {
     window.localStorage.setItem(`itemsData`, JSON.stringify(this.state.itemsData));
     window.localStorage.setItem(`themeDefault`, this.state.themeDefault);
+    window.localStorage.setItem(`wellcomeDefault`, this.state.wellcomeDefault);
   }
 
   componentDidMount() {
     const localItemData = window.localStorage.getItem(`itemsData`);
     const localThemeDefault = window.localStorage.getItem(`themeDefault`);
+    const localWellcomeDefault = window.localStorage.getItem(`wellcomeDefault`);
 
     if (localItemData) {
       this.setState({
         itemsData: JSON.parse(localItemData),
-        themeDefault: localThemeDefault
+        themeDefault: localThemeDefault,
+        wellcomeDefault: localWellcomeDefault
       });
     }
   }
@@ -200,8 +222,8 @@ export default class App extends Component {
 
     return (
       <div className={themeClassName}>
-        <Header onSearchChange={this.onSearchChange} onThemeSwitch={this.onThemeSwitch} onMenuSwitch={this.onMenuSwitch} onModalSwitch={this.onModalSwitch}></Header>
-        <Main itemsQuantity={[itemsAll, itemsDone, itemsNotDone]} filterType={filterType} itemsData={itemsDataToShow} onMenuSwitch={this.onMenuSwitch} onFilterChange={this.onFilterChange} menuDefault={menuDefault} onModalSwitch={this.onModalSwitch} onDoneSwitch={this.onDoneSwitch} onTaskFixed={this.onTaskFixed}></Main>
+        <Header onSearching={this.onSearching} onSearchChange={this.onSearchChange} onThemeSwitch={this.onThemeSwitch} onMenuSwitch={this.onMenuSwitch} onModalSwitch={this.onModalSwitch}></Header>
+        <Main searching={this.state.searching} wellcomeDefault={this.state.wellcomeDefault} itemsQuantity={[itemsAll, itemsDone, itemsNotDone]} filterType={filterType} itemsData={itemsDataToShow} onMenuSwitch={this.onMenuSwitch} onFilterChange={this.onFilterChange} menuDefault={menuDefault} onModalSwitch={this.onModalSwitch} onDoneSwitch={this.onDoneSwitch} onTaskFixed={this.onTaskFixed}></Main>
         {modalDefault ? null : <Modal currentId={currentId} modalType={modalType} modalField={modalField} onModalSwitch={this.onModalSwitch} onTaskAdd={this.onTaskAdd} onTaskEdit={this.onTaskEdit} onTaskDelete={this.onTaskDelete}></Modal>}
       </div >
     );

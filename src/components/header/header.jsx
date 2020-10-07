@@ -11,13 +11,13 @@ export default class Header extends Component {
   }
 
   render() {
-    const {onSearchChange, onThemeSwitch, onMenuSwitch, onModalSwitch} = this.props;
+    const {onSearchChange, onThemeSwitch, onMenuSwitch, onModalSwitch, onSearching} = this.props;
 
     return (
       <header className="header">
         <div className="container container--flex">
           <Navigation onMenuSwitch={onMenuSwitch} onModalSwitch={onModalSwitch}></Navigation>
-          <Search onSearchChange={onSearchChange}></Search>
+          <Search onSearching={onSearching} onSearchChange={onSearchChange}></Search>
           <Switch onThemeSwitch={onThemeSwitch}></Switch>
           <Logo></Logo>
         </div>
