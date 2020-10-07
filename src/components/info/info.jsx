@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 export default class Info extends Component {
   constructor() {
     super();
-
-    this.state = {};
   }
 
   render() {
