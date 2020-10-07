@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Menu from '../menu/menu.jsx';
 import Tasks from '../tasks/tasks.jsx';
 import Greeting from '../greeting/greeting.jsx';
+// import Info from '../info/info.jsx';
 
 export default class Main extends Component {
   constructor() {
@@ -23,7 +24,7 @@ export default class Main extends Component {
           itemsData.length ? <div className="container">
             <Tasks itemsData={itemsData} filterType={filterType} onDoneSwitch={onDoneSwitch} onTaskFixed={onTaskFixed} onModalSwitch={onModalSwitch}></Tasks>
           </div> : <div className="container">
-            <Greeting></Greeting>
+            <Greeting />
           </div>
         }
 
