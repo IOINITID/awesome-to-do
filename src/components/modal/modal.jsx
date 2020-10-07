@@ -17,6 +17,12 @@ export default class Modal extends Component {
       });
     };
 
+    this.onCloseLinkClick = (evt) => {
+      evt.preventDefault();
+
+      this.props.onModalSwitch();
+    };
+
     this.onFormSubmit = (evt) => {
       evt.preventDefault();
 
@@ -47,7 +53,7 @@ export default class Modal extends Component {
 
   render() {
     const {title} = this.state;
-    const {onModalSwitch, modalType} = this.props;
+    const {modalType} = this.props;
 
     let modalTitle;
     let modalClassName;
@@ -73,11 +79,11 @@ export default class Modal extends Component {
 
     return (
       <Fragment>
-        <div className="overlay" onClick={onModalSwitch}></div>
+        <div className="overlay" onClick={this.onCloseLinkClick}></div>
         <div className={modalClassName}>
           <div className="modal__info">
             <h2 className="modal__title">{modalTitle}</h2>
-            <a className="modal__link" href="#" onClick={onModalSwitch}>
+            <a className="modal__link" href="#" onClick={this.onCloseLinkClick}>
               <svg className="modal__icon" width="21" height="21" viewBox="0 0 21 21" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <path
