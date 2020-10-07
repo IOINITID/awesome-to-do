@@ -53,5 +53,7 @@ Main.propTypes = {
   onFilterChange: PropTypes.func.isRequired,
   onMenuSwitch: PropTypes.func.isRequired,
   itemsQuantity: PropTypes.array.isRequired,
-  filterType: PropTypes.string.isRequired
+  filterType: PropTypes.string.isRequired,
+  wellcomeDefault: PropTypes.string.isRequired,
+  searching: PropTypes.bool.isRequired
 };

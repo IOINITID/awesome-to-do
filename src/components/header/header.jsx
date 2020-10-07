@@ -30,5 +30,6 @@ Header.propTypes = {
   onSearchChange: PropTypes.func.isRequired,
   onThemeSwitch: PropTypes.func.isRequired,
   onMenuSwitch: PropTypes.func.isRequired,
-  onModalSwitch: PropTypes.func.isRequired
+  onModalSwitch: PropTypes.func.isRequired,
+  onSearching: PropTypes.func.isRequired
 };
