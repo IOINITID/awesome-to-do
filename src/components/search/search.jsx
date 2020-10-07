@@ -48,7 +48,7 @@ export default class Search extends Component {
     let searchButtonClassName = searchDefault ? `button` : `button button--active`;
 
     return (
-      <form className={searchClassName} onSubmit={this.onSearchFormSubmit}>
+      <form className={searchClassName} onSubmit={this.onSearchFormSubmit} autoComplete="off">
         <label className="search__label" htmlFor="search-field">
           <button className={searchButtonClassName} type="button" onClick={this.onSearchSwitch}>
             <svg className="button__icon" width="16" height="16" viewBox="0 0 16 16" fill="none"

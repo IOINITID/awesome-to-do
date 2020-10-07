@@ -92,7 +92,7 @@ export default class Modal extends Component {
               </svg>
             </a>
           </div>
-          <form className="modal__form" onSubmit={this.onFormSubmit}>
+          <form className="modal__form" onSubmit={this.onFormSubmit} autoComplete="off">
             <label className="modal__label" htmlFor="task-field">
               <input className="modal__field" type="text" name="task" id="task-field" value={title} placeholder="Введите новую задачу" onChange={this.onInputChange} required disabled={modalType === `delete` ? true : false} />
             </label>
