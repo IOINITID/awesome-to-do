@@ -11,14 +11,14 @@ export default class Header extends Component {
   }
 
   render() {
-    const {onSearchChange, onThemeSwitch, onMenuSwitch, onModalSwitch, onSearching} = this.props;
+    const {onSearchChange, onMenuSwitch, onModalSwitch, onSearching} = this.props;
 
     return (
       <header className="header">
         <div className="container container--flex">
           <Navigation onMenuSwitch={onMenuSwitch} onModalSwitch={onModalSwitch}></Navigation>
           <Search onSearching={onSearching} onSearchChange={onSearchChange}></Search>
-          <Switch onThemeSwitch={onThemeSwitch}></Switch>
+          <Switch></Switch>
           <Logo></Logo>
         </div>
       </header>
@@ -28,7 +28,6 @@ export default class Header extends Component {
 
 Header.propTypes = {
   onSearchChange: PropTypes.func.isRequired,
-  onThemeSwitch: PropTypes.func.isRequired,
   onMenuSwitch: PropTypes.func.isRequired,
   onModalSwitch: PropTypes.func.isRequired,
   onSearching: PropTypes.func.isRequired
