@@ -3,14 +3,15 @@ import {v4 as uuid} from 'uuid';
 import Header from '../header/header.jsx';
 import Main from '../main/main.jsx';
 import Modal from '../modal/modal.jsx';
+import {connect} from 'react-redux';
+import store from '../../store/index.js';
 
-export default class App extends Component {
+class App extends Component {
   constructor() {
     super();
 
     this.state = {
       itemsData: [],
-      themeDefault: `true`,
       menuDefault: true,
       modalDefault: true,
       searchData: ``,
@@ -34,22 +35,6 @@ export default class App extends Component {
       if (this.state.wellcomeDefault === `true`) {
         this.setState({wellcomeDefault: `false`});
       }
-    };
-
-    this.onThemeSwitch = () => {
-      let themeDefault;
-
-      this.setState((state) => {
-        if (state.themeDefault === `true`) {
-          themeDefault = `false`;
-        } else {
-          themeDefault = `true`;
-        }
-
-        return {
-          themeDefault
-        };
-      });
     };
 
     this.onMenuSwitch = () => {
@@ -193,39 +178,50 @@ export default class App extends Component {
 
   componentDidUpdate() {
     window.localStorage.setItem(`itemsData`, JSON.stringify(this.state.itemsData));
-    window.localStorage.setItem(`themeDefault`, this.state.themeDefault);
     window.localStorage.setItem(`wellcomeDefault`, this.state.wellcomeDefault);
   }
 
   componentDidMount() {
     const localItemData = window.localStorage.getItem(`itemsData`);
-    const localThemeDefault = window.localStorage.getItem(`themeDefault`);
     const localWellcomeDefault = window.localStorage.getItem(`wellcomeDefault`);
 
     if (localItemData) {
       this.setState({
         itemsData: JSON.parse(localItemData),
-        themeDefault: localThemeDefault,
         wellcomeDefault: localWellcomeDefault
       });
     }
   }
 
   render() {
-    const {itemsData, themeDefault, menuDefault, modalDefault, searchData, modalType, modalField, currentId, filterType} = this.state;
+    const {itemsData, menuDefault, modalDefault, searchData, modalType, modalField, currentId, filterType} = this.state;
     const itemsDataSorted = itemsData.slice().sort((a, b) => b.fixed - a.fixed).sort((a, b) => a.done - b.done);
     const itemsDataToShow = this.onFilter(this.onSearch(itemsDataSorted, searchData), filterType);
     const itemsAll = itemsData.length;
     const itemsDone = itemsData.filter((item) => item.done).length;
     const itemsNotDone = itemsData.filter((item) => !item.done).length;
-    const themeClassName = themeDefault === `true` ? `theme theme--dark` : `theme theme--light`;
+
+    const localTheme = window.localStorage.getItem(`themeDefault`) || `true`;
+    const themeClassName = localTheme === `true` ? `theme theme--dark` : `theme theme--light`;
 
     return (
       <div className={themeClassName}>
-        <Header onSearching={this.onSearching} onSearchChange={this.onSearchChange} onThemeSwitch={this.onThemeSwitch} onMenuSwitch={this.onMenuSwitch} onModalSwitch={this.onModalSwitch}></Header>
+        <Header onSearching={this.onSearching} onSearchChange={this.onSearchChange} onMenuSwitch={this.onMenuSwitch} onModalSwitch={this.onModalSwitch}></Header>
         <Main searching={this.state.searching} wellcomeDefault={this.state.wellcomeDefault} itemsQuantity={[itemsAll, itemsDone, itemsNotDone]} filterType={filterType} itemsData={itemsDataToShow} onMenuSwitch={this.onMenuSwitch} onFilterChange={this.onFilterChange} menuDefault={menuDefault} onModalSwitch={this.onModalSwitch} onDoneSwitch={this.onDoneSwitch} onTaskFixed={this.onTaskFixed}></Main>
         {modalDefault ? null : <Modal currentId={currentId} modalType={modalType} modalField={modalField} onModalSwitch={this.onModalSwitch} onTaskAdd={this.onTaskAdd} onTaskEdit={this.onTaskEdit} onTaskDelete={this.onTaskDelete}></Modal>}
       </div >
     );
   }
 }
+
+store.subscribe(() => {
+  window.localStorage.setItem(`themeDefault`, store.getState().themeDefault);
+});
+
+const mapStateToProps = (state) => {
+  return {
+    themeDefault: state.themeDefault
+  };
+};
+
+export default connect(mapStateToProps)(App);
