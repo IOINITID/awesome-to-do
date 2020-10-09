@@ -1,11 +1,11 @@
 const initialState = {
-  theme: window.localStorage.getItem(`theme`) || `dark`
+  themeDefault: window.localStorage.getItem(`themeDefault`) || `true`
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case `THEME_SWITCH`:
-      return state.theme === `dark` ? {theme: `light`} : {theme: `dark`};
+      return state.themeDefault === `true` ? {themeDefault: `false`} : {themeDefault: `true`};
     default:
       return state;
   }
