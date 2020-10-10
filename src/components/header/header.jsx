@@ -6,22 +6,21 @@ import Switch from '../switch/switch.jsx';
 import Logo from '../logo/logo.jsx';
 
 const Header = (props) => {
-  const {onSearchChange, onModalSwitch, onSearching} = props;
+  const {onModalSwitch, onSearching} = props;
 
   return (
     <header className="header">
       <div className="container container--flex">
-        <Navigation onModalSwitch={onModalSwitch}></Navigation>
-        <Search onSearching={onSearching} onSearchChange={onSearchChange}></Search>
-        <Switch></Switch>
-        <Logo></Logo>
+        <Navigation onModalSwitch={onModalSwitch} />
+        <Search onSearching={onSearching} />
+        <Switch />
+        <Logo />
       </div>
     </header>
   );
 };
 
 Header.propTypes = {
-  onSearchChange: PropTypes.func.isRequired,
   onModalSwitch: PropTypes.func.isRequired,
   onSearching: PropTypes.func.isRequired
 };
