@@ -6,7 +6,6 @@ import Switch from '../switch/switch.jsx';
 import Logo from '../logo/logo.jsx';
 
 const Header = (props) => {
-
   const {onSearchChange, onModalSwitch, onSearching} = props;
 
   return (

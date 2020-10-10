@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+// import PropTypes from 'prop-types';
 import {v4 as uuid} from 'uuid';
 import Header from '../header/header.jsx';
 import Main from '../main/main.jsx';
@@ -12,7 +13,6 @@ class App extends Component {
 
     this.state = {
       itemsData: [],
-      menuDefault: true,
       modalDefault: true,
       searchData: ``,
       modalType: ``,
@@ -35,14 +35,6 @@ class App extends Component {
       if (this.state.wellcomeDefault === `true`) {
         this.setState({wellcomeDefault: `false`});
       }
-    };
-
-    this.onMenuSwitch = () => {
-      this.setState((state) => {
-        return {
-          menuDefault: !state.menuDefault
-        };
-      });
     };
 
     this.onModalSwitch = (id, type = `add`) => {
@@ -194,7 +186,7 @@ class App extends Component {
   }
 
   render() {
-    const {itemsData, menuDefault, modalDefault, searchData, modalType, modalField, currentId, filterType} = this.state;
+    const {itemsData, modalDefault, searchData, modalType, modalField, currentId, filterType} = this.state;
     const itemsDataSorted = itemsData.slice().sort((a, b) => b.fixed - a.fixed).sort((a, b) => a.done - b.done);
     const itemsDataToShow = this.onFilter(this.onSearch(itemsDataSorted, searchData), filterType);
     const itemsAll = itemsData.length;
@@ -206,8 +198,8 @@ class App extends Component {
 
     return (
       <div className={themeClassName}>
-        <Header onSearching={this.onSearching} onSearchChange={this.onSearchChange} onMenuSwitch={this.onMenuSwitch} onModalSwitch={this.onModalSwitch}></Header>
-        <Main searching={this.state.searching} wellcomeDefault={this.state.wellcomeDefault} itemsQuantity={[itemsAll, itemsDone, itemsNotDone]} filterType={filterType} itemsData={itemsDataToShow} onMenuSwitch={this.onMenuSwitch} onFilterChange={this.onFilterChange} menuDefault={menuDefault} onModalSwitch={this.onModalSwitch} onDoneSwitch={this.onDoneSwitch} onTaskFixed={this.onTaskFixed}></Main>
+        <Header onSearching={this.onSearching} onSearchChange={this.onSearchChange} onModalSwitch={this.onModalSwitch}></Header>
+        <Main searching={this.state.searching} wellcomeDefault={this.state.wellcomeDefault} itemsQuantity={[itemsAll, itemsDone, itemsNotDone]} filterType={filterType} itemsData={itemsDataToShow} onFilterChange={this.onFilterChange} onModalSwitch={this.onModalSwitch} onDoneSwitch={this.onDoneSwitch} onTaskFixed={this.onTaskFixed}></Main>
         {modalDefault ? null : <Modal currentId={currentId} modalType={modalType} modalField={modalField} onModalSwitch={this.onModalSwitch} onTaskAdd={this.onTaskAdd} onTaskEdit={this.onTaskEdit} onTaskDelete={this.onTaskDelete}></Modal>}
       </div >
     );
@@ -217,6 +209,8 @@ class App extends Component {
 store.subscribe(() => {
   window.localStorage.setItem(`themeDefault`, store.getState().themeDefault);
 });
+
+App.propTypes = {};
 
 const mapStateToProps = (state) => {
   return {
