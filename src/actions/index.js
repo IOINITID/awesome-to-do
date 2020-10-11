@@ -17,9 +17,17 @@ const onSearchChangeAction = (searchData) => {
   };
 };
 
+const onSearchingAction = (searching) => {
+  return {
+    type: `SEARCHING`,
+    payload: searching
+  };
+};
+
 export {
   onThemeSwitchAction,
   onMenuSwitchAction,
   onSearchSwitchAction,
-  onSearchChangeAction
+  onSearchChangeAction,
+  onSearchingAction
 };

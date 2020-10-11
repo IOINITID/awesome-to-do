@@ -2,7 +2,8 @@ const initialState = {
   themeDefault: window.localStorage.getItem(`themeDefault`) || `true`,
   menuDefault: true,
   searchDefault: true,
-  searchData: ``
+  searchData: ``,
+  searching: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -15,6 +16,8 @@ const reducer = (state = initialState, action) => {
       return {...state, searchDefault: !state.searchDefault};
     case `SEARCH_CHANGE`:
       return {...state, searchData: action.payload};
+    case `SEARCHING`:
+      return {...state, searching: action.payload};
     default:
       return state;
   }
