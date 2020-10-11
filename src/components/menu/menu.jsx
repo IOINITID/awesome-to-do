@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {onMenuSwitchAction} from '../../actions/index.js';
+import {onMenuSwitchAction, onFilterChangeAction} from '../../actions/index.js';
 
 const Menu = (props) => {
   const {itemsQuantity, menuDefault, onModalSwitch, onMenuSwitch, onFilterChange} = props;
@@ -83,7 +83,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onMenuSwitch: () => dispatch(onMenuSwitchAction())
+    onMenuSwitch: () => dispatch(onMenuSwitchAction()),
+    onFilterChange: (filterType) => dispatch(onFilterChangeAction(filterType))
   };
 };
 
