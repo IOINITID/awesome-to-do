@@ -45,7 +45,8 @@ Info.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    searching: state.searching
+    searching: state.searching,
+    filterType: state.filterType
   };
 };
 
