@@ -6,14 +6,14 @@ import Greeting from '../greeting/greeting.jsx';
 import Info from '../info/info.jsx';
 
 const Main = (props) => {
-  const {itemsData, searching, wellcomeDefault, filterType, onModalSwitch, onDoneSwitch, onTaskFixed, onFilterChange, itemsQuantity} = props;
+  const {itemsData, wellcomeDefault, filterType, onModalSwitch, onDoneSwitch, onTaskFixed, onFilterChange, itemsQuantity} = props;
 
   const getNoTasksComponent = () => {
     switch (wellcomeDefault) {
       case `true`:
         return <Greeting />;
       case `false`:
-        return <Info filterType={filterType} searching={searching} />;
+        return <Info filterType={filterType} />;
       default:
         return <Greeting />;
     }
@@ -46,8 +46,7 @@ Main.propTypes = {
   onFilterChange: PropTypes.func.isRequired,
   itemsQuantity: PropTypes.array.isRequired,
   filterType: PropTypes.string.isRequired,
-  wellcomeDefault: PropTypes.string.isRequired,
-  searching: PropTypes.bool.isRequired
+  wellcomeDefault: PropTypes.string.isRequired
 };
 
 export default Main;

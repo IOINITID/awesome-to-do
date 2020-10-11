@@ -1,18 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {onSearchSwitchAction, onSearchChangeAction} from '../../actions/index.js';
+import {onSearchSwitchAction, onSearchChangeAction, onSearchingAction} from '../../actions/index.js';
 
 const Search = (props) => {
-  const {searchDefault, searchData, onSearchSwitch, onSearchChange} = props;
+  const {searchDefault, searchData, onSearchSwitch, onSearchChange, onSearching} = props;
 
   const onInputChange = (evt) => {
     const searchDataValue = evt.target.value;
 
     if (searchDataValue.length) {
-      props.onSearching(true);
+      onSearching(true);
     } else {
-      props.onSearching(false);
+      onSearching(false);
     }
 
     onSearchChange(searchDataValue);
@@ -60,7 +60,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onSearchSwitch: () => dispatch(onSearchSwitchAction()),
-    onSearchChange: (searchData) => dispatch(onSearchChangeAction(searchData))
+    onSearchChange: (searchData) => dispatch(onSearchChangeAction(searchData)),
+    onSearching: (searching) => dispatch(onSearchingAction(searching))
   };
 };
 

@@ -18,16 +18,7 @@ class App extends Component {
       modalField: ``,
       currentId: ``,
       filterType: ``,
-      wellcomeDefault: `true`,
-      searching: false
-    };
-
-    this.onSearching = (value) => {
-      if (value) {
-        this.setState({searching: true});
-      } else {
-        this.setState({searching: false});
-      }
+      wellcomeDefault: `true`
     };
 
     this.onWellcomeSwitch = () => {
@@ -193,8 +184,8 @@ class App extends Component {
 
     return (
       <div className={themeClassName}>
-        <Header onSearching={this.onSearching} onModalSwitch={this.onModalSwitch}></Header>
-        <Main searching={this.state.searching} wellcomeDefault={this.state.wellcomeDefault} itemsQuantity={[itemsAll, itemsDone, itemsNotDone]} filterType={filterType} itemsData={itemsDataToShow} onFilterChange={this.onFilterChange} onModalSwitch={this.onModalSwitch} onDoneSwitch={this.onDoneSwitch} onTaskFixed={this.onTaskFixed}></Main>
+        <Header onModalSwitch={this.onModalSwitch}></Header>
+        <Main wellcomeDefault={this.state.wellcomeDefault} itemsQuantity={[itemsAll, itemsDone, itemsNotDone]} filterType={filterType} itemsData={itemsDataToShow} onFilterChange={this.onFilterChange} onModalSwitch={this.onModalSwitch} onDoneSwitch={this.onDoneSwitch} onTaskFixed={this.onTaskFixed}></Main>
         {modalDefault ? null : <Modal currentId={currentId} modalType={modalType} modalField={modalField} onModalSwitch={this.onModalSwitch} onTaskAdd={this.onTaskAdd} onTaskEdit={this.onTaskEdit} onTaskDelete={this.onTaskDelete}></Modal>}
       </div >
     );
