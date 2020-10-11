@@ -1,14 +1,16 @@
 import React, {Component, Fragment} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {onTaskFixedAction, onTaskDoneAction, onModalSwitchAction} from '../../actions/index.js';
 
-export default class More extends Component {
+class More extends Component {
   constructor() {
     super();
 
     this.onUndoneLinkClick = (evt) => {
       evt.preventDefault();
 
-      this.props.onDoneSwitch(this.props.id);
+      this.props.onTaskDone(this.props.id);
       this.props.onMoreSwitch();
     };
 
@@ -94,8 +96,18 @@ More.propTypes = {
   done: PropTypes.bool.isRequired,
   fixed: PropTypes.bool.isRequired,
   moreDefault: PropTypes.bool.isRequired,
-  onDoneSwitch: PropTypes.func.isRequired,
+  onTaskDone: PropTypes.func.isRequired,
   onTaskFixed: PropTypes.func.isRequired,
   onMoreSwitch: PropTypes.func.isRequired,
   onModalSwitch: PropTypes.func.isRequired
 };
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onTaskFixed: (id) => dispatch(onTaskFixedAction(id)),
+    onTaskDone: (id) => dispatch(onTaskDoneAction(id)),
+    onModalSwitch: (id, type) => dispatch(onModalSwitchAction(id, type))
+  };
+};
+
+export default connect(null, mapDispatchToProps)(More);

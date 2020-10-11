@@ -6,14 +6,14 @@ import Greeting from '../greeting/greeting.jsx';
 import Info from '../info/info.jsx';
 
 const Main = (props) => {
-  const {itemsData, wellcomeDefault, filterType, onModalSwitch, onDoneSwitch, onTaskFixed, onFilterChange, itemsQuantity} = props;
+  const {itemsData, wellcomeDefault, onModalSwitch, itemsQuantity} = props;
 
   const getNoTasksComponent = () => {
     switch (wellcomeDefault) {
       case `true`:
         return <Greeting />;
       case `false`:
-        return <Info filterType={filterType} />;
+        return <Info />;
       default:
         return <Greeting />;
     }
@@ -23,12 +23,12 @@ const Main = (props) => {
     <main className="main">
 
       <div className="container">
-        <Menu itemsQuantity={itemsQuantity} onModalSwitch={onModalSwitch} onFilterChange={onFilterChange} />
+        <Menu itemsQuantity={itemsQuantity} onModalSwitch={onModalSwitch} />
       </div>
 
       {
         itemsData.length ? <div className="container">
-          <Tasks itemsData={itemsData} filterType={filterType} onDoneSwitch={onDoneSwitch} onTaskFixed={onTaskFixed} onModalSwitch={onModalSwitch} />
+          <Tasks itemsData={itemsData} onModalSwitch={onModalSwitch} />
         </div> : <div className="container">
           {getNoTasksComponent()}
         </div>
@@ -41,11 +41,7 @@ const Main = (props) => {
 Main.propTypes = {
   itemsData: PropTypes.array.isRequired,
   onModalSwitch: PropTypes.func.isRequired,
-  onDoneSwitch: PropTypes.func.isRequired,
-  onTaskFixed: PropTypes.func.isRequired,
-  onFilterChange: PropTypes.func.isRequired,
   itemsQuantity: PropTypes.array.isRequired,
-  filterType: PropTypes.string.isRequired,
   wellcomeDefault: PropTypes.string.isRequired
 };
 
