@@ -1,7 +1,9 @@
 import React, {Component, Fragment} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {onTaskAddAction, onTaskDeleteAction, onTaskEditAction} from '../../actions/index.js';
 
-export default class Modal extends Component {
+class Modal extends Component {
   constructor() {
     super();
 
@@ -128,3 +130,13 @@ Modal.propTypes = {
   onTaskEdit: PropTypes.func.isRequired,
   onTaskDelete: PropTypes.func.isRequired
 };
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onTaskAdd: (title) => dispatch(onTaskAddAction(title)),
+    onTaskDelete: (id) => dispatch(onTaskDeleteAction(id)),
+    onTaskEdit: (id, title) => dispatch(onTaskEditAction(id, title))
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Modal);
