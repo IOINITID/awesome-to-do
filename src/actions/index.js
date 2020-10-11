@@ -28,11 +28,67 @@ const onWellcomeSwitchAction = () => {
   return {type: `WELLCOME_SWITCH`};
 };
 
+const onTaskAddAction = (title) => {
+  return {
+    type: `TASK_ADD`,
+    payload: title
+  };
+};
+
+const onFilterChangeAction = (filterType) => {
+  return {
+    type: `FILTER_CHANGE`,
+    payload: filterType
+  };
+};
+
+const onTaskDeleteAction = (id) => {
+  return {
+    type: `TASK_DELETE`,
+    payload: id
+  };
+};
+
+const onTaskFixedAction = (id) => {
+  return {
+    type: `TASK_FIXED`,
+    payload: id
+  };
+};
+
+const onTaskDoneAction = (id) => {
+  return {
+    type: `TASK_DONE`,
+    payload: id
+  };
+};
+
+const onTaskEditAction = (id, title) => {
+  return {
+    type: `TASK_EDIT`,
+    payload: {id, title}
+  };
+};
+
+const onModalSwitchAction = (id, type = `add`) => {
+  return {
+    type: `MODAL_SWITCH`,
+    payload: {id, type}
+  };
+};
+
 export {
   onThemeSwitchAction,
   onMenuSwitchAction,
   onSearchSwitchAction,
   onSearchChangeAction,
   onSearchingAction,
-  onWellcomeSwitchAction
+  onWellcomeSwitchAction,
+  onTaskAddAction,
+  onFilterChangeAction,
+  onTaskDeleteAction,
+  onTaskFixedAction,
+  onTaskDoneAction,
+  onTaskEditAction,
+  onModalSwitchAction
 };
