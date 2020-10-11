@@ -1,8 +1,10 @@
 import React, {Component, Fragment} from 'react';
 import PropTypes from 'prop-types';
 import More from '../more/more.jsx';
+import {connect} from 'react-redux';
+import {onTaskDoneAction} from '../../actions/index.js';
 
-export default class Task extends Component {
+class Task extends Component {
   constructor() {
     super();
 
@@ -21,7 +23,7 @@ export default class Task extends Component {
 
   render() {
     const {moreDefault} = this.state;
-    const {id, title, done, fixed, onDoneSwitch, onTaskFixed, onModalSwitch} = this.props;
+    const {id, title, done, fixed, onTaskDone, onModalSwitch} = this.props;
 
     let moreButtonClassName = moreDefault ? `button tasks__more` : `button button--active tasks__more`;
 
@@ -29,7 +31,7 @@ export default class Task extends Component {
       <Fragment>
         <p className="tasks__description">{title}</p>
         {
-          done ? null : <button className="button tasks__done" type="button" onClick={() => onDoneSwitch(id)}>
+          done ? null : <button className="button tasks__done" type="button" onClick={() => onTaskDone(id)}>
             <svg className="button__icon" width="22" height="17" viewBox="0 0 22 17" fill="none"
               xmlns="http://www.w3.org/2000/svg">
               <path d="M2 9.42857L7.4 15L20 2" stroke="white" strokeWidth="3" strokeLinecap="round"
@@ -51,7 +53,7 @@ export default class Task extends Component {
               fill="white" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </button>
-        <More id={id} done={done} fixed={fixed} moreDefault={moreDefault} onDoneSwitch={onDoneSwitch} onTaskFixed={onTaskFixed} onMoreSwitch={this.onMoreSwitch} onModalSwitch={onModalSwitch}></More>
+        <More id={id} done={done} fixed={fixed} moreDefault={moreDefault} onMoreSwitch={this.onMoreSwitch} onModalSwitch={onModalSwitch}></More>
       </Fragment>
     );
   }
@@ -62,7 +64,14 @@ Task.propTypes = {
   title: PropTypes.string.isRequired,
   done: PropTypes.bool.isRequired,
   fixed: PropTypes.bool.isRequired,
-  onDoneSwitch: PropTypes.func.isRequired,
-  onTaskFixed: PropTypes.func.isRequired,
+  onTaskDone: PropTypes.func.isRequired,
   onModalSwitch: PropTypes.func.isRequired
 };
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onTaskDone: (id) => dispatch(onTaskDoneAction(id))
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Task);
