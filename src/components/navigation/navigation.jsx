@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {onMenuSwitchAction} from '../../actions/index.js';
+import {onMenuSwitchAction, onModalSwitchAction} from '../../actions/index.js';
 
 const Navigation = (props) => {
   const {onMenuSwitch, onModalSwitch} = props;
@@ -9,7 +9,7 @@ const Navigation = (props) => {
   const onAddButtonClick = (evt) => {
     const modalType = evt.target.dataset.type;
 
-    onModalSwitch(modalType);
+    onModalSwitch(null, modalType);
   };
 
   return (
@@ -47,7 +47,8 @@ Navigation.propTypes = {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onMenuSwitch: () => dispatch(onMenuSwitchAction())
+    onMenuSwitch: () => dispatch(onMenuSwitchAction()),
+    onModalSwitch: (id, type) => dispatch(onModalSwitchAction(id, type))
   };
 };
 
