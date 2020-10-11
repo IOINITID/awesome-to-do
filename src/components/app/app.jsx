@@ -6,6 +6,7 @@ import Main from '../main/main.jsx';
 import Modal from '../modal/modal.jsx';
 import {connect} from 'react-redux';
 import store from '../../store/index.js';
+import {onWellcomeSwitchAction} from '../../actions/index.js';
 
 class App extends Component {
   constructor() {
@@ -18,13 +19,6 @@ class App extends Component {
       modalField: ``,
       currentId: ``,
       filterType: ``,
-      wellcomeDefault: `true`
-    };
-
-    this.onWellcomeSwitch = () => {
-      if (this.state.wellcomeDefault === `true`) {
-        this.setState({wellcomeDefault: `false`});
-      }
     };
 
     this.onModalSwitch = (id, type = `add`) => {
@@ -79,7 +73,7 @@ class App extends Component {
         };
       });
 
-      this.onWellcomeSwitch();
+      this.props.onWellcomeSwitch();
     };
 
     this.onTaskEdit = (id, title) => {
@@ -154,17 +148,14 @@ class App extends Component {
 
   componentDidUpdate() {
     window.localStorage.setItem(`itemsData`, JSON.stringify(this.state.itemsData));
-    window.localStorage.setItem(`wellcomeDefault`, this.state.wellcomeDefault);
   }
 
   componentDidMount() {
     const localItemData = window.localStorage.getItem(`itemsData`);
-    const localWellcomeDefault = window.localStorage.getItem(`wellcomeDefault`);
 
     if (localItemData) {
       this.setState({
-        itemsData: JSON.parse(localItemData),
-        wellcomeDefault: localWellcomeDefault
+        itemsData: JSON.parse(localItemData)
       });
     }
   }
@@ -185,7 +176,7 @@ class App extends Component {
     return (
       <div className={themeClassName}>
         <Header onModalSwitch={this.onModalSwitch}></Header>
-        <Main wellcomeDefault={this.state.wellcomeDefault} itemsQuantity={[itemsAll, itemsDone, itemsNotDone]} filterType={filterType} itemsData={itemsDataToShow} onFilterChange={this.onFilterChange} onModalSwitch={this.onModalSwitch} onDoneSwitch={this.onDoneSwitch} onTaskFixed={this.onTaskFixed}></Main>
+        <Main wellcomeDefault={this.props.wellcomeDefault} itemsQuantity={[itemsAll, itemsDone, itemsNotDone]} filterType={filterType} itemsData={itemsDataToShow} onFilterChange={this.onFilterChange} onModalSwitch={this.onModalSwitch} onDoneSwitch={this.onDoneSwitch} onTaskFixed={this.onTaskFixed}></Main>
         {modalDefault ? null : <Modal currentId={currentId} modalType={modalType} modalField={modalField} onModalSwitch={this.onModalSwitch} onTaskAdd={this.onTaskAdd} onTaskEdit={this.onTaskEdit} onTaskDelete={this.onTaskDelete}></Modal>}
       </div >
     );
@@ -194,17 +185,27 @@ class App extends Component {
 
 store.subscribe(() => {
   window.localStorage.setItem(`themeDefault`, store.getState().themeDefault);
+  window.localStorage.setItem(`wellcomeDefault`, store.getState().wellcomeDefault);
 });
 
 App.propTypes = {
-  searchData: PropTypes.string.isRequired
+  searchData: PropTypes.string.isRequired,
+  wellcomeDefault: PropTypes.string.isRequired,
+  onWellcomeSwitch: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => {
   return {
     themeDefault: state.themeDefault,
-    searchData: state.searchData
+    searchData: state.searchData,
+    wellcomeDefault: state.wellcomeDefault
   };
 };
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onWellcomeSwitch: () => dispatch(onWellcomeSwitchAction())
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
