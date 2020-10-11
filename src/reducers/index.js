@@ -3,7 +3,8 @@ const initialState = {
   menuDefault: true,
   searchDefault: true,
   searchData: ``,
-  searching: false
+  searching: false,
+  wellcomeDefault: window.localStorage.getItem(`wellcomeDefault`) || `true`,
 };
 
 const reducer = (state = initialState, action) => {
@@ -18,6 +19,8 @@ const reducer = (state = initialState, action) => {
       return {...state, searchData: action.payload};
     case `SEARCHING`:
       return {...state, searching: action.payload};
+    case `WELLCOME_SWITCH`:
+      return state.wellcomeDefault === `true` ? {...state, wellcomeDefault: `false`} : {...state, wellcomeDefault: `false`};
     default:
       return state;
   }

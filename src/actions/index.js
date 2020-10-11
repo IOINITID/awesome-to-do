@@ -24,10 +24,15 @@ const onSearchingAction = (searching) => {
   };
 };
 
+const onWellcomeSwitchAction = () => {
+  return {type: `WELLCOME_SWITCH`};
+};
+
 export {
   onThemeSwitchAction,
   onMenuSwitchAction,
   onSearchSwitchAction,
   onSearchChangeAction,
-  onSearchingAction
+  onSearchingAction,
+  onWellcomeSwitchAction
 };
