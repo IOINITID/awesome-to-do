@@ -9,11 +9,11 @@ const initialState = {
   wellcomeDefault: window.localStorage.getItem(`wellcomeDefault`) || `true`,
   itemsData: JSON.parse(window.localStorage.getItem(`itemsData`)) || [],
   filterType: ``,
-
   modalDefault: true,
   modalType: ``,
   modalField: ``,
   currentId: ``,
+  title: ``
 };
 
 const reducer = (state = initialState, action) => {
