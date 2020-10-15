@@ -32,7 +32,7 @@ const Tasks = (props) => {
       <ul className="tasks__list">
         {
           itemsData.map((item) => {
-            const {id, title, done, fixed} = item;
+            const {id, title, done, fixed, more} = item;
 
             let tasksItemClassName;
 
@@ -50,7 +50,7 @@ const Tasks = (props) => {
 
             return (
               <li key={id} className={tasksItemClassName}>
-                <Task id={id} title={title} done={done} fixed={fixed} onModalSwitch={onModalSwitch} />
+                <Task id={id} title={title} done={done} fixed={fixed} more={more} onModalSwitch={onModalSwitch} />
               </li>
             );
           })

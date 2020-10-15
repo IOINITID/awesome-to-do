@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {onTaskFixedAction, onTaskDoneAction, onModalSwitchAction} from '../../actions/index.js';
+import {onTaskFixedAction, onTaskDoneAction, onModalSwitchAction, onMoreSwitchAction} from '../../actions/index.js';
 
 const More = (props) => {
   const onUndoneLinkClick = (evt) => {
@@ -36,9 +36,9 @@ const More = (props) => {
     props.onModalSwitch(props.id, modalType);
   };
 
-  const {done, fixed, moreDefault} = props;
+  const {done, fixed, more} = props;
 
-  let moreClassName = moreDefault ? `more` : `more more--active`;
+  let moreClassName = more ? `more more--active` : `more`;
 
   return (
     <div className={moreClassName}>
@@ -89,7 +89,7 @@ More.propTypes = {
   id: PropTypes.string.isRequired,
   done: PropTypes.bool.isRequired,
   fixed: PropTypes.bool.isRequired,
-  moreDefault: PropTypes.bool.isRequired,
+  more: PropTypes.bool.isRequired,
   onTaskDone: PropTypes.func.isRequired,
   onTaskFixed: PropTypes.func.isRequired,
   onMoreSwitch: PropTypes.func.isRequired,
@@ -100,7 +100,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onTaskFixed: (id) => dispatch(onTaskFixedAction(id)),
     onTaskDone: (id) => dispatch(onTaskDoneAction(id)),
-    onModalSwitch: (id, type) => dispatch(onModalSwitchAction(id, type))
+    onModalSwitch: (id, type) => dispatch(onModalSwitchAction(id, type)),
+    onMoreSwitch: (id) => dispatch(onMoreSwitchAction(id))
   };
 };
 
