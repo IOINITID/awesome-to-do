@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {onMenuSwitchAction, onModalSwitchAction} from '../../actions/index.js';
 
 const Navigation = (props) => {
-  const {onMenuSwitch, onModalSwitch} = props;
+  const {onMenuSwitch, onModalSwitch, menuDefault, modalDefault} = props;
 
   const onAddButtonClick = (evt) => {
     const modalType = evt.target.dataset.type;
@@ -12,11 +12,14 @@ const Navigation = (props) => {
     onModalSwitch(null, modalType);
   };
 
+  const menuButtonClassName = menuDefault ? `button` : `button button--active`;
+  const modalButtonClassName = modalDefault ? `button` : `button button--active`;
+
   return (
     <nav className="navigation">
       <ul className="navigation__list">
         <li className="navigation__item">
-          <button className="button" type="button" onClick={onMenuSwitch}>
+          <button className={menuButtonClassName} type="button" onClick={onMenuSwitch}>
             <svg className="button__icon" width="19" height="16" viewBox="0 0 19 16" fill="none"
               xmlns="http://www.w3.org/2000/svg">
               <path fillRule="evenodd" clipRule="evenodd"
@@ -26,7 +29,7 @@ const Navigation = (props) => {
           </button>
         </li>
         <li className="navigation__item">
-          <button className="button" type="button" data-type="add" onClick={onAddButtonClick}>
+          <button className={modalButtonClassName} type="button" data-type="add" onClick={onAddButtonClick}>
             <svg className="button__icon" width="16" height="16" viewBox="0 0 16 16" fill="none"
               xmlns="http://www.w3.org/2000/svg">
               <path
@@ -42,7 +45,16 @@ const Navigation = (props) => {
 
 Navigation.propTypes = {
   onMenuSwitch: PropTypes.func.isRequired,
-  onModalSwitch: PropTypes.func.isRequired
+  onModalSwitch: PropTypes.func.isRequired,
+  menuDefault: PropTypes.bool.isRequired,
+  modalDefault: PropTypes.bool.isRequired
+};
+
+const mapStateToProps = (state) => {
+  return {
+    menuDefault: state.menuDefault,
+    modalDefault: state.modalDefault
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -52,4 +64,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(Navigation);
+export default connect(mapStateToProps, mapDispatchToProps)(Navigation);
