@@ -77,6 +77,13 @@ const onModalSwitchAction = (id, type = `add`) => {
   };
 };
 
+const onMoreSwitchAction = (id) => {
+  return {
+    type: `MORE_SWITCH`,
+    payload: id
+  };
+};
+
 export {
   onThemeSwitchAction,
   onMenuSwitchAction,
@@ -90,5 +97,6 @@ export {
   onTaskFixedAction,
   onTaskDoneAction,
   onTaskEditAction,
-  onModalSwitchAction
+  onModalSwitchAction,
+  onMoreSwitchAction
 };

@@ -36,7 +36,8 @@ const reducer = (state = initialState, action) => {
         id: uuid(),
         title: action.payload,
         done: false,
-        fixed: false
+        fixed: false,
+        more: false
       };
 
       itemsData.push(itemData);
@@ -84,6 +85,18 @@ const reducer = (state = initialState, action) => {
       const currentId = action.payload.id || ``;
 
       return {...state, currentId, modalDefault: !state.modalDefault, modalType: action.payload.type, modalField};
+    case `MORE_SWITCH`:
+      const itemsDataMore = state.itemsData.slice();
+
+      itemsDataMore.map((item) => {
+        if (item.id === action.payload) {
+          item.more = !item.more;
+        } else {
+          item.more = false;
+        }
+      });
+
+      return {...state, itemsData: itemsDataMore};
     default:
       return state;
   }
