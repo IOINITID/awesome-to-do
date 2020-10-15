@@ -1,15 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {onMenuSwitchAction, onModalSwitchAction} from '../../actions/index.js';
+import {onMenuSwitchAction, onModalSwitchAction, onSearchSwitchAction, onSearchChangeAction} from '../../actions/index.js';
 
 const Navigation = (props) => {
-  const {onMenuSwitch, onModalSwitch, menuDefault, modalDefault} = props;
+  const {onMenuSwitch, onModalSwitch, menuDefault, modalDefault, onSearchSwitch, onSearchChange} = props;
 
   const onAddButtonClick = (evt) => {
     const modalType = evt.target.dataset.type;
 
     onModalSwitch(null, modalType);
+    onSearchSwitch(true);
+    onSearchChange(``);
   };
 
   const menuButtonClassName = menuDefault ? `button` : `button button--active`;
@@ -47,7 +49,9 @@ Navigation.propTypes = {
   onMenuSwitch: PropTypes.func.isRequired,
   onModalSwitch: PropTypes.func.isRequired,
   menuDefault: PropTypes.bool.isRequired,
-  modalDefault: PropTypes.bool.isRequired
+  modalDefault: PropTypes.bool.isRequired,
+  onSearchSwitch: PropTypes.func.isRequired,
+  onSearchChange: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => {
@@ -60,7 +64,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onMenuSwitch: () => dispatch(onMenuSwitchAction()),
-    onModalSwitch: (id, type) => dispatch(onModalSwitchAction(id, type))
+    onModalSwitch: (id, type) => dispatch(onModalSwitchAction(id, type)),
+    onSearchSwitch: (searchDefault) => dispatch(onSearchSwitchAction(searchDefault)),
+    onSearchChange: (searchData) => dispatch(onSearchChangeAction(searchData))
   };
 };
 
