@@ -36,7 +36,7 @@ const Search = (props) => {
               fill="white" />
           </svg>
         </button>
-        <input className="search__field" type="search" name="search" id="search-field" value={searchData} onChange={onInputChange} placeholder="Поиск по задачам" />
+        {searchDefault ? null : <input className="search__field" type="search" name="search" id="search-field" value={searchData} autoFocus={true} onChange={onInputChange} placeholder="Поиск по задачам" />}
       </label>
     </form>
   );
