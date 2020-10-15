@@ -23,7 +23,7 @@ const reducer = (state = initialState, action) => {
     case `MENU_SWITCH`:
       return {...state, menuDefault: !state.menuDefault};
     case `SEARCH_SWITCH`:
-      return {...state, searchDefault: !state.searchDefault};
+      return {...state, searchDefault: action.payload ? true : !state.searchDefault};
     case `SEARCH_CHANGE`:
       return {...state, searchData: action.payload};
     case `SEARCHING`:

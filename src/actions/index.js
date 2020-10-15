@@ -6,8 +6,11 @@ const onMenuSwitchAction = () => {
   return {type: `MENU_SWITCH`};
 };
 
-const onSearchSwitchAction = () => {
-  return {type: `SEARCH_SWITCH`};
+const onSearchSwitchAction = (searchDefault) => {
+  return {
+    type: `SEARCH_SWITCH`,
+    payload: searchDefault
+  };
 };
 
 const onSearchChangeAction = (searchData) => {
