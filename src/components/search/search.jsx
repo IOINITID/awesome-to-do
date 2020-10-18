@@ -22,6 +22,12 @@ const Search = (props) => {
     evt.preventDefault();
   };
 
+  const onEscKeyDownPress = (evt) => {
+    if (evt.key === `Escape`) {
+      onSearchSwitch();
+    }
+  };
+
   let searchClassName = searchDefault ? `search` : `search search--active`;
   let searchButtonClassName = searchDefault ? `button` : `button button--active`;
 
@@ -36,7 +42,7 @@ const Search = (props) => {
               fill="white" />
           </svg>
         </button>
-        {searchDefault ? null : <input className="search__field" type="search" name="search" id="search-field" value={searchData} autoFocus={true} onChange={onInputChange} placeholder="Поиск по задачам" />}
+        {searchDefault ? null : <input className="search__field" type="search" name="search" id="search-field" value={searchData} autoFocus={true} onChange={onInputChange} onKeyDown={onEscKeyDownPress} placeholder="Поиск по задачам" />}
       </label>
     </form>
   );
