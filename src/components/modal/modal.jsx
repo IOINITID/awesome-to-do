@@ -38,8 +38,16 @@ const Modal = (props) => {
     onModalSwitch();
   };
 
+  const onEscKeyDownPress = (evt) => {
+    if (evt.key === `Escape`) {
+      onModalSwitch();
+    }
+  };
+
   useEffect(() => {
     setTitle(modalField);
+    document.addEventListener(`keydown`, onEscKeyDownPress);
+    return () => document.removeEventListener(`keydown`, onEscKeyDownPress);
   }, []);
 
   let modalTitle;
@@ -81,7 +89,7 @@ const Modal = (props) => {
         </div>
         <form className="modal__form" onSubmit={onFormSubmit} autoComplete="off">
           <label className="modal__label" htmlFor="task-field">
-            <input className="modal__field" type="text" name="task" id="task-field" value={title} autoFocus={true} placeholder="Введите новую задачу" onChange={onInputChange} required disabled={modalType === `delete` ? true : false} />
+            <input className="modal__field" type="text" name="task" id="task-field" value={title} autoFocus={true} placeholder="Введите новую задачу" onChange={onInputChange} onKeyDown={onEscKeyDownPress} required disabled={modalType === `delete` ? true : false} />
           </label>
           {
             modalType === `delete` ? <button className="button modal__button" type="button" onClick={onDeleteButtonClick}>
