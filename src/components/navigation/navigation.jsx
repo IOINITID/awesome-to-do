@@ -12,6 +12,10 @@ const Navigation = (props) => {
     onModalSwitch(null, modalType);
     onSearchSwitch(true);
     onSearchChange(``);
+
+    if (!menuDefault) {
+      onMenuSwitch();
+    }
   };
 
   const menuButtonClassName = menuDefault ? `button` : `button button--active`;
