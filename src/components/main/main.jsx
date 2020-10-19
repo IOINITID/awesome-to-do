@@ -4,9 +4,11 @@ import Menu from '../menu/menu.jsx';
 import Tasks from '../tasks/tasks.jsx';
 import Greeting from '../greeting/greeting.jsx';
 import Info from '../info/info.jsx';
+import {connect} from 'react-redux';
+import {onMenuSwitchAction} from '../../actions/index.js';
 
 const Main = (props) => {
-  const {itemsData, wellcomeDefault, onModalSwitch, itemsQuantity} = props;
+  const {itemsData, wellcomeDefault, onModalSwitch, itemsQuantity, menuDefault, onMenuSwitch} = props;
 
   const getNoTasksComponent = () => {
     switch (wellcomeDefault) {
@@ -19,8 +21,16 @@ const Main = (props) => {
     }
   };
 
+  const onMainClick = (evt) => {
+    const menuElement = document.querySelector(`.menu`);
+
+    if (!menuDefault && !menuElement.contains(evt.target)) {
+      onMenuSwitch();
+    }
+  };
+
   return (
-    <main className="main">
+    <main className="main" onClick={onMainClick}>
 
       <div className="container">
         <Menu itemsQuantity={itemsQuantity} onModalSwitch={onModalSwitch} />
@@ -42,7 +52,21 @@ Main.propTypes = {
   itemsData: PropTypes.array.isRequired,
   onModalSwitch: PropTypes.func.isRequired,
   itemsQuantity: PropTypes.array.isRequired,
-  wellcomeDefault: PropTypes.string.isRequired
+  wellcomeDefault: PropTypes.string.isRequired,
+  menuDefault: PropTypes.bool.isRequired,
+  onMenuSwitch: PropTypes.func.isRequired
 };
 
-export default Main;
+const mapStateToProps = (state) => {
+  return {
+    menuDefault: state.menuDefault
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onMenuSwitch: () => dispatch(onMenuSwitchAction()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);
