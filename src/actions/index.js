@@ -13,6 +13,12 @@ const onSearchSwitchAction = (searchDefault) => {
   };
 };
 
+const onSearchCloseAction = () => {
+  return {
+    type: `SEARCH_CLOSE`
+  };
+};
+
 const onSearchChangeAction = (searchData) => {
   return {
     type: `SEARCH_CHANGE`,
@@ -101,5 +107,6 @@ export {
   onTaskDoneAction,
   onTaskEditAction,
   onModalSwitchAction,
-  onMoreSwitchAction
+  onMoreSwitchAction,
+  onSearchCloseAction
 };

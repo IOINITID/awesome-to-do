@@ -24,6 +24,8 @@ const reducer = (state = initialState, action) => {
       return {...state, menuDefault: !state.menuDefault};
     case `SEARCH_SWITCH`:
       return {...state, searchDefault: action.payload ? true : !state.searchDefault};
+    case `SEARCH_CLOSE`:
+      return {...state, searchDefault: true};
     case `SEARCH_CHANGE`:
       return {...state, searchData: action.payload};
     case `SEARCHING`:
