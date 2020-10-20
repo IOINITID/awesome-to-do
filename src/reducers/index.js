@@ -6,7 +6,7 @@ const initialState = {
   searchDefault: true,
   searchData: ``,
   searching: false,
-  wellcomeDefault: window.localStorage.getItem(`wellcomeDefault`) || `true`,
+  wellcomeDefault: `true`,
   itemsData: JSON.parse(window.localStorage.getItem(`itemsData`)) || [],
   filterType: ``,
   modalDefault: true,
