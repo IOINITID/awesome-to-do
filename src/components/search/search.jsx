@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {onSearchSwitchAction, onSearchChangeAction, onSearchingAction} from '../../actions/index.js';
+import {onSearchSwitchAction, onSearchChangeAction, onSearchingAction, onSearchCloseAction} from '../../actions/index.js';
 
 const Search = (props) => {
   const {searchDefault, searchData, onSearchSwitch, onSearchChange, onSearching} = props;
@@ -28,6 +28,18 @@ const Search = (props) => {
     }
   };
 
+  const onSearchClose = (evt) => {
+    const formElement = document.querySelector(`.search`);
+
+    if (!formElement.contains(evt.target)) {
+      props.onSearchClose();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener(`click`, onSearchClose);
+  }, []);
+
   let searchClassName = searchDefault ? `search` : `search search--active`;
   let searchButtonClassName = searchDefault ? `button` : `button button--active`;
 
@@ -53,7 +65,8 @@ Search.propTypes = {
   searchData: PropTypes.string.isRequired,
   onSearchSwitch: PropTypes.func.isRequired,
   onSearchChange: PropTypes.func.isRequired,
-  onSearching: PropTypes.func.isRequired
+  onSearching: PropTypes.func.isRequired,
+  onSearchClose: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => {
@@ -67,7 +80,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onSearchSwitch: () => dispatch(onSearchSwitchAction()),
     onSearchChange: (searchData) => dispatch(onSearchChangeAction(searchData)),
-    onSearching: (searching) => dispatch(onSearchingAction(searching))
+    onSearching: (searching) => dispatch(onSearchingAction(searching)),
+    onSearchClose: () => dispatch(onSearchCloseAction())
   };
 };
 
