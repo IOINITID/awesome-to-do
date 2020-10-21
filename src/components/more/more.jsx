@@ -1,7 +1,7 @@
-import React, {Fragment} from 'react';
+import React, {createRef, Fragment, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {onTaskFixedAction, onTaskDoneAction, onModalSwitchAction, onMoreSwitchAction} from '../../actions/index.js';
+import {onTaskFixedAction, onTaskDoneAction, onModalSwitchAction, onMoreSwitchAction, onMoreCloseAction} from '../../actions/index.js';
 
 const More = (props) => {
   const onUndoneLinkClick = (evt) => {
@@ -38,10 +38,22 @@ const More = (props) => {
 
   const {done, fixed, more} = props;
 
+  const moreContainer = createRef();
+
+  const onMoreClose = (evt) => {
+    if (more && moreContainer.current && !moreContainer.current.contains(evt.target)) {
+      props.onMoreClose();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener(`click`, onMoreClose);
+  }, [more]);
+
   let moreClassName = more ? `more more--active` : `more`;
 
   return (
-    <div className={moreClassName}>
+    <div className={moreClassName} ref={moreContainer}>
       <ul className="more__list">
         {
           done ? <li className="more__item more__item--undone">
@@ -93,7 +105,8 @@ More.propTypes = {
   onTaskDone: PropTypes.func.isRequired,
   onTaskFixed: PropTypes.func.isRequired,
   onMoreSwitch: PropTypes.func.isRequired,
-  onModalSwitch: PropTypes.func.isRequired
+  onModalSwitch: PropTypes.func.isRequired,
+  onMoreClose: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -101,7 +114,8 @@ const mapDispatchToProps = (dispatch) => {
     onTaskFixed: (id) => dispatch(onTaskFixedAction(id)),
     onTaskDone: (id) => dispatch(onTaskDoneAction(id)),
     onModalSwitch: (id, type) => dispatch(onModalSwitchAction(id, type)),
-    onMoreSwitch: (id) => dispatch(onMoreSwitchAction(id))
+    onMoreSwitch: (id) => dispatch(onMoreSwitchAction(id)),
+    onMoreClose: () => dispatch(onMoreCloseAction())
   };
 };
 

@@ -93,6 +93,12 @@ const onMoreSwitchAction = (id) => {
   };
 };
 
+const onMoreCloseAction = () => {
+  return {
+    type: `MORE_CLOSE`
+  };
+};
+
 export {
   onThemeSwitchAction,
   onMenuSwitchAction,
@@ -108,5 +114,6 @@ export {
   onTaskEditAction,
   onModalSwitchAction,
   onMoreSwitchAction,
-  onSearchCloseAction
+  onSearchCloseAction,
+  onMoreCloseAction
 };

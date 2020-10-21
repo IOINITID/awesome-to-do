@@ -99,6 +99,14 @@ const reducer = (state = initialState, action) => {
       });
 
       return {...state, itemsData: itemsDataMore};
+    case `MORE_CLOSE`:
+      const itemsDataToClose = state.itemsData.slice();
+
+      itemsDataToClose.map((item) => {
+        item.more = false;
+      });
+
+      return {...state, itemsData: itemsDataToClose};
     default:
       return state;
   }
