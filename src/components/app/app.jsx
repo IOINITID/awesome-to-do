@@ -38,7 +38,6 @@ const App = (props) => {
   const itemsAll = itemsData.length;
   const itemsDone = itemsData.filter((item) => item.done).length;
   const itemsNotDone = itemsData.filter((item) => !item.done).length;
-
   const localTheme = window.localStorage.getItem(`themeDefault`) || `true`;
   const themeClassName = localTheme === `true` ? `theme theme--dark` : `theme theme--light`;
 
