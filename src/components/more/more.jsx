@@ -4,11 +4,15 @@ import {connect} from 'react-redux';
 import {onTaskFixedAction, onTaskDoneAction, onModalSwitchAction, onMoreSwitchAction, onMoreCloseAction} from '../../actions/index.js';
 
 const More = (props) => {
+  const {id, done, fixed, more, onMoreClose, onTaskDone, onMoreSwitch, onModalSwitch, onTaskFixed} = props;
+
+  const moreElement = createRef();
+
   const onUndoneLinkClick = (evt) => {
     evt.preventDefault();
 
-    props.onTaskDone(props.id);
-    props.onMoreSwitch();
+    onTaskDone(id);
+    onMoreSwitch();
   };
 
   const onEditLinkClick = (evt) => {
@@ -16,15 +20,15 @@ const More = (props) => {
 
     const modalType = evt.target.dataset.type;
 
-    props.onMoreSwitch();
-    props.onModalSwitch(props.id, modalType);
+    onMoreSwitch();
+    onModalSwitch(id, modalType);
   };
 
   const onFixedLinkClick = (evt) => {
     evt.preventDefault();
 
-    props.onTaskFixed(props.id);
-    props.onMoreSwitch();
+    onTaskFixed(id);
+    onMoreSwitch();
   };
 
   const onDeleteLinkClick = (evt) => {
@@ -32,29 +36,25 @@ const More = (props) => {
 
     const modalType = evt.target.dataset.type;
 
-    props.onMoreSwitch();
-    props.onModalSwitch(props.id, modalType);
+    onMoreSwitch();
+    onModalSwitch(id, modalType);
   };
 
-  const {done, fixed, more} = props;
-
-  const moreContainer = createRef();
-
-  const onMoreClose = (evt) => {
-    if (more && moreContainer.current && !moreContainer.current.contains(evt.target)) {
-      props.onMoreClose();
+  const onMoreCloseClick = (evt) => {
+    if (more && moreElement.current && !moreElement.current.contains(evt.target)) {
+      onMoreClose();
     }
   };
 
   useEffect(() => {
-    document.addEventListener(`click`, onMoreClose);
-    return () => document.removeEventListener(`click`, onMoreClose);
+    document.addEventListener(`click`, onMoreCloseClick);
+    return () => document.removeEventListener(`click`, onMoreCloseClick);
   }, [more]);
 
   let moreClassName = more ? `more more--active` : `more`;
 
   return (
-    <div className={moreClassName} ref={moreContainer}>
+    <div className={moreClassName} ref={moreElement}>
       <ul className="more__list">
         {
           done ? <li className="more__item more__item--undone">
