@@ -48,6 +48,7 @@ const More = (props) => {
 
   useEffect(() => {
     document.addEventListener(`click`, onMoreClose);
+    return () => document.removeEventListener(`click`, onMoreClose);
   }, [more]);
 
   let moreClassName = more ? `more more--active` : `more`;
