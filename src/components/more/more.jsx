@@ -47,7 +47,10 @@ const More = (props) => {
   };
 
   useEffect(() => {
-    document.addEventListener(`click`, onMoreCloseClick);
+    if (more) {
+      document.addEventListener(`click`, onMoreCloseClick);
+    }
+
     return () => document.removeEventListener(`click`, onMoreCloseClick);
   }, [more]);
 
