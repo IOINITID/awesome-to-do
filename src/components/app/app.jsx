@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../header/header.jsx';
 import Main from '../main/main.jsx';
@@ -31,7 +31,7 @@ const App = (props) => {
     }
   };
 
-  const {searchData, itemsData, filterType, currentId, modalDefault, modalType, modalField, onModalSwitch, wellcomeDefault} = props;
+  const {searchData, itemsData, filterType, currentId, modalDefault, modalType, modalField, onModalSwitch, wellcomeDefault, onWellcomeSwitch} = props;
 
   const itemsDataSorted = itemsData.slice().sort((a, b) => b.fixed - a.fixed).sort((a, b) => a.done - b.done);
   const itemsDataToShow = onFilter(onSearch(itemsDataSorted, searchData), filterType);
@@ -40,6 +40,12 @@ const App = (props) => {
   const itemsNotDone = itemsData.filter((item) => !item.done).length;
   const localTheme = window.localStorage.getItem(`themeDefault`) || `true`;
   const themeClassName = localTheme === `true` ? `theme theme--dark` : `theme theme--light`;
+
+  useEffect(() => {
+    if (itemsAll) {
+      onWellcomeSwitch();
+    }
+  }, []);
 
   return (
     <div className={themeClassName}>
