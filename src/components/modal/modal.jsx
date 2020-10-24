@@ -1,10 +1,10 @@
 import React, {Fragment, useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {onMenuSwitchAction, onTaskAddAction, onTaskDeleteAction, onTaskEditAction} from '../../actions/index.js';
+import {onMenuSwitchAction, onTaskAddAction, onTaskDeleteAction, onTaskEditAction, onWellcomeSwitchAction} from '../../actions/index.js';
 
 const Modal = (props) => {
-  const {modalType, modalField, onModalSwitch, currentId, onTaskEdit, onTaskAdd, onTaskDelete, onMenuSwitch, menuDefault} = props;
+  const {modalType, modalField, onModalSwitch, currentId, onTaskEdit, onTaskAdd, onTaskDelete, onMenuSwitch, menuDefault, onWellcomeSwitch} = props;
 
   const [title, setTitle] = useState(modalField);
 
@@ -31,6 +31,7 @@ const Modal = (props) => {
 
     setTitle(``);
     onModalSwitch();
+    onWellcomeSwitch();
 
     if (!menuDefault) {
       onMenuSwitch();
@@ -126,7 +127,8 @@ Modal.propTypes = {
   onTaskEdit: PropTypes.func.isRequired,
   onTaskDelete: PropTypes.func.isRequired,
   onMenuSwitch: PropTypes.func.isRequired,
-  menuDefault: PropTypes.bool.isRequired
+  menuDefault: PropTypes.bool.isRequired,
+  onWellcomeSwitch: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => {
@@ -142,7 +144,8 @@ const mapDispatchToProps = (dispatch) => {
     onTaskAdd: (title) => dispatch(onTaskAddAction(title)),
     onTaskDelete: (id) => dispatch(onTaskDeleteAction(id)),
     onTaskEdit: (id, title) => dispatch(onTaskEditAction(id, title)),
-    onMenuSwitch: () => dispatch(onMenuSwitchAction())
+    onMenuSwitch: () => dispatch(onMenuSwitchAction()),
+    onWellcomeSwitch: () => dispatch(onWellcomeSwitchAction())
   };
 };
 

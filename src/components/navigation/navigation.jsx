@@ -18,6 +18,13 @@ const Navigation = (props) => {
     }
   };
 
+  const onMenuButtonClick = (evt) => {
+    evt.preventDefault();
+
+    onMenuSwitch();
+    onSearchChange(``);
+  };
+
   const menuButtonClassName = menuDefault ? `button` : `button button--active`;
   const modalButtonClassName = modalDefault ? `button` : `button button--active`;
 
@@ -25,7 +32,7 @@ const Navigation = (props) => {
     <nav className="navigation">
       <ul className="navigation__list">
         <li className="navigation__item">
-          <button className={menuButtonClassName} type="button" onClick={onMenuSwitch}>
+          <button className={menuButtonClassName} type="button" onClick={onMenuButtonClick}>
             <svg className="button__icon" width="19" height="16" viewBox="0 0 19 16" fill="none"
               xmlns="http://www.w3.org/2000/svg">
               <path fillRule="evenodd" clipRule="evenodd"
@@ -61,7 +68,8 @@ Navigation.propTypes = {
 const mapStateToProps = (state) => {
   return {
     menuDefault: state.menuDefault,
-    modalDefault: state.modalDefault
+    modalDefault: state.modalDefault,
+    searchDefault: state.searchDefault
   };
 };
 

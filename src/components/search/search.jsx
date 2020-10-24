@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {onSearchSwitchAction, onSearchChangeAction, onSearchingAction, onSearchCloseAction} from '../../actions/index.js';
+import {onSearchSwitchAction, onSearchChangeAction, onSearchingAction, onSearchCloseAction, onMenuSwitchAction} from '../../actions/index.js';
 
 const Search = (props) => {
-  const {searchDefault, searchData, onSearchSwitch, onSearchChange, onSearching} = props;
+  const {searchDefault, searchData, onSearchSwitch, onSearchChange, onSearching, menuDefault, onMenuSwitch} = props;
 
   const onInputChange = (evt) => {
     const searchDataValue = evt.target.value;
@@ -36,6 +36,17 @@ const Search = (props) => {
     }
   };
 
+  const onSearchButtonClick = (evt) => {
+    evt.preventDefault();
+
+    onSearchSwitch();
+    onSearchChange(``);
+
+    if (!menuDefault) {
+      onMenuSwitch();
+    }
+  };
+
   useEffect(() => {
     document.addEventListener(`click`, onSearchClose);
   }, []);
@@ -46,7 +57,7 @@ const Search = (props) => {
   return (
     <form className={searchClassName} onSubmit={onSearchFormSubmit} autoComplete="off">
       <label className="search__label" htmlFor="search-field">
-        <button className={searchButtonClassName} type="button" onClick={onSearchSwitch}>
+        <button className={searchButtonClassName} type="button" onClick={onSearchButtonClick}>
           <svg className="button__icon" width="16" height="16" viewBox="0 0 16 16" fill="none"
             xmlns="http://www.w3.org/2000/svg">
             <path
@@ -66,13 +77,16 @@ Search.propTypes = {
   onSearchSwitch: PropTypes.func.isRequired,
   onSearchChange: PropTypes.func.isRequired,
   onSearching: PropTypes.func.isRequired,
-  onSearchClose: PropTypes.func.isRequired
+  onSearchClose: PropTypes.func.isRequired,
+  menuDefault: PropTypes.bool.isRequired,
+  onMenuSwitch: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => {
   return {
     searchDefault: state.searchDefault,
-    searchData: state.searchData
+    searchData: state.searchData,
+    menuDefault: state.menuDefault
   };
 };
 
@@ -81,7 +95,8 @@ const mapDispatchToProps = (dispatch) => {
     onSearchSwitch: () => dispatch(onSearchSwitchAction()),
     onSearchChange: (searchData) => dispatch(onSearchChangeAction(searchData)),
     onSearching: (searching) => dispatch(onSearchingAction(searching)),
-    onSearchClose: () => dispatch(onSearchCloseAction())
+    onSearchClose: () => dispatch(onSearchCloseAction()),
+    onMenuSwitch: () => dispatch(onMenuSwitchAction())
   };
 };
 

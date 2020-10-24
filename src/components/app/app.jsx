@@ -52,7 +52,6 @@ const App = (props) => {
 
 store.subscribe(() => {
   window.localStorage.setItem(`themeDefault`, store.getState().themeDefault);
-  window.localStorage.setItem(`wellcomeDefault`, store.getState().wellcomeDefault);
   window.localStorage.setItem(`itemsData`, JSON.stringify(store.getState().itemsData));
 });
 
