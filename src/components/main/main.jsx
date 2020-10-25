@@ -37,11 +37,13 @@ const Main = (props) => {
       </div>
 
       {
-        itemsData.length ? <div className="container">
-          <Tasks itemsData={itemsData} onModalSwitch={onModalSwitch} />
-        </div> : <div className="container">
-          {getNoTasksComponent()}
-        </div>
+        itemsData.length ?
+          <div className="container">
+            <Tasks itemsData={itemsData} onModalSwitch={onModalSwitch} />
+          </div> :
+          <div className="container">
+            {getNoTasksComponent()}
+          </div>
       }
 
     </main>
