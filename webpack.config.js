@@ -29,7 +29,7 @@ module.exports = {
             options: {
               sassOptions: {
                 outputStyle: 'compressed'
-              },
+              }
             }
           }
         ]
@@ -40,8 +40,8 @@ module.exports = {
           loader: `@svgr/webpack`,
           options: {
             svgo: false
-          },
-        }, ],
+          }
+        }]
       }
     ]
   },
