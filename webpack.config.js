@@ -14,7 +14,8 @@ module.exports = {
     port: 1337
   },
   module: {
-    rules: [{
+    rules: [
+      {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
@@ -22,26 +23,8 @@ module.exports = {
         }
       },
       {
-        test: /\.(css|scss)$/,
-        use: [`style-loader`, `css-loader`, `postcss-loader`,
-          {
-            loader: `sass-loader`,
-            options: {
-              sassOptions: {
-                outputStyle: 'compressed'
-              },
-            }
-          }
-        ]
-      },
-      {
-        test: /\.svg$/,
-        use: [{
-          loader: `@svgr/webpack`,
-          options: {
-            svgo: false
-          },
-        }, ],
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"]
       }
     ]
   },
