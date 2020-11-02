@@ -14,8 +14,7 @@ module.exports = {
     port: 1337
   },
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
@@ -24,7 +23,16 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"]
+        use: [`style-loader`, `css-loader`]
+      },
+      {
+        test: /\.svg$/,
+        use: {
+          loader: `@svgr/webpack`,
+          options: {
+            svgo: false
+          }
+        }
       }
     ]
   },
