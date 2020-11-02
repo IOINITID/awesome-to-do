@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import More from '../more/more.jsx';
 import {connect} from 'react-redux';
 import {onMoreSwitchAction, onTaskDoneAction} from '../../actions/index.js';
+import DoneIcon from '../../assets/images/done-icon.svg';
+import MoreIcon from '../../assets/images/more-icon.svg';
 
 const Task = (props) => {
   const {id, title, done, fixed, more, onTaskDone, onModalSwitch, onMoreSwitch} = props;
@@ -17,27 +19,13 @@ const Task = (props) => {
     <Fragment>
       <p className="tasks__description">{title}</p>
       {
-        done ? null : <button className="button tasks__done" type="button" onClick={() => onTaskDone(id)}>
-          <svg className="button__icon" width="22" height="17" viewBox="0 0 22 17" fill="none"
-            xmlns="http://www.w3.org/2000/svg">
-            <path d="M2 9.42857L7.4 15L20 2" stroke="white" strokeWidth="3" strokeLinecap="round"
-              strokeLinejoin="round" />
-          </svg>
-        </button>
+        done ? null :
+          <button className="button tasks__done" type="button" onClick={() => onTaskDone(id)}>
+            <DoneIcon className="button__icon" width="22" height="17" />
+          </button>
       }
       <button className={moreButtonClassName} type="button" onClick={onMoreButtonClick}>
-        <svg className="button__icon" width="22" height="5" viewBox="0 0 22 5" fill="none"
-          xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M11 3.5C11.6904 3.5 12.25 2.94036 12.25 2.25C12.25 1.55964 11.6904 1 11 1C10.3096 1 9.75 1.55964 9.75 2.25C9.75 2.94036 10.3096 3.5 11 3.5Z"
-            fill="white" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          <path
-            d="M19.75 3.5C20.4404 3.5 21 2.94036 21 2.25C21 1.55964 20.4404 1 19.75 1C19.0596 1 18.5 1.55964 18.5 2.25C18.5 2.94036 19.0596 3.5 19.75 3.5Z"
-            fill="white" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          <path
-            d="M2.25 3.5C2.94036 3.5 3.5 2.94036 3.5 2.25C3.5 1.55964 2.94036 1 2.25 1C1.55964 1 1 1.55964 1 2.25C1 2.94036 1.55964 3.5 2.25 3.5Z"
-            fill="white" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
+        <MoreIcon className="button__icon" width="22" height="5" />
       </button>
       <More id={id} done={done} fixed={fixed} more={more} onModalSwitch={onModalSwitch}></More>
     </Fragment>
