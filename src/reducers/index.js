@@ -1,13 +1,13 @@
 import {v4 as uuid} from 'uuid';
 
 const initialState = {
-  themeDefault: window.localStorage.getItem(`themeDefault`) || `true`,
+  theme: window.localStorage.getItem(`theme`) || `dark`,
+  itemsData: JSON.parse(window.localStorage.getItem(`itemsData`)) || [],
   menuDefault: true,
   searchDefault: true,
   searchData: ``,
   searching: false,
   wellcomeDefault: `true`,
-  itemsData: JSON.parse(window.localStorage.getItem(`itemsData`)) || [],
   filterType: ``,
   modalDefault: true,
   modalType: ``,
@@ -19,7 +19,7 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case `THEME_SWITCH`:
-      return state.themeDefault === `true` ? {...state, themeDefault: `false`} : {...state, themeDefault: `true`};
+      return state.theme === `dark` ? {...state, theme: `light`} : {...state, theme: `dark`};
     case `MENU_SWITCH`:
       return {...state, menuDefault: !state.menuDefault};
     case `SEARCH_SWITCH`:

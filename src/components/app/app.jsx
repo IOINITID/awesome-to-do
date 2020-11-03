@@ -38,8 +38,7 @@ const App = (props) => {
   const itemsAll = itemsData.length;
   const itemsDone = itemsData.filter((item) => item.done).length;
   const itemsNotDone = itemsData.filter((item) => !item.done).length;
-  const localTheme = window.localStorage.getItem(`themeDefault`) || `true`;
-  const themeClassName = localTheme === `true` ? `theme theme--dark` : `theme theme--light`;
+  const localTheme = window.localStorage.getItem(`theme`) || `dark`;
 
   useEffect(() => {
     if (itemsAll) {
@@ -48,7 +47,7 @@ const App = (props) => {
   }, []);
 
   return (
-    <div className={themeClassName}>
+    <div className={`theme theme--${localTheme}`}>
       <Header />
       <Main wellcomeDefault={wellcomeDefault} itemsQuantity={[itemsAll, itemsDone, itemsNotDone]} itemsData={itemsDataToShow} onModalSwitch={onModalSwitch}></Main>
       {modalDefault ? null : <Modal currentId={currentId} modalType={modalType} modalField={modalField} onModalSwitch={onModalSwitch} />}
@@ -57,7 +56,7 @@ const App = (props) => {
 };
 
 store.subscribe(() => {
-  window.localStorage.setItem(`themeDefault`, store.getState().themeDefault);
+  window.localStorage.setItem(`theme`, store.getState().theme);
   window.localStorage.setItem(`itemsData`, JSON.stringify(store.getState().itemsData));
 });
 
@@ -76,7 +75,7 @@ App.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    themeDefault: state.themeDefault,
+    theme: state.theme,
     searchData: state.searchData,
     wellcomeDefault: state.wellcomeDefault,
     itemsData: state.itemsData,
