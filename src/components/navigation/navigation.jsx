@@ -6,7 +6,7 @@ import MenuIcon from '../../assets/images/menu-icon.svg';
 import AddIcon from '../../assets/images/add-icon.svg';
 
 const Navigation = (props) => {
-  const {onMenuSwitch, onModalSwitch, menuDefault, isModalOpen, onSearchSwitch, onSearchChange} = props;
+  const {onMenuSwitch, onModalSwitch, isMenuOpen, isModalOpen, onSearchSwitch, onSearchChange} = props;
 
   const onAddButtonClick = (evt) => {
     const modalType = evt.target.dataset.type;
@@ -15,7 +15,7 @@ const Navigation = (props) => {
     onSearchSwitch(true);
     onSearchChange(``);
 
-    if (!menuDefault) {
+    if (isMenuOpen) {
       onMenuSwitch();
     }
   };
@@ -27,7 +27,7 @@ const Navigation = (props) => {
     onSearchChange(``);
   };
 
-  const menuButtonClassName = menuDefault ? `button` : `button button--active`;
+  const menuButtonClassName = isMenuOpen ? `button button--active` : `button`;
   const modalButtonClassName = isModalOpen ? `button button--active` : `button`;
 
   return (
@@ -51,7 +51,7 @@ const Navigation = (props) => {
 Navigation.propTypes = {
   onMenuSwitch: PropTypes.func.isRequired,
   onModalSwitch: PropTypes.func.isRequired,
-  menuDefault: PropTypes.bool.isRequired,
+  isMenuOpen: PropTypes.bool.isRequired,
   isModalOpen: PropTypes.bool.isRequired,
   onSearchSwitch: PropTypes.func.isRequired,
   onSearchChange: PropTypes.func.isRequired
@@ -59,7 +59,7 @@ Navigation.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    menuDefault: state.menuDefault,
+    isMenuOpen: state.isMenuOpen,
     isModalOpen: state.isModalOpen,
     searchDefault: state.searchDefault
   };

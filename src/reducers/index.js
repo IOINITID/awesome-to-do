@@ -4,7 +4,7 @@ const initialState = {
   theme: window.localStorage.getItem(`theme`) || `dark`,
   itemsData: JSON.parse(window.localStorage.getItem(`itemsData`)) || [],
   isModalOpen: false,
-  menuDefault: true,
+  isMenuOpen: false,
   searchDefault: true,
   searchData: ``,
   searching: false,
@@ -21,7 +21,7 @@ const reducer = (state = initialState, action) => {
     case `THEME_SWITCH`:
       return state.theme === `dark` ? {...state, theme: `light`} : {...state, theme: `dark`};
     case `MENU_SWITCH`:
-      return {...state, menuDefault: !state.menuDefault};
+      return {...state, isMenuOpen: !state.isMenuOpen};
     case `SEARCH_SWITCH`:
       return {...state, searchDefault: action.payload ? true : !state.searchDefault};
     case `SEARCH_CLOSE`:

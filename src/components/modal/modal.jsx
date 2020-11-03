@@ -7,7 +7,7 @@ import DeleteIcon from '../../assets/images/delete-icon.svg';
 import DoneIcon from '../../assets/images/done-icon.svg';
 
 const Modal = (props) => {
-  const {modalType, modalField, onModalSwitch, currentId, onTaskEdit, onTaskAdd, onTaskDelete, onMenuSwitch, menuDefault, onWellcomeSwitch} = props;
+  const {modalType, modalField, onModalSwitch, currentId, onTaskEdit, onTaskAdd, onTaskDelete, onMenuSwitch, isMenuOpen, onWellcomeSwitch} = props;
 
   const [title, setTitle] = useState(modalField);
 
@@ -36,7 +36,7 @@ const Modal = (props) => {
     onModalSwitch();
     onWellcomeSwitch();
 
-    if (!menuDefault) {
+    if (isMenuOpen) {
       onMenuSwitch();
     }
   };
@@ -118,7 +118,7 @@ Modal.propTypes = {
   onTaskEdit: PropTypes.func.isRequired,
   onTaskDelete: PropTypes.func.isRequired,
   onMenuSwitch: PropTypes.func.isRequired,
-  menuDefault: PropTypes.bool.isRequired,
+  isMenuOpen: PropTypes.bool.isRequired,
   onWellcomeSwitch: PropTypes.func.isRequired
 };
 
@@ -126,7 +126,7 @@ const mapStateToProps = (state) => {
   return {
     modalField: state.modalField,
     currentId: state.currentId,
-    menuDefault: state.menuDefault
+    isMenuOpen: state.isMenuOpen
   };
 };
 

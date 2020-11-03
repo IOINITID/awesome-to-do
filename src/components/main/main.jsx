@@ -8,7 +8,7 @@ import {connect} from 'react-redux';
 import {onMenuSwitchAction} from '../../actions/index.js';
 
 const Main = (props) => {
-  const {itemsData, wellcomeDefault, onModalSwitch, itemsQuantity, menuDefault, onMenuSwitch} = props;
+  const {itemsData, wellcomeDefault, onModalSwitch, itemsQuantity, isMenuOpen, onMenuSwitch} = props;
 
   const getNoTasksComponent = () => {
     switch (wellcomeDefault) {
@@ -24,7 +24,7 @@ const Main = (props) => {
   const onMainClick = (evt) => {
     const menuElement = document.querySelector(`.menu`);
 
-    if (!menuDefault && !menuElement.contains(evt.target)) {
+    if (isMenuOpen && !menuElement.contains(evt.target)) {
       onMenuSwitch();
     }
   };
@@ -55,13 +55,13 @@ Main.propTypes = {
   onModalSwitch: PropTypes.func.isRequired,
   itemsQuantity: PropTypes.array.isRequired,
   wellcomeDefault: PropTypes.string.isRequired,
-  menuDefault: PropTypes.bool.isRequired,
+  isMenuOpen: PropTypes.bool.isRequired,
   onMenuSwitch: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => {
   return {
-    menuDefault: state.menuDefault
+    isMenuOpen: state.isMenuOpen
   };
 };
 

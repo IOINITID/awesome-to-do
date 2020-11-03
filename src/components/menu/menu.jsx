@@ -6,7 +6,7 @@ import FixedIcon from '../../assets/images/fixed-icon.svg';
 import AddIcon from '../../assets/images/add-icon.svg';
 
 const Menu = (props) => {
-  const {itemsQuantity, menuDefault, onModalSwitch, onMenuSwitch, onFilterChange, onSearchSwitch, onSearchChange} = props;
+  const {itemsQuantity, isMenuOpen, onModalSwitch, onMenuSwitch, onFilterChange, onSearchSwitch, onSearchChange} = props;
   const [itemsAll, itemsDone, itemsNotDone] = itemsQuantity;
 
   const onFilterItemClick = (evt) => {
@@ -29,7 +29,7 @@ const Menu = (props) => {
     onSearchChange(``);
   };
 
-  const menuClassName = menuDefault ? `menu` : `menu menu--active`;
+  const menuClassName = isMenuOpen ? `menu menu--active` : `menu`;
 
   return (
     <section className={menuClassName}>
@@ -71,7 +71,7 @@ const Menu = (props) => {
 
 Menu.propTypes = {
   itemsQuantity: PropTypes.array.isRequired,
-  menuDefault: PropTypes.bool.isRequired,
+  isMenuOpen: PropTypes.bool.isRequired,
   onModalSwitch: PropTypes.func.isRequired,
   onMenuSwitch: PropTypes.func.isRequired,
   onFilterChange: PropTypes.func.isRequired,
@@ -81,7 +81,7 @@ Menu.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    menuDefault: state.menuDefault
+    isMenuOpen: state.isMenuOpen
   };
 };
 

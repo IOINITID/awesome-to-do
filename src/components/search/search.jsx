@@ -5,7 +5,7 @@ import {onSearchSwitchAction, onSearchChangeAction, onSearchingAction, onSearchC
 import SearchIcon from '../../assets/images/search-icon.svg';
 
 const Search = (props) => {
-  const {searchDefault, searchData, onSearchSwitch, onSearchChange, onSearching, menuDefault, onMenuSwitch} = props;
+  const {searchDefault, searchData, onSearchSwitch, onSearchChange, onSearching, isMenuOpen, onMenuSwitch} = props;
 
   const onInputChange = (evt) => {
     const searchDataValue = evt.target.value;
@@ -43,7 +43,7 @@ const Search = (props) => {
     onSearchSwitch();
     onSearchChange(``);
 
-    if (!menuDefault) {
+    if (isMenuOpen) {
       onMenuSwitch();
     }
   };
@@ -74,7 +74,7 @@ Search.propTypes = {
   onSearchChange: PropTypes.func.isRequired,
   onSearching: PropTypes.func.isRequired,
   onSearchClose: PropTypes.func.isRequired,
-  menuDefault: PropTypes.bool.isRequired,
+  isMenuOpen: PropTypes.bool.isRequired,
   onMenuSwitch: PropTypes.func.isRequired
 };
 
@@ -82,7 +82,7 @@ const mapStateToProps = (state) => {
   return {
     searchDefault: state.searchDefault,
     searchData: state.searchData,
-    menuDefault: state.menuDefault
+    isMenuOpen: state.isMenuOpen
   };
 };
 
