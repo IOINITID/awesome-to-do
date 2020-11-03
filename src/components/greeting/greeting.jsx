@@ -1,4 +1,6 @@
 import React from 'react';
+import GreetingDarkIcon from '../../assets/images/greeting-dark-icon.svg';
+import GreetingLightIcon from '../../assets/images/greeting-light-icon.svg';
 
 const Greeting = () => {
   return (
@@ -7,8 +9,8 @@ const Greeting = () => {
         <h2 className="greeting__title">Awesome to do</h2>
         <p className="greeting__description">Ваш личный помощник<br /> в организации списка задач</p>
       </div>
-      <img className="greeting__image greeting__image--dark" src="./img/greeting-dark-icon.svg" alt="Человек заполняет список дел." />
-      <img className="greeting__image greeting__image--light" src="./img/greeting-light-icon.svg" alt="Человек заполняет список дел." />
+      <GreetingDarkIcon className="greeting__image greeting__image--dark" width="537" height="478" />
+      <GreetingLightIcon className="greeting__image greeting__image--light" width="537" height="478" />
     </section>
   );
 };
