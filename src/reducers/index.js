@@ -3,13 +3,13 @@ import {v4 as uuid} from 'uuid';
 const initialState = {
   theme: window.localStorage.getItem(`theme`) || `dark`,
   itemsData: JSON.parse(window.localStorage.getItem(`itemsData`)) || [],
+  isModalOpen: false,
   menuDefault: true,
   searchDefault: true,
   searchData: ``,
   searching: false,
   wellcomeDefault: `true`,
   filterType: ``,
-  modalDefault: true,
   modalType: ``,
   modalField: ``,
   currentId: ``,
@@ -86,7 +86,7 @@ const reducer = (state = initialState, action) => {
       const [{title: modalField = ``} = {}] = modalTask;
       const currentId = action.payload.id || ``;
 
-      return {...state, currentId, modalDefault: !state.modalDefault, modalType: action.payload.type, modalField};
+      return {...state, currentId, isModalOpen: !state.isModalOpen, modalType: action.payload.type, modalField};
     case `MORE_SWITCH`:
       const itemsDataMore = state.itemsData.slice();
 

@@ -31,7 +31,7 @@ const App = (props) => {
     }
   };
 
-  const {searchData, itemsData, filterType, currentId, modalDefault, modalType, modalField, onModalSwitch, wellcomeDefault, onWellcomeSwitch} = props;
+  const {searchData, itemsData, filterType, currentId, isModalOpen, modalType, modalField, onModalSwitch, wellcomeDefault, onWellcomeSwitch} = props;
 
   const itemsDataSorted = itemsData.slice().sort((a, b) => b.fixed - a.fixed).sort((a, b) => a.done - b.done);
   const itemsDataToShow = onFilter(onSearch(itemsDataSorted, searchData), filterType);
@@ -49,8 +49,21 @@ const App = (props) => {
   return (
     <div className={`theme theme--${localTheme}`}>
       <Header />
-      <Main wellcomeDefault={wellcomeDefault} itemsQuantity={[itemsAll, itemsDone, itemsNotDone]} itemsData={itemsDataToShow} onModalSwitch={onModalSwitch}></Main>
-      {modalDefault ? null : <Modal currentId={currentId} modalType={modalType} modalField={modalField} onModalSwitch={onModalSwitch} />}
+      <Main
+        wellcomeDefault={wellcomeDefault}
+        itemsQuantity={[itemsAll, itemsDone, itemsNotDone]}
+        itemsData={itemsDataToShow}
+        onModalSwitch={onModalSwitch}
+      />
+      {
+        isModalOpen &&
+        <Modal
+          currentId={currentId}
+          modalType={modalType}
+          modalField={modalField}
+          onModalSwitch={onModalSwitch}
+        />
+      }
     </div >
   );
 };
@@ -67,7 +80,7 @@ App.propTypes = {
   itemsData: PropTypes.array.isRequired,
   filterType: PropTypes.string.isRequired,
   currentId: PropTypes.string.isRequired,
-  modalDefault: PropTypes.bool.isRequired,
+  isModalOpen: PropTypes.bool.isRequired,
   modalType: PropTypes.string.isRequired,
   modalField: PropTypes.string.isRequired,
   onModalSwitch: PropTypes.func.isRequired
@@ -81,7 +94,7 @@ const mapStateToProps = (state) => {
     itemsData: state.itemsData,
     filterType: state.filterType,
     currentId: state.currentId,
-    modalDefault: state.modalDefault,
+    isModalOpen: state.isModalOpen,
     modalType: state.modalType,
     modalField: state.modalField
   };
