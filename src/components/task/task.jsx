@@ -7,7 +7,7 @@ import DoneIcon from '../../assets/images/done-icon.svg';
 import MoreIcon from '../../assets/images/more-icon.svg';
 
 const Task = (props) => {
-  const {id, title, done, fixed, more, onTaskDone, onModalSwitch, onMoreSwitch} = props;
+  const {id, title, done, fixed, more, onTaskDone, onMoreSwitch} = props;
 
   let moreButtonClassName = more ? `button button--active tasks__more` : `button tasks__more`;
 
@@ -27,7 +27,7 @@ const Task = (props) => {
       <button className={moreButtonClassName} type="button" onClick={onMoreButtonClick}>
         <MoreIcon className="button__icon" width="22" height="5" />
       </button>
-      <More id={id} done={done} fixed={fixed} more={more} onModalSwitch={onModalSwitch}></More>
+      <More id={id} done={done} fixed={fixed} more={more} />
     </Fragment>
   );
 };
@@ -39,7 +39,6 @@ Task.propTypes = {
   fixed: PropTypes.bool.isRequired,
   more: PropTypes.bool.isRequired,
   onTaskDone: PropTypes.func.isRequired,
-  onModalSwitch: PropTypes.func.isRequired,
   onMoreSwitch: PropTypes.func.isRequired
 };
 

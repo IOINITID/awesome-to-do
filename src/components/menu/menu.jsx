@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {onMenuSwitchAction, onFilterChangeAction, onSearchChangeAction} from '../../actions/index.js';
+import {onMenuSwitchAction, onFilterChangeAction, onSearchChangeAction, onModalSwitchAction} from '../../actions/index.js';
 import FixedIcon from '../../assets/images/fixed-icon.svg';
 import AddIcon from '../../assets/images/add-icon.svg';
 
@@ -86,7 +86,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onMenuSwitch: () => dispatch(onMenuSwitchAction()),
     onFilterChange: (filterType) => dispatch(onFilterChangeAction(filterType)),
-    onSearchChange: (searchData) => dispatch(onSearchChangeAction(searchData))
+    onSearchChange: (searchData) => dispatch(onSearchChangeAction(searchData)),
+    onModalSwitch: (id, type) => dispatch(onModalSwitchAction(id, type))
   };
 };
 

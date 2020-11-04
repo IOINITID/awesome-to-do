@@ -5,7 +5,7 @@ import Tasks from '../tasks/tasks.jsx';
 import Greeting from '../greeting/greeting.jsx';
 import Info from '../info/info.jsx';
 import {connect} from 'react-redux';
-import {onMenuSwitchAction, onModalSwitchAction, onWellcomeSwitchAction} from '../../actions/index.js';
+import {onMenuSwitchAction, onWellcomeSwitchAction} from '../../actions/index.js';
 
 const Main = (props) => {
   const onSearch = (itemsData) => {
@@ -31,7 +31,7 @@ const Main = (props) => {
     }
   };
 
-  const {itemsData, wellcomeDefault, onModalSwitch, isMenuOpen, onMenuSwitch, searchData, filterType, onWellcomeSwitch} = props;
+  const {itemsData, wellcomeDefault, isMenuOpen, onMenuSwitch, searchData, filterType, onWellcomeSwitch} = props;
 
   const itemsDataSorted = itemsData.slice().sort((a, b) => b.fixed - a.fixed).sort((a, b) => a.done - b.done);
   const itemsDataToShow = onFilter(onSearch(itemsDataSorted, searchData), filterType);
@@ -69,19 +69,13 @@ const Main = (props) => {
     <main className="main" onClick={onMainClick}>
 
       <div className="container">
-        <Menu
-          itemsQuantity={[itemsAll, itemsDone, itemsNotDone]}
-          onModalSwitch={onModalSwitch}
-        />
+        <Menu itemsQuantity={[itemsAll, itemsDone, itemsNotDone]} />
       </div>
 
       {
         itemsDataToShow.length ?
           <div className="container">
-            <Tasks
-              itemsData={itemsDataToShow}
-              onModalSwitch={onModalSwitch}
-            />
+            <Tasks itemsData={itemsDataToShow} />
           </div> :
           <div className="container">
             {getNoTasksComponent()}
@@ -94,7 +88,6 @@ const Main = (props) => {
 
 Main.propTypes = {
   itemsData: PropTypes.array.isRequired,
-  onModalSwitch: PropTypes.func.isRequired,
   wellcomeDefault: PropTypes.string.isRequired,
   isMenuOpen: PropTypes.bool.isRequired,
   onMenuSwitch: PropTypes.func.isRequired,
@@ -116,7 +109,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onMenuSwitch: () => dispatch(onMenuSwitchAction()),
-    onModalSwitch: (id, type) => dispatch(onModalSwitchAction(id, type)),
     onWellcomeSwitch: () => dispatch(onWellcomeSwitchAction()),
   };
 };

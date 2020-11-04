@@ -4,7 +4,7 @@ import Task from '../task/task.jsx';
 import {connect} from 'react-redux';
 
 const Tasks = (props) => {
-  const {itemsData, filterType, onModalSwitch} = props;
+  const {itemsData, filterType} = props;
 
   let tasksTitle;
 
@@ -50,7 +50,7 @@ const Tasks = (props) => {
 
             return (
               <li key={id} className={tasksItemClassName}>
-                <Task id={id} title={title} done={done} fixed={fixed} more={more} onModalSwitch={onModalSwitch} />
+                <Task id={id} title={title} done={done} fixed={fixed} more={more} />
               </li>
             );
           })
@@ -62,7 +62,6 @@ const Tasks = (props) => {
 
 Tasks.propTypes = {
   itemsData: PropTypes.array.isRequired,
-  onModalSwitch: PropTypes.func.isRequired,
   filterType: PropTypes.string.isRequired
 };
 
