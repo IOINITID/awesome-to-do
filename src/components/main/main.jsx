@@ -5,31 +5,20 @@ import Tasks from '../tasks/tasks.jsx';
 import Greeting from '../greeting/greeting.jsx';
 import Info from '../info/info.jsx';
 import {connect} from 'react-redux';
-import {onMenuSwitchAction, onWellcomeSwitchAction} from '../../actions/index.js';
+import {onMenuSwitchAction, onWelcomeSwitchAction} from '../../actions/index.js';
 import {onSearch, onFilter} from '../../utils/common.js';
 
 const Main = (props) => {
-  const {itemsData, wellcomeDefault, isMenuOpen, onMenuSwitch, searchData, filterType, onWellcomeSwitch} = props;
+  const {itemsData, isWelcome, isMenuOpen, onMenuSwitch, searchData, filterType, onWelcomeSwitch} = props;
 
   const itemsDataSorted = itemsData.slice().sort((a, b) => b.fixed - a.fixed).sort((a, b) => a.done - b.done);
   const itemsDataToShow = onFilter(onSearch(itemsDataSorted, searchData), filterType);
 
   useEffect(() => {
     if (itemsData.length) {
-      onWellcomeSwitch();
+      onWelcomeSwitch();
     }
   }, []);
-
-  const getNoTasksComponent = () => {
-    switch (wellcomeDefault) {
-      case `true`:
-        return <Greeting />;
-      case `false`:
-        return <Info />;
-      default:
-        return <Greeting />;
-    }
-  };
 
   const onMainClick = (evt) => {
     const menuElement = document.querySelector(`.menu`);
@@ -52,7 +41,7 @@ const Main = (props) => {
             <Tasks />
           </div> :
           <div className="container">
-            {getNoTasksComponent()}
+            {isWelcome ? <Greeting /> : <Info />}
           </div>
       }
 
@@ -62,18 +51,18 @@ const Main = (props) => {
 
 Main.propTypes = {
   itemsData: PropTypes.array.isRequired,
-  wellcomeDefault: PropTypes.string.isRequired,
+  isWelcome: PropTypes.bool.isRequired,
   isMenuOpen: PropTypes.bool.isRequired,
   onMenuSwitch: PropTypes.func.isRequired,
   searchData: PropTypes.string.isRequired,
   filterType: PropTypes.string.isRequired,
-  onWellcomeSwitch: PropTypes.func.isRequired,
+  onWelcomeSwitch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
   return {
     isMenuOpen: state.isMenuOpen,
-    wellcomeDefault: state.wellcomeDefault,
+    isWelcome: state.isWelcome,
     searchData: state.searchData,
     filterType: state.filterType,
     itemsData: state.itemsData
@@ -83,7 +72,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onMenuSwitch: () => dispatch(onMenuSwitchAction()),
-    onWellcomeSwitch: () => dispatch(onWellcomeSwitchAction()),
+    onWelcomeSwitch: () => dispatch(onWelcomeSwitchAction()),
   };
 };
 

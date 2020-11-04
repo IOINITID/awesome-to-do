@@ -5,7 +5,7 @@ import {
   SEARCH_CLOSE,
   SEARCH_CHANGE,
   SEARCHING,
-  WELLCOME_SWITCH,
+  WELCOME_SWITCH,
   TASK_ADD,
   FILTER_CHANGE,
   TASK_DELETE,
@@ -55,9 +55,9 @@ const onSearchingAction = (searching) => {
   };
 };
 
-const onWellcomeSwitchAction = () => {
+const onWelcomeSwitchAction = () => {
   return {
-    type: WELLCOME_SWITCH
+    type: WELCOME_SWITCH
   };
 };
 
@@ -135,7 +135,7 @@ export {
   onSearchSwitchAction,
   onSearchChangeAction,
   onSearchingAction,
-  onWellcomeSwitchAction,
+  onWelcomeSwitchAction,
   onTaskAddAction,
   onFilterChangeAction,
   onTaskDeleteAction,

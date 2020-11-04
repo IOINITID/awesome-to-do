@@ -1,13 +1,13 @@
 import React, {Fragment, useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {onMenuSwitchAction, onModalSwitchAction, onTaskAddAction, onTaskDeleteAction, onTaskEditAction, onWellcomeSwitchAction} from '../../actions/index.js';
+import {onMenuSwitchAction, onModalSwitchAction, onTaskAddAction, onTaskDeleteAction, onTaskEditAction, onWelcomeSwitchAction} from '../../actions/index.js';
 import CloseIcon from '../../assets/images/close-icon.svg';
 import DeleteIcon from '../../assets/images/delete-icon.svg';
 import DoneIcon from '../../assets/images/done-icon.svg';
 
 const Modal = (props) => {
-  const {modalType, modalField, onModalSwitch, currentId, onTaskEdit, onTaskAdd, onTaskDelete, onMenuSwitch, isMenuOpen, onWellcomeSwitch} = props;
+  const {modalType, modalField, onModalSwitch, currentId, onTaskEdit, onTaskAdd, onTaskDelete, onMenuSwitch, isMenuOpen, onWelcomeSwitch} = props;
 
   const [title, setTitle] = useState(modalField);
 
@@ -34,7 +34,7 @@ const Modal = (props) => {
 
     setTitle(``);
     onModalSwitch();
-    onWellcomeSwitch();
+    onWelcomeSwitch();
 
     if (isMenuOpen) {
       onMenuSwitch();
@@ -119,7 +119,7 @@ Modal.propTypes = {
   onTaskDelete: PropTypes.func.isRequired,
   onMenuSwitch: PropTypes.func.isRequired,
   isMenuOpen: PropTypes.bool.isRequired,
-  onWellcomeSwitch: PropTypes.func.isRequired
+  onWelcomeSwitch: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => {
@@ -137,7 +137,7 @@ const mapDispatchToProps = (dispatch) => {
     onTaskDelete: (id) => dispatch(onTaskDeleteAction(id)),
     onTaskEdit: (id, title) => dispatch(onTaskEditAction(id, title)),
     onMenuSwitch: () => dispatch(onMenuSwitchAction()),
-    onWellcomeSwitch: () => dispatch(onWellcomeSwitchAction()),
+    onWelcomeSwitch: () => dispatch(onWelcomeSwitchAction()),
     onModalSwitch: (id, type) => dispatch(onModalSwitchAction(id, type))
   };
 };

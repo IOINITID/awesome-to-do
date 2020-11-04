@@ -6,7 +6,7 @@ import {
   SEARCH_CLOSE,
   SEARCH_CHANGE,
   SEARCHING,
-  WELLCOME_SWITCH,
+  WELCOME_SWITCH,
   TASK_ADD,
   FILTER_CHANGE,
   TASK_DELETE,
@@ -26,7 +26,7 @@ const initialState = {
   isSearchOpen: false,
   searchData: ``,
   searching: false,
-  wellcomeDefault: `true`,
+  isWelcome: true,
   filterType: ``,
   modalType: ``,
   modalField: ``,
@@ -48,8 +48,8 @@ const reducer = (state = initialState, action) => {
       return {...state, searchData: action.payload};
     case SEARCHING:
       return {...state, searching: action.payload};
-    case WELLCOME_SWITCH:
-      return state.wellcomeDefault === `true` ? {...state, wellcomeDefault: `false`} : {...state, wellcomeDefault: `false`};
+    case WELCOME_SWITCH:
+      return state.isWelcome && {...state, isWelcome: false};
     case TASK_ADD:
       const itemsData = state.itemsData.slice();
       const itemData = {
@@ -62,7 +62,7 @@ const reducer = (state = initialState, action) => {
 
       itemsData.push(itemData);
 
-      return {...state, wellcomeDefault: `false`, itemsData};
+      return {...state, isWelcome: false, itemsData};
     case FILTER_CHANGE:
       return {...state, filterType: action.payload};
     case TASK_DELETE:
