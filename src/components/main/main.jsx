@@ -79,7 +79,7 @@ const Main = (props) => {
         itemsDataToShow.length ?
           <div className="container">
             <Tasks
-              itemsData={itemsData}
+              itemsData={itemsDataToShow}
               onModalSwitch={onModalSwitch}
             />
           </div> :
