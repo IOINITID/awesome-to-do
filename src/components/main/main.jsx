@@ -8,9 +8,9 @@ import {connect} from 'react-redux';
 import {onMenuSwitchAction, onWellcomeSwitchAction} from '../../actions/index.js';
 
 const Main = (props) => {
-  const onSearch = (itemsData) => {
+  const onSearch = (itemsData, searchData) => {
     if (itemsData.length) {
-      return itemsData.filter((item) => item.title.toLowerCase().indexOf(props.searchData.toLowerCase()) > -1);
+      return itemsData.filter((item) => item.title.toLowerCase().indexOf(searchData.toLowerCase()) > -1);
     }
 
     return itemsData;
@@ -35,10 +35,6 @@ const Main = (props) => {
 
   const itemsDataSorted = itemsData.slice().sort((a, b) => b.fixed - a.fixed).sort((a, b) => a.done - b.done);
   const itemsDataToShow = onFilter(onSearch(itemsDataSorted, searchData), filterType);
-
-  const itemsAll = itemsData.length;
-  const itemsDone = itemsData.filter((item) => item.done).length;
-  const itemsNotDone = itemsData.filter((item) => !item.done).length;
 
   useEffect(() => {
     if (itemsData.length) {
@@ -69,13 +65,13 @@ const Main = (props) => {
     <main className="main" onClick={onMainClick}>
 
       <div className="container">
-        <Menu itemsQuantity={[itemsAll, itemsDone, itemsNotDone]} />
+        <Menu />
       </div>
 
       {
         itemsDataToShow.length ?
           <div className="container">
-            <Tasks itemsData={itemsDataToShow} />
+            <Tasks />
           </div> :
           <div className="container">
             {getNoTasksComponent()}

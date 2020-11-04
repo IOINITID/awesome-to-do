@@ -6,8 +6,12 @@ import FixedIcon from '../../assets/images/fixed-icon.svg';
 import AddIcon from '../../assets/images/add-icon.svg';
 
 const Menu = (props) => {
-  const {itemsQuantity, isMenuOpen, onModalSwitch, onMenuSwitch, onFilterChange, onSearchChange} = props;
-  const [itemsAll, itemsDone, itemsNotDone] = itemsQuantity;
+  const {itemsData, isMenuOpen, onModalSwitch, onMenuSwitch, onFilterChange, onSearchChange} = props;
+
+  const itemsAll = itemsData.length;
+  const itemsDone = itemsData.filter((item) => item.done).length;
+  const itemsNotDone = itemsData.filter((item) => !item.done).length;
+
 
   const onFilterItemClick = (evt) => {
     evt.preventDefault();
@@ -68,17 +72,18 @@ const Menu = (props) => {
 };
 
 Menu.propTypes = {
-  itemsQuantity: PropTypes.array.isRequired,
   isMenuOpen: PropTypes.bool.isRequired,
   onModalSwitch: PropTypes.func.isRequired,
   onMenuSwitch: PropTypes.func.isRequired,
   onFilterChange: PropTypes.func.isRequired,
-  onSearchChange: PropTypes.func.isRequired
+  onSearchChange: PropTypes.func.isRequired,
+  itemsData: PropTypes.array.isRequired
 };
 
 const mapStateToProps = (state) => {
   return {
-    isMenuOpen: state.isMenuOpen
+    isMenuOpen: state.isMenuOpen,
+    itemsData: state.itemsData
   };
 };
 

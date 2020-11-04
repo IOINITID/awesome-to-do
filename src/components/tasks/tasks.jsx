@@ -4,7 +4,33 @@ import Task from '../task/task.jsx';
 import {connect} from 'react-redux';
 
 const Tasks = (props) => {
-  const {itemsData, filterType} = props;
+  const onSearch = (itemsData, searchData) => {
+    if (itemsData.length) {
+      return itemsData.filter((item) => item.title.toLowerCase().indexOf(searchData.toLowerCase()) > -1);
+    }
+
+    return itemsData;
+  };
+
+  const onFilter = (itemsData, filterType) => {
+    switch (filterType) {
+      case `all`:
+        return itemsData;
+      case `done`:
+        return itemsData.filter((item) => item.done);
+      case `undone`:
+        return itemsData.filter((item) => !item.done);
+      case `fixed`:
+        return itemsData.filter((item) => item.fixed);
+      default:
+        return itemsData;
+    }
+  };
+
+  const {itemsData, filterType, searchData} = props;
+
+  const itemsDataSorted = itemsData.slice().sort((a, b) => b.fixed - a.fixed).sort((a, b) => a.done - b.done);
+  const itemsDataToShow = onFilter(onSearch(itemsDataSorted, searchData), filterType);
 
   let tasksTitle;
 
@@ -31,7 +57,7 @@ const Tasks = (props) => {
       <h2 className="tasks__title">{tasksTitle}</h2>
       <ul className="tasks__list">
         {
-          itemsData.map((item) => {
+          itemsDataToShow.map((item) => {
             const {id, title, done, fixed, more} = item;
 
             let tasksItemClassName;
@@ -62,12 +88,15 @@ const Tasks = (props) => {
 
 Tasks.propTypes = {
   itemsData: PropTypes.array.isRequired,
-  filterType: PropTypes.string.isRequired
+  filterType: PropTypes.string.isRequired,
+  searchData: PropTypes.string.isRequired
 };
 
 const mapStateToProps = (state) => {
   return {
-    filterType: state.filterType
+    filterType: state.filterType,
+    itemsData: state.itemsData,
+    searchData: state.searchData
   };
 };
 
