@@ -56,12 +56,10 @@ const Tasks = (props) => {
 
   return (
     <section className="tasks">
-      <div className="container">
-        <h2 className="tasks__title">{tasksTitle}</h2>
-        <ul className="tasks__list">
-          {taskItems}
-        </ul>
-      </div>
+      <h2 className="tasks__title">{tasksTitle}</h2>
+      <ul className="tasks__list">
+        {taskItems}
+      </ul>
     </section>
   );
 };

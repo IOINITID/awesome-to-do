@@ -33,7 +33,9 @@ const Main = (props) => {
   return (
     <main className="main" onClick={onMainClick}>
       <Menu />
-      {itemsDataToShow.length ? <Tasks /> : noTasks}
+      <div className="container">
+        {itemsDataToShow.length ? <Tasks /> : noTasks}
+      </div>
     </main>
   );
 };
