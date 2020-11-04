@@ -49,7 +49,7 @@ const reducer = (state = initialState, action) => {
     case SEARCHING:
       return {...state, searching: action.payload};
     case WELCOME_SWITCH:
-      return state.isWelcome && {...state, isWelcome: false};
+      return {...state, isWelcome: false};
     case TASK_ADD:
       const itemsData = state.itemsData.slice();
       const itemData = {
