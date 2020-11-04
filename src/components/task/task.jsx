@@ -19,10 +19,10 @@ const Task = (props) => {
     <Fragment>
       <p className="tasks__description">{title}</p>
       {
-        done ? null :
-          <button className="button tasks__done" type="button" onClick={() => onTaskDone(id)}>
-            <DoneIcon className="button__icon" width="22" height="17" />
-          </button>
+        !done &&
+        <button className="button tasks__done" type="button" onClick={() => onTaskDone(id)}>
+          <DoneIcon className="button__icon" width="22" height="17" />
+        </button>
       }
       <button className={moreButtonClassName} type="button" onClick={onMoreButtonClick}>
         <MoreIcon className="button__icon" width="22" height="5" />
