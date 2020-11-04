@@ -5,7 +5,7 @@ import Tasks from '../tasks/tasks.jsx';
 import Greeting from '../greeting/greeting.jsx';
 import Info from '../info/info.jsx';
 import {connect} from 'react-redux';
-import {onMenuSwitchAction} from '../../actions/index.js';
+import {onMenuSwitchAction, onModalSwitchAction} from '../../actions/index.js';
 
 const Main = (props) => {
   const {itemsData, wellcomeDefault, onModalSwitch, itemsQuantity, isMenuOpen, onMenuSwitch} = props;
@@ -68,6 +68,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onMenuSwitch: () => dispatch(onMenuSwitchAction()),
+    onModalSwitch: (id, type) => dispatch(onModalSwitchAction(id, type))
   };
 };
 

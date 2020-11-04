@@ -1,7 +1,7 @@
 import React, {Fragment, useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {onMenuSwitchAction, onTaskAddAction, onTaskDeleteAction, onTaskEditAction, onWellcomeSwitchAction} from '../../actions/index.js';
+import {onMenuSwitchAction, onModalSwitchAction, onTaskAddAction, onTaskDeleteAction, onTaskEditAction, onWellcomeSwitchAction} from '../../actions/index.js';
 import CloseIcon from '../../assets/images/close-icon.svg';
 import DeleteIcon from '../../assets/images/delete-icon.svg';
 import DoneIcon from '../../assets/images/done-icon.svg';
@@ -125,6 +125,7 @@ Modal.propTypes = {
 const mapStateToProps = (state) => {
   return {
     modalField: state.modalField,
+    modalType: state.modalType,
     currentId: state.currentId,
     isMenuOpen: state.isMenuOpen
   };
@@ -136,7 +137,8 @@ const mapDispatchToProps = (dispatch) => {
     onTaskDelete: (id) => dispatch(onTaskDeleteAction(id)),
     onTaskEdit: (id, title) => dispatch(onTaskEditAction(id, title)),
     onMenuSwitch: () => dispatch(onMenuSwitchAction()),
-    onWellcomeSwitch: () => dispatch(onWellcomeSwitchAction())
+    onWellcomeSwitch: () => dispatch(onWellcomeSwitchAction()),
+    onModalSwitch: (id, type) => dispatch(onModalSwitchAction(id, type))
   };
 };
 

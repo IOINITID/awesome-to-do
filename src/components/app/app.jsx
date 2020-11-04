@@ -31,7 +31,7 @@ const App = (props) => {
     }
   };
 
-  const {searchData, itemsData, filterType, currentId, isModalOpen, modalType, modalField, onModalSwitch, wellcomeDefault, onWellcomeSwitch} = props;
+  const {searchData, itemsData, filterType, isModalOpen, wellcomeDefault, onWellcomeSwitch} = props;
 
   const itemsDataSorted = itemsData.slice().sort((a, b) => b.fixed - a.fixed).sort((a, b) => a.done - b.done);
   const itemsDataToShow = onFilter(onSearch(itemsDataSorted, searchData), filterType);
@@ -53,16 +53,9 @@ const App = (props) => {
         wellcomeDefault={wellcomeDefault}
         itemsQuantity={[itemsAll, itemsDone, itemsNotDone]}
         itemsData={itemsDataToShow}
-        onModalSwitch={onModalSwitch}
       />
       {
-        isModalOpen &&
-        <Modal
-          currentId={currentId}
-          modalType={modalType}
-          modalField={modalField}
-          onModalSwitch={onModalSwitch}
-        />
+        isModalOpen && <Modal />
       }
     </div >
   );
@@ -79,11 +72,7 @@ App.propTypes = {
   onWellcomeSwitch: PropTypes.func.isRequired,
   itemsData: PropTypes.array.isRequired,
   filterType: PropTypes.string.isRequired,
-  currentId: PropTypes.string.isRequired,
-  isModalOpen: PropTypes.bool.isRequired,
-  modalType: PropTypes.string.isRequired,
-  modalField: PropTypes.string.isRequired,
-  onModalSwitch: PropTypes.func.isRequired
+  isModalOpen: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state) => {
@@ -93,18 +82,14 @@ const mapStateToProps = (state) => {
     wellcomeDefault: state.wellcomeDefault,
     itemsData: state.itemsData,
     filterType: state.filterType,
-    currentId: state.currentId,
-    isModalOpen: state.isModalOpen,
-    modalType: state.modalType,
-    modalField: state.modalField
+    isModalOpen: state.isModalOpen
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onWellcomeSwitch: () => dispatch(onWellcomeSwitchAction()),
-    onTaskAdd: (title) => dispatch(onTaskAddAction(title)),
-    onModalSwitch: (id, type) => dispatch(onModalSwitchAction(id, type))
+    onTaskAdd: (title) => dispatch(onTaskAddAction(title))
   };
 };
 
