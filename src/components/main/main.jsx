@@ -28,23 +28,12 @@ const Main = (props) => {
     }
   };
 
+  const noTasks = isWelcome ? <Greeting /> : <Info />;
+
   return (
     <main className="main" onClick={onMainClick}>
-
-      <div className="container">
-        <Menu />
-      </div>
-
-      {
-        itemsDataToShow.length ?
-          <div className="container">
-            <Tasks />
-          </div> :
-          <div className="container">
-            {isWelcome ? <Greeting /> : <Info />}
-          </div>
-      }
-
+      <Menu />
+      {itemsDataToShow.length ? <Tasks /> : noTasks}
     </main>
   );
 };

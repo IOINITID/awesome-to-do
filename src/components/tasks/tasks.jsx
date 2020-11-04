@@ -32,34 +32,36 @@ const Tasks = (props) => {
 
   return (
     <section className="tasks">
-      <h2 className="tasks__title">{tasksTitle}</h2>
-      <ul className="tasks__list">
-        {
-          itemsDataToShow.map((item) => {
-            const {id, title, done, fixed, more} = item;
+      <div className="container">
+        <h2 className="tasks__title">{tasksTitle}</h2>
+        <ul className="tasks__list">
+          {
+            itemsDataToShow.map((item) => {
+              const {id, title, done, fixed, more} = item;
 
-            let tasksItemClassName;
+              let tasksItemClassName;
 
-            switch (true) {
-              case fixed:
-                tasksItemClassName = `tasks__item tasks__item--fixed`;
-                break;
-              case done:
-                tasksItemClassName = `tasks__item tasks__item--done`;
-                break;
-              default:
-                tasksItemClassName = `tasks__item`;
-                break;
-            }
+              switch (true) {
+                case fixed:
+                  tasksItemClassName = `tasks__item tasks__item--fixed`;
+                  break;
+                case done:
+                  tasksItemClassName = `tasks__item tasks__item--done`;
+                  break;
+                default:
+                  tasksItemClassName = `tasks__item`;
+                  break;
+              }
 
-            return (
-              <li key={id} className={tasksItemClassName}>
-                <Task id={id} title={title} done={done} fixed={fixed} more={more} />
-              </li>
-            );
-          })
-        }
-      </ul>
+              return (
+                <li key={id} className={tasksItemClassName}>
+                  <Task id={id} title={title} done={done} fixed={fixed} more={more} />
+                </li>
+              );
+            })
+          }
+        </ul>
+      </div>
     </section>
   );
 };
