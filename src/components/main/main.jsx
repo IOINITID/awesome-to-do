@@ -6,31 +6,9 @@ import Greeting from '../greeting/greeting.jsx';
 import Info from '../info/info.jsx';
 import {connect} from 'react-redux';
 import {onMenuSwitchAction, onWellcomeSwitchAction} from '../../actions/index.js';
+import {onSearch, onFilter} from '../../utils/common.js';
 
 const Main = (props) => {
-  const onSearch = (itemsData, searchData) => {
-    if (itemsData.length) {
-      return itemsData.filter((item) => item.title.toLowerCase().indexOf(searchData.toLowerCase()) > -1);
-    }
-
-    return itemsData;
-  };
-
-  const onFilter = (itemsData, filterType) => {
-    switch (filterType) {
-      case `all`:
-        return itemsData;
-      case `done`:
-        return itemsData.filter((item) => item.done);
-      case `undone`:
-        return itemsData.filter((item) => !item.done);
-      case `fixed`:
-        return itemsData.filter((item) => item.fixed);
-      default:
-        return itemsData;
-    }
-  };
-
   const {itemsData, wellcomeDefault, isMenuOpen, onMenuSwitch, searchData, filterType, onWellcomeSwitch} = props;
 
   const itemsDataSorted = itemsData.slice().sort((a, b) => b.fixed - a.fixed).sort((a, b) => a.done - b.done);
