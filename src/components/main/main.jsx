@@ -1,14 +1,50 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import Menu from '../menu/menu.jsx';
 import Tasks from '../tasks/tasks.jsx';
 import Greeting from '../greeting/greeting.jsx';
 import Info from '../info/info.jsx';
 import {connect} from 'react-redux';
-import {onMenuSwitchAction, onModalSwitchAction} from '../../actions/index.js';
+import {onMenuSwitchAction, onModalSwitchAction, onWellcomeSwitchAction} from '../../actions/index.js';
 
 const Main = (props) => {
-  const {itemsData, wellcomeDefault, onModalSwitch, itemsQuantity, isMenuOpen, onMenuSwitch} = props;
+  const onSearch = (itemsData) => {
+    if (itemsData.length) {
+      return itemsData.filter((item) => item.title.toLowerCase().indexOf(props.searchData.toLowerCase()) > -1);
+    }
+
+    return itemsData;
+  };
+
+  const onFilter = (itemsData, filterType) => {
+    switch (filterType) {
+      case `all`:
+        return itemsData;
+      case `done`:
+        return itemsData.filter((item) => item.done);
+      case `undone`:
+        return itemsData.filter((item) => !item.done);
+      case `fixed`:
+        return itemsData.filter((item) => item.fixed);
+      default:
+        return itemsData;
+    }
+  };
+
+  const {itemsData, wellcomeDefault, onModalSwitch, isMenuOpen, onMenuSwitch, searchData, filterType, onWellcomeSwitch} = props;
+
+  const itemsDataSorted = itemsData.slice().sort((a, b) => b.fixed - a.fixed).sort((a, b) => a.done - b.done);
+  const itemsDataToShow = onFilter(onSearch(itemsDataSorted, searchData), filterType);
+
+  const itemsAll = itemsData.length;
+  const itemsDone = itemsData.filter((item) => item.done).length;
+  const itemsNotDone = itemsData.filter((item) => !item.done).length;
+
+  useEffect(() => {
+    if (itemsData.length) {
+      onWellcomeSwitch();
+    }
+  }, []);
 
   const getNoTasksComponent = () => {
     switch (wellcomeDefault) {
@@ -33,13 +69,19 @@ const Main = (props) => {
     <main className="main" onClick={onMainClick}>
 
       <div className="container">
-        <Menu itemsQuantity={itemsQuantity} onModalSwitch={onModalSwitch} />
+        <Menu
+          itemsQuantity={[itemsAll, itemsDone, itemsNotDone]}
+          onModalSwitch={onModalSwitch}
+        />
       </div>
 
       {
-        itemsData.length ?
+        itemsDataToShow.length ?
           <div className="container">
-            <Tasks itemsData={itemsData} onModalSwitch={onModalSwitch} />
+            <Tasks
+              itemsData={itemsData}
+              onModalSwitch={onModalSwitch}
+            />
           </div> :
           <div className="container">
             {getNoTasksComponent()}
@@ -53,22 +95,29 @@ const Main = (props) => {
 Main.propTypes = {
   itemsData: PropTypes.array.isRequired,
   onModalSwitch: PropTypes.func.isRequired,
-  itemsQuantity: PropTypes.array.isRequired,
   wellcomeDefault: PropTypes.string.isRequired,
   isMenuOpen: PropTypes.bool.isRequired,
-  onMenuSwitch: PropTypes.func.isRequired
+  onMenuSwitch: PropTypes.func.isRequired,
+  searchData: PropTypes.string.isRequired,
+  filterType: PropTypes.string.isRequired,
+  onWellcomeSwitch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
   return {
-    isMenuOpen: state.isMenuOpen
+    isMenuOpen: state.isMenuOpen,
+    wellcomeDefault: state.wellcomeDefault,
+    searchData: state.searchData,
+    filterType: state.filterType,
+    itemsData: state.itemsData
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onMenuSwitch: () => dispatch(onMenuSwitchAction()),
-    onModalSwitch: (id, type) => dispatch(onModalSwitchAction(id, type))
+    onModalSwitch: (id, type) => dispatch(onModalSwitchAction(id, type)),
+    onWellcomeSwitch: () => dispatch(onWellcomeSwitchAction()),
   };
 };
 
