@@ -5,7 +5,7 @@ import {onSearchSwitchAction, onSearchChangeAction, onSearchingAction, onSearchC
 import SearchIcon from '../../assets/images/search-icon.svg';
 
 const Search = (props) => {
-  const {searchDefault, searchData, onSearchSwitch, onSearchChange, onSearching, isMenuOpen, onMenuSwitch} = props;
+  const {isSearchOpen, searchData, onSearchSwitch, onSearchChange, onSearching, isMenuOpen, onMenuSwitch} = props;
 
   const onInputChange = (evt) => {
     const searchDataValue = evt.target.value;
@@ -52,8 +52,8 @@ const Search = (props) => {
     document.addEventListener(`click`, onSearchClose);
   }, []);
 
-  let searchClassName = searchDefault ? `search` : `search search--active`;
-  let searchButtonClassName = searchDefault ? `button` : `button button--active`;
+  let searchClassName = isSearchOpen ? `search search--active` : `search`;
+  let searchButtonClassName = isSearchOpen ? `button button--active` : `button`;
 
   return (
     <form className={searchClassName} onSubmit={onSearchFormSubmit} autoComplete="off">
@@ -61,14 +61,26 @@ const Search = (props) => {
         <button className={searchButtonClassName} type="button" onClick={onSearchButtonClick}>
           <SearchIcon className="button__icon" width="16" height="16" />
         </button>
-        {searchDefault ? null : <input className="search__field" type="search" name="search" id="search-field" value={searchData} autoFocus={true} onChange={onInputChange} onKeyDown={onEscKeyDownPress} placeholder="Поиск по задачам" />}
+        {
+          isSearchOpen &&
+          <input
+            className="search__field"
+            type="search" name="search"
+            id="search-field"
+            value={searchData}
+            autoFocus={true}
+            onChange={onInputChange}
+            onKeyDown={onEscKeyDownPress}
+            placeholder="Поиск по задачам"
+          />
+        }
       </label>
     </form>
   );
 };
 
 Search.propTypes = {
-  searchDefault: PropTypes.bool.isRequired,
+  isSearchOpen: PropTypes.bool.isRequired,
   searchData: PropTypes.string.isRequired,
   onSearchSwitch: PropTypes.func.isRequired,
   onSearchChange: PropTypes.func.isRequired,
@@ -80,7 +92,7 @@ Search.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    searchDefault: state.searchDefault,
+    isSearchOpen: state.isSearchOpen,
     searchData: state.searchData,
     isMenuOpen: state.isMenuOpen
   };

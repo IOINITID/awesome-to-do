@@ -1,18 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {onMenuSwitchAction, onModalSwitchAction, onSearchSwitchAction, onSearchChangeAction} from '../../actions/index.js';
+import {onMenuSwitchAction, onModalSwitchAction, onSearchChangeAction} from '../../actions/index.js';
 import MenuIcon from '../../assets/images/menu-icon.svg';
 import AddIcon from '../../assets/images/add-icon.svg';
 
 const Navigation = (props) => {
-  const {onMenuSwitch, onModalSwitch, isMenuOpen, isModalOpen, onSearchSwitch, onSearchChange} = props;
+  const {onMenuSwitch, onModalSwitch, isMenuOpen, isModalOpen, onSearchChange} = props;
 
   const onAddButtonClick = (evt) => {
     const modalType = evt.target.dataset.type;
 
     onModalSwitch(null, modalType);
-    onSearchSwitch(true);
     onSearchChange(``);
 
     if (isMenuOpen) {
@@ -53,15 +52,13 @@ Navigation.propTypes = {
   onModalSwitch: PropTypes.func.isRequired,
   isMenuOpen: PropTypes.bool.isRequired,
   isModalOpen: PropTypes.bool.isRequired,
-  onSearchSwitch: PropTypes.func.isRequired,
   onSearchChange: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => {
   return {
     isMenuOpen: state.isMenuOpen,
-    isModalOpen: state.isModalOpen,
-    searchDefault: state.searchDefault
+    isModalOpen: state.isModalOpen
   };
 };
 
@@ -69,7 +66,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onMenuSwitch: () => dispatch(onMenuSwitchAction()),
     onModalSwitch: (id, type) => dispatch(onModalSwitchAction(id, type)),
-    onSearchSwitch: (searchDefault) => dispatch(onSearchSwitchAction(searchDefault)),
     onSearchChange: (searchData) => dispatch(onSearchChangeAction(searchData))
   };
 };

@@ -5,7 +5,7 @@ const initialState = {
   itemsData: JSON.parse(window.localStorage.getItem(`itemsData`)) || [],
   isModalOpen: false,
   isMenuOpen: false,
-  searchDefault: true,
+  isSearchOpen: false,
   searchData: ``,
   searching: false,
   wellcomeDefault: `true`,
@@ -23,9 +23,9 @@ const reducer = (state = initialState, action) => {
     case `MENU_SWITCH`:
       return {...state, isMenuOpen: !state.isMenuOpen};
     case `SEARCH_SWITCH`:
-      return {...state, searchDefault: action.payload ? true : !state.searchDefault};
+      return {...state, isSearchOpen: !state.isSearchOpen};
     case `SEARCH_CLOSE`:
-      return {...state, searchDefault: true};
+      return {...state, isSearchOpen: false};
     case `SEARCH_CHANGE`:
       return {...state, searchData: action.payload};
     case `SEARCHING`:
