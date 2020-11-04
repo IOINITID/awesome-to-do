@@ -18,11 +18,15 @@ import {
 } from '../utils/constants.js';
 
 const onThemeSwitchAction = () => {
-  return {type: THEME_SWITCH};
+  return {
+    type: THEME_SWITCH
+  };
 };
 
 const onMenuSwitchAction = () => {
-  return {type: MENU_SWITCH};
+  return {
+    type: MENU_SWITCH
+  };
 };
 
 const onSearchSwitchAction = () => {
@@ -37,7 +41,7 @@ const onSearchCloseAction = () => {
   };
 };
 
-const onSearchChangeAction = (searchData) => {
+const onSearchChangeAction = (searchData = ``) => {
   return {
     type: SEARCH_CHANGE,
     payload: searchData
@@ -52,7 +56,9 @@ const onSearchingAction = (searching) => {
 };
 
 const onWellcomeSwitchAction = () => {
-  return {type: WELLCOME_SWITCH};
+  return {
+    type: WELLCOME_SWITCH
+  };
 };
 
 const onTaskAddAction = (title) => {
@@ -93,14 +99,20 @@ const onTaskDoneAction = (id) => {
 const onTaskEditAction = (id, title) => {
   return {
     type: TASK_EDIT,
-    payload: {id, title}
+    payload: {
+      id,
+      title
+    }
   };
 };
 
 const onModalSwitchAction = (id, type = `add`) => {
   return {
     type: MODAL_SWITCH,
-    payload: {id, type}
+    payload: {
+      id,
+      type
+    }
   };
 };
 

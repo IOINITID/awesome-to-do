@@ -1,29 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {onMenuSwitchAction, onModalSwitchAction, onSearchChangeAction} from '../../actions/index.js';
+import {onMenuSwitchAction, onModalSwitchAction} from '../../actions/index.js';
 import MenuIcon from '../../assets/images/menu-icon.svg';
 import AddIcon from '../../assets/images/add-icon.svg';
 
 const Navigation = (props) => {
-  const {onMenuSwitch, onModalSwitch, isMenuOpen, isModalOpen, onSearchChange} = props;
+  const {isMenuOpen, isModalOpen, onMenuSwitch, onModalSwitch} = props;
 
-  const onAddButtonClick = (evt) => {
-    const modalType = evt.target.dataset.type;
-
-    onModalSwitch(null, modalType);
-    onSearchChange(``);
+  const onAddButtonClick = () => {
+    onModalSwitch();
 
     if (isMenuOpen) {
       onMenuSwitch();
     }
   };
 
-  const onMenuButtonClick = (evt) => {
-    evt.preventDefault();
-
+  const onMenuButtonClick = () => {
     onMenuSwitch();
-    onSearchChange(``);
   };
 
   const menuButtonClassName = isMenuOpen ? `button button--active` : `button`;
@@ -48,11 +42,10 @@ const Navigation = (props) => {
 };
 
 Navigation.propTypes = {
-  onMenuSwitch: PropTypes.func.isRequired,
-  onModalSwitch: PropTypes.func.isRequired,
   isMenuOpen: PropTypes.bool.isRequired,
   isModalOpen: PropTypes.bool.isRequired,
-  onSearchChange: PropTypes.func.isRequired
+  onMenuSwitch: PropTypes.func.isRequired,
+  onModalSwitch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -65,8 +58,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onMenuSwitch: () => dispatch(onMenuSwitchAction()),
-    onModalSwitch: (id, type) => dispatch(onModalSwitchAction(id, type)),
-    onSearchChange: (searchData) => dispatch(onSearchChangeAction(searchData))
+    onModalSwitch: (id, type) => dispatch(onModalSwitchAction(id, type))
   };
 };
 

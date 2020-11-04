@@ -99,7 +99,6 @@ const reducer = (state = initialState, action) => {
 
       return {...state, itemsData: itemsDataEdit};
     case MODAL_SWITCH:
-
       const modalTask = state.itemsData.filter((item) => item.id === action.payload.id);
       const [{title: modalField = ``} = {}] = modalTask;
       const currentId = action.payload.id || ``;

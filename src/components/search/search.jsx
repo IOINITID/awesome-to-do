@@ -1,11 +1,13 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useRef} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {onSearchSwitchAction, onSearchChangeAction, onSearchingAction, onSearchCloseAction, onMenuSwitchAction} from '../../actions/index.js';
 import SearchIcon from '../../assets/images/search-icon.svg';
 
 const Search = (props) => {
-  const {isSearchOpen, searchData, onSearchSwitch, onSearchChange, onSearching, isMenuOpen, onMenuSwitch} = props;
+  const {isSearchOpen, isMenuOpen, searchData, onSearchSwitch, onSearchChange, onSearchClose, onSearching, onMenuSwitch} = props;
+
+  const searchRef = useRef(null);
 
   const onInputChange = (evt) => {
     const searchDataValue = evt.target.value;
@@ -29,11 +31,10 @@ const Search = (props) => {
     }
   };
 
-  const onSearchClose = (evt) => {
-    const formElement = document.querySelector(`.search`);
-
-    if (!formElement.contains(evt.target)) {
-      props.onSearchClose();
+  const onSearchFieldClose = (evt) => {
+    if (!searchRef.current.contains(evt.target)) {
+      onSearchClose();
+      onSearchChange();
     }
   };
 
@@ -41,7 +42,7 @@ const Search = (props) => {
     evt.preventDefault();
 
     onSearchSwitch();
-    onSearchChange(``);
+    onSearchChange();
 
     if (isMenuOpen) {
       onMenuSwitch();
@@ -49,14 +50,18 @@ const Search = (props) => {
   };
 
   useEffect(() => {
-    document.addEventListener(`click`, onSearchClose);
-  }, []);
+    if (isSearchOpen) {
+      document.addEventListener(`click`, onSearchFieldClose);
+    }
+
+    return () => document.removeEventListener(`click`, onSearchFieldClose);
+  }, [isSearchOpen]);
 
   let searchClassName = isSearchOpen ? `search search--active` : `search`;
   let searchButtonClassName = isSearchOpen ? `button button--active` : `button`;
 
   return (
-    <form className={searchClassName} onSubmit={onSearchFormSubmit} autoComplete="off">
+    <form className={searchClassName} ref={searchRef} onSubmit={onSearchFormSubmit} autoComplete="off">
       <label className="search__label" htmlFor="search-field">
         <button className={searchButtonClassName} type="button" onClick={onSearchButtonClick}>
           <SearchIcon className="button__icon" width="16" height="16" />
@@ -81,12 +86,12 @@ const Search = (props) => {
 
 Search.propTypes = {
   isSearchOpen: PropTypes.bool.isRequired,
+  isMenuOpen: PropTypes.bool.isRequired,
   searchData: PropTypes.string.isRequired,
   onSearchSwitch: PropTypes.func.isRequired,
   onSearchChange: PropTypes.func.isRequired,
-  onSearching: PropTypes.func.isRequired,
   onSearchClose: PropTypes.func.isRequired,
-  isMenuOpen: PropTypes.bool.isRequired,
+  onSearching: PropTypes.func.isRequired,
   onMenuSwitch: PropTypes.func.isRequired
 };
 
