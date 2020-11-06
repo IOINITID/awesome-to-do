@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {onMenuSwitchAction, onFilterChangeAction, onSearchChangeAction, onModalSwitchAction} from '../../actions/index.js';
+import {onMenuSwitchAction, onFilterChangeAction, onModalSwitchAction} from '../../actions/index.js';
 import FixedIcon from '../../assets/images/fixed-icon.svg';
 import AddIcon from '../../assets/images/add-icon.svg';
 
 const Menu = (props) => {
-  const {itemsData, isMenuOpen, onModalSwitch, onMenuSwitch, onFilterChange, onSearchChange} = props;
+  const {itemsData, isMenuOpen, onModalSwitch, onMenuSwitch, onFilterChange} = props;
 
   const itemsAll = itemsData.length;
   const itemsDone = itemsData.filter((item) => item.done).length;
@@ -20,7 +20,6 @@ const Menu = (props) => {
 
     onFilterChange(filterType);
     onMenuSwitch();
-    onSearchChange(``);
   };
 
   const onAddLinkClick = (evt) => {
@@ -28,7 +27,6 @@ const Menu = (props) => {
 
     onModalSwitch();
     onMenuSwitch();
-    onSearchChange(``);
   };
 
   const menuClassName = isMenuOpen ? `menu menu--active` : `menu`;
@@ -76,7 +74,6 @@ Menu.propTypes = {
   onModalSwitch: PropTypes.func.isRequired,
   onMenuSwitch: PropTypes.func.isRequired,
   onFilterChange: PropTypes.func.isRequired,
-  onSearchChange: PropTypes.func.isRequired,
   itemsData: PropTypes.array.isRequired
 };
 
@@ -91,7 +88,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onMenuSwitch: () => dispatch(onMenuSwitchAction()),
     onFilterChange: (filterType) => dispatch(onFilterChangeAction(filterType)),
-    onSearchChange: (searchData) => dispatch(onSearchChangeAction(searchData)),
     onModalSwitch: (id, type) => dispatch(onModalSwitchAction(id, type))
   };
 };
