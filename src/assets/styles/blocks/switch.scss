@@ -1,0 +1,39 @@
+.switch {
+  position: relative;
+  width: 107px;
+  height: 52px;
+  margin-left: auto;
+  padding: 3px 5px;
+  border-radius: 10px;
+}
+
+.switch .button {
+  z-index: 1;
+  transition: 0.75s ease-in-out;
+}
+
+.theme--dark .switch {
+  background: linear-gradient(140.4deg, #271827 3%, #2c2535 115.66%);
+  box-shadow: -4px -4px 16px rgba(88, 76, 98, 0.25), 3px 3px 12px rgba(0, 0, 0, 0.2), inset 4px 4px 8px rgba(0, 0, 0, 0.35);
+}
+
+.theme--light .switch {
+  background: linear-gradient(90.15deg, #ebf3fc 1.15%, #e2ecfd 100.11%);
+  box-shadow: -4px -3px 16px rgba(255, 255, 255, 0.7), -1px 3px 65px rgba(182, 194, 215, 0.49), inset 10px 10px 10px rgba(224, 235, 248, 0.2), inset 5px 5px 10px rgba(167, 172, 190, 0.7);
+}
+
+.theme--dark .switch .button {
+  transform: translateX(0);
+}
+
+.theme--light .switch .button {
+  transform: translateX(51px);
+}
+
+.theme--dark .switch .button__icon--sun {
+  display: none;
+}
+
+.theme--light .switch .button__icon--moon {
+  display: none;
+}

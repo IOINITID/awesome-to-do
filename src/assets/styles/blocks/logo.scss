@@ -1,0 +1,17 @@
+.logo {
+  margin-left: 80px;
+}
+
+@media (max-width: 1024px) {
+  .logo {
+    margin-left: 70px;
+  }
+}
+
+.theme--dark .logo__icon path {
+  fill: #ffffff;
+}
+
+.theme--light .logo__icon path {
+  fill: #5e647c;
+}

@@ -1,0 +1,19 @@
+.header {
+  z-index: 4;
+  width: 100%;
+  min-height: 80px;
+}
+
+.header .container {
+  min-height: 80px;
+}
+
+.theme--dark .header {
+  background: linear-gradient(117.98deg, #3a3d4e 46.98%, #1f1523 95.78%);
+  box-shadow: 660px 4px 250px rgba(32, 23, 36, 0.7), 5px 10px 50px #2e303e;
+}
+
+.theme--light .header {
+  background: linear-gradient(124.48deg, #f6faff 28.86%, #dfe9fd 110.11%);
+  box-shadow: 0 4px 16px #dde5f1;
+}

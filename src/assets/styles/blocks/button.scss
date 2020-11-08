@@ -1,0 +1,82 @@
+.button {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 46px;
+  min-width: 46px;
+  height: 46px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  cursor: pointer;
+}
+
+.button::before {
+  content: "";
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
+  border-radius: 8px;
+}
+
+.button--active::before {
+  visibility: hidden;
+}
+
+.button:hover::before,
+.button:focus::before {
+  opacity: 0.5;
+}
+
+.button:active::before {
+  visibility: hidden;
+}
+
+.button:hover .button__icon,
+.button:focus .button__icon {
+  opacity: 0.7;
+}
+
+.button:active .button__icon {
+  opacity: 1;
+}
+
+.button__icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.theme--dark .button {
+  background: linear-gradient(140.4deg, #271827 3%, #2c2535 115.66%);
+  box-shadow: -4px -4px 16px rgba(88, 76, 98, 0.25), 3px 3px 12px rgba(0, 0, 0, 0.2), inset 4px 4px 8px rgba(0, 0, 0, 0.35);
+}
+
+.theme--dark .button::before {
+  background: linear-gradient(154.25deg, #4d3c50 21.96%, #1a1523 100.49%);
+  box-shadow: 3px 3px 16px #000000;
+}
+
+.theme--dark .button .button__icon path {
+  fill: #ffffff;
+}
+
+.theme--light .button {
+  background: linear-gradient(90.15deg, #ebf3fc 1.15%, #e2ecfd 100.11%);
+  border: 0.5px solid #e1eaf7;
+  box-shadow: inset 10px 10px 10px rgba(224, 235, 248, 0.2), inset -5px -5px 15px rgba(255, 255, 255, 0.75), inset 5px 5px 10px rgba(167, 172, 190, 0.7);
+}
+
+.theme--light .button::before {
+  background: radial-gradient(109.5% 99.54% at 110.19% 66.2%, #e1ebfd 0%, #e9f1ff 49.48%, #f7faff 100%);
+  border: 1px solid rgba(251, 252, 255, 0.45);
+  box-shadow: -3px -3px 4px rgba(255, 255, 255, 0.3), 5px 5px 16px rgba(177, 188, 214, 0.7);
+}
+
+.theme--light .button .button__icon path {
+  fill: #5e647c;
+}
