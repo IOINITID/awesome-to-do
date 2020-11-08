@@ -35,6 +35,7 @@ const Search = (props) => {
     if (!searchRef.current.contains(evt.target)) {
       onSearchClose();
       onSearchChange();
+      onSearching(false);
     }
   };
 

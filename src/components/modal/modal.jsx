@@ -5,9 +5,21 @@ import {onMenuSwitchAction, onModalSwitchAction, onTaskAddAction, onTaskDeleteAc
 import CloseIcon from '../../assets/images/close-icon.svg';
 import DeleteIcon from '../../assets/images/delete-icon.svg';
 import DoneIcon from '../../assets/images/done-icon.svg';
+import ModalAddFirstDarkIcon from '../../assets/images/modal-add-first-dark-icon.svg';
+import ModalAddFirstLightIcon from '../../assets/images/modal-add-first-light-icon.svg';
+import ModalAddSecondDarkIcon from '../../assets/images/modal-add-second-dark-icon.svg';
+import ModalAddSecondLightIcon from '../../assets/images/modal-add-second-light-icon.svg';
+import ModalEditFirstDarkIcon from '../../assets/images/modal-edit-first-dark-icon.svg';
+import ModalEditFirstLightIcon from '../../assets/images/modal-edit-first-light-icon.svg';
+import ModalEditSecondDarkIcon from '../../assets/images/modal-edit-second-dark-icon.svg';
+import ModalEditSecondLightIcon from '../../assets/images/modal-edit-second-light-icon.svg';
+import ModalDeleteFirstDarkIcon from '../../assets/images/modal-delete-first-dark-icon.svg';
+import ModalDeleteFirstLightIcon from '../../assets/images/modal-delete-first-light-icon.svg';
+import ModalDeleteSecondDarkIcon from '../../assets/images/modal-delete-second-dark-icon.svg';
+import ModalDeleteSecondLightIcon from '../../assets/images/modal-delete-second-light-icon.svg';
 
 const Modal = (props) => {
-  const {modalType, modalField, onModalSwitch, currentId, onTaskEdit, onTaskAdd, onTaskDelete, onMenuSwitch, isMenuOpen, onWelcomeSwitch} = props;
+  const {theme, modalType, modalField, onModalSwitch, currentId, onTaskEdit, onTaskAdd, onTaskDelete, onMenuSwitch, isMenuOpen, onWelcomeSwitch} = props;
 
   const [title, setTitle] = useState(modalField);
 
@@ -60,23 +72,48 @@ const Modal = (props) => {
 
   let modalTitle;
   let modalClassName;
+  let modalIcons;
 
   switch (true) {
     case modalType === `add`:
       modalTitle = `Добавить задачу`;
       modalClassName = `modal modal--active modal--add`;
+      modalIcons = (
+        <Fragment>
+          {theme === `dark` ? <ModalAddFirstDarkIcon className="modal__icon-first" /> : <ModalAddFirstLightIcon className="modal__icon-first" />}
+          {theme === `dark` ? <ModalAddSecondDarkIcon className="modal__icon-second" /> : <ModalAddSecondLightIcon className="modal__icon-second" />}
+        </Fragment>
+      );
       break;
     case modalType === `edit`:
       modalTitle = `Редактировать задачу`;
       modalClassName = `modal modal--active modal--edit`;
+      modalIcons = (
+        <Fragment>
+          {theme === `dark` ? <ModalEditFirstDarkIcon className="modal__icon-first" /> : <ModalEditFirstLightIcon className="modal__icon-first" />}
+          {theme === `dark` ? <ModalEditSecondDarkIcon className="modal__icon-second" /> : <ModalEditSecondLightIcon className="modal__icon-second" />}
+        </Fragment>
+      );
       break;
     case modalType === `delete`:
       modalTitle = `Удалить задачу`;
       modalClassName = `modal modal--active modal--delete`;
+      modalIcons = (
+        <Fragment>
+          {theme === `dark` ? <ModalDeleteFirstDarkIcon className="modal__icon-first" /> : <ModalDeleteFirstLightIcon className="modal__icon-first" />}
+          {theme === `dark` ? <ModalDeleteSecondDarkIcon className="modal__icon-second" /> : <ModalDeleteSecondLightIcon className="modal__icon-second" />}
+        </Fragment>
+      );
       break;
     default:
       modalTitle = `Добавить задачу`;
       modalClassName = `modal modal--active modal--add`;
+      modalIcons = (
+        <Fragment>
+          {theme === `dark` ? <ModalAddFirstDarkIcon className="modal__icon-first" /> : <ModalAddFirstLightIcon className="modal__icon-first" />}
+          {theme === `dark` ? <ModalAddSecondDarkIcon className="modal__icon-second" /> : <ModalAddSecondLightIcon className="modal__icon-second" />}
+        </Fragment>
+      );
       break;
   }
 
@@ -104,12 +141,14 @@ const Modal = (props) => {
               </button>
           }
         </form>
+        {modalIcons}
       </div>
     </Fragment>
   );
 };
 
 Modal.propTypes = {
+  theme: PropTypes.string.isRequired,
   currentId: PropTypes.string.isRequired,
   onModalSwitch: PropTypes.func.isRequired,
   onTaskAdd: PropTypes.func.isRequired,
@@ -124,6 +163,7 @@ Modal.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
+    theme: state.theme,
     modalField: state.modalField,
     modalType: state.modalType,
     currentId: state.currentId,
