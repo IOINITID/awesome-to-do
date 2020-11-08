@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import store from './store/index.js';
 import {Provider} from 'react-redux';
 import App from './components/app/app.jsx';
+import './assets/styles/styles.scss';
+import './assets/images/favicon.svg';
 
 store.subscribe(() => {
   window.localStorage.setItem(`theme`, store.getState().theme);
