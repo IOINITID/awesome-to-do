@@ -12,7 +12,6 @@ const Menu = (props) => {
   const itemsDone = itemsData.filter((item) => item.done).length;
   const itemsNotDone = itemsData.filter((item) => !item.done).length;
 
-
   const onFilterItemClick = (evt) => {
     evt.preventDefault();
 
@@ -35,31 +34,31 @@ const Menu = (props) => {
     <section className={menuClassName}>
       <ul className="menu__list">
         <li className="menu__item">
-          <a className="menu__link" href="#" data-type="all" onClick={onFilterItemClick}>
+          <a className="menu__link" href="#" data-type="all" aria-label="Все задачи." onClick={onFilterItemClick}>
             Все задачи
             <sup className="menu__quantity">{itemsAll}</sup>
           </a>
         </li>
         <li className="menu__item">
-          <a className="menu__link" href="#" data-type="undone" onClick={onFilterItemClick}>
+          <a className="menu__link" href="#" data-type="undone" aria-label="Текущие." onClick={onFilterItemClick}>
             Текущие
             <sup className="menu__quantity">{itemsNotDone}</sup>
           </a>
         </li>
         <li className="menu__item">
-          <a className="menu__link" href="#" data-type="done" onClick={onFilterItemClick}>
+          <a className="menu__link" href="#" data-type="done" aria-label="Выполненные." onClick={onFilterItemClick}>
             Выполненные
             <sup className="menu__quantity">{itemsDone}</sup>
           </a>
         </li>
         <li className="menu__item menu__item--fixed">
-          <a className="menu__link" href="#" data-type="fixed" onClick={onFilterItemClick}>
+          <a className="menu__link" href="#" data-type="fixed" aria-label="Закреплённые." onClick={onFilterItemClick}>
             <FixedIcon className="menu__icon" width="17" height="17" />
             Закреплённые
           </a>
         </li>
         <li className="menu__item menu__item--add">
-          <a className="menu__link" href="#" onClick={onAddLinkClick}>
+          <a className="menu__link" href="#" aria-label="Добавить задачу." onClick={onAddLinkClick}>
             <AddIcon className="menu__icon" width="17" height="17" />
             Добавить задачу
           </a>

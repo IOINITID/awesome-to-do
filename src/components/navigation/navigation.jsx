@@ -27,12 +27,12 @@ const Navigation = (props) => {
     <nav className="navigation">
       <ul className="navigation__list">
         <li className="navigation__item">
-          <button className={menuButtonClassName} type="button" onClick={onMenuButtonClick}>
+          <button className={menuButtonClassName} type="button" aria-label="Открыть меню." onClick={onMenuButtonClick}>
             <MenuIcon className="button__icon" width="19" height="16" />
           </button>
         </li>
         <li className="navigation__item">
-          <button className={modalButtonClassName} type="button" data-type="add" onClick={onAddButtonClick}>
+          <button className={modalButtonClassName} type="button" data-type="add" aria-label="Добавить задачу." onClick={onAddButtonClick}>
             <AddIcon className="button__icon" width="16" height="16" />
           </button>
         </li>

@@ -10,7 +10,7 @@ const Switch = (props) => {
 
   return (
     <div className="switch">
-      <button className="button switch__button" onClick={onThemeSwitch}>
+      <button className="button switch__button" aria-label="Переключить тему." onClick={onThemeSwitch}>
         {
           theme === `dark` ?
             <MoonIcon

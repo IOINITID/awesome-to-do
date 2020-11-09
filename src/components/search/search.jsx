@@ -64,7 +64,7 @@ const Search = (props) => {
   return (
     <form className={searchClassName} ref={searchRef} onSubmit={onSearchFormSubmit} autoComplete="off">
       <label className="search__label" htmlFor="search-field">
-        <button className={searchButtonClassName} type="button" onClick={onSearchButtonClick}>
+        <button className={searchButtonClassName} type="button" aria-label="Открыть поиск." onClick={onSearchButtonClick}>
           <SearchIcon className="button__icon" width="16" height="16" />
         </button>
         {
