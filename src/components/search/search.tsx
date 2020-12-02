@@ -1,10 +1,20 @@
 import React, {useEffect, useRef} from 'react';
-import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {onSearchSwitchAction, onSearchChangeAction, onSearchingAction, onSearchCloseAction, onMenuSwitchAction} from '../../actions/index';
 import SearchIcon from '../../assets/images/search-icon.svg';
 
-const Search = (props) => {
+interface ISearch {
+  isSearchOpen: boolean;
+  isMenuOpen: boolean;
+  searchData: string;
+  onSearchSwitch: () => void;
+  onSearchChange: (firstArg?: string) => void;
+  onSearchClose: () => void;
+  onSearching: (firstArg: boolean) => void;
+  onMenuSwitch: () => void;
+}
+
+const Search = (props: ISearch) => {
   const {isSearchOpen, isMenuOpen, searchData, onSearchSwitch, onSearchChange, onSearchClose, onSearching, onMenuSwitch} = props;
 
   const searchRef = useRef(null);
@@ -83,17 +93,6 @@ const Search = (props) => {
       </label>
     </form>
   );
-};
-
-Search.propTypes = {
-  isSearchOpen: PropTypes.bool.isRequired,
-  isMenuOpen: PropTypes.bool.isRequired,
-  searchData: PropTypes.string.isRequired,
-  onSearchSwitch: PropTypes.func.isRequired,
-  onSearchChange: PropTypes.func.isRequired,
-  onSearchClose: PropTypes.func.isRequired,
-  onSearching: PropTypes.func.isRequired,
-  onMenuSwitch: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => {
