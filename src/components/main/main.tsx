@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react';
-import PropTypes from 'prop-types';
 import Menu from '../menu/menu';
 import Tasks from '../tasks/tasks';
 import Greeting from '../greeting/greeting';
@@ -8,10 +7,28 @@ import {connect} from 'react-redux';
 import {onMenuSwitchAction, onWelcomeSwitchAction} from '../../actions/index';
 import {onSearch, onFilter} from '../../utils/common';
 
-const Main = (props) => {
+interface IItemsData {
+  done: boolean;
+  fixed: boolean;
+  id: string;
+  more: boolean;
+  title: boolean;
+}
+
+interface IMain {
+  itemsData: Array<IItemsData>;
+  isWelcome: boolean;
+  isMenuOpen: boolean;
+  onMenuSwitch: () => void;
+  searchData: string;
+  filterType: string;
+  onWelcomeSwitch: () => void;
+}
+
+const Main = (props: IMain) => {
   const {itemsData, isWelcome, isMenuOpen, onMenuSwitch, searchData, filterType, onWelcomeSwitch} = props;
 
-  const itemsDataSorted = itemsData.slice().sort((a, b) => b.fixed - a.fixed).sort((a, b) => a.done - b.done);
+  const itemsDataSorted = itemsData.slice().sort((a: any, b: any) => b.fixed - a.fixed).sort((a: any, b: any) => a.done - b.done);
   const itemsDataToShow = onFilter(onSearch(itemsDataSorted, searchData), filterType);
 
   useEffect(() => {
@@ -38,16 +55,6 @@ const Main = (props) => {
       </div>
     </main>
   );
-};
-
-Main.propTypes = {
-  itemsData: PropTypes.array.isRequired,
-  isWelcome: PropTypes.bool.isRequired,
-  isMenuOpen: PropTypes.bool.isRequired,
-  onMenuSwitch: PropTypes.func.isRequired,
-  searchData: PropTypes.string.isRequired,
-  filterType: PropTypes.string.isRequired,
-  onWelcomeSwitch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
