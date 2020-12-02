@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Task from '../task/task.jsx';
+import Task from '../task/task';
 import {connect} from 'react-redux';
-import {onSearch, onFilter} from '../../utils/common.js';
+import {onSearch, onFilter} from '../../utils/common';
 
 const Tasks = (props) => {
   const {itemsData, filterType, searchData} = props;

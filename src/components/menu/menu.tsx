@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {onMenuSwitchAction, onFilterChangeAction, onModalSwitchAction} from '../../actions/index.js';
+import {onMenuSwitchAction, onFilterChangeAction, onModalSwitchAction} from '../../actions/index';
 import FixedIcon from '../../assets/images/fixed-icon.svg';
 import AddIcon from '../../assets/images/add-icon.svg';
 

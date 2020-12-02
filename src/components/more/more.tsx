@@ -1,7 +1,7 @@
-import React, {createRef, Fragment, useEffect} from 'react';
+import React, {createRef, Fragment, RefObject, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {onTaskFixedAction, onTaskDoneAction, onModalSwitchAction, onMoreSwitchAction, onMoreCloseAction} from '../../actions/index.js';
+import {onTaskFixedAction, onTaskDoneAction, onModalSwitchAction, onMoreSwitchAction, onMoreCloseAction} from '../../actions/index';
 import UndoneIcon from '../../assets/images/undone-icon.svg';
 import EditIcon from '../../assets/images/edit-icon.svg';
 import FixedIcon from '../../assets/images/fixed-icon.svg';
@@ -10,7 +10,7 @@ import DeleteIcon from '../../assets/images/delete-icon.svg';
 const More = (props) => {
   const {id, done, fixed, more, onMoreClose, onTaskDone, onMoreSwitch, onModalSwitch, onTaskFixed} = props;
 
-  const moreElement = createRef();
+  const moreElement: RefObject<HTMLDivElement> = createRef<HTMLDivElement>();
 
   const onUndoneLinkClick = (evt) => {
     evt.preventDefault();

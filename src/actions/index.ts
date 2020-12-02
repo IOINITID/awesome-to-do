@@ -15,7 +15,7 @@ import {
   MODAL_SWITCH,
   MORE_SWITCH,
   MORE_CLOSE
-} from '../utils/constants.js';
+} from '../utils/constants';
 
 const onThemeSwitchAction = () => {
   return {

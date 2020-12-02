@@ -1,12 +1,12 @@
 import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
-import Menu from '../menu/menu.jsx';
-import Tasks from '../tasks/tasks.jsx';
-import Greeting from '../greeting/greeting.jsx';
-import Info from '../info/info.jsx';
+import Menu from '../menu/menu';
+import Tasks from '../tasks/tasks';
+import Greeting from '../greeting/greeting';
+import Info from '../info/info';
 import {connect} from 'react-redux';
-import {onMenuSwitchAction, onWelcomeSwitchAction} from '../../actions/index.js';
-import {onSearch, onFilter} from '../../utils/common.js';
+import {onMenuSwitchAction, onWelcomeSwitchAction} from '../../actions/index';
+import {onSearch, onFilter} from '../../utils/common';
 
 const Main = (props) => {
   const {itemsData, isWelcome, isMenuOpen, onMenuSwitch, searchData, filterType, onWelcomeSwitch} = props;

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {onThemeSwitchAction} from '../../actions/index.js';
+import {onThemeSwitchAction} from '../../actions/index';
 import MoonIcon from '../../assets/images/moon-icon.svg';
 import SunIcon from '../../assets/images/sun-icon.svg';
 

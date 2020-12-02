@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import Header from '../header/header.jsx';
-import Main from '../main/main.jsx';
-import Modal from '../modal/modal.jsx';
+import Header from '../header/header';
+import Main from '../main/main';
+import Modal from '../modal/modal';
 
 const App = (props) => {
   const {theme, isModalOpen} = props;

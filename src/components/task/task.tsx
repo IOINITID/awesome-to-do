@@ -1,8 +1,8 @@
 import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
-import More from '../more/more.jsx';
+import More from '../more/more';
 import {connect} from 'react-redux';
-import {onMoreSwitchAction, onTaskDoneAction} from '../../actions/index.js';
+import {onMoreSwitchAction, onTaskDoneAction} from '../../actions/index';
 import DoneIcon from '../../assets/images/done-icon.svg';
 import MoreIcon from '../../assets/images/more-icon.svg';
 
