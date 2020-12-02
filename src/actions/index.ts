@@ -1,104 +1,87 @@
-import {
-  THEME_SWITCH,
-  MENU_SWITCH,
-  SEARCH_SWITCH,
-  SEARCH_CLOSE,
-  SEARCH_CHANGE,
-  SEARCHING,
-  WELCOME_SWITCH,
-  TASK_ADD,
-  FILTER_CHANGE,
-  TASK_DELETE,
-  TASK_FIXED,
-  TASK_DONE,
-  TASK_EDIT,
-  MODAL_SWITCH,
-  MORE_SWITCH,
-  MORE_CLOSE
-} from '../utils/constants';
+import {ActionTypes} from '../utils/constants';
 
 const onThemeSwitchAction = () => {
   return {
-    type: THEME_SWITCH
+    type: ActionTypes.THEME_SWITCH
   };
 };
 
 const onMenuSwitchAction = () => {
   return {
-    type: MENU_SWITCH
+    type: ActionTypes.MENU_SWITCH
   };
 };
 
 const onSearchSwitchAction = () => {
   return {
-    type: SEARCH_SWITCH
+    type: ActionTypes.SEARCH_SWITCH
   };
 };
 
 const onSearchCloseAction = () => {
   return {
-    type: SEARCH_CLOSE
+    type: ActionTypes.SEARCH_CLOSE
   };
 };
 
 const onSearchChangeAction = (searchData = ``) => {
   return {
-    type: SEARCH_CHANGE,
+    type: ActionTypes.SEARCH_CHANGE,
     payload: searchData
   };
 };
 
 const onSearchingAction = (searching) => {
   return {
-    type: SEARCHING,
+    type: ActionTypes.SEARCHING,
     payload: searching
   };
 };
 
 const onWelcomeSwitchAction = () => {
   return {
-    type: WELCOME_SWITCH
+    type: ActionTypes.WELCOME_SWITCH
   };
 };
 
 const onTaskAddAction = (title) => {
   return {
-    type: TASK_ADD,
+    type: ActionTypes.TASK_ADD,
     payload: title
   };
 };
 
 const onFilterChangeAction = (filterType) => {
   return {
-    type: FILTER_CHANGE,
+    type: ActionTypes.FILTER_CHANGE,
     payload: filterType
   };
 };
 
 const onTaskDeleteAction = (id) => {
   return {
-    type: TASK_DELETE,
+    type: ActionTypes.TASK_DELETE,
     payload: id
   };
 };
 
 const onTaskFixedAction = (id) => {
   return {
-    type: TASK_FIXED,
+    type: ActionTypes.TASK_FIXED,
     payload: id
   };
 };
 
 const onTaskDoneAction = (id) => {
   return {
-    type: TASK_DONE,
+    type: ActionTypes.TASK_DONE,
     payload: id
   };
 };
 
 const onTaskEditAction = (id, title) => {
   return {
-    type: TASK_EDIT,
+    type: ActionTypes.TASK_EDIT,
     payload: {
       id,
       title
@@ -108,7 +91,7 @@ const onTaskEditAction = (id, title) => {
 
 const onModalSwitchAction = (id, type = `add`) => {
   return {
-    type: MODAL_SWITCH,
+    type: ActionTypes.MODAL_SWITCH,
     payload: {
       id,
       type
@@ -118,14 +101,14 @@ const onModalSwitchAction = (id, type = `add`) => {
 
 const onMoreSwitchAction = (id) => {
   return {
-    type: MORE_SWITCH,
+    type: ActionTypes.MORE_SWITCH,
     payload: id
   };
 };
 
 const onMoreCloseAction = () => {
   return {
-    type: MORE_CLOSE
+    type: ActionTypes.MORE_CLOSE
   };
 };
 

@@ -1,22 +1,5 @@
 import {v4 as uuid} from 'uuid';
-import {
-  THEME_SWITCH,
-  MENU_SWITCH,
-  SEARCH_SWITCH,
-  SEARCH_CLOSE,
-  SEARCH_CHANGE,
-  SEARCHING,
-  WELCOME_SWITCH,
-  TASK_ADD,
-  FILTER_CHANGE,
-  TASK_DELETE,
-  TASK_FIXED,
-  TASK_DONE,
-  TASK_EDIT,
-  MODAL_SWITCH,
-  MORE_SWITCH,
-  MORE_CLOSE
-} from '../utils/constants';
+import {ActionTypes} from '../utils/constants';
 
 const initialState = {
   theme: window.localStorage.getItem(`theme`) || `dark`,
@@ -36,21 +19,21 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case THEME_SWITCH:
+    case ActionTypes.THEME_SWITCH:
       return state.theme === `dark` ? {...state, theme: `light`} : {...state, theme: `dark`};
-    case MENU_SWITCH:
+    case ActionTypes.MENU_SWITCH:
       return {...state, isMenuOpen: !state.isMenuOpen};
-    case SEARCH_SWITCH:
+    case ActionTypes.SEARCH_SWITCH:
       return {...state, isSearchOpen: !state.isSearchOpen};
-    case SEARCH_CLOSE:
+    case ActionTypes.SEARCH_CLOSE:
       return {...state, isSearchOpen: false};
-    case SEARCH_CHANGE:
+    case ActionTypes.SEARCH_CHANGE:
       return {...state, searchData: action.payload};
-    case SEARCHING:
+    case ActionTypes.SEARCHING:
       return {...state, searching: action.payload};
-    case WELCOME_SWITCH:
+    case ActionTypes.WELCOME_SWITCH:
       return {...state, isWelcome: false};
-    case TASK_ADD:
+    case ActionTypes.TASK_ADD:
       const itemsData = state.itemsData.slice();
       const itemData = {
         id: uuid(),
@@ -63,11 +46,11 @@ const reducer = (state = initialState, action) => {
       itemsData.push(itemData);
 
       return {...state, isWelcome: false, itemsData};
-    case FILTER_CHANGE:
+    case ActionTypes.FILTER_CHANGE:
       return {...state, filterType: action.payload};
-    case TASK_DELETE:
+    case ActionTypes.TASK_DELETE:
       return {...state, itemsData: state.itemsData.filter((item) => item.id !== action.payload)};
-    case TASK_FIXED:
+    case ActionTypes.TASK_FIXED:
       const itemsDataFixed = state.itemsData.slice();
 
       itemsDataFixed.map((item) => {
@@ -77,7 +60,7 @@ const reducer = (state = initialState, action) => {
       });
 
       return {...state, itemsData: itemsDataFixed};
-    case TASK_DONE:
+    case ActionTypes.TASK_DONE:
       const itemsDataDone = state.itemsData.slice();
 
       itemsDataDone.map((item) => {
@@ -88,7 +71,7 @@ const reducer = (state = initialState, action) => {
       });
 
       return {...state, itemsData: itemsDataDone};
-    case TASK_EDIT:
+    case ActionTypes.TASK_EDIT:
       const itemsDataEdit = state.itemsData.slice();
 
       itemsDataEdit.map((item) => {
@@ -98,13 +81,13 @@ const reducer = (state = initialState, action) => {
       });
 
       return {...state, itemsData: itemsDataEdit};
-    case MODAL_SWITCH:
+    case ActionTypes.MODAL_SWITCH:
       const modalTask = state.itemsData.filter((item) => item.id === action.payload.id);
       const [{title: modalField = ``} = {}] = modalTask;
       const currentId = action.payload.id || ``;
 
       return {...state, currentId, isModalOpen: !state.isModalOpen, modalType: action.payload.type, modalField};
-    case MORE_SWITCH:
+    case ActionTypes.MORE_SWITCH:
       const itemsDataMore = state.itemsData.slice();
 
       itemsDataMore.map((item) => {
@@ -116,7 +99,7 @@ const reducer = (state = initialState, action) => {
       });
 
       return {...state, itemsData: itemsDataMore};
-    case MORE_CLOSE:
+    case ActionTypes.MORE_CLOSE:
       const itemsDataToClose = state.itemsData.slice();
 
       itemsDataToClose.map((item) => {
