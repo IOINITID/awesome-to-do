@@ -1,12 +1,17 @@
 import React, {Fragment} from 'react';
-import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import NoTaskDarkIcon from '../../assets/images/no-task-dark-icon.svg';
 import NoTaskLightIcon from '../../assets/images/no-task-light-icon.svg';
 import NotFoundDarkIcon from '../../assets/images/not-found-dark-icon.svg';
 import NotFoundLightIcon from '../../assets/images/not-found-light-icon.svg';
 
-const Info = (props) => {
+interface IInfo {
+  theme: string;
+  filterType: string;
+  searching: boolean;
+}
+
+const Info = (props: IInfo) => {
   const {theme, filterType, searching} = props;
 
   let infoData;
@@ -48,12 +53,6 @@ const Info = (props) => {
       }
     </section>
   );
-};
-
-Info.propTypes = {
-  theme: PropTypes.string.isRequired,
-  filterType: PropTypes.string.isRequired,
-  searching: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state) => {
