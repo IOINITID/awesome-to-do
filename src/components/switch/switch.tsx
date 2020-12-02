@@ -1,11 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {onThemeSwitchAction} from '../../actions/index';
 import MoonIcon from '../../assets/images/moon-icon.svg';
 import SunIcon from '../../assets/images/sun-icon.svg';
 
-const Switch = (props) => {
+interface ISwitch {
+  theme: string;
+  onThemeSwitch: () => void;
+}
+
+const Switch = (props: ISwitch) => {
   const {theme, onThemeSwitch} = props;
 
   return (
@@ -27,11 +31,6 @@ const Switch = (props) => {
       </button>
     </div>
   );
-};
-
-Switch.propTypes = {
-  theme: PropTypes.string.isRequired,
-  onThemeSwitch: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => {
