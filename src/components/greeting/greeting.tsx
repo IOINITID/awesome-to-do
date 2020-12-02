@@ -1,10 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import GreetingDarkIcon from '../../assets/images/greeting-dark-icon.svg';
 import GreetingLightIcon from '../../assets/images/greeting-light-icon.svg';
 
-const Greeting = (props) => {
+interface IGreeting {
+  theme: string;
+}
+
+const Greeting = (props: IGreeting) => {
   const {theme} = props;
 
   return (
@@ -28,10 +31,6 @@ const Greeting = (props) => {
       }
     </section>
   );
-};
-
-Greeting.propTypes = {
-  theme: PropTypes.string.isRequired
 };
 
 const mapStateToProps = (state) => {
