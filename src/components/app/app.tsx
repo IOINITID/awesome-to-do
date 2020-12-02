@@ -1,11 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import Header from '../header/header';
 import Main from '../main/main';
 import Modal from '../modal/modal';
 
-const App = (props) => {
+interface IApp {
+  theme: string;
+  isModalOpen: boolean;
+}
+
+const App = (props: IApp) => {
   const {theme, isModalOpen} = props;
 
   return (
@@ -15,11 +19,6 @@ const App = (props) => {
       {isModalOpen && <Modal />}
     </div>
   );
-};
-
-App.propTypes = {
-  theme: PropTypes.string.isRequired,
-  isModalOpen: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state) => {

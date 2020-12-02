@@ -1,13 +1,26 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Task from '../task/task';
 import {connect} from 'react-redux';
 import {onSearch, onFilter} from '../../utils/common';
 
-const Tasks = (props) => {
+interface IItemsData {
+  done: boolean;
+  fixed: boolean;
+  id: string;
+  more: boolean;
+  title: boolean;
+}
+
+interface ITasks {
+  itemsData: Array<IItemsData>;
+  filterType: string;
+  searchData: string;
+}
+
+const Tasks = (props: ITasks) => {
   const {itemsData, filterType, searchData} = props;
 
-  const itemsDataSorted = itemsData.slice().sort((a, b) => b.fixed - a.fixed).sort((a, b) => a.done - b.done);
+  const itemsDataSorted = itemsData.slice().sort((a: any, b: any) => b.fixed - a.fixed).sort((a: any, b: any) => a.done - b.done);
   const itemsDataToShow = onFilter(onSearch(itemsDataSorted, searchData), filterType);
 
   let tasksTitle;
@@ -62,12 +75,6 @@ const Tasks = (props) => {
       </ul>
     </section>
   );
-};
-
-Tasks.propTypes = {
-  itemsData: PropTypes.array.isRequired,
-  filterType: PropTypes.string.isRequired,
-  searchData: PropTypes.string.isRequired
 };
 
 const mapStateToProps = (state) => {

@@ -1,5 +1,4 @@
 import React, {createRef, Fragment, RefObject, useEffect} from 'react';
-import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {onTaskFixedAction, onTaskDoneAction, onModalSwitchAction, onMoreSwitchAction, onMoreCloseAction} from '../../actions/index';
 import UndoneIcon from '../../assets/images/undone-icon.svg';
@@ -7,7 +6,19 @@ import EditIcon from '../../assets/images/edit-icon.svg';
 import FixedIcon from '../../assets/images/fixed-icon.svg';
 import DeleteIcon from '../../assets/images/delete-icon.svg';
 
-const More = (props) => {
+interface IMore {
+  id: string;
+  done: boolean;
+  fixed: boolean;
+  more: boolean;
+  onTaskDone: (id: string) => void;
+  onTaskFixed: (id: string) => void;
+  onMoreSwitch: () => void;
+  onModalSwitch: (id: string, type: string) => void;
+  onMoreClose: () => void;
+}
+
+const More = (props: IMore) => {
   const {id, done, fixed, more, onMoreClose, onTaskDone, onMoreSwitch, onModalSwitch, onTaskFixed} = props;
 
   const moreElement: RefObject<HTMLDivElement> = createRef<HTMLDivElement>();
@@ -94,18 +105,6 @@ const More = (props) => {
       </ul>
     </div>
   );
-};
-
-More.propTypes = {
-  id: PropTypes.string.isRequired,
-  done: PropTypes.bool.isRequired,
-  fixed: PropTypes.bool.isRequired,
-  more: PropTypes.bool.isRequired,
-  onTaskDone: PropTypes.func.isRequired,
-  onTaskFixed: PropTypes.func.isRequired,
-  onMoreSwitch: PropTypes.func.isRequired,
-  onModalSwitch: PropTypes.func.isRequired,
-  onMoreClose: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = (dispatch) => {

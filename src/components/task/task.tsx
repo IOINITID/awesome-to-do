@@ -1,12 +1,21 @@
 import React, {Fragment} from 'react';
-import PropTypes from 'prop-types';
 import More from '../more/more';
 import {connect} from 'react-redux';
 import {onMoreSwitchAction, onTaskDoneAction} from '../../actions/index';
 import DoneIcon from '../../assets/images/done-icon.svg';
 import MoreIcon from '../../assets/images/more-icon.svg';
 
-const Task = (props) => {
+interface ITask {
+  id: string;
+  title: string;
+  done: boolean;
+  fixed: boolean;
+  more: boolean;
+  onTaskDone: (id: string) => void;
+  onMoreSwitch: (id: string) => void;
+}
+
+const Task = (props: ITask) => {
   const {id, title, done, fixed, more, onTaskDone, onMoreSwitch} = props;
 
   let moreButtonClassName = more ? `button button--active tasks__more` : `button tasks__more`;
@@ -30,16 +39,6 @@ const Task = (props) => {
       <More id={id} done={done} fixed={fixed} more={more} />
     </Fragment>
   );
-};
-
-Task.propTypes = {
-  id: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  done: PropTypes.bool.isRequired,
-  fixed: PropTypes.bool.isRequired,
-  more: PropTypes.bool.isRequired,
-  onTaskDone: PropTypes.func.isRequired,
-  onMoreSwitch: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = (dispatch) => {

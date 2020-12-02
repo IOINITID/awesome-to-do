@@ -1,5 +1,4 @@
 import React, {Fragment, useEffect, useState} from 'react';
-import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {onMenuSwitchAction, onModalSwitchAction, onTaskAddAction, onTaskDeleteAction, onTaskEditAction, onWelcomeSwitchAction} from '../../actions/index';
 import CloseIcon from '../../assets/images/close-icon.svg';
@@ -18,7 +17,21 @@ import ModalDeleteFirstLightIcon from '../../assets/images/modal-delete-first-li
 import ModalDeleteSecondDarkIcon from '../../assets/images/modal-delete-second-dark-icon.svg';
 import ModalDeleteSecondLightIcon from '../../assets/images/modal-delete-second-light-icon.svg';
 
-const Modal = (props) => {
+interface IModal {
+  theme: string;
+  currentId: string;
+  onModalSwitch: () => void;
+  onTaskAdd: (title: string) => void;
+  modalType: string;
+  modalField: string;
+  onTaskEdit: (id: string, title: string) => void;
+  onTaskDelete: (id: string) => void;
+  onMenuSwitch: () => void;
+  isMenuOpen: boolean;
+  onWelcomeSwitch: () => void;
+}
+
+const Modal = (props: IModal) => {
   const {theme, modalType, modalField, onModalSwitch, currentId, onTaskEdit, onTaskAdd, onTaskDelete, onMenuSwitch, isMenuOpen, onWelcomeSwitch} = props;
 
   const [title, setTitle] = useState(modalField);
@@ -145,20 +158,6 @@ const Modal = (props) => {
       </div>
     </Fragment>
   );
-};
-
-Modal.propTypes = {
-  theme: PropTypes.string.isRequired,
-  currentId: PropTypes.string.isRequired,
-  onModalSwitch: PropTypes.func.isRequired,
-  onTaskAdd: PropTypes.func.isRequired,
-  modalType: PropTypes.string.isRequired,
-  modalField: PropTypes.string.isRequired,
-  onTaskEdit: PropTypes.func.isRequired,
-  onTaskDelete: PropTypes.func.isRequired,
-  onMenuSwitch: PropTypes.func.isRequired,
-  isMenuOpen: PropTypes.bool.isRequired,
-  onWelcomeSwitch: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => {

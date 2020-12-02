@@ -1,11 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {onMenuSwitchAction, onModalSwitchAction} from '../../actions/index';
 import MenuIcon from '../../assets/images/menu-icon.svg';
 import AddIcon from '../../assets/images/add-icon.svg';
 
-const Navigation = (props) => {
+interface INavigation {
+  isMenuOpen: boolean;
+  isModalOpen: boolean;
+  onMenuSwitch: () => void;
+  onModalSwitch: () => void;
+}
+
+const Navigation = (props: INavigation) => {
   const {isMenuOpen, isModalOpen, onMenuSwitch, onModalSwitch} = props;
 
   const onAddButtonClick = () => {
@@ -39,13 +45,6 @@ const Navigation = (props) => {
       </ul>
     </nav>
   );
-};
-
-Navigation.propTypes = {
-  isMenuOpen: PropTypes.bool.isRequired,
-  isModalOpen: PropTypes.bool.isRequired,
-  onMenuSwitch: PropTypes.func.isRequired,
-  onModalSwitch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
