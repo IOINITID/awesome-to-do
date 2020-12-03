@@ -1,7 +1,36 @@
 import {v4 as uuid} from 'uuid';
 import {ActionTypes} from '../utils/constants';
 
-const initialState = {
+interface IItemsData {
+  done: boolean;
+  fixed: boolean;
+  id: string;
+  more: boolean;
+  title: string;
+}
+
+interface IInitialState {
+  theme: string;
+  itemsData: Array<IItemsData> | [];
+  isModalOpen: boolean;
+  isMenuOpen: boolean;
+  isSearchOpen: boolean;
+  searchData: string;
+  searching: boolean;
+  isWelcome: boolean;
+  filterType: string;
+  modalType: string;
+  modalField: string;
+  currentId: string;
+  title: string;
+}
+
+interface IAction {
+  type: string;
+  payload?: any;
+}
+
+const initialState: IInitialState = {
   theme: window.localStorage.getItem(`theme`) || `dark`,
   itemsData: JSON.parse(window.localStorage.getItem(`itemsData`)) || [],
   isModalOpen: false,
@@ -17,7 +46,7 @@ const initialState = {
   title: ``
 };
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action: IAction): IInitialState => {
   switch (action.type) {
     case ActionTypes.THEME_SWITCH:
       return state.theme === `dark` ? {...state, theme: `light`} : {...state, theme: `dark`};
