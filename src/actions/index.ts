@@ -24,14 +24,14 @@ const onSearchCloseAction = () => {
   };
 };
 
-const onSearchChangeAction = (searchData = ``) => {
+const onSearchChangeAction = (searchData: string = ``) => {
   return {
     type: ActionTypes.SEARCH_CHANGE,
     payload: searchData
   };
 };
 
-const onSearchingAction = (searching) => {
+const onSearchingAction = (searching: boolean) => {
   return {
     type: ActionTypes.SEARCHING,
     payload: searching
@@ -44,42 +44,42 @@ const onWelcomeSwitchAction = () => {
   };
 };
 
-const onTaskAddAction = (title) => {
+const onTaskAddAction = (title: string) => {
   return {
     type: ActionTypes.TASK_ADD,
     payload: title
   };
 };
 
-const onFilterChangeAction = (filterType) => {
+const onFilterChangeAction = (filterType: string) => {
   return {
     type: ActionTypes.FILTER_CHANGE,
     payload: filterType
   };
 };
 
-const onTaskDeleteAction = (id) => {
+const onTaskDeleteAction = (id: string) => {
   return {
     type: ActionTypes.TASK_DELETE,
     payload: id
   };
 };
 
-const onTaskFixedAction = (id) => {
+const onTaskFixedAction = (id: string) => {
   return {
     type: ActionTypes.TASK_FIXED,
     payload: id
   };
 };
 
-const onTaskDoneAction = (id) => {
+const onTaskDoneAction = (id: string) => {
   return {
     type: ActionTypes.TASK_DONE,
     payload: id
   };
 };
 
-const onTaskEditAction = (id, title) => {
+const onTaskEditAction = (id: string, title: string) => {
   return {
     type: ActionTypes.TASK_EDIT,
     payload: {
@@ -89,7 +89,7 @@ const onTaskEditAction = (id, title) => {
   };
 };
 
-const onModalSwitchAction = (id, type = `add`) => {
+const onModalSwitchAction = (id: string, type: string = `add`) => {
   return {
     type: ActionTypes.MODAL_SWITCH,
     payload: {
@@ -99,7 +99,7 @@ const onModalSwitchAction = (id, type = `add`) => {
   };
 };
 
-const onMoreSwitchAction = (id) => {
+const onMoreSwitchAction = (id: string) => {
   return {
     type: ActionTypes.MORE_SWITCH,
     payload: id

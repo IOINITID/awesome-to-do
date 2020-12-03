@@ -12,7 +12,7 @@ interface IItemsData {
   fixed: boolean;
   id: string;
   more: boolean;
-  title: boolean;
+  title: string;
 }
 
 interface IMain {
