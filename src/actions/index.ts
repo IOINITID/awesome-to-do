@@ -1,78 +1,83 @@
 import {ActionTypes} from '../utils/constants';
 
-const onThemeSwitchAction = () => {
+interface IAction {
+  type: string;
+  payload?: any;
+}
+
+const onThemeSwitchAction = (): IAction => {
   return {
     type: ActionTypes.THEME_SWITCH
   };
 };
 
-const onMenuSwitchAction = () => {
+const onMenuSwitchAction = (): IAction => {
   return {
     type: ActionTypes.MENU_SWITCH
   };
 };
 
-const onSearchSwitchAction = () => {
+const onSearchSwitchAction = (): IAction => {
   return {
     type: ActionTypes.SEARCH_SWITCH
   };
 };
 
-const onSearchCloseAction = () => {
+const onSearchCloseAction = (): IAction => {
   return {
     type: ActionTypes.SEARCH_CLOSE
   };
 };
 
-const onSearchChangeAction = (searchData: string = ``) => {
+const onSearchChangeAction = (searchData: string = ``): IAction => {
   return {
     type: ActionTypes.SEARCH_CHANGE,
     payload: searchData
   };
 };
 
-const onSearchingAction = (searching: boolean) => {
+const onSearchingAction = (searching: boolean): IAction => {
   return {
     type: ActionTypes.SEARCHING,
     payload: searching
   };
 };
 
-const onWelcomeSwitchAction = () => {
+const onWelcomeSwitchAction = (): IAction => {
   return {
     type: ActionTypes.WELCOME_SWITCH
   };
 };
 
-const onTaskAddAction = (title: string) => {
+const onTaskAddAction = (title: string): IAction => {
   return {
     type: ActionTypes.TASK_ADD,
     payload: title
   };
 };
 
-const onFilterChangeAction = (filterType: string) => {
+const onFilterChangeAction = (filterType: string): IAction => {
   return {
     type: ActionTypes.FILTER_CHANGE,
     payload: filterType
   };
 };
 
-const onTaskDeleteAction = (id: string) => {
+const onTaskDeleteAction = (id: string): IAction => {
   return {
     type: ActionTypes.TASK_DELETE,
     payload: id
   };
 };
 
-const onTaskFixedAction = (id: string) => {
+const onTaskFixedAction = (id: string): IAction => {
   return {
     type: ActionTypes.TASK_FIXED,
     payload: id
   };
 };
 
-const onTaskDoneAction = (id: string) => {
+const onTaskDoneAction = (id: string): IAction => {
   return {
     type: ActionTypes.TASK_DONE,
     payload: id
@@ -89,7 +94,7 @@ const onTaskEditAction = (id: string, title: string) => {
   };
 };
 
-const onModalSwitchAction = (id: string, type: string = `add`) => {
+const onModalSwitchAction = (id: string, type: string = `add`): IAction => {
   return {
     type: ActionTypes.MODAL_SWITCH,
     payload: {
@@ -99,14 +104,14 @@ const onModalSwitchAction = (id: string, type: string = `add`) => {
   };
 };
 
-const onMoreSwitchAction = (id: string) => {
+const onMoreSwitchAction = (id: string): IAction => {
   return {
     type: ActionTypes.MORE_SWITCH,
     payload: id
   };
 };
 
-const onMoreCloseAction = () => {
+const onMoreCloseAction = (): IAction => {
   return {
     type: ActionTypes.MORE_CLOSE
   };
