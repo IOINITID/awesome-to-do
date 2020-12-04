@@ -23,7 +23,7 @@ const Tasks = (props: ITasks) => {
   const itemsDataSorted = itemsData.slice().sort((a: any, b: any) => b.fixed - a.fixed).sort((a: any, b: any) => a.done - b.done);
   const itemsDataToShow = onFilter(onSearch(itemsDataSorted, searchData), filterType);
 
-  let tasksTitle;
+  let tasksTitle: string;
 
   switch (filterType) {
     case `all`:
@@ -46,7 +46,7 @@ const Tasks = (props: ITasks) => {
   const taskItems = itemsDataToShow.map((item) => {
     const {id, title, done, fixed, more} = item;
 
-    let tasksItemClassName;
+    let tasksItemClassName: string;
 
     switch (true) {
       case fixed:
