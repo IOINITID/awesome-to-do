@@ -11,10 +11,15 @@ interface IInfo {
   searching: boolean;
 }
 
+interface IInfoData {
+  title: string;
+  description: string;
+}
+
 const Info = (props: IInfo) => {
   const {theme, filterType, searching} = props;
 
-  let infoData;
+  let infoData: IInfoData;
 
   switch (filterType) {
     case `all`:
@@ -34,7 +39,7 @@ const Info = (props: IInfo) => {
       break;
   }
 
-  let infoClassName = searching ? `info info--search` : `info info--all`;
+  let infoClassName: string = searching ? `info info--search` : `info info--all`;
 
   return (
     <section className={infoClassName}>
