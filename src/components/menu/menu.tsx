@@ -27,16 +27,16 @@ const Menu = (props: IMenu) => {
   const itemsDone = itemsData.filter((item) => item.done).length;
   const itemsNotDone = itemsData.filter((item) => !item.done).length;
 
-  const onFilterItemClick = (evt) => {
+  const onFilterItemClick = (evt: React.MouseEvent<HTMLAnchorElement>) => {
     evt.preventDefault();
 
-    const filterType = evt.target.dataset.type;
+    const filterType: string = (evt.target as HTMLAnchorElement).dataset.type;
 
     onFilterChange(filterType);
     onMenuSwitch();
   };
 
-  const onAddLinkClick = (evt) => {
+  const onAddLinkClick = (evt: React.MouseEvent<HTMLAnchorElement>) => {
     evt.preventDefault();
 
     onModalSwitch();

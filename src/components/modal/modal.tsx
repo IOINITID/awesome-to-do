@@ -36,19 +36,19 @@ const Modal = (props: IModal) => {
 
   const [title, setTitle] = useState(modalField);
 
-  const onInputChange = (evt) => {
-    const value = evt.target.value;
+  const onInputChange = (evt: React.ChangeEvent<HTMLInputElement>): void => {
+    const value = (evt.target as HTMLInputElement).value;
 
     setTitle(value);
   };
 
-  const onCloseLinkClick = (evt) => {
+  const onCloseLinkClick = (evt: React.MouseEvent<HTMLDivElement | HTMLAnchorElement>): void => {
     evt.preventDefault();
 
     onModalSwitch();
   };
 
-  const onFormSubmit = (evt) => {
+  const onFormSubmit = (evt: React.FormEvent<HTMLFormElement>): void => {
     evt.preventDefault();
 
     if (modalType === `edit`) {
@@ -66,12 +66,12 @@ const Modal = (props: IModal) => {
     }
   };
 
-  const onDeleteButtonClick = () => {
+  const onDeleteButtonClick = (): void => {
     onTaskDelete(currentId);
     onModalSwitch();
   };
 
-  const onEscKeyDownPress = (evt) => {
+  const onEscKeyDownPress = (evt): void => {
     if (evt.key === `Escape`) {
       onModalSwitch();
     }
@@ -83,9 +83,9 @@ const Modal = (props: IModal) => {
     return () => document.removeEventListener(`keydown`, onEscKeyDownPress);
   }, []);
 
-  let modalTitle;
-  let modalClassName;
-  let modalIcons;
+  let modalTitle: string;
+  let modalClassName: string;
+  let modalIcons: React.ReactElement;
 
   switch (true) {
     case modalType === `add`:
