@@ -38,14 +38,14 @@ const Main = (props: IMain) => {
   }, []);
 
   const onMainClick = (evt) => {
-    const menuElement = document.querySelector(`.menu`);
+    const menuElement: HTMLDivElement = document.querySelector(`.menu`);
 
     if (isMenuOpen && !menuElement.contains(evt.target)) {
       onMenuSwitch();
     }
   };
 
-  const noTasks = isWelcome ? <Greeting /> : <Info />;
+  const noTasks: React.ReactElement = isWelcome ? <Greeting /> : <Info />;
 
   return (
     <main className="main" onClick={onMainClick}>
