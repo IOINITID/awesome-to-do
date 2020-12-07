@@ -23,39 +23,39 @@ const More = (props: IMore) => {
 
   const moreElement: RefObject<HTMLDivElement> = createRef<HTMLDivElement>();
 
-  const onUndoneLinkClick = (evt) => {
+  const onUndoneLinkClick = (evt: React.MouseEvent<HTMLAnchorElement>): void => {
     evt.preventDefault();
 
     onTaskDone(id);
     onMoreSwitch();
   };
 
-  const onEditLinkClick = (evt) => {
+  const onEditLinkClick = (evt: React.MouseEvent<HTMLAnchorElement>): void => {
     evt.preventDefault();
 
-    const modalType = evt.target.dataset.type;
+    const modalType: string = (evt.target as HTMLAnchorElement).dataset.type;
 
     onMoreSwitch();
     onModalSwitch(id, modalType);
   };
 
-  const onFixedLinkClick = (evt) => {
+  const onFixedLinkClick = (evt: React.MouseEvent<HTMLAnchorElement>): void => {
     evt.preventDefault();
 
     onTaskFixed(id);
     onMoreSwitch();
   };
 
-  const onDeleteLinkClick = (evt) => {
+  const onDeleteLinkClick = (evt: React.MouseEvent<HTMLAnchorElement>): void => {
     evt.preventDefault();
 
-    const modalType = evt.target.dataset.type;
+    const modalType: string = (evt.target as HTMLAnchorElement).dataset.type;
 
     onMoreSwitch();
     onModalSwitch(id, modalType);
   };
 
-  const onMoreCloseClick = (evt) => {
+  const onMoreCloseClick = (evt): void => {
     if (more && moreElement.current && !moreElement.current.contains(evt.target)) {
       onMoreClose();
     }
@@ -69,7 +69,7 @@ const More = (props: IMore) => {
     return () => document.removeEventListener(`click`, onMoreCloseClick);
   }, [more]);
 
-  let moreClassName = more ? `more more--active` : `more`;
+  let moreClassName: string = more ? `more more--active` : `more`;
 
   return (
     <div className={moreClassName} ref={moreElement}>

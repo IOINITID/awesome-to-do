@@ -14,7 +14,7 @@ interface INavigation {
 const Navigation = (props: INavigation) => {
   const {isMenuOpen, isModalOpen, onMenuSwitch, onModalSwitch} = props;
 
-  const onAddButtonClick = () => {
+  const onAddButtonClick = (): void => {
     onModalSwitch();
 
     if (isMenuOpen) {
@@ -22,12 +22,12 @@ const Navigation = (props: INavigation) => {
     }
   };
 
-  const onMenuButtonClick = () => {
+  const onMenuButtonClick = (): void => {
     onMenuSwitch();
   };
 
-  const menuButtonClassName = isMenuOpen ? `button button--active` : `button`;
-  const modalButtonClassName = isModalOpen ? `button button--active` : `button`;
+  const menuButtonClassName: string = isMenuOpen ? `button button--active` : `button`;
+  const modalButtonClassName: string = isModalOpen ? `button button--active` : `button`;
 
   return (
     <nav className="navigation">

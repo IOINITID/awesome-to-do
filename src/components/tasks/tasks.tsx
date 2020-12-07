@@ -20,8 +20,8 @@ interface ITasks {
 const Tasks = (props: ITasks) => {
   const {itemsData, filterType, searchData} = props;
 
-  const itemsDataSorted = itemsData.slice().sort((a: any, b: any) => b.fixed - a.fixed).sort((a: any, b: any) => a.done - b.done);
-  const itemsDataToShow = onFilter(onSearch(itemsDataSorted, searchData), filterType);
+  const itemsDataSorted: Array<IItemsData> = itemsData.slice().sort((a: any, b: any) => b.fixed - a.fixed).sort((a: any, b: any) => a.done - b.done);
+  const itemsDataToShow: Array<IItemsData> = onFilter(onSearch(itemsDataSorted, searchData), filterType);
 
   let tasksTitle: string;
 

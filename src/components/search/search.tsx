@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {RefObject, useEffect, useRef} from 'react';
 import {connect} from 'react-redux';
 import {onSearchSwitchAction, onSearchChangeAction, onSearchingAction, onSearchCloseAction, onMenuSwitchAction} from '../../actions/index';
 import SearchIcon from '../../assets/images/search-icon.svg';
@@ -17,10 +17,10 @@ interface ISearch {
 const Search = (props: ISearch) => {
   const {isSearchOpen, isMenuOpen, searchData, onSearchSwitch, onSearchChange, onSearchClose, onSearching, onMenuSwitch} = props;
 
-  const searchRef = useRef(null);
+  const searchRef: RefObject<HTMLFormElement> = useRef<HTMLFormElement>(null);
 
-  const onInputChange = (evt) => {
-    const searchDataValue = evt.target.value;
+  const onInputChange = (evt: React.ChangeEvent<HTMLInputElement>): void => {
+    const searchDataValue: string = evt.target.value;
 
     if (searchDataValue.length) {
       onSearching(true);
@@ -31,17 +31,17 @@ const Search = (props: ISearch) => {
     onSearchChange(searchDataValue);
   };
 
-  const onSearchFormSubmit = (evt) => {
+  const onSearchFormSubmit = (evt: React.FormEvent<HTMLFormElement>): void => {
     evt.preventDefault();
   };
 
-  const onEscKeyDownPress = (evt) => {
+  const onEscKeyDownPress = (evt: React.KeyboardEvent<HTMLInputElement>): void => {
     if (evt.key === `Escape`) {
       onSearchSwitch();
     }
   };
 
-  const onSearchFieldClose = (evt) => {
+  const onSearchFieldClose = (evt): void => {
     if (!searchRef.current.contains(evt.target)) {
       onSearchClose();
       onSearchChange();
@@ -49,7 +49,7 @@ const Search = (props: ISearch) => {
     }
   };
 
-  const onSearchButtonClick = (evt) => {
+  const onSearchButtonClick = (evt: React.MouseEvent<HTMLButtonElement>): void => {
     evt.preventDefault();
 
     onSearchSwitch();
@@ -68,8 +68,8 @@ const Search = (props: ISearch) => {
     return () => document.removeEventListener(`click`, onSearchFieldClose);
   }, [isSearchOpen]);
 
-  let searchClassName = isSearchOpen ? `search search--active` : `search`;
-  let searchButtonClassName = isSearchOpen ? `button button--active` : `button`;
+  let searchClassName: string = isSearchOpen ? `search search--active` : `search`;
+  let searchButtonClassName: string = isSearchOpen ? `button button--active` : `button`;
 
   return (
     <form className={searchClassName} ref={searchRef} onSubmit={onSearchFormSubmit} autoComplete="off">
