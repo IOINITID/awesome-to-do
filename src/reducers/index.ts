@@ -46,7 +46,7 @@ const initialState: IInitialState = {
   title: ``
 };
 
-const reducer = (state = initialState, action: IAction): IInitialState => {
+const reducer = (state: IInitialState = initialState, action: IAction): IInitialState => {
   switch (action.type) {
     case ActionTypes.THEME_SWITCH:
       return state.theme === `dark` ? {...state, theme: `light`} : {...state, theme: `dark`};
