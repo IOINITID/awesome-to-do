@@ -5,7 +5,9 @@ import Main from '../main/main';
 import Modal from '../modal/modal';
 
 interface IApp {
+  /** Theme value for application. */
   theme: string;
+  /** Modal state for application. */
   isModalOpen: boolean;
 }
 
