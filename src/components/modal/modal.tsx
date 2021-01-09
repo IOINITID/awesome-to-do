@@ -1,6 +1,13 @@
-import React, {Fragment, useEffect, useState} from 'react';
-import {connect} from 'react-redux';
-import {onMenuSwitchAction, onModalSwitchAction, onTaskAddAction, onTaskDeleteAction, onTaskEditAction, onWelcomeSwitchAction} from '../../actions/index';
+import React, { Fragment, useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import {
+  onMenuSwitchAction,
+  onModalSwitchAction,
+  onTaskAddAction,
+  onTaskDeleteAction,
+  onTaskEditAction,
+  onWelcomeSwitchAction,
+} from '../../actions/index';
 import CloseIcon from '../../assets/images/close-icon.svg';
 import DeleteIcon from '../../assets/images/delete-icon.svg';
 import DoneIcon from '../../assets/images/done-icon.svg';
@@ -32,7 +39,19 @@ interface IModal {
 }
 
 const Modal = (props: IModal) => {
-  const {theme, modalType, modalField, onModalSwitch, currentId, onTaskEdit, onTaskAdd, onTaskDelete, onMenuSwitch, isMenuOpen, onWelcomeSwitch} = props;
+  const {
+    theme,
+    modalType,
+    modalField,
+    onModalSwitch,
+    currentId,
+    onTaskEdit,
+    onTaskAdd,
+    onTaskDelete,
+    onMenuSwitch,
+    isMenuOpen,
+    onWelcomeSwitch,
+  } = props;
 
   const [title, setTitle] = useState(modalField);
 
@@ -93,8 +112,16 @@ const Modal = (props: IModal) => {
       modalClassName = `modal modal--active modal--add`;
       modalIcons = (
         <Fragment>
-          {theme === `dark` ? <ModalAddFirstDarkIcon className="modal__icon-first" /> : <ModalAddFirstLightIcon className="modal__icon-first" />}
-          {theme === `dark` ? <ModalAddSecondDarkIcon className="modal__icon-second" /> : <ModalAddSecondLightIcon className="modal__icon-second" />}
+          {theme === `dark` ? (
+            <ModalAddFirstDarkIcon className="modal__icon-first" />
+          ) : (
+            <ModalAddFirstLightIcon className="modal__icon-first" />
+          )}
+          {theme === `dark` ? (
+            <ModalAddSecondDarkIcon className="modal__icon-second" />
+          ) : (
+            <ModalAddSecondLightIcon className="modal__icon-second" />
+          )}
         </Fragment>
       );
       break;
@@ -103,8 +130,16 @@ const Modal = (props: IModal) => {
       modalClassName = `modal modal--active modal--edit`;
       modalIcons = (
         <Fragment>
-          {theme === `dark` ? <ModalEditFirstDarkIcon className="modal__icon-first" /> : <ModalEditFirstLightIcon className="modal__icon-first" />}
-          {theme === `dark` ? <ModalEditSecondDarkIcon className="modal__icon-second" /> : <ModalEditSecondLightIcon className="modal__icon-second" />}
+          {theme === `dark` ? (
+            <ModalEditFirstDarkIcon className="modal__icon-first" />
+          ) : (
+            <ModalEditFirstLightIcon className="modal__icon-first" />
+          )}
+          {theme === `dark` ? (
+            <ModalEditSecondDarkIcon className="modal__icon-second" />
+          ) : (
+            <ModalEditSecondLightIcon className="modal__icon-second" />
+          )}
         </Fragment>
       );
       break;
@@ -113,8 +148,16 @@ const Modal = (props: IModal) => {
       modalClassName = `modal modal--active modal--delete`;
       modalIcons = (
         <Fragment>
-          {theme === `dark` ? <ModalDeleteFirstDarkIcon className="modal__icon-first" /> : <ModalDeleteFirstLightIcon className="modal__icon-first" />}
-          {theme === `dark` ? <ModalDeleteSecondDarkIcon className="modal__icon-second" /> : <ModalDeleteSecondLightIcon className="modal__icon-second" />}
+          {theme === `dark` ? (
+            <ModalDeleteFirstDarkIcon className="modal__icon-first" />
+          ) : (
+            <ModalDeleteFirstLightIcon className="modal__icon-first" />
+          )}
+          {theme === `dark` ? (
+            <ModalDeleteSecondDarkIcon className="modal__icon-second" />
+          ) : (
+            <ModalDeleteSecondLightIcon className="modal__icon-second" />
+          )}
         </Fragment>
       );
       break;
@@ -123,8 +166,16 @@ const Modal = (props: IModal) => {
       modalClassName = `modal modal--active modal--add`;
       modalIcons = (
         <Fragment>
-          {theme === `dark` ? <ModalAddFirstDarkIcon className="modal__icon-first" /> : <ModalAddFirstLightIcon className="modal__icon-first" />}
-          {theme === `dark` ? <ModalAddSecondDarkIcon className="modal__icon-second" /> : <ModalAddSecondLightIcon className="modal__icon-second" />}
+          {theme === `dark` ? (
+            <ModalAddFirstDarkIcon className="modal__icon-first" />
+          ) : (
+            <ModalAddFirstLightIcon className="modal__icon-first" />
+          )}
+          {theme === `dark` ? (
+            <ModalAddSecondDarkIcon className="modal__icon-second" />
+          ) : (
+            <ModalAddSecondLightIcon className="modal__icon-second" />
+          )}
         </Fragment>
       );
       break;
@@ -142,17 +193,29 @@ const Modal = (props: IModal) => {
         </div>
         <form className="modal__form" onSubmit={onFormSubmit} autoComplete="off">
           <label className="modal__label" htmlFor="task-field">
-            <input className="modal__field" type="text" name="task" id="task-field" value={title} autoFocus={true} placeholder="Введите новую задачу" onChange={onInputChange} onKeyDown={onEscKeyDownPress} required disabled={modalType === `delete` ? true : false} />
+            <input
+              className="modal__field"
+              type="text"
+              name="task"
+              id="task-field"
+              value={title}
+              autoFocus={true}
+              placeholder="Введите новую задачу"
+              onChange={onInputChange}
+              onKeyDown={onEscKeyDownPress}
+              required
+              disabled={modalType === `delete` ? true : false}
+            />
           </label>
-          {
-            modalType === `delete` ?
-              <button className="button modal__button" type="button" onClick={onDeleteButtonClick}>
-                <DeleteIcon className="button__icon button__icon--delete" width="18" height="22" />
-              </button> :
-              <button className="button modal__button" type="submit">
-                <DoneIcon className="button__icon button__icon--add" width="28" height="22" />
-              </button>
-          }
+          {modalType === `delete` ? (
+            <button className="button modal__button" type="button" onClick={onDeleteButtonClick}>
+              <DeleteIcon className="button__icon button__icon--delete" width="18" height="22" />
+            </button>
+          ) : (
+            <button className="button modal__button" type="submit">
+              <DoneIcon className="button__icon button__icon--add" width="28" height="22" />
+            </button>
+          )}
         </form>
         {modalIcons}
       </div>
@@ -166,7 +229,7 @@ const mapStateToProps = (state) => {
     modalField: state.modalField,
     modalType: state.modalType,
     currentId: state.currentId,
-    isMenuOpen: state.isMenuOpen
+    isMenuOpen: state.isMenuOpen,
   };
 };
 
@@ -177,7 +240,7 @@ const mapDispatchToProps = (dispatch) => {
     onTaskEdit: (id, title) => dispatch(onTaskEditAction(id, title)),
     onMenuSwitch: () => dispatch(onMenuSwitchAction()),
     onWelcomeSwitch: () => dispatch(onWelcomeSwitchAction()),
-    onModalSwitch: (id, type) => dispatch(onModalSwitchAction(id, type))
+    onModalSwitch: (id, type) => dispatch(onModalSwitchAction(id, type)),
   };
 };
 

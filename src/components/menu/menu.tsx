@@ -1,6 +1,6 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {onMenuSwitchAction, onFilterChangeAction, onModalSwitchAction} from '../../actions/index';
+import { connect } from 'react-redux';
+import { onMenuSwitchAction, onFilterChangeAction, onModalSwitchAction } from '../../actions/index';
 import FixedIcon from '../../assets/images/fixed-icon.svg';
 import AddIcon from '../../assets/images/add-icon.svg';
 
@@ -17,11 +17,11 @@ interface IMenu {
   onModalSwitch: () => void;
   onMenuSwitch: () => void;
   onFilterChange: (firstArg: string) => void;
-  itemsData: Array<IItemsData>
+  itemsData: Array<IItemsData>;
 }
 
 const Menu = (props: IMenu) => {
-  const {itemsData, isMenuOpen, onModalSwitch, onMenuSwitch, onFilterChange} = props;
+  const { itemsData, isMenuOpen, onModalSwitch, onMenuSwitch, onFilterChange } = props;
 
   const itemsAll = itemsData.length;
   const itemsDone = itemsData.filter((item) => item.done).length;
@@ -86,7 +86,7 @@ const Menu = (props: IMenu) => {
 const mapStateToProps = (state) => {
   return {
     isMenuOpen: state.isMenuOpen,
-    itemsData: state.itemsData
+    itemsData: state.itemsData,
   };
 };
 
@@ -94,7 +94,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onMenuSwitch: () => dispatch(onMenuSwitchAction()),
     onFilterChange: (filterType) => dispatch(onFilterChangeAction(filterType)),
-    onModalSwitch: (id, type) => dispatch(onModalSwitchAction(id, type))
+    onModalSwitch: (id, type) => dispatch(onModalSwitchAction(id, type)),
   };
 };
 

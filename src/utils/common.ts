@@ -40,7 +40,4 @@ const onFilter = (itemsData: Array<IItemsData>, filterType: string): Array<IItem
   }
 };
 
-export {
-  onSearch,
-  onFilter
-};
+export { onSearch, onFilter };

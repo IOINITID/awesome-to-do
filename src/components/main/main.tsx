@@ -1,11 +1,11 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import Menu from '../menu/menu';
 import Tasks from '../tasks/tasks';
 import Greeting from '../greeting/greeting';
 import Info from '../info/info';
-import {connect} from 'react-redux';
-import {onMenuSwitchAction, onWelcomeSwitchAction} from '../../actions/index';
-import {onSearch, onFilter} from '../../utils/common';
+import { connect } from 'react-redux';
+import { onMenuSwitchAction, onWelcomeSwitchAction } from '../../actions/index';
+import { onSearch, onFilter } from '../../utils/common';
 
 interface IItemsData {
   done: boolean;
@@ -26,9 +26,12 @@ interface IMain {
 }
 
 const Main = (props: IMain) => {
-  const {itemsData, isWelcome, isMenuOpen, onMenuSwitch, searchData, filterType, onWelcomeSwitch} = props;
+  const { itemsData, isWelcome, isMenuOpen, onMenuSwitch, searchData, filterType, onWelcomeSwitch } = props;
 
-  const itemsDataSorted = itemsData.slice().sort((a: any, b: any) => b.fixed - a.fixed).sort((a: any, b: any) => a.done - b.done);
+  const itemsDataSorted = itemsData
+    .slice()
+    .sort((a: any, b: any) => b.fixed - a.fixed)
+    .sort((a: any, b: any) => a.done - b.done);
   const itemsDataToShow = onFilter(onSearch(itemsDataSorted, searchData), filterType);
 
   useEffect(() => {
@@ -50,9 +53,7 @@ const Main = (props: IMain) => {
   return (
     <main className="main" onClick={onMainClick}>
       <Menu />
-      <div className="container">
-        {itemsDataToShow.length ? <Tasks /> : noTasks}
-      </div>
+      <div className="container">{itemsDataToShow.length ? <Tasks /> : noTasks}</div>
     </main>
   );
 };
@@ -63,7 +64,7 @@ const mapStateToProps = (state) => {
     isWelcome: state.isWelcome,
     searchData: state.searchData,
     filterType: state.filterType,
-    itemsData: state.itemsData
+    itemsData: state.itemsData,
   };
 };
 

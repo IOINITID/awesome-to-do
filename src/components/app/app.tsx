@@ -1,5 +1,5 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import Header from '../header/header';
 import Main from '../main/main';
 import Modal from '../modal/modal';
@@ -12,7 +12,7 @@ interface IApp {
 }
 
 const App = (props: IApp) => {
-  const {theme, isModalOpen} = props;
+  const { theme, isModalOpen } = props;
 
   return (
     <div className={`theme theme--${theme}`}>
@@ -26,7 +26,7 @@ const App = (props: IApp) => {
 const mapStateToProps = (state) => {
   return {
     theme: state.theme,
-    isModalOpen: state.isModalOpen
+    isModalOpen: state.isModalOpen,
   };
 };
 

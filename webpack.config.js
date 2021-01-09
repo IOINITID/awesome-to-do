@@ -1,94 +1,95 @@
 const path = require(`path`);
 const outputPath = path.join(__dirname, `dist`);
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   entry: `./src/index.tsx`,
   output: {
     filename: `scripts/scripts.js`,
-    path: outputPath
+    path: outputPath,
   },
   devServer: {
     contentBase: outputPath,
     open: true,
     inline: true,
-    port: 1337
+    port: 1337,
   },
   module: {
-    rules: [{
+    rules: [
+      {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: `babel-loader`
-        }
+          loader: `babel-loader`,
+        },
       },
       {
         test: /\.(ts|tsx)$/,
-        loader: `ts-loader`
+        loader: `ts-loader`,
       },
       {
         test: /\.scss$/,
-        use: [`style-loader`, `css-loader`,
+        use: [
+          `style-loader`,
+          `css-loader`,
           {
             loader: `postcss-loader`,
             options: {
               postcssOptions: {
-                plugins: [
-                  ['autoprefixer']
-                ]
-              }
-            }
+                plugins: [['autoprefixer']],
+              },
+            },
           },
           {
             loader: `sass-loader`,
             options: {
               sassOptions: {
-                outputStyle: 'compressed'
-              }
-            }
-          }
-        ]
+                outputStyle: 'compressed',
+              },
+            },
+          },
+        ],
       },
       {
         test: /\.svg$/,
         use: {
           loader: `@svgr/webpack`,
           options: {
-            svgo: false
-          }
-        }
+            svgo: false,
+          },
+        },
       },
       {
         test: /favicon.svg$/,
         use: {
           loader: `file-loader`,
           options: {
-            name: 'images/[name].[ext]'
-          }
-        }
+            name: 'images/[name].[ext]',
+          },
+        },
       },
       {
         test: /\.(woff2|woff|ttf)$/,
         use: {
           loader: `file-loader`,
           options: {
-            name: 'fonts/[name].[ext]'
-          }
-        }
-      }
-    ]
+            name: 'fonts/[name].[ext]',
+          },
+        },
+      },
+    ],
   },
   resolve: {
-    extensions: [`.ts`, `.tsx`, `.js`, `json`]
+    extensions: [`.ts`, `.tsx`, `.js`, `json`],
   },
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       inject: false,
       template: `./src/index.html`,
-      filename: `index.html`
-    })
+      filename: `index.html`,
+    }),
   ],
-  devtool: `source-map`
+  devtool: `source-map`,
 };

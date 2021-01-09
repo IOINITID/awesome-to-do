@@ -1,6 +1,12 @@
-import React, {createRef, Fragment, RefObject, useEffect} from 'react';
-import {connect} from 'react-redux';
-import {onTaskFixedAction, onTaskDoneAction, onModalSwitchAction, onMoreSwitchAction, onMoreCloseAction} from '../../actions/index';
+import React, { createRef, Fragment, RefObject, useEffect } from 'react';
+import { connect } from 'react-redux';
+import {
+  onTaskFixedAction,
+  onTaskDoneAction,
+  onModalSwitchAction,
+  onMoreSwitchAction,
+  onMoreCloseAction,
+} from '../../actions/index';
 import UndoneIcon from '../../assets/images/undone-icon.svg';
 import EditIcon from '../../assets/images/edit-icon.svg';
 import FixedIcon from '../../assets/images/fixed-icon.svg';
@@ -19,7 +25,7 @@ interface IMore {
 }
 
 const More = (props: IMore) => {
-  const {id, done, fixed, more, onMoreClose, onTaskDone, onMoreSwitch, onModalSwitch, onTaskFixed} = props;
+  const { id, done, fixed, more, onMoreClose, onTaskDone, onMoreSwitch, onModalSwitch, onTaskFixed } = props;
 
   const moreElement: RefObject<HTMLDivElement> = createRef<HTMLDivElement>();
 
@@ -74,28 +80,29 @@ const More = (props: IMore) => {
   return (
     <div className={moreClassName} ref={moreElement}>
       <ul className="more__list">
-        {
-          done ? <li className="more__item more__item--undone">
+        {done ? (
+          <li className="more__item more__item--undone">
             <a className="more__link" href="#" onClick={onUndoneLinkClick}>
               <UndoneIcon className="more__icon" width="14" height="10" />
               Невыполненное
             </a>
-          </li> :
-            <Fragment>
-              <li className="more__item more__item--edit">
-                <a className="more__link" href="#" data-type="edit" onClick={onEditLinkClick}>
-                  <EditIcon className="more__icon" width="10" height="10" />
-                  Редактировать
-                </a>
-              </li>
-              <li className="more__item more__item--fixed">
-                <a className="more__link" href="#" onClick={onFixedLinkClick}>
-                  <FixedIcon className="more__icon" width="10" height="10" />
-                  {fixed ? `Открепить` : `Закрепить`}
-                </a>
-              </li>
-            </Fragment>
-        }
+          </li>
+        ) : (
+          <Fragment>
+            <li className="more__item more__item--edit">
+              <a className="more__link" href="#" data-type="edit" onClick={onEditLinkClick}>
+                <EditIcon className="more__icon" width="10" height="10" />
+                Редактировать
+              </a>
+            </li>
+            <li className="more__item more__item--fixed">
+              <a className="more__link" href="#" onClick={onFixedLinkClick}>
+                <FixedIcon className="more__icon" width="10" height="10" />
+                {fixed ? `Открепить` : `Закрепить`}
+              </a>
+            </li>
+          </Fragment>
+        )}
         <li className="more__item more__item--delete">
           <a className="more__link" href="#" data-type="delete" onClick={onDeleteLinkClick}>
             <DeleteIcon className="more__icon" width="8" height="10" />
@@ -113,7 +120,7 @@ const mapDispatchToProps = (dispatch) => {
     onTaskDone: (id) => dispatch(onTaskDoneAction(id)),
     onModalSwitch: (id, type) => dispatch(onModalSwitchAction(id, type)),
     onMoreSwitch: (id) => dispatch(onMoreSwitchAction(id)),
-    onMoreClose: () => dispatch(onMoreCloseAction())
+    onMoreClose: () => dispatch(onMoreCloseAction()),
   };
 };
 

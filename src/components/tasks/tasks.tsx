@@ -1,7 +1,7 @@
 import React from 'react';
 import Task from '../task/task';
-import {connect} from 'react-redux';
-import {onSearch, onFilter} from '../../utils/common';
+import { connect } from 'react-redux';
+import { onSearch, onFilter } from '../../utils/common';
 
 interface IItemsData {
   done: boolean;
@@ -18,9 +18,12 @@ interface ITasks {
 }
 
 const Tasks = (props: ITasks) => {
-  const {itemsData, filterType, searchData} = props;
+  const { itemsData, filterType, searchData } = props;
 
-  const itemsDataSorted: Array<IItemsData> = itemsData.slice().sort((a: any, b: any) => b.fixed - a.fixed).sort((a: any, b: any) => a.done - b.done);
+  const itemsDataSorted: Array<IItemsData> = itemsData
+    .slice()
+    .sort((a: any, b: any) => b.fixed - a.fixed)
+    .sort((a: any, b: any) => a.done - b.done);
   const itemsDataToShow: Array<IItemsData> = onFilter(onSearch(itemsDataSorted, searchData), filterType);
 
   let tasksTitle: string;
@@ -44,7 +47,7 @@ const Tasks = (props: ITasks) => {
   }
 
   const taskItems = itemsDataToShow.map((item) => {
-    const {id, title, done, fixed, more} = item;
+    const { id, title, done, fixed, more } = item;
 
     let tasksItemClassName: string;
 
@@ -70,9 +73,7 @@ const Tasks = (props: ITasks) => {
   return (
     <section className="tasks">
       <h2 className="tasks__title">{tasksTitle}</h2>
-      <ul className="tasks__list">
-        {taskItems}
-      </ul>
+      <ul className="tasks__list">{taskItems}</ul>
     </section>
   );
 };
@@ -81,7 +82,7 @@ const mapStateToProps = (state) => {
   return {
     filterType: state.filterType,
     itemsData: state.itemsData,
-    searchData: state.searchData
+    searchData: state.searchData,
   };
 };
 

@@ -1,6 +1,12 @@
-import React, {RefObject, useEffect, useRef} from 'react';
-import {connect} from 'react-redux';
-import {onSearchSwitchAction, onSearchChangeAction, onSearchingAction, onSearchCloseAction, onMenuSwitchAction} from '../../actions/index';
+import React, { RefObject, useEffect, useRef } from 'react';
+import { connect } from 'react-redux';
+import {
+  onSearchSwitchAction,
+  onSearchChangeAction,
+  onSearchingAction,
+  onSearchCloseAction,
+  onMenuSwitchAction,
+} from '../../actions/index';
 import SearchIcon from '../../assets/images/search-icon.svg';
 
 interface ISearch {
@@ -15,7 +21,16 @@ interface ISearch {
 }
 
 const Search = (props: ISearch) => {
-  const {isSearchOpen, isMenuOpen, searchData, onSearchSwitch, onSearchChange, onSearchClose, onSearching, onMenuSwitch} = props;
+  const {
+    isSearchOpen,
+    isMenuOpen,
+    searchData,
+    onSearchSwitch,
+    onSearchChange,
+    onSearchClose,
+    onSearching,
+    onMenuSwitch,
+  } = props;
 
   const searchRef: RefObject<HTMLFormElement> = useRef<HTMLFormElement>(null);
 
@@ -74,14 +89,19 @@ const Search = (props: ISearch) => {
   return (
     <form className={searchClassName} ref={searchRef} onSubmit={onSearchFormSubmit} autoComplete="off">
       <label className="search__label" htmlFor="search-field">
-        <button className={searchButtonClassName} type="button" aria-label="Открыть поиск." onClick={onSearchButtonClick}>
+        <button
+          className={searchButtonClassName}
+          type="button"
+          aria-label="Открыть поиск."
+          onClick={onSearchButtonClick}
+        >
           <SearchIcon className="button__icon" width="16" height="16" />
         </button>
-        {
-          isSearchOpen &&
+        {isSearchOpen && (
           <input
             className="search__field"
-            type="search" name="search"
+            type="search"
+            name="search"
             id="search-field"
             value={searchData}
             autoFocus={true}
@@ -89,7 +109,7 @@ const Search = (props: ISearch) => {
             onKeyDown={onEscKeyDownPress}
             placeholder="Поиск по задачам"
           />
-        }
+        )}
       </label>
     </form>
   );
@@ -99,7 +119,7 @@ const mapStateToProps = (state) => {
   return {
     isSearchOpen: state.isSearchOpen,
     searchData: state.searchData,
-    isMenuOpen: state.isMenuOpen
+    isMenuOpen: state.isMenuOpen,
   };
 };
 
@@ -109,7 +129,7 @@ const mapDispatchToProps = (dispatch) => {
     onSearchChange: (searchData) => dispatch(onSearchChangeAction(searchData)),
     onSearching: (searching) => dispatch(onSearchingAction(searching)),
     onSearchClose: () => dispatch(onSearchCloseAction()),
-    onMenuSwitch: () => dispatch(onMenuSwitchAction())
+    onMenuSwitch: () => dispatch(onMenuSwitchAction()),
   };
 };
 

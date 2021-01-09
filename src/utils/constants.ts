@@ -14,9 +14,7 @@ enum ActionTypes {
   TASK_EDIT = `TASK_EDIT`,
   MODAL_SWITCH = `MODAL_SWITCH`,
   MORE_SWITCH = `MORE_SWITCH`,
-  MORE_CLOSE = `MORE_CLOSE`
+  MORE_CLOSE = `MORE_CLOSE`,
 }
 
-export {
-  ActionTypes
-};
+export { ActionTypes };

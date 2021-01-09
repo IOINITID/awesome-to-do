@@ -1,6 +1,6 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {onMenuSwitchAction, onModalSwitchAction} from '../../actions/index';
+import { connect } from 'react-redux';
+import { onMenuSwitchAction, onModalSwitchAction } from '../../actions/index';
 import MenuIcon from '../../assets/images/menu-icon.svg';
 import AddIcon from '../../assets/images/add-icon.svg';
 
@@ -12,7 +12,7 @@ interface INavigation {
 }
 
 const Navigation = (props: INavigation) => {
-  const {isMenuOpen, isModalOpen, onMenuSwitch, onModalSwitch} = props;
+  const { isMenuOpen, isModalOpen, onMenuSwitch, onModalSwitch } = props;
 
   const onAddButtonClick = (): void => {
     onModalSwitch();
@@ -38,7 +38,13 @@ const Navigation = (props: INavigation) => {
           </button>
         </li>
         <li className="navigation__item">
-          <button className={modalButtonClassName} type="button" data-type="add" aria-label="Добавить задачу." onClick={onAddButtonClick}>
+          <button
+            className={modalButtonClassName}
+            type="button"
+            data-type="add"
+            aria-label="Добавить задачу."
+            onClick={onAddButtonClick}
+          >
             <AddIcon className="button__icon" width="16" height="16" />
           </button>
         </li>
@@ -50,14 +56,14 @@ const Navigation = (props: INavigation) => {
 const mapStateToProps = (state) => {
   return {
     isMenuOpen: state.isMenuOpen,
-    isModalOpen: state.isModalOpen
+    isModalOpen: state.isModalOpen,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onMenuSwitch: () => dispatch(onMenuSwitchAction()),
-    onModalSwitch: (id, type) => dispatch(onModalSwitchAction(id, type))
+    onModalSwitch: (id, type) => dispatch(onModalSwitchAction(id, type)),
   };
 };
 

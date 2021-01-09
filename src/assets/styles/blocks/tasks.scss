@@ -5,7 +5,7 @@
   font-weight: 400;
   font-size: 30px;
   line-height: 36px;
-  font-family: "SF Pro Display", "Arial", sans-serif;
+  font-family: 'SF Pro Display', 'Arial', sans-serif;
 }
 
 .theme--dark .tasks__title {
@@ -33,7 +33,8 @@
 
 .theme--dark .tasks__list::-webkit-scrollbar {
   background: linear-gradient(140.4deg, #271827 3%, #2c2535 115.66%);
-  box-shadow: -4px -4px 16px rgba(88, 76, 98, 0.25), 3px 3px 12px rgba(0, 0, 0, 0.2), inset 4px 4px 8px rgba(0, 0, 0, 0.35);
+  box-shadow: -4px -4px 16px rgba(88, 76, 98, 0.25), 3px 3px 12px rgba(0, 0, 0, 0.2),
+    inset 4px 4px 8px rgba(0, 0, 0, 0.35);
 }
 
 .theme--light .tasks__list::-webkit-scrollbar {
@@ -71,16 +72,18 @@
 
 .theme--dark .tasks__item {
   background: linear-gradient(140.4deg, #271827 3%, #2c2535 115.66%);
-  box-shadow: -4px -4px 16px rgba(88, 76, 98, 0.25), 3px 3px 12px rgba(0, 0, 0, 0.2), inset 4px 4px 8px rgba(0, 0, 0, 0.35);
+  box-shadow: -4px -4px 16px rgba(88, 76, 98, 0.25), 3px 3px 12px rgba(0, 0, 0, 0.2),
+    inset 4px 4px 8px rgba(0, 0, 0, 0.35);
 }
 
 .theme--light .tasks__item {
   background: linear-gradient(90.15deg, #ebf3fc 1.15%, #e2ecfd 100.11%);
-  box-shadow: -4px -3px 16px rgba(255, 255, 255, 0.7), -1px 3px 65px rgba(182, 194, 215, 0), inset 10px 10px 10px rgba(224, 235, 248, 0.2), inset 5px 5px 10px rgba(167, 172, 190, 0.7);
+  box-shadow: -4px -3px 16px rgba(255, 255, 255, 0.7), -1px 3px 65px rgba(182, 194, 215, 0),
+    inset 10px 10px 10px rgba(224, 235, 248, 0.2), inset 5px 5px 10px rgba(167, 172, 190, 0.7);
 }
 
 .tasks__item--fixed::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
@@ -107,7 +110,8 @@
   background: linear-gradient(178deg, #f6faff 21.96%, rgba(177, 189, 216, 0.58) 116.73%);
   border: 1px solid rgba(251, 252, 255, 0.45);
   border-radius: 8px;
-  box-shadow: 0 -1px 10px rgba(190, 201, 223, 0.5), 0 1px 30px rgba(189, 198, 219, 0), -3px -3px 4px rgba(255, 255, 255, 0), 5px 5px 16px rgba(177, 188, 214, 0);
+  box-shadow: 0 -1px 10px rgba(190, 201, 223, 0.5), 0 1px 30px rgba(189, 198, 219, 0),
+    -3px -3px 4px rgba(255, 255, 255, 0), 5px 5px 16px rgba(177, 188, 214, 0);
 }
 
 .tasks__item:last-child {
@@ -120,7 +124,7 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 21px;
-  font-family: "SF Pro Display", "Arial", sans-serif;
+  font-family: 'SF Pro Display', 'Arial', sans-serif;
 }
 
 .theme--dark .tasks__description {
