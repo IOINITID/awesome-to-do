@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useEffect } from 'react';
 import Menu from '../menu/menu';
 import Tasks from '../tasks/tasks';
@@ -51,6 +52,8 @@ const Main = (props: IMain) => {
   const noTasks: React.ReactElement = isWelcome ? <Greeting /> : <Info />;
 
   return (
+    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events
     <main className="main" onClick={onMainClick}>
       <Menu />
       <div className="container">{itemsDataToShow.length ? <Tasks /> : noTasks}</div>

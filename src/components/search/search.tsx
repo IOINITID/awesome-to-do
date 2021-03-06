@@ -8,6 +8,8 @@ import {
   onMenuSwitchAction,
 } from '../../actions/index';
 import SearchIcon from '../../assets/images/search-icon.svg';
+import i18n from 'i18next';
+import { useTranslation } from 'react-i18next';
 
 interface ISearch {
   isSearchOpen: boolean;
@@ -18,6 +20,7 @@ interface ISearch {
   onSearchClose: () => void;
   onSearching: (firstArg: boolean) => void;
   onMenuSwitch: () => void;
+  language: string;
 }
 
 const Search = (props: ISearch) => {
@@ -30,7 +33,14 @@ const Search = (props: ISearch) => {
     onSearchClose,
     onSearching,
     onMenuSwitch,
+    language,
   } = props;
+
+  const { t } = useTranslation();
+
+  useEffect(() => {
+    i18n.changeLanguage(language);
+  }, [language]);
 
   const searchRef: RefObject<HTMLFormElement> = useRef<HTMLFormElement>(null);
 
@@ -83,8 +93,8 @@ const Search = (props: ISearch) => {
     return () => document.removeEventListener(`click`, onSearchFieldClose);
   }, [isSearchOpen]);
 
-  let searchClassName: string = isSearchOpen ? `search search--active` : `search`;
-  let searchButtonClassName: string = isSearchOpen ? `button button--active` : `button`;
+  const searchClassName: string = isSearchOpen ? `search search--active` : `search`;
+  const searchButtonClassName: string = isSearchOpen ? `button button--active` : `button`;
 
   return (
     <form className={searchClassName} ref={searchRef} onSubmit={onSearchFormSubmit} autoComplete="off">
@@ -104,10 +114,11 @@ const Search = (props: ISearch) => {
             name="search"
             id="search-field"
             value={searchData}
+            // eslint-disable-next-line jsx-a11y/no-autofocus
             autoFocus={true}
             onChange={onInputChange}
             onKeyDown={onEscKeyDownPress}
-            placeholder="Поиск по задачам"
+            placeholder={t('Поиск по задачам')}
           />
         )}
       </label>
@@ -120,6 +131,7 @@ const mapStateToProps = (state) => {
     isSearchOpen: state.isSearchOpen,
     searchData: state.searchData,
     isMenuOpen: state.isMenuOpen,
+    language: state.language,
   };
 };
 

@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 import { v4 as uuid } from 'uuid';
 import { ActionTypes } from '../utils/constants';
 
@@ -23,6 +24,7 @@ interface IInitialState {
   modalField: string;
   currentId: string;
   title: string;
+  language: string;
 }
 
 interface IAction {
@@ -31,8 +33,8 @@ interface IAction {
 }
 
 const initialState: IInitialState = {
-  theme: window.localStorage.getItem(`theme`) || `dark`,
-  itemsData: JSON.parse(window.localStorage.getItem(`itemsData`)) || [],
+  theme: window.localStorage.getItem('theme') || 'dark',
+  itemsData: JSON.parse(window.localStorage.getItem('itemsData')) || [],
   isModalOpen: false,
   isMenuOpen: false,
   isSearchOpen: false,
@@ -44,6 +46,7 @@ const initialState: IInitialState = {
   modalField: ``,
   currentId: ``,
   title: ``,
+  language: window.localStorage.getItem('language') || 'ru',
 };
 
 const reducer = (state: IInitialState = initialState, action: IAction): IInitialState => {
@@ -52,6 +55,8 @@ const reducer = (state: IInitialState = initialState, action: IAction): IInitial
       return state.theme === `dark` ? { ...state, theme: `light` } : { ...state, theme: `dark` };
     case ActionTypes.MENU_SWITCH:
       return { ...state, isMenuOpen: !state.isMenuOpen };
+    case 'LANGUAGE_CHANGE':
+      return { ...state, language: state.language === 'en' ? 'ru' : 'en' };
     case ActionTypes.SEARCH_SWITCH:
       return { ...state, isSearchOpen: !state.isSearchOpen };
     case ActionTypes.SEARCH_CLOSE:
@@ -61,7 +66,7 @@ const reducer = (state: IInitialState = initialState, action: IAction): IInitial
     case ActionTypes.SEARCHING:
       return { ...state, searching: action.payload };
     case ActionTypes.WELCOME_SWITCH:
-      return { ...state, isWelcome: false };
+      return { ...state, isWelcome: action.payload };
     case ActionTypes.TASK_ADD:
       const itemsData = state.itemsData.slice();
       const itemData = {

@@ -1,8 +1,18 @@
-import React from 'react';
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { onMenuSwitchAction, onFilterChangeAction, onModalSwitchAction } from '../../actions/index';
+import {
+  onMenuSwitchAction,
+  onFilterChangeAction,
+  onModalSwitchAction,
+  onLanguageChangeAction,
+  onWelcomeSwitchAction,
+} from '../../actions/index';
 import FixedIcon from '../../assets/images/fixed-icon.svg';
 import AddIcon from '../../assets/images/add-icon.svg';
+
+import i18n from 'i18next';
+import { useTranslation } from 'react-i18next';
 
 interface IItemsData {
   done: boolean;
@@ -18,10 +28,24 @@ interface IMenu {
   onMenuSwitch: () => void;
   onFilterChange: (firstArg: string) => void;
   itemsData: Array<IItemsData>;
+  language: string;
+  onLanguageChange: () => void;
+  onWelcomeSwitch: () => void;
 }
 
 const Menu = (props: IMenu) => {
-  const { itemsData, isMenuOpen, onModalSwitch, onMenuSwitch, onFilterChange } = props;
+  const {
+    itemsData,
+    isMenuOpen,
+    onModalSwitch,
+    onMenuSwitch,
+    onFilterChange,
+    language,
+    onLanguageChange,
+    onWelcomeSwitch,
+  } = props;
+
+  const { t } = useTranslation();
 
   const itemsAll = itemsData.length;
   const itemsDone = itemsData.filter((item) => item.done).length;
@@ -34,6 +58,7 @@ const Menu = (props: IMenu) => {
 
     onFilterChange(filterType);
     onMenuSwitch();
+    onWelcomeSwitch();
   };
 
   const onAddLinkClick = (evt: React.MouseEvent<HTMLAnchorElement>) => {
@@ -43,6 +68,10 @@ const Menu = (props: IMenu) => {
     onMenuSwitch();
   };
 
+  useEffect(() => {
+    i18n.changeLanguage(language);
+  }, [language]);
+
   const menuClassName = isMenuOpen ? `menu menu--active` : `menu`;
 
   return (
@@ -50,34 +79,47 @@ const Menu = (props: IMenu) => {
       <ul className="menu__list">
         <li className="menu__item">
           <a className="menu__link" href="#" data-type="all" aria-label="Все задачи." onClick={onFilterItemClick}>
-            Все задачи
+            {t('Все задачи')}
             <sup className="menu__quantity">{itemsAll}</sup>
           </a>
         </li>
         <li className="menu__item">
           <a className="menu__link" href="#" data-type="undone" aria-label="Текущие." onClick={onFilterItemClick}>
-            Текущие
+            {t('Текущие')}
             <sup className="menu__quantity">{itemsNotDone}</sup>
           </a>
         </li>
         <li className="menu__item">
           <a className="menu__link" href="#" data-type="done" aria-label="Выполненные." onClick={onFilterItemClick}>
-            Выполненные
+            {t('Выполненные')}
             <sup className="menu__quantity">{itemsDone}</sup>
           </a>
         </li>
         <li className="menu__item menu__item--fixed">
           <a className="menu__link" href="#" data-type="fixed" aria-label="Закреплённые." onClick={onFilterItemClick}>
             <FixedIcon className="menu__icon" width="17" height="17" />
-            Закреплённые
+            {t('Закреплённые')}
           </a>
         </li>
         <li className="menu__item menu__item--add">
           <a className="menu__link" href="#" aria-label="Добавить задачу." onClick={onAddLinkClick}>
             <AddIcon className="menu__icon" width="17" height="17" />
-            Добавить задачу
+            {t('Добавить задачу')}
           </a>
         </li>
+
+        <div className={`switch lang ${language === 'ru' ? 'lang--ru' : 'lang--eng'}`}>
+          <button
+            className="button lang__button"
+            aria-label="Переключить язык."
+            onClick={() => {
+              onLanguageChange();
+            }}
+          >
+            {language === 'ru' ? <span>Ru</span> : <span>Eng</span>}
+          </button>
+          <span className="lang__eng">{language === 'ru' ? 'Eng' : 'Ru'}</span>
+        </div>
       </ul>
     </section>
   );
@@ -87,6 +129,7 @@ const mapStateToProps = (state) => {
   return {
     isMenuOpen: state.isMenuOpen,
     itemsData: state.itemsData,
+    language: state.language,
   };
 };
 
@@ -95,6 +138,8 @@ const mapDispatchToProps = (dispatch) => {
     onMenuSwitch: () => dispatch(onMenuSwitchAction()),
     onFilterChange: (filterType) => dispatch(onFilterChangeAction(filterType)),
     onModalSwitch: (id, type) => dispatch(onModalSwitchAction(id, type)),
+    onLanguageChange: () => dispatch(onLanguageChangeAction()),
+    onWelcomeSwitch: () => dispatch(onWelcomeSwitchAction()),
   };
 };
 

@@ -39,3 +39,38 @@
 .theme--light .switch .button__icon--moon {
   display: none;
 }
+
+.switch.lang {
+  margin: auto 0 0 0;
+
+  .lang__button span {
+    position: absolute;
+    color: #ffffff;
+    opacity: 1;
+  }
+
+  .lang__eng {
+    position: absolute;
+    top: 17px;
+    right: 13px;
+    color: #ffffff;
+    opacity: 0.5;
+  }
+}
+
+.switch.lang--ru {
+  .lang__button {
+    transform: translateX(0);
+  }
+}
+
+.switch.lang--eng {
+  .lang__button {
+    transform: translateX(100%);
+  }
+
+  .lang__eng {
+    right: 0;
+    left: 13px;
+  }
+}

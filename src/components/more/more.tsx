@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { createRef, Fragment, RefObject, useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
@@ -12,6 +13,9 @@ import EditIcon from '../../assets/images/edit-icon.svg';
 import FixedIcon from '../../assets/images/fixed-icon.svg';
 import DeleteIcon from '../../assets/images/delete-icon.svg';
 
+import i18n from 'i18next';
+import { useTranslation } from 'react-i18next';
+
 interface IMore {
   id: string;
   done: boolean;
@@ -22,10 +26,17 @@ interface IMore {
   onMoreSwitch: () => void;
   onModalSwitch: (id: string, type: string) => void;
   onMoreClose: () => void;
+  language: string;
 }
 
 const More = (props: IMore) => {
-  const { id, done, fixed, more, onMoreClose, onTaskDone, onMoreSwitch, onModalSwitch, onTaskFixed } = props;
+  const { id, done, fixed, more, onMoreClose, onTaskDone, onMoreSwitch, onModalSwitch, onTaskFixed, language } = props;
+
+  const { t } = useTranslation();
+
+  useEffect(() => {
+    i18n.changeLanguage(language);
+  }, [language]);
 
   const moreElement: RefObject<HTMLDivElement> = createRef<HTMLDivElement>();
 
@@ -75,7 +86,7 @@ const More = (props: IMore) => {
     return () => document.removeEventListener(`click`, onMoreCloseClick);
   }, [more]);
 
-  let moreClassName: string = more ? `more more--active` : `more`;
+  const moreClassName: string = more ? `more more--active` : `more`;
 
   return (
     <div className={moreClassName} ref={moreElement}>
@@ -84,7 +95,7 @@ const More = (props: IMore) => {
           <li className="more__item more__item--undone">
             <a className="more__link" href="#" onClick={onUndoneLinkClick}>
               <UndoneIcon className="more__icon" width="14" height="10" />
-              Невыполненное
+              {t('Невыполненное')}
             </a>
           </li>
         ) : (
@@ -92,13 +103,13 @@ const More = (props: IMore) => {
             <li className="more__item more__item--edit">
               <a className="more__link" href="#" data-type="edit" onClick={onEditLinkClick}>
                 <EditIcon className="more__icon" width="10" height="10" />
-                Редактировать
+                {t('Редактировать')}
               </a>
             </li>
             <li className="more__item more__item--fixed">
               <a className="more__link" href="#" onClick={onFixedLinkClick}>
                 <FixedIcon className="more__icon" width="10" height="10" />
-                {fixed ? `Открепить` : `Закрепить`}
+                {fixed ? t('Открепить') : t('Закрепить')}
               </a>
             </li>
           </Fragment>
@@ -106,7 +117,7 @@ const More = (props: IMore) => {
         <li className="more__item more__item--delete">
           <a className="more__link" href="#" data-type="delete" onClick={onDeleteLinkClick}>
             <DeleteIcon className="more__icon" width="8" height="10" />
-            Удалить
+            {t('Удалить')}
           </a>
         </li>
       </ul>

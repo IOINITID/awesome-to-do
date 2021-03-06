@@ -5,6 +5,12 @@ interface IAction {
   payload?: any;
 }
 
+const onLanguageChangeAction = () => {
+  return {
+    type: 'LANGUAGE_CHANGE',
+  };
+};
+
 const onThemeSwitchAction = (): IAction => {
   return {
     type: ActionTypes.THEME_SWITCH,
@@ -43,9 +49,10 @@ const onSearchingAction = (searching: boolean): IAction => {
   };
 };
 
-const onWelcomeSwitchAction = (): IAction => {
+const onWelcomeSwitchAction = (isWelcome = false): IAction => {
   return {
     type: ActionTypes.WELCOME_SWITCH,
+    payload: isWelcome,
   };
 };
 
@@ -134,4 +141,5 @@ export {
   onMoreSwitchAction,
   onSearchCloseAction,
   onMoreCloseAction,
+  onLanguageChangeAction,
 };

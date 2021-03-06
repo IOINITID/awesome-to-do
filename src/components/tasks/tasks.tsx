@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Task from '../task/task';
 import { connect } from 'react-redux';
 import { onSearch, onFilter } from '../../utils/common';
+import i18n from 'i18next';
+import { useTranslation } from 'react-i18next';
 
 interface IItemsData {
   done: boolean;
@@ -15,10 +17,17 @@ interface ITasks {
   itemsData: Array<IItemsData>;
   filterType: string;
   searchData: string;
+  language: string;
 }
 
 const Tasks = (props: ITasks) => {
-  const { itemsData, filterType, searchData } = props;
+  const { itemsData, filterType, searchData, language } = props;
+
+  const { t } = useTranslation();
+
+  useEffect(() => {
+    i18n.changeLanguage(language);
+  }, [language]);
 
   const itemsDataSorted: Array<IItemsData> = itemsData
     .slice()
@@ -30,19 +39,19 @@ const Tasks = (props: ITasks) => {
 
   switch (filterType) {
     case `all`:
-      tasksTitle = `Все задачи`;
+      tasksTitle = t('Все задачи');
       break;
     case `done`:
-      tasksTitle = `Выполненные`;
+      tasksTitle = t('Выполненные');
       break;
     case `undone`:
-      tasksTitle = `Текущие`;
+      tasksTitle = t('Текущие');
       break;
     case `fixed`:
-      tasksTitle = `Закреплённые`;
+      tasksTitle = t('Закреплённые');
       break;
     default:
-      tasksTitle = `Все задачи`;
+      tasksTitle = t('Все задачи');
       break;
   }
 
@@ -83,6 +92,7 @@ const mapStateToProps = (state) => {
     filterType: state.filterType,
     itemsData: state.itemsData,
     searchData: state.searchData,
+    language: state.language,
   };
 };
 

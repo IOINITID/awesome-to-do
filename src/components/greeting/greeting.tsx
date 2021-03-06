@@ -1,22 +1,32 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import GreetingDarkIcon from '../../assets/images/greeting-dark-icon.svg';
 import GreetingLightIcon from '../../assets/images/greeting-light-icon.svg';
 
+import i18n from 'i18next';
+import { useTranslation } from 'react-i18next';
+
 interface IGreeting {
   theme: string;
+  language: string;
 }
 
 const Greeting = (props: IGreeting) => {
-  const { theme } = props;
+  const { theme, language } = props;
+
+  const { t } = useTranslation();
+
+  useEffect(() => {
+    i18n.changeLanguage(language);
+  }, [language]);
 
   return (
     <section className="greeting">
       <div className="greeting__info">
         <h2 className="greeting__title">Awesome to do</h2>
         <p className="greeting__description">
-          Ваш личный помощник
-          <br /> в организации списка задач
+          {t('Ваш личный помощник')}
+          <br /> {t('в организации списка задач')}
         </p>
       </div>
       {theme === `dark` ? (
@@ -31,6 +41,7 @@ const Greeting = (props: IGreeting) => {
 const mapStateToProps = (state) => {
   return {
     theme: state.theme,
+    language: state.language,
   };
 };
 

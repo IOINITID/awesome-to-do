@@ -1,3 +1,7 @@
+/* eslint-disable jsx-a11y/no-autofocus */
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { Fragment, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import {
@@ -24,6 +28,9 @@ import ModalDeleteFirstLightIcon from '../../assets/images/modal-delete-first-li
 import ModalDeleteSecondDarkIcon from '../../assets/images/modal-delete-second-dark-icon.svg';
 import ModalDeleteSecondLightIcon from '../../assets/images/modal-delete-second-light-icon.svg';
 
+import i18n from 'i18next';
+import { useTranslation } from 'react-i18next';
+
 interface IModal {
   theme: string;
   currentId: string;
@@ -36,6 +43,7 @@ interface IModal {
   onMenuSwitch: () => void;
   isMenuOpen: boolean;
   onWelcomeSwitch: () => void;
+  language: string;
 }
 
 const Modal = (props: IModal) => {
@@ -51,7 +59,14 @@ const Modal = (props: IModal) => {
     onMenuSwitch,
     isMenuOpen,
     onWelcomeSwitch,
+    language,
   } = props;
+
+  const { t } = useTranslation();
+
+  useEffect(() => {
+    i18n.changeLanguage(language);
+  }, [language]);
 
   const [title, setTitle] = useState(modalField);
 
@@ -108,7 +123,7 @@ const Modal = (props: IModal) => {
 
   switch (true) {
     case modalType === `add`:
-      modalTitle = `Добавить задачу`;
+      modalTitle = t('Добавить задачу');
       modalClassName = `modal modal--active modal--add`;
       modalIcons = (
         <Fragment>
@@ -126,7 +141,7 @@ const Modal = (props: IModal) => {
       );
       break;
     case modalType === `edit`:
-      modalTitle = `Редактировать задачу`;
+      modalTitle = t('Редактировать задачу');
       modalClassName = `modal modal--active modal--edit`;
       modalIcons = (
         <Fragment>
@@ -144,7 +159,7 @@ const Modal = (props: IModal) => {
       );
       break;
     case modalType === `delete`:
-      modalTitle = `Удалить задачу`;
+      modalTitle = t('Удалить задачу');
       modalClassName = `modal modal--active modal--delete`;
       modalIcons = (
         <Fragment>
@@ -162,7 +177,7 @@ const Modal = (props: IModal) => {
       );
       break;
     default:
-      modalTitle = `Добавить задачу`;
+      modalTitle = t('Добавить задачу');
       modalClassName = `modal modal--active modal--add`;
       modalIcons = (
         <Fragment>
@@ -200,7 +215,7 @@ const Modal = (props: IModal) => {
               id="task-field"
               value={title}
               autoFocus={true}
-              placeholder="Введите новую задачу"
+              placeholder={t('Введите новую задачу')}
               onChange={onInputChange}
               onKeyDown={onEscKeyDownPress}
               required
@@ -230,6 +245,7 @@ const mapStateToProps = (state) => {
     modalType: state.modalType,
     currentId: state.currentId,
     isMenuOpen: state.isMenuOpen,
+    language: state.language,
   };
 };
 

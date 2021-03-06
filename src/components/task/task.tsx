@@ -18,7 +18,7 @@ interface ITask {
 const Task = (props: ITask) => {
   const { id, title, done, fixed, more, onTaskDone, onMoreSwitch } = props;
 
-  let moreButtonClassName: string = more ? `button button--active tasks__more` : `button tasks__more`;
+  const moreButtonClassName: string = more ? `button button--active tasks__more` : `button tasks__more`;
 
   const onMoreButtonClick = (): void => {
     onMoreSwitch(id);
