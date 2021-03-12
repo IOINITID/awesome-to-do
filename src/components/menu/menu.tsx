@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
@@ -108,14 +110,13 @@ const Menu = (props: IMenu) => {
           </a>
         </li>
 
-        <div className={`switch lang ${language === 'ru' ? 'lang--ru' : 'lang--eng'}`}>
-          <button
-            className="button lang__button"
-            aria-label="Переключить язык."
-            onClick={() => {
-              onLanguageChange();
-            }}
-          >
+        <div
+          className={`switch lang ${language === 'ru' ? 'lang--ru' : 'lang--eng'}`}
+          onClick={() => {
+            onLanguageChange();
+          }}
+        >
+          <button className="button lang__button" aria-label="Переключить язык.">
             {language === 'ru' ? <span>Ru</span> : <span>Eng</span>}
           </button>
           <span className="lang__eng">{language === 'ru' ? 'Eng' : 'Ru'}</span>

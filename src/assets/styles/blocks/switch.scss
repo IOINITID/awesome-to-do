@@ -5,6 +5,7 @@
   margin-left: auto;
   padding: 3px 5px;
   border-radius: 10px;
+  cursor: pointer;
 }
 
 .switch .button {
@@ -40,37 +41,68 @@
   display: none;
 }
 
-.switch.lang {
+.theme--dark .switch.lang {
   margin: auto 0 0 0;
 
   .lang__button span {
     position: absolute;
     color: #ffffff;
-    opacity: 1;
   }
 
   .lang__eng {
     position: absolute;
     top: 17px;
     right: 13px;
-    color: #ffffff;
-    opacity: 0.5;
+    color: #7b7b7b;
   }
 }
 
-.switch.lang--ru {
+.theme--dark .switch.lang--ru {
   .lang__button {
     transform: translateX(0);
   }
 }
 
-.switch.lang--eng {
+.theme--dark .switch.lang--eng {
   .lang__button {
-    transform: translateX(100%);
+    transform: translateX(51px);
   }
 
   .lang__eng {
     right: 0;
-    left: 13px;
+    left: 18px;
+  }
+}
+
+.theme--light .switch.lang {
+  margin: auto 0 0 0;
+
+  .lang__button span {
+    position: absolute;
+    color: #5e647c;
+  }
+
+  .lang__eng {
+    position: absolute;
+    top: 17px;
+    right: 13px;
+    color: #a1a9bd;
+  }
+}
+
+.theme--light .switch.lang--ru {
+  .lang__button {
+    transform: translateX(0);
+  }
+}
+
+.theme--light .switch.lang--eng {
+  .lang__button {
+    transform: translateX(51px);
+  }
+
+  .lang__eng {
+    right: 0;
+    left: 18px;
   }
 }

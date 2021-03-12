@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import { connect } from 'react-redux';
 import { onThemeSwitchAction } from '../../actions/index';
@@ -13,8 +15,8 @@ const Switch = (props: ISwitch) => {
   const { theme, onThemeSwitch } = props;
 
   return (
-    <div className="switch">
-      <button className="button switch__button" aria-label="Переключить тему." onClick={onThemeSwitch}>
+    <div className="switch" onClick={onThemeSwitch}>
+      <button className="button switch__button" aria-label="Переключить тему.">
         {theme === `dark` ? (
           <MoonIcon className="button__icon button__icon--moon" width="16" height="16" />
         ) : (
