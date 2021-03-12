@@ -6,6 +6,7 @@ import {
   onSearchingAction,
   onSearchCloseAction,
   onMenuSwitchAction,
+  onWelcomeSwitchAction,
 } from '../../actions/index';
 import SearchIcon from '../../assets/images/search-icon.svg';
 import i18n from 'i18next';
@@ -21,6 +22,7 @@ interface ISearch {
   onSearching: (firstArg: boolean) => void;
   onMenuSwitch: () => void;
   language: string;
+  onWellcomeSwitch: () => void;
 }
 
 const Search = (props: ISearch) => {
@@ -34,6 +36,7 @@ const Search = (props: ISearch) => {
     onSearching,
     onMenuSwitch,
     language,
+    onWellcomeSwitch,
   } = props;
 
   const { t } = useTranslation();
@@ -52,6 +55,8 @@ const Search = (props: ISearch) => {
     } else {
       onSearching(false);
     }
+
+    onWellcomeSwitch();
 
     onSearchChange(searchDataValue);
   };
@@ -142,6 +147,7 @@ const mapDispatchToProps = (dispatch) => {
     onSearching: (searching) => dispatch(onSearchingAction(searching)),
     onSearchClose: () => dispatch(onSearchCloseAction()),
     onMenuSwitch: () => dispatch(onMenuSwitchAction()),
+    onWellcomeSwitch: () => dispatch(onWelcomeSwitchAction()),
   };
 };
 
