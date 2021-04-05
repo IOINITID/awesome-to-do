@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { createRef, Fragment, RefObject, useEffect } from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import {
   onTaskFixedAction,
   onTaskDoneAction,
@@ -12,7 +12,6 @@ import UndoneIcon from '../../assets/images/undone-icon.svg';
 import EditIcon from '../../assets/images/edit-icon.svg';
 import FixedIcon from '../../assets/images/fixed-icon.svg';
 import DeleteIcon from '../../assets/images/delete-icon.svg';
-
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
 
@@ -26,13 +25,13 @@ interface IMore {
   onMoreSwitch: () => void;
   onModalSwitch: (id: string, type: string) => void;
   onMoreClose: () => void;
-  language: string;
+  language?: string;
 }
 
 const More = (props: IMore) => {
   const { id, done, fixed, more, onMoreClose, onTaskDone, onMoreSwitch, onModalSwitch, onTaskFixed, language } = props;
-
   const { t } = useTranslation();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     i18n.changeLanguage(language);
@@ -51,7 +50,6 @@ const More = (props: IMore) => {
     evt.preventDefault();
 
     const modalType: string = (evt.target as HTMLAnchorElement).dataset.type;
-
     onMoreSwitch();
     onModalSwitch(id, modalType);
   };
