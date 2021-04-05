@@ -1,19 +1,22 @@
-const path = require(`path`);
-const outputPath = path.join(__dirname, `dist`);
+const path = require('path');
+const outputPath = path.join(__dirname, 'dist');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
-  entry: `./src/index.tsx`,
+  entry: './src/index.tsx',
   output: {
-    filename: `scripts/scripts.js`,
+    filename: 'scripts/scripts.js',
     path: outputPath,
   },
   devServer: {
     contentBase: outputPath,
     open: true,
     inline: true,
-    port: 1337,
+    port: 3000,
+    host: '0.0.0.0',
+    public: 'localhost:3000',
+    progress: true,
   },
   module: {
     rules: [
@@ -21,20 +24,20 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: `babel-loader`,
+          loader: 'babel-loader',
         },
       },
       {
         test: /\.(ts|tsx)$/,
-        loader: `ts-loader`,
+        loader: 'ts-loader',
       },
       {
         test: /\.scss$/,
         use: [
-          `style-loader`,
-          `css-loader`,
+          'style-loader',
+          'css-loader',
           {
-            loader: `postcss-loader`,
+            loader: 'postcss-loader',
             options: {
               postcssOptions: {
                 plugins: [['autoprefixer']],
@@ -42,7 +45,7 @@ module.exports = {
             },
           },
           {
-            loader: `sass-loader`,
+            loader: 'sass-loader',
             options: {
               sassOptions: {
                 outputStyle: 'compressed',
@@ -54,7 +57,7 @@ module.exports = {
       {
         test: /\.svg$/,
         use: {
-          loader: `@svgr/webpack`,
+          loader: '@svgr/webpack',
           options: {
             svgo: false,
           },
@@ -63,7 +66,7 @@ module.exports = {
       {
         test: /favicon.svg$/,
         use: {
-          loader: `file-loader`,
+          loader: 'file-loader',
           options: {
             name: 'images/[name].[ext]',
           },
@@ -72,7 +75,7 @@ module.exports = {
       {
         test: /\.(woff2|woff|ttf)$/,
         use: {
-          loader: `file-loader`,
+          loader: 'file-loader',
           options: {
             name: 'fonts/[name].[ext]',
           },
@@ -81,15 +84,15 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: [`.ts`, `.tsx`, `.js`, `json`],
+    extensions: ['.ts', '.tsx', '.js', 'json'],
   },
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       inject: false,
-      template: `./src/index.html`,
-      filename: `index.html`,
+      template: './src/index.html',
+      filename: 'index.html',
     }),
   ],
-  devtool: `source-map`,
+  devtool: 'source-map',
 };
