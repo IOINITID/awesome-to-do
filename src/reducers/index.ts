@@ -11,7 +11,7 @@ interface IItemsData {
 }
 
 interface IInitialState {
-  theme: string;
+  // theme: string;
   itemsData: Array<IItemsData> | [];
   isModalOpen: boolean;
   isMenuOpen: boolean;
@@ -33,7 +33,7 @@ interface IAction {
 }
 
 const initialState: IInitialState = {
-  theme: window.localStorage.getItem('theme') || 'dark',
+  // theme: window.localStorage.getItem('theme') || 'dark',
   itemsData: JSON.parse(window.localStorage.getItem('itemsData')) || [],
   isModalOpen: false,
   isMenuOpen: false,
@@ -51,8 +51,8 @@ const initialState: IInitialState = {
 
 const reducer = (state: IInitialState = initialState, action: IAction): IInitialState => {
   switch (action.type) {
-    case ActionTypes.THEME_SWITCH:
-      return state.theme === `dark` ? { ...state, theme: `light` } : { ...state, theme: `dark` };
+    // case ActionTypes.THEME_SWITCH:
+    //   return state.theme === `dark` ? { ...state, theme: `light` } : { ...state, theme: `dark` };
     case ActionTypes.MENU_SWITCH:
       return { ...state, isMenuOpen: !state.isMenuOpen };
     case 'LANGUAGE_CHANGE':

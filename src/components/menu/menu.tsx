@@ -128,9 +128,9 @@ const Menu = (props: IMenu) => {
 
 const mapStateToProps = (state) => {
   return {
-    isMenuOpen: state.isMenuOpen,
-    itemsData: state.itemsData,
-    language: state.language,
+    isMenuOpen: state.app.isMenuOpen,
+    itemsData: state.app.itemsData,
+    language: state.app.language,
   };
 };
 

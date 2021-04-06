@@ -89,10 +89,10 @@ const Tasks = (props: ITasks) => {
 
 const mapStateToProps = (state) => {
   return {
-    filterType: state.filterType,
-    itemsData: state.itemsData,
-    searchData: state.searchData,
-    language: state.language,
+    filterType: state.app.filterType,
+    itemsData: state.app.itemsData,
+    searchData: state.app.searchData,
+    language: state.app.language,
   };
 };
 

@@ -78,10 +78,10 @@ const Info = (props: IInfo) => {
 
 const mapStateToProps = (state) => {
   return {
-    theme: state.theme,
-    searching: state.searching,
-    filterType: state.filterType,
-    language: state.language,
+    theme: state.theme.value,
+    searching: state.app.searching,
+    filterType: state.app.filterType,
+    language: state.app.language,
   };
 };
 

@@ -55,8 +55,8 @@ const Navigation = (props: INavigation) => {
 
 const mapStateToProps = (state) => {
   return {
-    isMenuOpen: state.isMenuOpen,
-    isModalOpen: state.isModalOpen,
+    isMenuOpen: state.app.isMenuOpen,
+    isModalOpen: state.app.isModalOpen,
   };
 };
 

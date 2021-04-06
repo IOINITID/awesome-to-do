@@ -7,9 +7,9 @@ import './assets/styles/styles.scss';
 import './assets/images/favicon.svg';
 
 store.subscribe(() => {
-  window.localStorage.setItem('theme', store.getState().theme);
-  window.localStorage.setItem('itemsData', JSON.stringify(store.getState().itemsData));
-  window.localStorage.setItem('language', store.getState().language);
+  window.localStorage.setItem('theme', store.getState().theme.value);
+  window.localStorage.setItem('itemsData', JSON.stringify(store.getState().app.itemsData));
+  window.localStorage.setItem('language', store.getState().app.language);
 });
 
 const Root = () => {

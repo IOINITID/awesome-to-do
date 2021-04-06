@@ -63,11 +63,11 @@ const Main = (props: IMain) => {
 
 const mapStateToProps = (state) => {
   return {
-    isMenuOpen: state.isMenuOpen,
-    isWelcome: state.isWelcome,
-    searchData: state.searchData,
-    filterType: state.filterType,
-    itemsData: state.itemsData,
+    isMenuOpen: state.app.isMenuOpen,
+    isWelcome: state.app.isWelcome,
+    searchData: state.app.searchData,
+    filterType: state.app.filterType,
+    itemsData: state.app.itemsData,
   };
 };
 

@@ -40,8 +40,8 @@ const Greeting = (props: IGreeting) => {
 
 const mapStateToProps = (state) => {
   return {
-    theme: state.theme,
-    language: state.language,
+    theme: state.theme.value,
+    language: state.app.language,
   };
 };
 

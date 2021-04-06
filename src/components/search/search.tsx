@@ -133,10 +133,10 @@ const Search = (props: ISearch) => {
 
 const mapStateToProps = (state) => {
   return {
-    isSearchOpen: state.isSearchOpen,
-    searchData: state.searchData,
-    isMenuOpen: state.isMenuOpen,
-    language: state.language,
+    isSearchOpen: state.app.isSearchOpen,
+    searchData: state.app.searchData,
+    isMenuOpen: state.app.isMenuOpen,
+    language: state.app.language,
   };
 };
 

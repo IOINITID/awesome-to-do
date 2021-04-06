@@ -1,6 +1,16 @@
-import { createStore } from 'redux';
-import reducer from '../reducers/index';
+import { configureStore } from '@reduxjs/toolkit';
+import appReducer from '../reducers/index';
+import themeReducer from '../features/theme/themeSlice';
 
-const store = createStore(reducer);
+const store = configureStore({
+  reducer: {
+    app: appReducer,
+    theme: themeReducer,
+  },
+});
+
+export type RootState = ReturnType<typeof store.getState>;
+
+export type AppDispatch = typeof store.dispatch;
 
 export default store;

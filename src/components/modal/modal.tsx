@@ -240,12 +240,12 @@ const Modal = (props: IModal) => {
 
 const mapStateToProps = (state) => {
   return {
-    theme: state.theme,
-    modalField: state.modalField,
-    modalType: state.modalType,
-    currentId: state.currentId,
-    isMenuOpen: state.isMenuOpen,
-    language: state.language,
+    theme: state.theme.value,
+    modalField: state.app.modalField,
+    modalType: state.app.modalType,
+    currentId: state.app.currentId,
+    isMenuOpen: state.app.isMenuOpen,
+    language: state.app.language,
   };
 };
 

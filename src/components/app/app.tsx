@@ -92,8 +92,8 @@ const App = (props: IApp) => {
 
 const mapStateToProps = (state) => {
   return {
-    theme: state.theme,
-    isModalOpen: state.isModalOpen,
+    theme: state.theme.value,
+    isModalOpen: state.app.isModalOpen,
   };
 };
 
