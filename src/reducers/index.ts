@@ -14,8 +14,8 @@ interface IInitialState {
   // theme: string;
   itemsData: Array<IItemsData> | [];
   isModalOpen: boolean;
-  isMenuOpen: boolean;
-  isSearchOpen: boolean;
+  // isMenuOpen: boolean;
+  // isSearchOpen: boolean;
   searchData: string;
   searching: boolean;
   isWelcome: boolean;
@@ -36,8 +36,8 @@ const initialState: IInitialState = {
   // theme: window.localStorage.getItem('theme') || 'dark',
   itemsData: JSON.parse(window.localStorage.getItem('itemsData')) || [],
   isModalOpen: false,
-  isMenuOpen: false,
-  isSearchOpen: false,
+  // isMenuOpen: false,
+  // isSearchOpen: false,
   searchData: ``,
   searching: false,
   isWelcome: true,
@@ -53,14 +53,14 @@ const reducer = (state: IInitialState = initialState, action: IAction): IInitial
   switch (action.type) {
     // case ActionTypes.THEME_SWITCH:
     //   return state.theme === `dark` ? { ...state, theme: `light` } : { ...state, theme: `dark` };
-    case ActionTypes.MENU_SWITCH:
-      return { ...state, isMenuOpen: !state.isMenuOpen };
+    // case ActionTypes.MENU_SWITCH:
+    //   return { ...state, isMenuOpen: !state.isMenuOpen };
     case 'LANGUAGE_CHANGE':
       return { ...state, language: state.language === 'en' ? 'ru' : 'en' };
-    case ActionTypes.SEARCH_SWITCH:
-      return { ...state, isSearchOpen: !state.isSearchOpen };
-    case ActionTypes.SEARCH_CLOSE:
-      return { ...state, isSearchOpen: false };
+    // case ActionTypes.SEARCH_SWITCH:
+    //   return { ...state, isSearchOpen: !state.isSearchOpen };
+    // case ActionTypes.SEARCH_CLOSE:
+    //   return { ...state, isSearchOpen: false };
     case ActionTypes.SEARCH_CHANGE:
       return { ...state, searchData: action.payload };
     case ActionTypes.SEARCHING:
@@ -83,7 +83,7 @@ const reducer = (state: IInitialState = initialState, action: IAction): IInitial
     case ActionTypes.FILTER_CHANGE:
       return { ...state, filterType: action.payload };
     case ActionTypes.TASK_DELETE:
-      return { ...state, itemsData: state.itemsData.filter((item) => item.id !== action.payload) };
+      return { ...state, itemsData: state.itemsData.filter((item: any) => item.id !== action.payload) };
     case ActionTypes.TASK_FIXED:
       const itemsDataFixed = state.itemsData.slice();
 
@@ -116,7 +116,7 @@ const reducer = (state: IInitialState = initialState, action: IAction): IInitial
 
       return { ...state, itemsData: itemsDataEdit };
     case ActionTypes.MODAL_SWITCH:
-      const modalTask = state.itemsData.filter((item) => item.id === action.payload.id);
+      const modalTask = state.itemsData.filter((item: any) => item.id === action.payload.id);
       const [{ title: modalField = `` } = {}] = modalTask;
       const currentId = action.payload.id || ``;
 

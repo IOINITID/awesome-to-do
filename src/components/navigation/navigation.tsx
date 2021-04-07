@@ -1,29 +1,32 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { onMenuSwitchAction, onModalSwitchAction } from '../../actions/index';
+import { onModalSwitchAction } from '../../actions/index';
 import MenuIcon from '../../assets/images/menu-icon.svg';
 import AddIcon from '../../assets/images/add-icon.svg';
+import { useDispatchTyped, useSelectorTyped } from '../../hooks';
+import { menuSwitch, selectMenu } from '../../features/menu/menuSlice';
 
 interface INavigation {
-  isMenuOpen: boolean;
   isModalOpen: boolean;
-  onMenuSwitch: () => void;
   onModalSwitch: () => void;
 }
 
 const Navigation = (props: INavigation) => {
-  const { isMenuOpen, isModalOpen, onMenuSwitch, onModalSwitch } = props;
+  const { isModalOpen, onModalSwitch } = props;
+
+  const dispatch = useDispatchTyped();
+  const isMenuOpen = useSelectorTyped(selectMenu);
 
   const onAddButtonClick = (): void => {
     onModalSwitch();
 
     if (isMenuOpen) {
-      onMenuSwitch();
+      dispatch(menuSwitch());
     }
   };
 
   const onMenuButtonClick = (): void => {
-    onMenuSwitch();
+    dispatch(menuSwitch());
   };
 
   const menuButtonClassName: string = isMenuOpen ? `button button--active` : `button`;
@@ -55,14 +58,12 @@ const Navigation = (props: INavigation) => {
 
 const mapStateToProps = (state) => {
   return {
-    isMenuOpen: state.app.isMenuOpen,
     isModalOpen: state.app.isModalOpen,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onMenuSwitch: () => dispatch(onMenuSwitchAction()),
     onModalSwitch: (id, type) => dispatch(onModalSwitchAction(id, type)),
   };
 };

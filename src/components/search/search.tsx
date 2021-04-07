@@ -1,7 +1,7 @@
 import React, { RefObject, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import {
-  onSearchSwitchAction,
+  // onSearchSwitchAction,
   onSearchChangeAction,
   onSearchingAction,
   onSearchCloseAction,
@@ -11,14 +11,16 @@ import {
 import SearchIcon from '../../assets/images/search-icon.svg';
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
+import { selectSearch, searchSwitch, searchClose } from '../../features/search/searchSlice';
+import { useDispatchTyped, useSelectorTyped } from '../../hooks';
 
 interface ISearch {
-  isSearchOpen: boolean;
+  // isSearchOpen: boolean;
   isMenuOpen: boolean;
   searchData: string;
-  onSearchSwitch: () => void;
+  // onSearchSwitch: () => void;
   onSearchChange: (firstArg?: string) => void;
-  onSearchClose: () => void;
+  // onSearchClose: () => void;
   onSearching: (firstArg: boolean) => void;
   onMenuSwitch: () => void;
   language: string;
@@ -27,12 +29,12 @@ interface ISearch {
 
 const Search = (props: ISearch) => {
   const {
-    isSearchOpen,
+    // isSearchOpen,
     isMenuOpen,
     searchData,
-    onSearchSwitch,
+    // onSearchSwitch,
     onSearchChange,
-    onSearchClose,
+    // onSearchClose,
     onSearching,
     onMenuSwitch,
     language,
@@ -40,6 +42,9 @@ const Search = (props: ISearch) => {
   } = props;
 
   const { t } = useTranslation();
+
+  const dispatch = useDispatchTyped();
+  const isSearchOpen = useSelectorTyped(selectSearch);
 
   useEffect(() => {
     i18n.changeLanguage(language);
@@ -66,24 +71,25 @@ const Search = (props: ISearch) => {
   };
 
   const onEscKeyDownPress = (evt: React.KeyboardEvent<HTMLInputElement>): void => {
-    if (evt.key === `Escape`) {
-      onSearchSwitch();
+    if (evt.key === 'Escape') {
+      dispatch(searchSwitch());
     }
   };
 
   const onSearchFieldClose = (evt): void => {
     if (!searchRef.current.contains(evt.target)) {
-      onSearchClose();
       onSearchChange();
       onSearching(false);
+
+      dispatch(searchClose());
     }
   };
 
   const onSearchButtonClick = (evt: React.MouseEvent<HTMLButtonElement>): void => {
     evt.preventDefault();
 
-    onSearchSwitch();
     onSearchChange();
+    dispatch(searchSwitch());
 
     if (isMenuOpen) {
       onMenuSwitch();
@@ -92,14 +98,14 @@ const Search = (props: ISearch) => {
 
   useEffect(() => {
     if (isSearchOpen) {
-      document.addEventListener(`click`, onSearchFieldClose);
+      document.addEventListener('click', onSearchFieldClose);
     }
 
-    return () => document.removeEventListener(`click`, onSearchFieldClose);
+    return () => document.removeEventListener('click', onSearchFieldClose);
   }, [isSearchOpen]);
 
-  const searchClassName: string = isSearchOpen ? `search search--active` : `search`;
-  const searchButtonClassName: string = isSearchOpen ? `button button--active` : `button`;
+  const searchClassName: string = isSearchOpen ? 'search search--active' : 'search';
+  const searchButtonClassName: string = isSearchOpen ? 'button button--active' : 'button';
 
   return (
     <form className={searchClassName} ref={searchRef} onSubmit={onSearchFormSubmit} autoComplete="off">
@@ -133,16 +139,16 @@ const Search = (props: ISearch) => {
 
 const mapStateToProps = (state) => {
   return {
-    isSearchOpen: state.app.isSearchOpen,
+    // isSearchOpen: state.app.isSearchOpen,
     searchData: state.app.searchData,
-    isMenuOpen: state.app.isMenuOpen,
+    isMenuOpen: state.menu.value,
     language: state.app.language,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onSearchSwitch: () => dispatch(onSearchSwitchAction()),
+    // onSearchSwitch: () => dispatch(onSearchSwitchAction()),
     onSearchChange: (searchData) => dispatch(onSearchChangeAction(searchData)),
     onSearching: (searching) => dispatch(onSearchingAction(searching)),
     onSearchClose: () => dispatch(onSearchCloseAction()),

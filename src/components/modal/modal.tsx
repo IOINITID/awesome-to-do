@@ -244,7 +244,7 @@ const mapStateToProps = (state) => {
     modalField: state.app.modalField,
     modalType: state.app.modalType,
     currentId: state.app.currentId,
-    isMenuOpen: state.app.isMenuOpen,
+    isMenuOpen: state.menu.value,
     language: state.app.language,
   };
 };

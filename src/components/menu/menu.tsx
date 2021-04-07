@@ -4,7 +4,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
-  onMenuSwitchAction,
   onFilterChangeAction,
   onModalSwitchAction,
   onLanguageChangeAction,
@@ -15,6 +14,8 @@ import AddIcon from '../../assets/images/add-icon.svg';
 
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
+import { useDispatchTyped, useSelectorTyped } from '../../hooks';
+import { menuSwitch, selectMenu } from '../../features/menu/menuSlice';
 
 interface IItemsData {
   done: boolean;
@@ -25,9 +26,7 @@ interface IItemsData {
 }
 
 interface IMenu {
-  isMenuOpen: boolean;
   onModalSwitch: () => void;
-  onMenuSwitch: () => void;
   onFilterChange: (firstArg: string) => void;
   itemsData: Array<IItemsData>;
   language: string;
@@ -36,16 +35,7 @@ interface IMenu {
 }
 
 const Menu = (props: IMenu) => {
-  const {
-    itemsData,
-    isMenuOpen,
-    onModalSwitch,
-    onMenuSwitch,
-    onFilterChange,
-    language,
-    onLanguageChange,
-    onWelcomeSwitch,
-  } = props;
+  const { itemsData, onModalSwitch, onFilterChange, language, onLanguageChange, onWelcomeSwitch } = props;
 
   const { t } = useTranslation();
 
@@ -53,21 +43,26 @@ const Menu = (props: IMenu) => {
   const itemsDone = itemsData.filter((item) => item.done).length;
   const itemsNotDone = itemsData.filter((item) => !item.done).length;
 
+  const dispatch = useDispatchTyped();
+  const isMenuOpen = useSelectorTyped(selectMenu);
+
   const onFilterItemClick = (evt: React.MouseEvent<HTMLAnchorElement>) => {
     evt.preventDefault();
 
     const filterType: string = (evt.target as HTMLAnchorElement).dataset.type;
 
     onFilterChange(filterType);
-    onMenuSwitch();
     onWelcomeSwitch();
+
+    dispatch(menuSwitch());
   };
 
   const onAddLinkClick = (evt: React.MouseEvent<HTMLAnchorElement>) => {
     evt.preventDefault();
 
     onModalSwitch();
-    onMenuSwitch();
+
+    dispatch(menuSwitch());
   };
 
   useEffect(() => {
@@ -128,7 +123,6 @@ const Menu = (props: IMenu) => {
 
 const mapStateToProps = (state) => {
   return {
-    isMenuOpen: state.app.isMenuOpen,
     itemsData: state.app.itemsData,
     language: state.app.language,
   };
@@ -136,7 +130,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onMenuSwitch: () => dispatch(onMenuSwitchAction()),
     onFilterChange: (filterType) => dispatch(onFilterChangeAction(filterType)),
     onModalSwitch: (id, type) => dispatch(onModalSwitchAction(id, type)),
     onLanguageChange: () => dispatch(onLanguageChangeAction()),
