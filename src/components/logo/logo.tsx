@@ -1,14 +1,14 @@
-import React, { memo } from 'react';
+import React, { FormEvent, memo } from 'react';
 import LogoIcon from '../../assets/images/logo-icon.svg';
-import { useDispatch } from 'react-redux';
-import { onWelcomeSwitchAction } from '../../actions';
+import { useDispatchTyped } from '../../hooks';
+import { welcomeSwitch } from '../../features/welcome/welcomeSlice';
 
 const Logo = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatchTyped();
 
-  const logoClickHandler = (event) => {
+  const logoClickHandler = (event: FormEvent<HTMLAnchorElement>) => {
     event.preventDefault();
-    dispatch(onWelcomeSwitchAction(true));
+    dispatch(welcomeSwitch(true));
   };
 
   return (

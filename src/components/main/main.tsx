@@ -5,8 +5,10 @@ import Tasks from '../tasks/tasks';
 import Greeting from '../greeting/greeting';
 import Info from '../info/info';
 import { connect } from 'react-redux';
-import { onMenuSwitchAction, onWelcomeSwitchAction } from '../../actions/index';
 import { onSearch, onFilter } from '../../utils/common';
+import { selectWelcome, welcomeSwitch } from '../../features/welcome/welcomeSlice';
+import { useDispatchTyped, useSelectorTyped } from '../../hooks';
+import { selectMenu, menuSwitch } from '../../features/menu/menuSlice';
 
 interface IItemsData {
   done: boolean;
@@ -18,16 +20,16 @@ interface IItemsData {
 
 interface IMain {
   itemsData: Array<IItemsData>;
-  isWelcome: boolean;
-  isMenuOpen: boolean;
-  onMenuSwitch: () => void;
   searchData: string;
   filterType: string;
-  onWelcomeSwitch: () => void;
 }
 
 const Main = (props: IMain) => {
-  const { itemsData, isWelcome, isMenuOpen, onMenuSwitch, searchData, filterType, onWelcomeSwitch } = props;
+  const { itemsData, searchData, filterType } = props;
+
+  const dispatch = useDispatchTyped();
+  const isWelcome = useSelectorTyped(selectWelcome);
+  const isMenuOpen = useSelectorTyped(selectMenu);
 
   const itemsDataSorted = itemsData
     .slice()
@@ -37,15 +39,15 @@ const Main = (props: IMain) => {
 
   useEffect(() => {
     if (itemsData.length) {
-      onWelcomeSwitch();
+      dispatch(welcomeSwitch(false));
     }
   }, []);
 
   const onMainClick = (evt) => {
-    const menuElement: HTMLDivElement = document.querySelector(`.menu`);
+    const menuElement: HTMLDivElement = document.querySelector('.menu');
 
     if (isMenuOpen && !menuElement.contains(evt.target)) {
-      onMenuSwitch();
+      dispatch(menuSwitch());
     }
   };
 
@@ -63,19 +65,10 @@ const Main = (props: IMain) => {
 
 const mapStateToProps = (state) => {
   return {
-    isMenuOpen: state.menu.value,
-    isWelcome: state.app.isWelcome,
     searchData: state.app.searchData,
     filterType: state.app.filterType,
     itemsData: state.app.itemsData,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onMenuSwitch: () => dispatch(onMenuSwitchAction()),
-    onWelcomeSwitch: () => dispatch(onWelcomeSwitchAction()),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default connect(mapStateToProps, null)(Main);

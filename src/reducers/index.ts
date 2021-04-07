@@ -18,7 +18,7 @@ interface IInitialState {
   // isSearchOpen: boolean;
   searchData: string;
   searching: boolean;
-  isWelcome: boolean;
+  // isWelcome: boolean;
   filterType: string;
   modalType: string;
   modalField: string;
@@ -40,7 +40,7 @@ const initialState: IInitialState = {
   // isSearchOpen: false,
   searchData: ``,
   searching: false,
-  isWelcome: true,
+  // isWelcome: true,
   filterType: ``,
   modalType: ``,
   modalField: ``,
@@ -65,8 +65,8 @@ const reducer = (state: IInitialState = initialState, action: IAction): IInitial
       return { ...state, searchData: action.payload };
     case ActionTypes.SEARCHING:
       return { ...state, searching: action.payload };
-    case ActionTypes.WELCOME_SWITCH:
-      return { ...state, isWelcome: action.payload };
+    // case ActionTypes.WELCOME_SWITCH:
+    //   return { ...state, isWelcome: action.payload };
     case ActionTypes.TASK_ADD:
       const itemsData = state.itemsData.slice();
       const itemData = {
@@ -79,7 +79,8 @@ const reducer = (state: IInitialState = initialState, action: IAction): IInitial
 
       itemsData.push(itemData);
 
-      return { ...state, isWelcome: false, itemsData };
+      // return { ...state, isWelcome: false, itemsData };
+      return { ...state, itemsData };
     case ActionTypes.FILTER_CHANGE:
       return { ...state, filterType: action.payload };
     case ActionTypes.TASK_DELETE:
