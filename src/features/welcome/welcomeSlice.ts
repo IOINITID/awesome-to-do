@@ -21,6 +21,6 @@ export const welcomeSlice = createSlice({
 
 export const { welcomeSwitch } = welcomeSlice.actions;
 
-export const selectWelcome = (state: RootState) => state;
+export const selectWelcome = (state: RootState) => state.welcome.value;
 
 export default welcomeSlice.reducer;

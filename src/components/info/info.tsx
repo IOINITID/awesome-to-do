@@ -7,11 +7,12 @@ import NotFoundLightIcon from '../../assets/images/not-found-light-icon.svg';
 
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
+import { selectSearching } from '../../features/search/searchSlice';
+import { useSelectorTyped } from '../../hooks';
+import { selectTheme } from '../../features/theme/themeSlice';
 
 interface IInfo {
-  theme: string;
   filterType: string;
-  searching: boolean;
   language: string;
 }
 
@@ -21,9 +22,12 @@ interface IInfoData {
 }
 
 const Info = (props: IInfo) => {
-  const { theme, filterType, searching, language } = props;
+  const { filterType, language } = props;
 
   const { t } = useTranslation();
+
+  const searching = useSelectorTyped(selectSearching);
+  const theme = useSelectorTyped(selectTheme);
 
   useEffect(() => {
     i18n.changeLanguage(language);
@@ -78,8 +82,6 @@ const Info = (props: IInfo) => {
 
 const mapStateToProps = (state) => {
   return {
-    theme: state.theme.value,
-    searching: state.app.searching,
     filterType: state.app.filterType,
     language: state.app.language,
   };

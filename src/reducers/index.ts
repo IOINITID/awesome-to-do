@@ -11,14 +11,8 @@ interface IItemsData {
 }
 
 interface IInitialState {
-  // theme: string;
   itemsData: Array<IItemsData> | [];
   isModalOpen: boolean;
-  // isMenuOpen: boolean;
-  // isSearchOpen: boolean;
-  searchData: string;
-  searching: boolean;
-  // isWelcome: boolean;
   filterType: string;
   modalType: string;
   modalField: string;
@@ -33,26 +27,20 @@ interface IAction {
 }
 
 const initialState: IInitialState = {
-  // theme: window.localStorage.getItem('theme') || 'dark',
   itemsData: JSON.parse(window.localStorage.getItem('itemsData')) || [],
   isModalOpen: false,
-  // isMenuOpen: false,
-  // isSearchOpen: false,
-  searchData: ``,
-  searching: false,
-  // isWelcome: true,
-  filterType: ``,
-  modalType: ``,
-  modalField: ``,
-  currentId: ``,
-  title: ``,
+  filterType: '',
+  modalType: '',
+  modalField: '',
+  currentId: '',
+  title: '',
   language: window.localStorage.getItem('language') || 'ru',
 };
 
 const reducer = (state: IInitialState = initialState, action: IAction): IInitialState => {
   switch (action.type) {
     // case ActionTypes.THEME_SWITCH:
-    //   return state.theme === `dark` ? { ...state, theme: `light` } : { ...state, theme: `dark` };
+    //   return state.theme === 'dark' ? { ...state, theme: 'light' } : { ...state, theme: 'dark' };
     // case ActionTypes.MENU_SWITCH:
     //   return { ...state, isMenuOpen: !state.isMenuOpen };
     case 'LANGUAGE_CHANGE':
@@ -61,10 +49,10 @@ const reducer = (state: IInitialState = initialState, action: IAction): IInitial
     //   return { ...state, isSearchOpen: !state.isSearchOpen };
     // case ActionTypes.SEARCH_CLOSE:
     //   return { ...state, isSearchOpen: false };
-    case ActionTypes.SEARCH_CHANGE:
-      return { ...state, searchData: action.payload };
-    case ActionTypes.SEARCHING:
-      return { ...state, searching: action.payload };
+    // case ActionTypes.SEARCH_CHANGE:
+    //   return { ...state, searchData: action.payload };
+    // case ActionTypes.SEARCHING:
+    //   return { ...state, searching: action.payload };
     // case ActionTypes.WELCOME_SWITCH:
     //   return { ...state, isWelcome: action.payload };
     case ActionTypes.TASK_ADD:
@@ -118,8 +106,8 @@ const reducer = (state: IInitialState = initialState, action: IAction): IInitial
       return { ...state, itemsData: itemsDataEdit };
     case ActionTypes.MODAL_SWITCH:
       const modalTask = state.itemsData.filter((item: any) => item.id === action.payload.id);
-      const [{ title: modalField = `` } = {}] = modalTask;
-      const currentId = action.payload.id || ``;
+      const [{ title: modalField = '' } = {}] = modalTask;
+      const currentId = action.payload.id || '';
 
       return { ...state, currentId, isModalOpen: !state.isModalOpen, modalType: action.payload.type, modalField };
     case ActionTypes.MORE_SWITCH:

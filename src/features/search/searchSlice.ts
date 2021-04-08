@@ -1,12 +1,16 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../../store';
 
 interface SearchState {
-  value: boolean;
+  isSearchOpen: boolean;
+  searching: boolean;
+  searchData: string;
 }
 
 const initialState: SearchState = {
-  value: false,
+  isSearchOpen: false,
+  searching: false,
+  searchData: '',
 };
 
 export const searchSlice = createSlice({
@@ -14,16 +18,26 @@ export const searchSlice = createSlice({
   initialState,
   reducers: {
     searchSwitch: (state) => {
-      state.value = !state.value;
+      state.isSearchOpen = !state.isSearchOpen;
     },
     searchClose: (state) => {
-      state.value = false;
+      state.isSearchOpen = false;
+    },
+    onSearching: (state, action: PayloadAction<boolean>) => {
+      state.searching = action.payload;
+    },
+    onSearchChange: (state, action: PayloadAction<string>) => {
+      state.searchData = action.payload;
     },
   },
 });
 
-export const { searchSwitch, searchClose } = searchSlice.actions;
+export const { searchSwitch, searchClose, onSearching, onSearchChange } = searchSlice.actions;
 
-export const selectSearch = (state: RootState) => state.search.value;
+export const selectSearch = (state: RootState) => state.search.isSearchOpen;
+
+export const selectSearching = (state: RootState) => state.search.searching;
+
+export const selectSearchData = (state: RootState) => state.search.searchData;
 
 export default searchSlice.reducer;

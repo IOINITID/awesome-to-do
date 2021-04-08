@@ -76,7 +76,7 @@ const Modal = (props: IModal) => {
 
     setTitle('');
     onModalSwitch();
-    dispatch(welcomeSwitch());
+    dispatch(welcomeSwitch(false));
 
     if (isMenuOpen) {
       dispatch(menuSwitch());

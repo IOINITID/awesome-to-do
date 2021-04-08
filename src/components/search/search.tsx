@@ -1,6 +1,5 @@
 import React, { RefObject, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
-import { onSearchChangeAction, onSearchingAction } from '../../actions/index';
 import SearchIcon from '../../assets/images/search-icon.svg';
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
@@ -8,22 +7,21 @@ import { selectSearch, searchSwitch, searchClose } from '../../features/search/s
 import { useDispatchTyped, useSelectorTyped } from '../../hooks';
 import { menuSwitch, selectMenu } from '../../features/menu/menuSlice';
 import { welcomeSwitch } from '../../features/welcome/welcomeSlice';
+import { onSearching, selectSearchData, onSearchChange } from '../../features/search/searchSlice';
 
 interface ISearch {
-  searchData: string;
-  onSearchChange: (firstArg?: string) => void;
-  onSearching: (firstArg: boolean) => void;
   language: string;
 }
 
 const Search = (props: ISearch) => {
-  const { searchData, onSearchChange, onSearching, language } = props;
+  const { language } = props;
 
   const { t } = useTranslation();
 
   const dispatch = useDispatchTyped();
   const isSearchOpen = useSelectorTyped(selectSearch);
   const isMenuOpen = useSelectorTyped(selectMenu);
+  const searchData = useSelectorTyped(selectSearchData);
 
   useEffect(() => {
     i18n.changeLanguage(language);
@@ -32,17 +30,16 @@ const Search = (props: ISearch) => {
   const searchRef: RefObject<HTMLFormElement> = useRef<HTMLFormElement>(null);
 
   const onInputChange = (evt: React.ChangeEvent<HTMLInputElement>): void => {
-    const searchDataValue: string = evt.target.value;
+    const searchDataValue = evt.target.value;
 
     if (searchDataValue.length) {
-      onSearching(true);
+      dispatch(onSearching(true));
     } else {
-      onSearching(false);
+      dispatch(onSearching(false));
     }
 
-    dispatch(welcomeSwitch());
-
-    onSearchChange(searchDataValue);
+    dispatch(welcomeSwitch(false));
+    dispatch(onSearchChange(searchDataValue));
   };
 
   const onSearchFormSubmit = (evt: React.FormEvent<HTMLFormElement>): void => {
@@ -57,9 +54,8 @@ const Search = (props: ISearch) => {
 
   const onSearchFieldClose = (evt): void => {
     if (!searchRef.current.contains(evt.target)) {
-      onSearchChange();
-      onSearching(false);
-
+      dispatch(onSearchChange(''));
+      dispatch(onSearching(false));
       dispatch(searchClose());
     }
   };
@@ -67,7 +63,7 @@ const Search = (props: ISearch) => {
   const onSearchButtonClick = (evt: React.MouseEvent<HTMLButtonElement>): void => {
     evt.preventDefault();
 
-    onSearchChange();
+    dispatch(onSearchChange(''));
     dispatch(searchSwitch());
 
     if (isMenuOpen) {
@@ -118,16 +114,8 @@ const Search = (props: ISearch) => {
 
 const mapStateToProps = (state) => {
   return {
-    searchData: state.app.searchData,
     language: state.app.language,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onSearchChange: (searchData) => dispatch(onSearchChangeAction(searchData)),
-    onSearching: (searching) => dispatch(onSearchingAction(searching)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Search);
+export default connect(mapStateToProps, null)(Search);
