@@ -4,6 +4,7 @@ import themeReducer from '../features/theme/themeSlice';
 import menuReducer from '../features/menu/menuSlice';
 import searchReducer from '../features/search/searchSlice';
 import welcomeReducer from '../features/welcome/welcomeSlice';
+import languageReducer from '../features/language/languageSlice';
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     menu: menuReducer,
     search: searchReducer,
     welcome: welcomeReducer,
+    language: languageReducer,
   },
 });
 

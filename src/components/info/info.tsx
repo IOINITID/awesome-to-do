@@ -1,19 +1,18 @@
 import React, { Fragment, useEffect } from 'react';
-import { connect } from 'react-redux';
 import NoTaskDarkIcon from '../../assets/images/no-task-dark-icon.svg';
 import NoTaskLightIcon from '../../assets/images/no-task-light-icon.svg';
 import NotFoundDarkIcon from '../../assets/images/not-found-dark-icon.svg';
 import NotFoundLightIcon from '../../assets/images/not-found-light-icon.svg';
-
 import i18n from 'i18next';
+import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { selectSearching } from '../../features/search/searchSlice';
 import { useSelectorTyped } from '../../hooks';
 import { selectTheme } from '../../features/theme/themeSlice';
+import { selectLanguage } from '../../features/language/languageSlice';
 
 interface IInfo {
   filterType: string;
-  language: string;
 }
 
 interface IInfoData {
@@ -22,12 +21,13 @@ interface IInfoData {
 }
 
 const Info = (props: IInfo) => {
-  const { filterType, language } = props;
+  const { filterType } = props;
 
   const { t } = useTranslation();
 
   const searching = useSelectorTyped(selectSearching);
   const theme = useSelectorTyped(selectTheme);
+  const language = useSelectorTyped(selectLanguage);
 
   useEffect(() => {
     i18n.changeLanguage(language);
@@ -83,7 +83,6 @@ const Info = (props: IInfo) => {
 const mapStateToProps = (state) => {
   return {
     filterType: state.app.filterType,
-    language: state.app.language,
   };
 };
 

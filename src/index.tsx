@@ -9,7 +9,7 @@ import './assets/images/favicon.svg';
 store.subscribe(() => {
   window.localStorage.setItem('theme', store.getState().theme.value);
   window.localStorage.setItem('itemsData', JSON.stringify(store.getState().app.itemsData));
-  window.localStorage.setItem('language', store.getState().app.language);
+  window.localStorage.setItem('language', store.getState().language.value);
 });
 
 const Root = () => {

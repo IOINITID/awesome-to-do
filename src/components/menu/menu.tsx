@@ -16,6 +16,7 @@ import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
 import { useDispatchTyped, useSelectorTyped } from '../../hooks';
 import { menuSwitch, selectMenu } from '../../features/menu/menuSlice';
+import { selectLanguage } from '../../features/language/languageSlice';
 
 interface IItemsData {
   done: boolean;
@@ -29,13 +30,12 @@ interface IMenu {
   onModalSwitch: () => void;
   onFilterChange: (firstArg: string) => void;
   itemsData: Array<IItemsData>;
-  language: string;
   onLanguageChange: () => void;
   onWelcomeSwitch: () => void;
 }
 
 const Menu = (props: IMenu) => {
-  const { itemsData, onModalSwitch, onFilterChange, language, onLanguageChange, onWelcomeSwitch } = props;
+  const { itemsData, onModalSwitch, onFilterChange, onLanguageChange, onWelcomeSwitch } = props;
 
   const { t } = useTranslation();
 
@@ -45,6 +45,7 @@ const Menu = (props: IMenu) => {
 
   const dispatch = useDispatchTyped();
   const isMenuOpen = useSelectorTyped(selectMenu);
+  const language = useSelectorTyped(selectLanguage);
 
   const onFilterItemClick = (evt: React.MouseEvent<HTMLAnchorElement>) => {
     evt.preventDefault();
@@ -124,7 +125,6 @@ const Menu = (props: IMenu) => {
 const mapStateToProps = (state) => {
   return {
     itemsData: state.app.itemsData,
-    language: state.app.language,
   };
 };
 

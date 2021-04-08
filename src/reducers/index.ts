@@ -18,7 +18,6 @@ interface IInitialState {
   modalField: string;
   currentId: string;
   title: string;
-  language: string;
 }
 
 interface IAction {
@@ -34,7 +33,6 @@ const initialState: IInitialState = {
   modalField: '',
   currentId: '',
   title: '',
-  language: window.localStorage.getItem('language') || 'ru',
 };
 
 const reducer = (state: IInitialState = initialState, action: IAction): IInitialState => {
@@ -43,8 +41,8 @@ const reducer = (state: IInitialState = initialState, action: IAction): IInitial
     //   return state.theme === 'dark' ? { ...state, theme: 'light' } : { ...state, theme: 'dark' };
     // case ActionTypes.MENU_SWITCH:
     //   return { ...state, isMenuOpen: !state.isMenuOpen };
-    case 'LANGUAGE_CHANGE':
-      return { ...state, language: state.language === 'en' ? 'ru' : 'en' };
+    // case 'LANGUAGE_CHANGE':
+    //   return { ...state, language: state.language === 'en' ? 'ru' : 'en' };
     // case ActionTypes.SEARCH_SWITCH:
     //   return { ...state, isSearchOpen: !state.isSearchOpen };
     // case ActionTypes.SEARCH_CLOSE:

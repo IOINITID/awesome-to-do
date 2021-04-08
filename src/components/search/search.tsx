@@ -1,5 +1,4 @@
-import React, { RefObject, useEffect, useRef } from 'react';
-import { connect } from 'react-redux';
+import React, { memo, RefObject, useEffect, useRef } from 'react';
 import SearchIcon from '../../assets/images/search-icon.svg';
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
@@ -8,20 +7,16 @@ import { useDispatchTyped, useSelectorTyped } from '../../hooks';
 import { menuSwitch, selectMenu } from '../../features/menu/menuSlice';
 import { welcomeSwitch } from '../../features/welcome/welcomeSlice';
 import { onSearching, selectSearchData, onSearchChange } from '../../features/search/searchSlice';
+import { selectLanguage } from '../../features/language/languageSlice';
 
-interface ISearch {
-  language: string;
-}
-
-const Search = (props: ISearch) => {
-  const { language } = props;
-
+const Search = () => {
   const { t } = useTranslation();
 
   const dispatch = useDispatchTyped();
   const isSearchOpen = useSelectorTyped(selectSearch);
   const isMenuOpen = useSelectorTyped(selectMenu);
   const searchData = useSelectorTyped(selectSearchData);
+  const language = useSelectorTyped(selectLanguage);
 
   useEffect(() => {
     i18n.changeLanguage(language);
@@ -112,10 +107,4 @@ const Search = (props: ISearch) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    language: state.app.language,
-  };
-};
-
-export default connect(mapStateToProps, null)(Search);
+export default memo(Search);

@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
 import Task from '../task/task';
+import i18n from 'i18next';
 import { connect } from 'react-redux';
 import { onSearch, onFilter } from '../../utils/common';
-import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
+import { selectLanguage } from '../../features/language/languageSlice';
+import { useSelectorTyped } from '../../hooks';
+import { selectSearchData } from '../../features/search/searchSlice';
 
 interface IItemsData {
   done: boolean;
@@ -16,14 +19,15 @@ interface IItemsData {
 interface ITasks {
   itemsData: Array<IItemsData>;
   filterType: string;
-  searchData: string;
-  language: string;
 }
 
 const Tasks = (props: ITasks) => {
-  const { itemsData, filterType, searchData, language } = props;
+  const { itemsData, filterType } = props;
 
   const { t } = useTranslation();
+
+  const language = useSelectorTyped(selectLanguage);
+  const searchData = useSelectorTyped(selectSearchData);
 
   useEffect(() => {
     i18n.changeLanguage(language);
@@ -91,8 +95,6 @@ const mapStateToProps = (state) => {
   return {
     filterType: state.app.filterType,
     itemsData: state.app.itemsData,
-    searchData: state.app.searchData,
-    language: state.app.language,
   };
 };
 

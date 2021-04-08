@@ -27,6 +27,7 @@ import { useDispatchTyped, useSelectorTyped } from '../../hooks';
 import { menuSwitch, selectMenu } from '../../features/menu/menuSlice';
 import { welcomeSwitch } from '../../features/welcome/welcomeSlice';
 import { selectTheme } from '../../features/theme/themeSlice';
+import { selectLanguage } from '../../features/language/languageSlice';
 
 interface IModal {
   currentId: string;
@@ -36,15 +37,15 @@ interface IModal {
   modalField: string;
   onTaskEdit: (id: string, title: string) => void;
   onTaskDelete: (id: string) => void;
-  language: string;
 }
 
 const Modal = (props: IModal) => {
-  const { modalType, modalField, onModalSwitch, currentId, onTaskEdit, onTaskAdd, onTaskDelete, language } = props;
+  const { modalType, modalField, onModalSwitch, currentId, onTaskEdit, onTaskAdd, onTaskDelete } = props;
 
   const dispatch = useDispatchTyped();
   const isMenuOpen = useSelectorTyped(selectMenu);
   const theme = useSelectorTyped(selectTheme);
+  const language = useSelectorTyped(selectLanguage);
 
   const [title, setTitle] = useState(modalField);
   const { t } = useTranslation();
@@ -226,7 +227,6 @@ const mapStateToProps = (state) => {
     modalField: state.app.modalField,
     modalType: state.app.modalType,
     currentId: state.app.currentId,
-    language: state.app.language,
   };
 };
 
