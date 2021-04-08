@@ -1,50 +1,29 @@
 import React, { RefObject, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
-import {
-  // onSearchSwitchAction,
-  onSearchChangeAction,
-  onSearchingAction,
-  onSearchCloseAction,
-  onMenuSwitchAction,
-  onWelcomeSwitchAction,
-} from '../../actions/index';
+import { onSearchChangeAction, onSearchingAction } from '../../actions/index';
 import SearchIcon from '../../assets/images/search-icon.svg';
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
 import { selectSearch, searchSwitch, searchClose } from '../../features/search/searchSlice';
 import { useDispatchTyped, useSelectorTyped } from '../../hooks';
+import { menuSwitch, selectMenu } from '../../features/menu/menuSlice';
+import { welcomeSwitch } from '../../features/welcome/welcomeSlice';
 
 interface ISearch {
-  // isSearchOpen: boolean;
-  isMenuOpen: boolean;
   searchData: string;
-  // onSearchSwitch: () => void;
   onSearchChange: (firstArg?: string) => void;
-  // onSearchClose: () => void;
   onSearching: (firstArg: boolean) => void;
-  onMenuSwitch: () => void;
   language: string;
-  onWellcomeSwitch: () => void;
 }
 
 const Search = (props: ISearch) => {
-  const {
-    // isSearchOpen,
-    isMenuOpen,
-    searchData,
-    // onSearchSwitch,
-    onSearchChange,
-    // onSearchClose,
-    onSearching,
-    onMenuSwitch,
-    language,
-    onWellcomeSwitch,
-  } = props;
+  const { searchData, onSearchChange, onSearching, language } = props;
 
   const { t } = useTranslation();
 
   const dispatch = useDispatchTyped();
   const isSearchOpen = useSelectorTyped(selectSearch);
+  const isMenuOpen = useSelectorTyped(selectMenu);
 
   useEffect(() => {
     i18n.changeLanguage(language);
@@ -61,7 +40,7 @@ const Search = (props: ISearch) => {
       onSearching(false);
     }
 
-    onWellcomeSwitch();
+    dispatch(welcomeSwitch());
 
     onSearchChange(searchDataValue);
   };
@@ -92,7 +71,7 @@ const Search = (props: ISearch) => {
     dispatch(searchSwitch());
 
     if (isMenuOpen) {
-      onMenuSwitch();
+      dispatch(menuSwitch());
     }
   };
 
@@ -139,21 +118,15 @@ const Search = (props: ISearch) => {
 
 const mapStateToProps = (state) => {
   return {
-    // isSearchOpen: state.app.isSearchOpen,
     searchData: state.app.searchData,
-    isMenuOpen: state.menu.value,
     language: state.app.language,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // onSearchSwitch: () => dispatch(onSearchSwitchAction()),
     onSearchChange: (searchData) => dispatch(onSearchChangeAction(searchData)),
     onSearching: (searching) => dispatch(onSearchingAction(searching)),
-    onSearchClose: () => dispatch(onSearchCloseAction()),
-    onMenuSwitch: () => dispatch(onMenuSwitchAction()),
-    onWellcomeSwitch: () => dispatch(onWelcomeSwitchAction()),
   };
 };
 
