@@ -1,5 +1,5 @@
 /* eslint-disable no-case-declarations */
-import { v4 as uuid } from 'uuid';
+import { nanoid } from 'nanoid';
 import { ActionTypes } from '../utils/constants';
 
 interface IItemsData {
@@ -54,7 +54,7 @@ const reducer = (state: IInitialState = initialState, action: IAction): IInitial
     case ActionTypes.TASK_ADD:
       const itemsData = state.itemsData.slice();
       const itemData = {
-        id: uuid(),
+        id: nanoid(),
         title: action.payload,
         done: false,
         fixed: false,
