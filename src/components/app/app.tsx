@@ -5,6 +5,8 @@ import Main from '../main/main';
 import Modal from '../modal/modal';
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
+import { selectTheme } from '../../features/theme/themeSlice';
+import { useSelectorTyped } from '../../hooks';
 
 i18n.use(initReactI18next).init({
   resources: {
@@ -72,14 +74,13 @@ i18n.use(initReactI18next).init({
 });
 
 interface IApp {
-  /** Theme value for application. */
-  theme: string;
-  /** Modal state for application. */
   isModalOpen: boolean;
 }
 
 const App = (props: IApp) => {
-  const { theme, isModalOpen } = props;
+  const { isModalOpen } = props;
+
+  const theme = useSelectorTyped(selectTheme);
 
   return (
     <div className={`theme theme--${theme}`}>
@@ -92,7 +93,6 @@ const App = (props: IApp) => {
 
 const mapStateToProps = (state) => {
   return {
-    theme: state.theme.value,
     isModalOpen: state.app.isModalOpen,
   };
 };

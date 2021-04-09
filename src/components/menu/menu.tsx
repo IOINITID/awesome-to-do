@@ -11,10 +11,9 @@ import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
 import { useDispatchTyped, useSelectorTyped } from '../../hooks';
 import { menuSwitch, selectMenu } from '../../features/menu/menuSlice';
-import { selectLanguage } from '../../features/language/languageSlice';
+import { selectLanguage, languageChange } from '../../features/language/languageSlice';
 import { filterChange } from '../../features/filter/filterSlice';
 import { welcomeSwitch } from '../../features/welcome/welcomeSlice';
-import { languageChange } from '../../features/language/languageSlice';
 
 interface IItemsData {
   done: boolean;

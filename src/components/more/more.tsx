@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { createRef, Fragment, RefObject, useEffect } from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import {
   onTaskFixedAction,
   onTaskDoneAction,
@@ -14,6 +14,8 @@ import FixedIcon from '../../assets/images/fixed-icon.svg';
 import DeleteIcon from '../../assets/images/delete-icon.svg';
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
+import { selectLanguage } from '../../features/language/languageSlice';
+import { useSelectorTyped } from '../../hooks';
 
 interface IMore {
   id: string;
@@ -25,13 +27,13 @@ interface IMore {
   onMoreSwitch: () => void;
   onModalSwitch: (id: string, type: string) => void;
   onMoreClose: () => void;
-  language?: string;
 }
 
 const More = (props: IMore) => {
-  const { id, done, fixed, more, onMoreClose, onTaskDone, onMoreSwitch, onModalSwitch, onTaskFixed, language } = props;
+  const { id, done, fixed, more, onMoreClose, onTaskDone, onMoreSwitch, onModalSwitch, onTaskFixed } = props;
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+
+  const language = useSelectorTyped(selectLanguage);
 
   useEffect(() => {
     i18n.changeLanguage(language);
