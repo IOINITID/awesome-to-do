@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { selectLanguage } from '../../features/language/languageSlice';
 import { useSelectorTyped } from '../../hooks';
 import { selectSearchData } from '../../features/search/searchSlice';
+import { selectFilter } from '../../features/filter/filterSlice';
 
 interface IItemsData {
   done: boolean;
@@ -18,16 +19,16 @@ interface IItemsData {
 
 interface ITasks {
   itemsData: Array<IItemsData>;
-  filterType: string;
 }
 
 const Tasks = (props: ITasks) => {
-  const { itemsData, filterType } = props;
+  const { itemsData } = props;
 
   const { t } = useTranslation();
 
   const language = useSelectorTyped(selectLanguage);
   const searchData = useSelectorTyped(selectSearchData);
+  const filterType = useSelectorTyped(selectFilter);
 
   useEffect(() => {
     i18n.changeLanguage(language);
@@ -42,16 +43,16 @@ const Tasks = (props: ITasks) => {
   let tasksTitle: string;
 
   switch (filterType) {
-    case `all`:
+    case 'all':
       tasksTitle = t('Все задачи');
       break;
-    case `done`:
+    case 'done':
       tasksTitle = t('Выполненные');
       break;
-    case `undone`:
+    case 'undone':
       tasksTitle = t('Текущие');
       break;
-    case `fixed`:
+    case 'fixed':
       tasksTitle = t('Закреплённые');
       break;
     default:
@@ -66,13 +67,13 @@ const Tasks = (props: ITasks) => {
 
     switch (true) {
       case fixed:
-        tasksItemClassName = `tasks__item tasks__item--fixed`;
+        tasksItemClassName = 'tasks__item tasks__item--fixed';
         break;
       case done:
-        tasksItemClassName = `tasks__item tasks__item--done`;
+        tasksItemClassName = 'tasks__item tasks__item--done';
         break;
       default:
-        tasksItemClassName = `tasks__item`;
+        tasksItemClassName = 'tasks__item';
         break;
     }
 
@@ -93,7 +94,6 @@ const Tasks = (props: ITasks) => {
 
 const mapStateToProps = (state) => {
   return {
-    filterType: state.app.filterType,
     itemsData: state.app.itemsData,
   };
 };

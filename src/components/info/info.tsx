@@ -1,33 +1,28 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, memo, useEffect } from 'react';
 import NoTaskDarkIcon from '../../assets/images/no-task-dark-icon.svg';
 import NoTaskLightIcon from '../../assets/images/no-task-light-icon.svg';
 import NotFoundDarkIcon from '../../assets/images/not-found-dark-icon.svg';
 import NotFoundLightIcon from '../../assets/images/not-found-light-icon.svg';
 import i18n from 'i18next';
-import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { selectSearching } from '../../features/search/searchSlice';
 import { useSelectorTyped } from '../../hooks';
 import { selectTheme } from '../../features/theme/themeSlice';
 import { selectLanguage } from '../../features/language/languageSlice';
-
-interface IInfo {
-  filterType: string;
-}
+import { selectFilter } from '../../features/filter/filterSlice';
 
 interface IInfoData {
   title: string;
   description: string;
 }
 
-const Info = (props: IInfo) => {
-  const { filterType } = props;
-
+const Info = () => {
   const { t } = useTranslation();
 
   const searching = useSelectorTyped(selectSearching);
   const theme = useSelectorTyped(selectTheme);
   const language = useSelectorTyped(selectLanguage);
+  const filterType = useSelectorTyped(selectFilter);
 
   useEffect(() => {
     i18n.changeLanguage(language);
@@ -80,10 +75,4 @@ const Info = (props: IInfo) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    filterType: state.app.filterType,
-  };
-};
-
-export default connect(mapStateToProps)(Info);
+export default memo(Info);

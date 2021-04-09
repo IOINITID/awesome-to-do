@@ -13,7 +13,6 @@ interface IItemsData {
 interface IInitialState {
   itemsData: Array<IItemsData> | [];
   isModalOpen: boolean;
-  filterType: string;
   modalType: string;
   modalField: string;
   currentId: string;
@@ -28,7 +27,6 @@ interface IAction {
 const initialState: IInitialState = {
   itemsData: JSON.parse(window.localStorage.getItem('itemsData')) || [],
   isModalOpen: false,
-  filterType: '',
   modalType: '',
   modalField: '',
   currentId: '',
@@ -67,8 +65,8 @@ const reducer = (state: IInitialState = initialState, action: IAction): IInitial
 
       // return { ...state, isWelcome: false, itemsData };
       return { ...state, itemsData };
-    case ActionTypes.FILTER_CHANGE:
-      return { ...state, filterType: action.payload };
+    // case ActionTypes.FILTER_CHANGE:
+    //   return { ...state, filterType: action.payload };
     case ActionTypes.TASK_DELETE:
       return { ...state, itemsData: state.itemsData.filter((item: any) => item.id !== action.payload) };
     case ActionTypes.TASK_FIXED:

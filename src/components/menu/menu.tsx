@@ -3,12 +3,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import {
-  onFilterChangeAction,
-  onModalSwitchAction,
-  onLanguageChangeAction,
-  onWelcomeSwitchAction,
-} from '../../actions/index';
+import { onModalSwitchAction } from '../../actions/index';
 import FixedIcon from '../../assets/images/fixed-icon.svg';
 import AddIcon from '../../assets/images/add-icon.svg';
 
@@ -17,6 +12,9 @@ import { useTranslation } from 'react-i18next';
 import { useDispatchTyped, useSelectorTyped } from '../../hooks';
 import { menuSwitch, selectMenu } from '../../features/menu/menuSlice';
 import { selectLanguage } from '../../features/language/languageSlice';
+import { filterChange } from '../../features/filter/filterSlice';
+import { welcomeSwitch } from '../../features/welcome/welcomeSlice';
+import { languageChange } from '../../features/language/languageSlice';
 
 interface IItemsData {
   done: boolean;
@@ -28,14 +26,11 @@ interface IItemsData {
 
 interface IMenu {
   onModalSwitch: () => void;
-  onFilterChange: (firstArg: string) => void;
   itemsData: Array<IItemsData>;
-  onLanguageChange: () => void;
-  onWelcomeSwitch: () => void;
 }
 
 const Menu = (props: IMenu) => {
-  const { itemsData, onModalSwitch, onFilterChange, onLanguageChange, onWelcomeSwitch } = props;
+  const { itemsData, onModalSwitch } = props;
 
   const { t } = useTranslation();
 
@@ -50,10 +45,10 @@ const Menu = (props: IMenu) => {
   const onFilterItemClick = (evt: React.MouseEvent<HTMLAnchorElement>) => {
     evt.preventDefault();
 
-    const filterType: string = (evt.target as HTMLAnchorElement).dataset.type;
+    const filterType = (evt.target as HTMLAnchorElement).dataset.type;
 
-    onFilterChange(filterType);
-    onWelcomeSwitch();
+    dispatch(filterChange(filterType));
+    dispatch(welcomeSwitch(false));
 
     dispatch(menuSwitch());
   };
@@ -109,7 +104,7 @@ const Menu = (props: IMenu) => {
         <div
           className={`switch lang ${language === 'ru' ? 'lang--ru' : 'lang--eng'}`}
           onClick={() => {
-            onLanguageChange();
+            dispatch(languageChange());
           }}
         >
           <button className="button lang__button" aria-label="Переключить язык.">
@@ -130,10 +125,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onFilterChange: (filterType) => dispatch(onFilterChangeAction(filterType)),
     onModalSwitch: (id, type) => dispatch(onModalSwitchAction(id, type)),
-    onLanguageChange: () => dispatch(onLanguageChangeAction()),
-    onWelcomeSwitch: () => dispatch(onWelcomeSwitchAction()),
   };
 };
 

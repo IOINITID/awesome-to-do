@@ -5,6 +5,7 @@ import menuReducer from '../features/menu/menuSlice';
 import searchReducer from '../features/search/searchSlice';
 import welcomeReducer from '../features/welcome/welcomeSlice';
 import languageReducer from '../features/language/languageSlice';
+import filterReducer from '../features/filter/filterSlice';
 
 const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
     search: searchReducer,
     welcome: welcomeReducer,
     language: languageReducer,
+    filter: filterReducer,
   },
 });
 

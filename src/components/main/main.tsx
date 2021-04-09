@@ -9,6 +9,7 @@ import { onSearch, onFilter } from '../../utils/common';
 import { selectWelcome, welcomeSwitch } from '../../features/welcome/welcomeSlice';
 import { useDispatchTyped, useSelectorTyped } from '../../hooks';
 import { selectMenu, menuSwitch } from '../../features/menu/menuSlice';
+import { selectFilter } from '../../features/filter/filterSlice';
 
 interface IItemsData {
   done: boolean;
@@ -21,15 +22,15 @@ interface IItemsData {
 interface IMain {
   itemsData: Array<IItemsData>;
   searchData: string;
-  filterType: string;
 }
 
 const Main = (props: IMain) => {
-  const { itemsData, searchData, filterType } = props;
+  const { itemsData, searchData } = props;
 
   const dispatch = useDispatchTyped();
   const isWelcome = useSelectorTyped(selectWelcome);
   const isMenuOpen = useSelectorTyped(selectMenu);
+  const filterType = useSelectorTyped(selectFilter);
 
   const itemsDataSorted = itemsData
     .slice()
@@ -66,7 +67,6 @@ const Main = (props: IMain) => {
 const mapStateToProps = (state) => {
   return {
     searchData: state.app.searchData,
-    filterType: state.app.filterType,
     itemsData: state.app.itemsData,
   };
 };
