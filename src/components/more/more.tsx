@@ -1,13 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { createRef, Fragment, RefObject, useEffect } from 'react';
-import { connect } from 'react-redux';
-import {
-  onTaskFixedAction,
-  onTaskDoneAction,
-  onModalSwitchAction,
-  onMoreSwitchAction,
-  onMoreCloseAction,
-} from '../../actions/index';
+import React, { createRef, Fragment, memo, RefObject, useEffect } from 'react';
 import UndoneIcon from '../../assets/images/undone-icon.svg';
 import EditIcon from '../../assets/images/edit-icon.svg';
 import FixedIcon from '../../assets/images/fixed-icon.svg';
@@ -15,25 +7,22 @@ import DeleteIcon from '../../assets/images/delete-icon.svg';
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
 import { selectLanguage } from '../../features/language/languageSlice';
-import { useSelectorTyped } from '../../hooks';
+import { useDispatchTyped, useSelectorTyped } from '../../hooks';
+import { doneTask, fixedTask, taskMoreClose, taskMoreSwitch, tasksModalSwitch } from '../../features/tasks/tasksSlice';
 
 interface IMore {
   id: string;
   done: boolean;
   fixed: boolean;
   more: boolean;
-  onTaskDone: (id: string) => void;
-  onTaskFixed: (id: string) => void;
-  onMoreSwitch: () => void;
-  onModalSwitch: (id: string, type: string) => void;
-  onMoreClose: () => void;
 }
 
 const More = (props: IMore) => {
-  const { id, done, fixed, more, onMoreClose, onTaskDone, onMoreSwitch, onModalSwitch, onTaskFixed } = props;
+  const { id, done, fixed, more } = props;
   const { t } = useTranslation();
 
   const language = useSelectorTyped(selectLanguage);
+  const dispatch = useDispatchTyped();
 
   useEffect(() => {
     i18n.changeLanguage(language);
@@ -44,23 +33,23 @@ const More = (props: IMore) => {
   const onUndoneLinkClick = (evt: React.MouseEvent<HTMLAnchorElement>): void => {
     evt.preventDefault();
 
-    onTaskDone(id);
-    onMoreSwitch();
+    dispatch(doneTask(id));
+    dispatch(taskMoreSwitch());
   };
 
   const onEditLinkClick = (evt: React.MouseEvent<HTMLAnchorElement>): void => {
     evt.preventDefault();
 
     const modalType: string = (evt.target as HTMLAnchorElement).dataset.type;
-    onMoreSwitch();
-    onModalSwitch(id, modalType);
+    dispatch(taskMoreSwitch());
+    dispatch(tasksModalSwitch({ id: id, type: modalType }));
   };
 
   const onFixedLinkClick = (evt: React.MouseEvent<HTMLAnchorElement>): void => {
     evt.preventDefault();
 
-    onTaskFixed(id);
-    onMoreSwitch();
+    dispatch(fixedTask(id));
+    dispatch(taskMoreSwitch());
   };
 
   const onDeleteLinkClick = (evt: React.MouseEvent<HTMLAnchorElement>): void => {
@@ -68,25 +57,25 @@ const More = (props: IMore) => {
 
     const modalType: string = (evt.target as HTMLAnchorElement).dataset.type;
 
-    onMoreSwitch();
-    onModalSwitch(id, modalType);
+    dispatch(taskMoreSwitch());
+    dispatch(tasksModalSwitch({ id: id, type: modalType }));
   };
 
   const onMoreCloseClick = (evt): void => {
     if (more && moreElement.current && !moreElement.current.contains(evt.target)) {
-      onMoreClose();
+      dispatch(taskMoreClose());
     }
   };
 
   useEffect(() => {
     if (more) {
-      document.addEventListener(`click`, onMoreCloseClick);
+      document.addEventListener('click', onMoreCloseClick);
     }
 
-    return () => document.removeEventListener(`click`, onMoreCloseClick);
+    return () => document.removeEventListener('click', onMoreCloseClick);
   }, [more]);
 
-  const moreClassName: string = more ? `more more--active` : `more`;
+  const moreClassName: string = more ? 'more more--active' : 'more';
 
   return (
     <div className={moreClassName} ref={moreElement}>
@@ -125,14 +114,4 @@ const More = (props: IMore) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onTaskFixed: (id) => dispatch(onTaskFixedAction(id)),
-    onTaskDone: (id) => dispatch(onTaskDoneAction(id)),
-    onModalSwitch: (id, type) => dispatch(onModalSwitchAction(id, type)),
-    onMoreSwitch: (id) => dispatch(onMoreSwitchAction(id)),
-    onMoreClose: () => dispatch(onMoreCloseAction()),
-  };
-};
-
-export default connect(null, mapDispatchToProps)(More);
+export default memo(More);

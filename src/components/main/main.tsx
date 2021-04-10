@@ -1,31 +1,19 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import React, { useEffect } from 'react';
+import React, { memo, useEffect } from 'react';
 import Menu from '../menu/menu';
 import Tasks from '../tasks/tasks';
 import Greeting from '../greeting/greeting';
 import Info from '../info/info';
-import { connect } from 'react-redux';
 import { onSearch, onFilter } from '../../utils/common';
 import { selectWelcome, welcomeSwitch } from '../../features/welcome/welcomeSlice';
 import { useDispatchTyped, useSelectorTyped } from '../../hooks';
 import { selectMenu, menuSwitch } from '../../features/menu/menuSlice';
 import { selectFilter } from '../../features/filter/filterSlice';
 import { selectSearchData } from '../../features/search/searchSlice';
+import { selectTasks } from '../../features/tasks/tasksSlice';
 
-interface IItemsData {
-  done: boolean;
-  fixed: boolean;
-  id: string;
-  more: boolean;
-  title: string;
-}
-
-interface IMain {
-  itemsData: Array<IItemsData>;
-}
-
-const Main = (props: IMain) => {
-  const { itemsData } = props;
+const Main = () => {
+  const itemsData = useSelectorTyped(selectTasks);
 
   const dispatch = useDispatchTyped();
   const isWelcome = useSelectorTyped(selectWelcome);
@@ -65,10 +53,4 @@ const Main = (props: IMain) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    itemsData: state.app.itemsData,
-  };
-};
-
-export default connect(mapStateToProps, null)(Main);
+export default memo(Main);

@@ -1,19 +1,12 @@
-interface IItemsData {
-  done: boolean;
-  fixed: boolean;
-  id: string;
-  more: boolean;
-  title: string;
-}
 /**
  * @description Return item with title.
  * @param itemsData Items data.
  * @param searchData Search string.
  * @return Items where the name matches the search string.
  */
-const onSearch = (itemsData: Array<IItemsData>, searchData: string): Array<IItemsData> => {
+const onSearch = (itemsData, searchData: string) => {
   if (itemsData.length) {
-    return itemsData.filter((item: IItemsData) => item.title.toLowerCase().indexOf(searchData.toLowerCase()) > -1);
+    return itemsData.filter((item) => item.value.toLowerCase().indexOf(searchData.toLowerCase()) > -1);
   }
 
   return itemsData;
@@ -25,16 +18,16 @@ const onSearch = (itemsData: Array<IItemsData>, searchData: string): Array<IItem
  * @param filterType Filter type.
  * @return Items of this type.
  */
-const onFilter = (itemsData: Array<IItemsData>, filterType: string): Array<IItemsData> => {
+const onFilter = (itemsData, filterType: string) => {
   switch (filterType) {
-    case `all`:
+    case 'all':
       return itemsData;
-    case `done`:
-      return itemsData.filter((item: IItemsData) => item.done);
-    case `undone`:
-      return itemsData.filter((item: IItemsData) => !item.done);
-    case `fixed`:
-      return itemsData.filter((item: IItemsData) => item.fixed);
+    case 'done':
+      return itemsData.filter((item) => item.done);
+    case 'undone':
+      return itemsData.filter((item) => !item.done);
+    case 'fixed':
+      return itemsData.filter((item) => item.fixed);
     default:
       return itemsData;
   }

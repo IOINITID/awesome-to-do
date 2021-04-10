@@ -1,5 +1,4 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { memo } from 'react';
 import Header from '../header/header';
 import Main from '../main/main';
 import Modal from '../modal/modal';
@@ -9,6 +8,7 @@ import { selectTheme } from '../../features/theme/themeSlice';
 import { useSelectorTyped } from '../../hooks';
 import styled, { ThemeProvider } from 'styled-components';
 import theme from 'styled-theming';
+import { selectIsModalOpen } from '../../features/tasks/tasksSlice';
 
 i18n.use(initReactI18next).init({
   resources: {
@@ -75,10 +75,6 @@ i18n.use(initReactI18next).init({
   },
 });
 
-interface IApp {
-  isModalOpen: boolean;
-}
-
 const themeColors = theme('mode', {
   light: '#fefefe',
   dark: '#030303',
@@ -90,10 +86,9 @@ const StyledBox = styled.div`
   background-color: ${themeColors};
 `;
 
-const App = (props: IApp) => {
-  const { isModalOpen } = props;
-
+const App = () => {
   const theme = useSelectorTyped(selectTheme);
+  const isModalOpen = useSelectorTyped(selectIsModalOpen);
 
   return (
     <ThemeProvider theme={{ mode: theme }}>
@@ -106,10 +101,4 @@ const App = (props: IApp) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    isModalOpen: state.app.isModalOpen,
-  };
-};
-
-export default connect(mapStateToProps, null)(App);
+export default memo(App);

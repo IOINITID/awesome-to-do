@@ -1,24 +1,17 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { onModalSwitchAction } from '../../actions/index';
+import React, { memo } from 'react';
 import MenuIcon from '../../assets/images/menu-icon.svg';
 import AddIcon from '../../assets/images/add-icon.svg';
 import { useDispatchTyped, useSelectorTyped } from '../../hooks';
 import { menuSwitch, selectMenu } from '../../features/menu/menuSlice';
+import { selectIsModalOpen, tasksModalSwitch } from '../../features/tasks/tasksSlice';
 
-interface INavigation {
-  isModalOpen: boolean;
-  onModalSwitch: () => void;
-}
-
-const Navigation = (props: INavigation) => {
-  const { isModalOpen, onModalSwitch } = props;
-
+const Navigation = () => {
   const dispatch = useDispatchTyped();
   const isMenuOpen = useSelectorTyped(selectMenu);
+  const isModalOpen = useSelectorTyped(selectIsModalOpen);
 
   const onAddButtonClick = (): void => {
-    onModalSwitch();
+    dispatch(tasksModalSwitch({ id: '', type: 'add' }));
 
     if (isMenuOpen) {
       dispatch(menuSwitch());
@@ -29,8 +22,8 @@ const Navigation = (props: INavigation) => {
     dispatch(menuSwitch());
   };
 
-  const menuButtonClassName: string = isMenuOpen ? `button button--active` : `button`;
-  const modalButtonClassName: string = isModalOpen ? `button button--active` : `button`;
+  const menuButtonClassName: string = isMenuOpen ? 'button button--active' : 'button';
+  const modalButtonClassName: string = isModalOpen ? 'button button--active' : 'button';
 
   return (
     <nav className="navigation">
@@ -56,16 +49,4 @@ const Navigation = (props: INavigation) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    isModalOpen: state.app.isModalOpen,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onModalSwitch: (id, type) => dispatch(onModalSwitchAction(id, type)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Navigation);
+export default memo(Navigation);

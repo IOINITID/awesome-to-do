@@ -1,12 +1,9 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import { onModalSwitchAction } from '../../actions/index';
+import React, { memo, useEffect } from 'react';
 import FixedIcon from '../../assets/images/fixed-icon.svg';
 import AddIcon from '../../assets/images/add-icon.svg';
-
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
 import { useDispatchTyped, useSelectorTyped } from '../../hooks';
@@ -14,22 +11,10 @@ import { menuSwitch, selectMenu } from '../../features/menu/menuSlice';
 import { selectLanguage, languageChange } from '../../features/language/languageSlice';
 import { filterChange } from '../../features/filter/filterSlice';
 import { welcomeSwitch } from '../../features/welcome/welcomeSlice';
+import { selectTasks, tasksModalSwitch } from '../../features/tasks/tasksSlice';
 
-interface IItemsData {
-  done: boolean;
-  fixed: boolean;
-  id: string;
-  more: boolean;
-  title: string;
-}
-
-interface IMenu {
-  onModalSwitch: () => void;
-  itemsData: Array<IItemsData>;
-}
-
-const Menu = (props: IMenu) => {
-  const { itemsData, onModalSwitch } = props;
+const Menu = () => {
+  const itemsData = useSelectorTyped(selectTasks);
 
   const { t } = useTranslation();
 
@@ -48,15 +33,13 @@ const Menu = (props: IMenu) => {
 
     dispatch(filterChange(filterType));
     dispatch(welcomeSwitch(false));
-
     dispatch(menuSwitch());
   };
 
   const onAddLinkClick = (evt: React.MouseEvent<HTMLAnchorElement>) => {
     evt.preventDefault();
 
-    onModalSwitch();
-
+    dispatch(tasksModalSwitch({ id: '', type: 'add' }));
     dispatch(menuSwitch());
   };
 
@@ -64,7 +47,7 @@ const Menu = (props: IMenu) => {
     i18n.changeLanguage(language);
   }, [language]);
 
-  const menuClassName = isMenuOpen ? `menu menu--active` : `menu`;
+  const menuClassName = isMenuOpen ? 'menu menu--active' : 'menu';
 
   return (
     <section className={menuClassName}>
@@ -116,16 +99,4 @@ const Menu = (props: IMenu) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    itemsData: state.app.itemsData,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onModalSwitch: (id, type) => dispatch(onModalSwitchAction(id, type)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Menu);
+export default memo(Menu);

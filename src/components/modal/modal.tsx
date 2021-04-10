@@ -2,9 +2,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { Fragment, useEffect, useState } from 'react';
-import { connect } from 'react-redux';
-import { onModalSwitchAction, onTaskAddAction, onTaskDeleteAction, onTaskEditAction } from '../../actions/index';
+import React, { Fragment, memo, useEffect, useState } from 'react';
 import CloseIcon from '../../assets/images/close-icon.svg';
 import DeleteIcon from '../../assets/images/delete-icon.svg';
 import DoneIcon from '../../assets/images/done-icon.svg';
@@ -20,7 +18,6 @@ import ModalDeleteFirstDarkIcon from '../../assets/images/modal-delete-first-dar
 import ModalDeleteFirstLightIcon from '../../assets/images/modal-delete-first-light-icon.svg';
 import ModalDeleteSecondDarkIcon from '../../assets/images/modal-delete-second-dark-icon.svg';
 import ModalDeleteSecondLightIcon from '../../assets/images/modal-delete-second-light-icon.svg';
-
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
 import { useDispatchTyped, useSelectorTyped } from '../../hooks';
@@ -28,26 +25,26 @@ import { menuSwitch, selectMenu } from '../../features/menu/menuSlice';
 import { welcomeSwitch } from '../../features/welcome/welcomeSlice';
 import { selectTheme } from '../../features/theme/themeSlice';
 import { selectLanguage } from '../../features/language/languageSlice';
+import {
+  addTask,
+  deleteTask,
+  selectCurrentId,
+  selectModalType,
+  selectModalValue,
+  taskEdit,
+  tasksModalSwitch,
+} from '../../features/tasks/tasksSlice';
 
-interface IModal {
-  currentId: string;
-  onModalSwitch: () => void;
-  onTaskAdd: (title: string) => void;
-  modalType: string;
-  modalField: string;
-  onTaskEdit: (id: string, title: string) => void;
-  onTaskDelete: (id: string) => void;
-}
-
-const Modal = (props: IModal) => {
-  const { modalType, modalField, onModalSwitch, currentId, onTaskEdit, onTaskAdd, onTaskDelete } = props;
-
+const Modal = () => {
   const dispatch = useDispatchTyped();
   const isMenuOpen = useSelectorTyped(selectMenu);
   const theme = useSelectorTyped(selectTheme);
   const language = useSelectorTyped(selectLanguage);
+  const currentId = useSelectorTyped(selectCurrentId);
+  const modalType = useSelectorTyped(selectModalType);
+  const modalValue = useSelectorTyped(selectModalValue);
 
-  const [title, setTitle] = useState(modalField);
+  const [title, setTitle] = useState(modalValue);
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -63,20 +60,20 @@ const Modal = (props: IModal) => {
   const onCloseLinkClick = (evt: React.MouseEvent<HTMLDivElement | HTMLAnchorElement>): void => {
     evt.preventDefault();
 
-    onModalSwitch();
+    dispatch(tasksModalSwitch({ id: '', type: 'add' }));
   };
 
   const onFormSubmit = (evt: React.FormEvent<HTMLFormElement>): void => {
     evt.preventDefault();
 
     if (modalType === 'edit') {
-      onTaskEdit(currentId, title);
+      dispatch(taskEdit({ id: currentId, value: title }));
     } else {
-      onTaskAdd(title);
+      dispatch(addTask(title));
     }
 
     setTitle('');
-    onModalSwitch();
+    dispatch(tasksModalSwitch({ id: '', type: 'add' }));
     dispatch(welcomeSwitch(false));
 
     if (isMenuOpen) {
@@ -85,18 +82,18 @@ const Modal = (props: IModal) => {
   };
 
   const onDeleteButtonClick = (): void => {
-    onTaskDelete(currentId);
-    onModalSwitch();
+    dispatch(deleteTask(currentId));
+    dispatch(tasksModalSwitch({ id: '', type: 'add' }));
   };
 
   const onEscKeyDownPress = (evt): void => {
     if (evt.key === 'Escape') {
-      onModalSwitch();
+      dispatch(tasksModalSwitch({ id: '', type: 'add' }));
     }
   };
 
   useEffect(() => {
-    setTitle(modalField);
+    setTitle(modalValue);
     document.addEventListener('keydown', onEscKeyDownPress);
     return () => document.removeEventListener('keydown', onEscKeyDownPress);
   }, []);
@@ -222,21 +219,4 @@ const Modal = (props: IModal) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    modalField: state.app.modalField,
-    modalType: state.app.modalType,
-    currentId: state.app.currentId,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onTaskAdd: (title) => dispatch(onTaskAddAction(title)),
-    onTaskDelete: (id) => dispatch(onTaskDeleteAction(id)),
-    onTaskEdit: (id, title) => dispatch(onTaskEditAction(id, title)),
-    onModalSwitch: (id, type) => dispatch(onModalSwitchAction(id, type)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Modal);
+export default memo(Modal);

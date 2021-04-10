@@ -48,7 +48,7 @@ const Info = () => {
       break;
   }
 
-  const infoClassName: string = searching ? `info info--search` : `info info--all`;
+  const infoClassName: string = searching ? 'info info--search' : 'info info--all';
 
   return (
     <section className={infoClassName}>
@@ -56,7 +56,7 @@ const Info = () => {
       {searching ? (
         <Fragment>
           <p className="info__description">{t('Совпадений не найдено')}</p>
-          {theme === `dark` ? (
+          {theme === 'dark' ? (
             <NotFoundDarkIcon className="info__icon" />
           ) : (
             <NotFoundLightIcon className="info__icon" />
@@ -68,7 +68,7 @@ const Info = () => {
             {t('У Вас нет')} {infoData.description} {t('задач')}
           </p>
           <p className="info__description">{t('Добавьте задачу и она появится в этом списке')}</p>
-          {theme === `dark` ? <NoTaskDarkIcon className="info__icon" /> : <NoTaskLightIcon className="info__icon" />}
+          {theme === 'dark' ? <NoTaskDarkIcon className="info__icon" /> : <NoTaskLightIcon className="info__icon" />}
         </Fragment>
       )}
     </section>

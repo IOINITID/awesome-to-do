@@ -1,28 +1,16 @@
-import React, { useEffect } from 'react';
+import React, { memo, useEffect } from 'react';
 import Task from '../task/task';
 import i18n from 'i18next';
-import { connect } from 'react-redux';
 import { onSearch, onFilter } from '../../utils/common';
 import { useTranslation } from 'react-i18next';
 import { selectLanguage } from '../../features/language/languageSlice';
 import { useSelectorTyped } from '../../hooks';
 import { selectSearchData } from '../../features/search/searchSlice';
 import { selectFilter } from '../../features/filter/filterSlice';
+import { selectTasks } from '../../features/tasks/tasksSlice';
 
-interface IItemsData {
-  done: boolean;
-  fixed: boolean;
-  id: string;
-  more: boolean;
-  title: string;
-}
-
-interface ITasks {
-  itemsData: Array<IItemsData>;
-}
-
-const Tasks = (props: ITasks) => {
-  const { itemsData } = props;
+const Tasks = () => {
+  const itemsData = useSelectorTyped(selectTasks);
 
   const { t } = useTranslation();
 
@@ -34,11 +22,11 @@ const Tasks = (props: ITasks) => {
     i18n.changeLanguage(language);
   }, [language]);
 
-  const itemsDataSorted: Array<IItemsData> = itemsData
+  const itemsDataSorted = itemsData
     .slice()
     .sort((a: any, b: any) => b.fixed - a.fixed)
     .sort((a: any, b: any) => a.done - b.done);
-  const itemsDataToShow: Array<IItemsData> = onFilter(onSearch(itemsDataSorted, searchData), filterType);
+  const itemsDataToShow = onFilter(onSearch(itemsDataSorted, searchData), filterType);
 
   let tasksTitle: string;
 
@@ -61,7 +49,7 @@ const Tasks = (props: ITasks) => {
   }
 
   const taskItems = itemsDataToShow.map((item) => {
-    const { id, title, done, fixed, more } = item;
+    const { id, value, done, fixed, more } = item;
 
     let tasksItemClassName: string;
 
@@ -79,7 +67,7 @@ const Tasks = (props: ITasks) => {
 
     return (
       <li key={id} className={tasksItemClassName}>
-        <Task id={id} title={title} done={done} fixed={fixed} more={more} />
+        <Task id={id} value={value} done={done} fixed={fixed} more={more} />
       </li>
     );
   });
@@ -92,10 +80,4 @@ const Tasks = (props: ITasks) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    itemsData: state.app.itemsData,
-  };
-};
-
-export default connect(mapStateToProps)(Tasks);
+export default memo(Tasks);

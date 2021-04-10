@@ -8,7 +8,7 @@ import './assets/images/favicon.svg';
 
 store.subscribe(() => {
   window.localStorage.setItem('theme', store.getState().theme.value);
-  window.localStorage.setItem('itemsData', JSON.stringify(store.getState().app.itemsData));
+  window.localStorage.setItem('tasks', JSON.stringify(store.getState().tasks.value));
   window.localStorage.setItem('language', store.getState().language.value);
 });
 
@@ -20,4 +20,4 @@ const Root = () => {
   );
 };
 
-ReactDOM.render(<Root />, document.querySelector(`.root`));
+ReactDOM.render(<Root />, document.querySelector('.root'));
