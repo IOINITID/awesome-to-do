@@ -4,6 +4,7 @@ import AddIcon from '../../assets/images/add-icon.svg';
 import { useDispatchTyped, useSelectorTyped } from '../../hooks';
 import { menuSwitch, selectMenu } from '../../features/menu/menuSlice';
 import { selectIsModalOpen, tasksModalSwitch } from '../../features/tasks/tasksSlice';
+import Button from '../button';
 
 const Navigation = () => {
   const dispatch = useDispatchTyped();
@@ -22,27 +23,18 @@ const Navigation = () => {
     dispatch(menuSwitch());
   };
 
-  const menuButtonClassName: string = isMenuOpen ? 'button button--active' : 'button';
-  const modalButtonClassName: string = isModalOpen ? 'button button--active' : 'button';
-
   return (
     <nav className="navigation">
       <ul className="navigation__list">
         <li className="navigation__item">
-          <button className={menuButtonClassName} type="button" aria-label="Открыть меню." onClick={onMenuButtonClick}>
-            <MenuIcon className="button__icon" width="19" height="16" />
-          </button>
+          <Button active={isMenuOpen} onClick={onMenuButtonClick} aria-label="Открыть меню.">
+            <MenuIcon />
+          </Button>
         </li>
         <li className="navigation__item">
-          <button
-            className={modalButtonClassName}
-            type="button"
-            data-type="add"
-            aria-label="Добавить задачу."
-            onClick={onAddButtonClick}
-          >
-            <AddIcon className="button__icon" width="16" height="16" />
-          </button>
+          <Button active={isModalOpen} data-type="add" onClick={onAddButtonClick} aria-label="Добавить задачу.">
+            <AddIcon />
+          </Button>
         </li>
       </ul>
     </nav>

@@ -6,6 +6,7 @@ import React, { Fragment, memo, useEffect, useState } from 'react';
 import CloseIcon from '../../assets/images/close-icon.svg';
 import DeleteIcon from '../../assets/images/delete-icon.svg';
 import DoneIcon from '../../assets/images/done-icon.svg';
+import EditIcon from '../../assets/images/edit-icon.svg';
 import ModalAddFirstDarkIcon from '../../assets/images/modal-add-first-dark-icon.svg';
 import ModalAddFirstLightIcon from '../../assets/images/modal-add-first-light-icon.svg';
 import ModalAddSecondDarkIcon from '../../assets/images/modal-add-second-dark-icon.svg';
@@ -34,6 +35,7 @@ import {
   taskEdit,
   tasksModalSwitch,
 } from '../../features/tasks/tasksSlice';
+import Button from '../button';
 
 const Modal = () => {
   const dispatch = useDispatchTyped();
@@ -204,13 +206,13 @@ const Modal = () => {
             />
           </label>
           {modalType === 'delete' ? (
-            <button className="button modal__button" type="button" onClick={onDeleteButtonClick}>
-              <DeleteIcon className="button__icon button__icon--delete" width="18" height="22" />
-            </button>
+            <Button modal onClick={onDeleteButtonClick}>
+              <DeleteIcon />
+            </Button>
           ) : (
-            <button className="button modal__button" type="submit">
-              <DoneIcon className="button__icon button__icon--add" width="28" height="22" />
-            </button>
+            <Button modal outline type="submit">
+              <DoneIcon />
+            </Button>
           )}
         </form>
         {modalIcons}

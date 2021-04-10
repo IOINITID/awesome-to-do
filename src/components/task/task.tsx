@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import DoneIcon from '../../assets/images/done-icon.svg';
 import MoreIcon from '../../assets/images/more-icon.svg';
 import { doneTask, taskMoreSwitch } from '../../features/tasks/tasksSlice';
+import Button from '../button';
 
 interface ITask {
   id: string;
@@ -27,18 +28,23 @@ const Task = ({ id, value, done, fixed, more }: ITask) => {
   return (
     <Fragment>
       <p className="tasks__description">{value}</p>
-      {!done && (
-        <button className="button tasks__done" type="button" onClick={doneButtonClickHandler}>
-          <DoneIcon className="button__icon" width="22" height="17" />
-        </button>
-      )}
-      <button
-        className={more ? 'button button--active tasks__more' : 'button tasks__more'}
-        type="button"
-        onClick={moreButtonClickHandler}
+      <div
+        style={{
+          display: 'grid',
+          gridAutoFlow: 'column',
+          columnGap: '30px',
+        }}
       >
-        <MoreIcon className="button__icon" width="22" height="5" />
-      </button>
+        {!done && (
+          <Button outline onClick={doneButtonClickHandler}>
+            <DoneIcon />
+          </Button>
+        )}
+
+        <Button active={more} outline onClick={moreButtonClickHandler}>
+          <MoreIcon />
+        </Button>
+      </div>
       <More id={id} done={done} fixed={fixed} more={more} />
     </Fragment>
   );

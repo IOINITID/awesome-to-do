@@ -5,6 +5,8 @@ import MoonIcon from '../../assets/images/moon-icon.svg';
 import SunIcon from '../../assets/images/sun-icon.svg';
 import { useSelectorTyped, useDispatchTyped } from '../../hooks';
 import { selectTheme, themeSwitch } from '../../features/theme/themeSlice';
+import Button from '../button';
+import { StyledSwitch } from './styled';
 
 const Switch = () => {
   const dispatch = useDispatchTyped();
@@ -12,15 +14,11 @@ const Switch = () => {
   const switchClickHandler = () => dispatch(themeSwitch());
 
   return (
-    <div className="switch" onClick={switchClickHandler}>
-      <button className="button switch__button" aria-label="Переключить тему.">
-        {theme === 'dark' ? (
-          <MoonIcon className="button__icon button__icon--moon" width="16" height="16" />
-        ) : (
-          <SunIcon className="button__icon button__icon--sun" width="16" height="16" />
-        )}
-      </button>
-    </div>
+    // <div className="switch" onClick={switchClickHandler}>
+    <StyledSwitch active={theme === 'light'} onClick={switchClickHandler}>
+      <Button aria-label="Переключить тему.">{theme === 'dark' ? <MoonIcon /> : <SunIcon />}</Button>
+    </StyledSwitch>
+    // </div>
   );
 };
 

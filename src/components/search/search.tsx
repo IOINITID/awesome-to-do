@@ -8,6 +8,7 @@ import { menuSwitch, selectMenu } from '../../features/menu/menuSlice';
 import { welcomeSwitch } from '../../features/welcome/welcomeSlice';
 import { onSearching, selectSearchData, onSearchChange } from '../../features/search/searchSlice';
 import { selectLanguage } from '../../features/language/languageSlice';
+import Button from '../button';
 
 const Search = () => {
   const { t } = useTranslation();
@@ -75,19 +76,13 @@ const Search = () => {
   }, [isSearchOpen]);
 
   const searchClassName: string = isSearchOpen ? 'search search--active' : 'search';
-  const searchButtonClassName: string = isSearchOpen ? 'button button--active' : 'button';
 
   return (
     <form className={searchClassName} ref={searchRef} onSubmit={onSearchFormSubmit} autoComplete="off">
       <label className="search__label" htmlFor="search-field">
-        <button
-          className={searchButtonClassName}
-          type="button"
-          aria-label="Открыть поиск."
-          onClick={onSearchButtonClick}
-        >
-          <SearchIcon className="button__icon" width="16" height="16" />
-        </button>
+        <Button active={isSearchOpen} onClick={onSearchButtonClick} aria-label="Открыть поиск.">
+          <SearchIcon />
+        </Button>
         {isSearchOpen && (
           <input
             className="search__field"
