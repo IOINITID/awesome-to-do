@@ -5,6 +5,7 @@ import { useDispatchTyped, useSelectorTyped } from '../../hooks';
 import { menuSwitch, selectMenu } from '../../features/menu/menuSlice';
 import { selectIsModalOpen, tasksModalSwitch } from '../../features/tasks/tasksSlice';
 import Button from '../button';
+import { StyledNavigation, StyledNavigationItem, StyledNavigationList } from './styled';
 
 const Navigation = () => {
   const dispatch = useDispatchTyped();
@@ -24,20 +25,20 @@ const Navigation = () => {
   };
 
   return (
-    <nav className="navigation">
-      <ul className="navigation__list">
-        <li className="navigation__item">
+    <StyledNavigation>
+      <StyledNavigationList>
+        <StyledNavigationItem>
           <Button active={isMenuOpen} onClick={onMenuButtonClick} aria-label="Открыть меню.">
             <MenuIcon />
           </Button>
-        </li>
-        <li className="navigation__item">
+        </StyledNavigationItem>
+        <StyledNavigationItem>
           <Button active={isModalOpen} data-type="add" onClick={onAddButtonClick} aria-label="Добавить задачу.">
             <AddIcon />
           </Button>
-        </li>
-      </ul>
-    </nav>
+        </StyledNavigationItem>
+      </StyledNavigationList>
+    </StyledNavigation>
   );
 };
 

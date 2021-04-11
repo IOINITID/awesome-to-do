@@ -2,11 +2,12 @@ import React from 'react';
 import Navigation from '../navigation/navigation';
 import Search from '../search/search';
 import Switch from '../switch';
-import Logo from '../logo/logo';
+import Logo from '../logo';
 import MoonIcon from '../../assets/images/moon-icon.svg';
 import SunIcon from '../../assets/images/sun-icon.svg';
 import { useDispatchTyped, useSelectorTyped } from '../../hooks';
 import { selectTheme, themeSwitch } from '../../features/theme/themeSlice';
+import { StyledContainer, StyledHeader } from './styled';
 
 const Header = () => {
   const dispatch = useDispatchTyped();
@@ -14,16 +15,16 @@ const Header = () => {
   const switchClickHandler = () => dispatch(themeSwitch());
 
   return (
-    <header className="header">
-      <div className="container container--flex">
+    <StyledHeader>
+      <StyledContainer>
         <Navigation />
         <Search />
         <Switch active={theme === 'light'} label={'Переключить язык.'} onClick={switchClickHandler}>
           {theme === 'light' ? <MoonIcon /> : <SunIcon />}
         </Switch>
         <Logo />
-      </div>
-    </header>
+      </StyledContainer>
+    </StyledHeader>
   );
 };
 

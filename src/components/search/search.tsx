@@ -9,6 +9,7 @@ import { welcomeSwitch } from '../../features/welcome/welcomeSlice';
 import { onSearching, selectSearchData, onSearchChange } from '../../features/search/searchSlice';
 import { selectLanguage } from '../../features/language/languageSlice';
 import Button from '../button';
+import { StyledSearchForm, StyledSearchInput, StyledSearchLabel } from './styled';
 
 const Search = () => {
   const { t } = useTranslation();
@@ -75,17 +76,14 @@ const Search = () => {
     return () => document.removeEventListener('click', onSearchFieldClose);
   }, [isSearchOpen]);
 
-  const searchClassName: string = isSearchOpen ? 'search search--active' : 'search';
-
   return (
-    <form className={searchClassName} ref={searchRef} onSubmit={onSearchFormSubmit} autoComplete="off">
-      <label className="search__label" htmlFor="search-field">
+    <StyledSearchForm active={isSearchOpen} ref={searchRef} onSubmit={onSearchFormSubmit} autoComplete="off">
+      <StyledSearchLabel htmlFor="search-field">
         <Button active={isSearchOpen} onClick={onSearchButtonClick} aria-label="Открыть поиск.">
           <SearchIcon />
         </Button>
         {isSearchOpen && (
-          <input
-            className="search__field"
+          <StyledSearchInput
             type="search"
             name="search"
             id="search-field"
@@ -97,8 +95,8 @@ const Search = () => {
             placeholder={t('Поиск по задачам')}
           />
         )}
-      </label>
-    </form>
+      </StyledSearchLabel>
+    </StyledSearchForm>
   );
 };
 

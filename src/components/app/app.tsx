@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import Header from '../header/header';
+import Header from '../header';
 import Main from '../main/main';
 import Modal from '../modal/modal';
 import i18n from 'i18next';
