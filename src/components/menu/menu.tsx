@@ -14,6 +14,7 @@ import { welcomeSwitch } from '../../features/welcome/welcomeSlice';
 import { selectTasks, tasksModalSwitch } from '../../features/tasks/tasksSlice';
 import Button from '../button';
 import { StyledSwitch } from '../switch/styled';
+import Switch from '../switch';
 
 const Menu = () => {
   const itemsData = useSelectorTyped(selectTasks);
@@ -84,27 +85,13 @@ const Menu = () => {
             {t('Добавить задачу')}
           </a>
         </li>
-
-        {/* <div
-          className={`switch lang ${language === 'ru' ? 'lang--ru' : 'lang--eng'}`}
-          onClick={() => {
-            dispatch(languageChange());
-          }}
-        > */}
-        <StyledSwitch
+        <Switch
           style={{ margin: 'auto auto 0 0' }}
           active={language === 'ru'}
-          onClick={() => {
-            dispatch(languageChange());
-          }}
+          onClick={() => dispatch(languageChange())}
         >
-          {/* <button className="button lang__button" aria-label="Переключить язык.">
-            {language === 'ru' ? <span>Ru</span> : <span>Eng</span>}
-          </button> */}
-          <Button aria-label="Переключить язык.">{language === 'ru' ? <span>Eng</span> : <span>Ru</span>}</Button>
-          {/* <span className="lang__eng">{language === 'ru' ? 'Eng' : 'Ru'}</span> */}
-        </StyledSwitch>
-        {/* </div> */}
+          {language === 'ru' ? <span>Eng</span> : <span>Ru</span>}
+        </Switch>
       </ul>
     </section>
   );

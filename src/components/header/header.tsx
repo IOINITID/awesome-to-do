@@ -18,7 +18,7 @@ const Header = () => {
       <div className="container container--flex">
         <Navigation />
         <Search />
-        <Switch active={theme === 'light'} onClick={switchClickHandler}>
+        <Switch active={theme === 'light'} label={'Переключить язык.'} onClick={switchClickHandler}>
           {theme === 'light' ? <MoonIcon /> : <SunIcon />}
         </Switch>
         <Logo />
