@@ -8,8 +8,8 @@ import { selectTheme } from '../../features/theme/themeSlice';
 import { selectIsModalOpen } from '../../features/tasks/tasksSlice';
 import { useSelectorTyped } from '../../hooks';
 import { ThemeProvider } from 'styled-components';
-import { createGlobalStyle } from 'styled-components';
 import { Normalize } from 'styled-normalize';
+import { GlobalStyles, StyledAppWrapper } from './styled';
 
 i18n.use(initReactI18next).init({
   resources: {
@@ -75,101 +75,6 @@ i18n.use(initReactI18next).init({
   },
 });
 
-const GlobalStyles = createGlobalStyle`
-@font-face {
-  font-weight: 400;
-  font-family: 'SF Pro Display';
-  font-display: swap;
-  src: url('../fonts/SFProDisplay-Regular.woff2') format('woff2'),
-    url('../fonts/SFProDisplay-Regular.woff') format('woff'),
-    url('../fonts/SFProDisplay-Regular.ttf') format('truetype');
-}
-
-@font-face {
-  font-weight: 700;
-  font-family: 'SF Pro Display';
-  font-display: swap;
-  src: url('../fonts/SFProDisplay-Bold.woff2') format('woff2'),
-    url('../fonts/SFProDisplay-Bold.woff') format('woff'),
-    url('../fonts/SFProDisplay-Bold.ttf') format('truetype');
-}
-
-@font-face {
-  font-weight: 800;
-  font-family: 'SF Pro Display';
-  font-display: swap;
-  src: url('../fonts/SFProDisplay-Heavy.woff2') format('woff2'),
-    url('../fonts/SFProDisplay-Heavy.woff') format('woff'),
-    url('../fonts/SFProDisplay-Heavy.ttf') format('truetype');
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: inherit;
-}
-
-html {
-  box-sizing: border-box;
-  height: 100%;
-}
-
-body {
-  height: 100%;
-  font-weight: 400;
-  font-family: 'SF Pro Display', 'Arial', sans-serif;
-  scroll-behavior: smooth;
-}
-
-.container {
-  max-width: 1380px;
-  margin: 0 auto;
-  padding: 0 40px;
-}
-
-.container--flex {
-  display: flex;
-  align-items: center;
-}
-
-.root {
-  width: 100%;
-  height: 100%;
-}
-
-@media (max-width: 1024px) {
-  .container {
-    max-width: 768px;
-    padding: 0 30px;
-  }
-}
-
-@keyframes checkShow {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
-.greeting__image .check-1 {
-  opacity: 0;
-  animation: checkShow 1s ease-in-out 0s forwards;
-}
-
-.greeting__image .check-2 {
-  opacity: 0;
-  animation: checkShow 1s ease-in-out 1s forwards;
-}
-
-.greeting__image .check-3 {
-  opacity: 0;
-  animation: checkShow 1s ease-in-out 2s forwards;
-}
-`;
-
 const App = () => {
   const theme = useSelectorTyped(selectTheme);
   const isModalOpen = useSelectorTyped(selectIsModalOpen);
@@ -178,11 +83,11 @@ const App = () => {
     <ThemeProvider theme={{ mode: theme }}>
       <Normalize />
       <GlobalStyles />
-      <div className={`theme theme--${theme}`}>
+      <StyledAppWrapper>
         <Header />
         <Main />
         {isModalOpen && <Modal />}
-      </div>
+      </StyledAppWrapper>
     </ThemeProvider>
   );
 };
