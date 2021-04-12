@@ -6,7 +6,6 @@ import React, { Fragment, memo, useEffect, useState } from 'react';
 import CloseIcon from '../../assets/images/close-icon.svg';
 import DeleteIcon from '../../assets/images/delete-icon.svg';
 import DoneIcon from '../../assets/images/done-icon.svg';
-import EditIcon from '../../assets/images/edit-icon.svg';
 import ModalAddFirstDarkIcon from '../../assets/images/modal-add-first-dark-icon.svg';
 import ModalAddFirstLightIcon from '../../assets/images/modal-add-first-light-icon.svg';
 import ModalAddSecondDarkIcon from '../../assets/images/modal-add-second-dark-icon.svg';
@@ -36,6 +35,23 @@ import {
   tasksModalSwitch,
 } from '../../features/tasks/tasksSlice';
 import Button from '../button';
+import styled from 'styled-components';
+import theme from 'styled-theming';
+
+const themeOverlayBackground = theme('mode', {
+  light: 'rgba(0, 0, 0, 0.3)',
+  dark: 'rgba(252, 252, 252, 0.3)',
+});
+
+const StyledOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 4;
+  width: 100%;
+  height: 100%;
+  background: ${themeOverlayBackground};
+`;
 
 const Modal = () => {
   const dispatch = useDispatchTyped();
@@ -181,7 +197,7 @@ const Modal = () => {
 
   return (
     <Fragment>
-      <div className="overlay" onClick={onCloseLinkClick}></div>
+      <StyledOverlay onClick={onCloseLinkClick} />
       <div className={modalClassName}>
         <div className="modal__info">
           <h2 className="modal__title">{modalTitle}</h2>

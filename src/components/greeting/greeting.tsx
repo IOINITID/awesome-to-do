@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { selectLanguage } from '../../features/language/languageSlice';
 import { useSelectorTyped } from '../../hooks';
 import { selectTheme } from '../../features/theme/themeSlice';
+import { StyledGreeting, StyledGreetingDescription, StyledGreetingInfo, StyledGreetingTitle } from './styled';
 
 const Greeting = () => {
   const theme = useSelectorTyped(selectTheme);
@@ -17,20 +18,16 @@ const Greeting = () => {
   }, [language]);
 
   return (
-    <section className="greeting">
-      <div className="greeting__info">
-        <h2 className="greeting__title">Awesome to do</h2>
-        <p className="greeting__description">
+    <StyledGreeting>
+      <StyledGreetingInfo>
+        <StyledGreetingTitle>Awesome to do</StyledGreetingTitle>
+        <StyledGreetingDescription>
           {t('Ваш личный помощник')}
           <br /> {t('в организации списка задач')}
-        </p>
-      </div>
-      {theme === 'dark' ? (
-        <GreetingDarkIcon className="greeting__image greeting__image--dark" width="537" height="478" />
-      ) : (
-        <GreetingLightIcon className="greeting__image greeting__image--light" width="537" height="478" />
-      )}
-    </section>
+        </StyledGreetingDescription>
+      </StyledGreetingInfo>
+      {theme === 'light' ? <GreetingLightIcon /> : <GreetingDarkIcon />}
+    </StyledGreeting>
   );
 };
 

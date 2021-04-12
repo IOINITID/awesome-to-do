@@ -5,10 +5,11 @@ import Modal from '../modal/modal';
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import { selectTheme } from '../../features/theme/themeSlice';
+import { selectIsModalOpen } from '../../features/tasks/tasksSlice';
 import { useSelectorTyped } from '../../hooks';
 import { ThemeProvider } from 'styled-components';
-import { selectIsModalOpen } from '../../features/tasks/tasksSlice';
 import { createGlobalStyle } from 'styled-components';
+import { Normalize } from 'styled-normalize';
 
 i18n.use(initReactI18next).init({
   resources: {
@@ -69,13 +70,39 @@ i18n.use(initReactI18next).init({
   },
   lng: 'ru',
   fallbackLng: 'ru',
-
   interpolation: {
     escapeValue: false,
   },
 });
 
 const GlobalStyles = createGlobalStyle`
+@font-face {
+  font-weight: 400;
+  font-family: 'SF Pro Display';
+  font-display: swap;
+  src: url('../fonts/SFProDisplay-Regular.woff2') format('woff2'),
+    url('../fonts/SFProDisplay-Regular.woff') format('woff'),
+    url('../fonts/SFProDisplay-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-weight: 700;
+  font-family: 'SF Pro Display';
+  font-display: swap;
+  src: url('../fonts/SFProDisplay-Bold.woff2') format('woff2'),
+    url('../fonts/SFProDisplay-Bold.woff') format('woff'),
+    url('../fonts/SFProDisplay-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-weight: 800;
+  font-family: 'SF Pro Display';
+  font-display: swap;
+  src: url('../fonts/SFProDisplay-Heavy.woff2') format('woff2'),
+    url('../fonts/SFProDisplay-Heavy.woff') format('woff'),
+    url('../fonts/SFProDisplay-Heavy.ttf') format('truetype');
+}
+
 *,
 *::before,
 *::after {
@@ -92,34 +119,6 @@ body {
   font-weight: 400;
   font-family: 'SF Pro Display', 'Arial', sans-serif;
   scroll-behavior: smooth;
-}
-
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  border: 0;
-  clip: rect(0 0 0 0);
-}
-
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 4;
-  width: 100%;
-  height: 100%;
-}
-
-.theme--dark .overlay {
-  background: rgba(252, 252, 252, 0.3);
-}
-
-.theme--light .overlay {
-  background: rgba(0, 0, 0, 0.3);
 }
 
 .container {
@@ -177,12 +176,13 @@ const App = () => {
 
   return (
     <ThemeProvider theme={{ mode: theme }}>
+      <Normalize />
+      <GlobalStyles />
       <div className={`theme theme--${theme}`}>
         <Header />
         <Main />
         {isModalOpen && <Modal />}
       </div>
-      <GlobalStyles />
     </ThemeProvider>
   );
 };

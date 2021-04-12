@@ -2,7 +2,7 @@
 import React, { memo, useEffect } from 'react';
 import Menu from '../menu/menu';
 import Tasks from '../tasks/tasks';
-import Greeting from '../greeting/greeting';
+import Greeting from '../greeting';
 import Info from '../info/info';
 import { onSearch, onFilter } from '../../utils/common';
 import { selectWelcome, welcomeSwitch } from '../../features/welcome/welcomeSlice';
