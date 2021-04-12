@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { memo, useEffect } from 'react';
+import React, { memo, useEffect, useRef } from 'react';
 import FixedIcon from '../../assets/images/fixed-icon.svg';
 import AddIcon from '../../assets/images/add-icon.svg';
 import i18n from 'i18next';
@@ -12,9 +12,8 @@ import { selectLanguage, languageChange } from '../../features/language/language
 import { filterChange } from '../../features/filter/filterSlice';
 import { welcomeSwitch } from '../../features/welcome/welcomeSlice';
 import { selectTasks, tasksModalSwitch } from '../../features/tasks/tasksSlice';
-import Button from '../button';
-import { StyledSwitch } from '../switch/styled';
 import Switch from '../switch';
+import { StyledMenu, StyledMenuItem, StyledMenuLink, StyledMenuList, StyledMenuQuantity } from './styled';
 
 const Menu = () => {
   const itemsData = useSelectorTyped(selectTasks);
@@ -50,41 +49,39 @@ const Menu = () => {
     i18n.changeLanguage(language);
   }, [language]);
 
-  const menuClassName = isMenuOpen ? 'menu menu--active' : 'menu';
-
   return (
-    <section className={menuClassName}>
-      <ul className="menu__list">
-        <li className="menu__item">
-          <a className="menu__link" href="#" data-type="all" aria-label="Все задачи." onClick={onFilterItemClick}>
+    <StyledMenu className="menu" active={isMenuOpen}>
+      <StyledMenuList>
+        <StyledMenuItem>
+          <StyledMenuLink href="#" data-type="all" aria-label="Все задачи." onClick={onFilterItemClick}>
             {t('Все задачи')}
-            <sup className="menu__quantity">{itemsAll}</sup>
-          </a>
-        </li>
-        <li className="menu__item">
-          <a className="menu__link" href="#" data-type="undone" aria-label="Текущие." onClick={onFilterItemClick}>
+            <StyledMenuQuantity>{itemsAll}</StyledMenuQuantity>
+          </StyledMenuLink>
+        </StyledMenuItem>
+        <StyledMenuItem>
+          <StyledMenuLink href="#" data-type="undone" aria-label="Текущие." onClick={onFilterItemClick}>
             {t('Текущие')}
-            <sup className="menu__quantity">{itemsNotDone}</sup>
-          </a>
-        </li>
-        <li className="menu__item">
-          <a className="menu__link" href="#" data-type="done" aria-label="Выполненные." onClick={onFilterItemClick}>
+            <StyledMenuQuantity>{itemsNotDone}</StyledMenuQuantity>
+          </StyledMenuLink>
+        </StyledMenuItem>
+        <StyledMenuItem>
+          <StyledMenuLink href="#" data-type="done" aria-label="Выполненные." onClick={onFilterItemClick}>
             {t('Выполненные')}
-            <sup className="menu__quantity">{itemsDone}</sup>
-          </a>
-        </li>
-        <li className="menu__item menu__item--fixed">
-          <a className="menu__link" href="#" data-type="fixed" aria-label="Закреплённые." onClick={onFilterItemClick}>
+            <StyledMenuQuantity>{itemsDone}</StyledMenuQuantity>
+          </StyledMenuLink>
+        </StyledMenuItem>
+        <StyledMenuItem fixed>
+          <StyledMenuLink href="#" data-type="fixed" aria-label="Закреплённые." onClick={onFilterItemClick}>
             <FixedIcon className="menu__icon" width="17" height="17" />
             {t('Закреплённые')}
-          </a>
-        </li>
-        <li className="menu__item menu__item--add">
-          <a className="menu__link" href="#" aria-label="Добавить задачу." onClick={onAddLinkClick}>
+          </StyledMenuLink>
+        </StyledMenuItem>
+        <StyledMenuItem add>
+          <StyledMenuLink href="#" aria-label="Добавить задачу." onClick={onAddLinkClick}>
             <AddIcon className="menu__icon" width="17" height="17" />
             {t('Добавить задачу')}
-          </a>
-        </li>
+          </StyledMenuLink>
+        </StyledMenuItem>
         <Switch
           style={{ margin: 'auto auto 0 0' }}
           active={language === 'ru'}
@@ -92,8 +89,8 @@ const Menu = () => {
         >
           {language === 'ru' ? <span>Eng</span> : <span>Ru</span>}
         </Switch>
-      </ul>
-    </section>
+      </StyledMenuList>
+    </StyledMenu>
   );
 };
 

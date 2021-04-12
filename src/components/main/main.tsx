@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import React, { memo, useEffect } from 'react';
-import Menu from '../menu/menu';
+import React, { memo, useEffect, useRef } from 'react';
+import Menu from '../menu';
 import Tasks from '../tasks/tasks';
 import Greeting from '../greeting';
 import Info from '../info/info';
@@ -34,7 +34,7 @@ const Main = () => {
   }, []);
 
   const onMainClick = (evt) => {
-    const menuElement: HTMLDivElement = document.querySelector('.menu');
+    const menuElement = document.querySelector('.menu');
 
     if (isMenuOpen && !menuElement.contains(evt.target)) {
       dispatch(menuSwitch());
