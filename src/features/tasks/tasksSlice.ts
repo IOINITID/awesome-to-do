@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../../store';
 import { nanoid } from 'nanoid';
 
-interface ITask {
+export interface ITask {
   id: string;
   value: string;
   done: boolean;

@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import React, { memo, useEffect, useRef } from 'react';
+import React, { memo, useEffect } from 'react';
 import Menu from '../menu';
 import Tasks from '../tasks/tasks';
 import Greeting from '../greeting';
@@ -10,7 +10,7 @@ import { useDispatchTyped, useSelectorTyped } from '../../hooks';
 import { selectMenu, menuSwitch } from '../../features/menu/menuSlice';
 import { selectFilter } from '../../features/filter/filterSlice';
 import { selectSearchData } from '../../features/search/searchSlice';
-import { selectTasks } from '../../features/tasks/tasksSlice';
+import { selectTasks, ITask } from '../../features/tasks/tasksSlice';
 
 const Main = () => {
   const itemsData = useSelectorTyped(selectTasks);
@@ -23,8 +23,9 @@ const Main = () => {
 
   const itemsDataSorted = itemsData
     .slice()
-    .sort((a: any, b: any) => b.fixed - a.fixed)
-    .sort((a: any, b: any) => a.done - b.done);
+    .sort((a: ITask, b: ITask) => (b.fixed as any) - (a.fixed as any))
+    .sort((a: ITask, b: ITask) => (a.done as any) - (b.done as any));
+
   const itemsDataToShow = onFilter(onSearch(itemsDataSorted, searchData), filterType);
 
   useEffect(() => {
