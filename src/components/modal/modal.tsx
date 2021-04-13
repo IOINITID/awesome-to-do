@@ -37,6 +37,15 @@ import {
 import Button from '../button';
 import styled from 'styled-components';
 import theme from 'styled-theming';
+import {
+  StyledModal,
+  StyledModalForm,
+  StyledModalInfo,
+  StyledModalInput,
+  StyledModalLabel,
+  StyledModalLink,
+  StyledModalTitle,
+} from './styled';
 
 const themeOverlayBackground = theme('mode', {
   light: 'rgba(0, 0, 0, 0.3)',
@@ -198,17 +207,16 @@ const Modal = () => {
   return (
     <Fragment>
       <StyledOverlay onClick={onCloseLinkClick} />
-      <div className={modalClassName}>
-        <div className="modal__info">
-          <h2 className="modal__title">{modalTitle}</h2>
-          <a className="modal__link" href="#" onClick={onCloseLinkClick}>
+      <StyledModal>
+        <StyledModalInfo>
+          <StyledModalTitle>{modalTitle}</StyledModalTitle>
+          <StyledModalLink href="#" onClick={onCloseLinkClick}>
             <CloseIcon className="modal__icon" width="21" height="21" />
-          </a>
-        </div>
-        <form className="modal__form" onSubmit={onFormSubmit} autoComplete="off">
-          <label className="modal__label" htmlFor="task-field">
-            <input
-              className="modal__field"
+          </StyledModalLink>
+        </StyledModalInfo>
+        <StyledModalForm onSubmit={onFormSubmit} autoComplete="off">
+          <StyledModalLabel htmlFor="task-field">
+            <StyledModalInput
               type="text"
               name="task"
               id="task-field"
@@ -220,7 +228,7 @@ const Modal = () => {
               required
               disabled={modalType === 'delete' ? true : false}
             />
-          </label>
+          </StyledModalLabel>
           {modalType === 'delete' ? (
             <Button modal onClick={onDeleteButtonClick}>
               <DeleteIcon />
@@ -230,9 +238,9 @@ const Modal = () => {
               <DoneIcon />
             </Button>
           )}
-        </form>
+        </StyledModalForm>
         {modalIcons}
-      </div>
+      </StyledModal>
     </Fragment>
   );
 };
