@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 import { selectLanguage } from '../../features/language/languageSlice';
 import { useDispatchTyped, useSelectorTyped } from '../../hooks';
 import { doneTask, fixedTask, taskMoreClose, taskMoreSwitch, tasksModalSwitch } from '../../features/tasks/tasksSlice';
+import { StyledMore, StyledMoreItem, StyledMoreLink, StyledMoreList } from './styled';
 
 interface IMore {
   id: string;
@@ -75,42 +76,40 @@ const More = (props: IMore) => {
     return () => document.removeEventListener('click', onMoreCloseClick);
   }, [more]);
 
-  const moreClassName: string = more ? 'more more--active' : 'more';
-
   return (
-    <div className={moreClassName} ref={moreElement}>
-      <ul className="more__list">
+    <StyledMore active={more} ref={moreElement}>
+      <StyledMoreList>
         {done ? (
-          <li className="more__item more__item--undone">
-            <a className="more__link" href="#" onClick={onUndoneLinkClick}>
+          <StyledMoreItem className="more__item more__item--undone">
+            <StyledMoreLink className="more__link" href="#" onClick={onUndoneLinkClick}>
               <UndoneIcon className="more__icon" width="14" height="10" />
               {t('Невыполненное')}
-            </a>
-          </li>
+            </StyledMoreLink>
+          </StyledMoreItem>
         ) : (
           <Fragment>
-            <li className="more__item more__item--edit">
-              <a className="more__link" href="#" data-type="edit" onClick={onEditLinkClick}>
+            <StyledMoreItem className="more__item more__item--edit">
+              <StyledMoreLink className="more__link" href="#" data-type="edit" onClick={onEditLinkClick}>
                 <EditIcon className="more__icon" width="10" height="10" />
                 {t('Редактировать')}
-              </a>
-            </li>
-            <li className="more__item more__item--fixed">
-              <a className="more__link" href="#" onClick={onFixedLinkClick}>
+              </StyledMoreLink>
+            </StyledMoreItem>
+            <StyledMoreItem className="more__item more__item--fixed">
+              <StyledMoreLink className="more__link" href="#" onClick={onFixedLinkClick}>
                 <FixedIcon className="more__icon" width="10" height="10" />
                 {fixed ? t('Открепить') : t('Закрепить')}
-              </a>
-            </li>
+              </StyledMoreLink>
+            </StyledMoreItem>
           </Fragment>
         )}
-        <li className="more__item more__item--delete">
-          <a className="more__link" href="#" data-type="delete" onClick={onDeleteLinkClick}>
+        <StyledMoreItem className="more__item more__item--delete">
+          <StyledMoreLink className="more__link" href="#" data-type="delete" onClick={onDeleteLinkClick}>
             <DeleteIcon className="more__icon" width="8" height="10" />
             {t('Удалить')}
-          </a>
-        </li>
-      </ul>
-    </div>
+          </StyledMoreLink>
+        </StyledMoreItem>
+      </StyledMoreList>
+    </StyledMore>
   );
 };
 

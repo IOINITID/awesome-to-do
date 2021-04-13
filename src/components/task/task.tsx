@@ -5,6 +5,7 @@ import DoneIcon from '../../assets/images/done-icon.svg';
 import MoreIcon from '../../assets/images/more-icon.svg';
 import { doneTask, taskMoreSwitch } from '../../features/tasks/tasksSlice';
 import Button from '../button';
+import { StyledTasksDescription } from '../tasks/styled';
 
 interface ITask {
   id: string;
@@ -27,7 +28,7 @@ const Task = ({ id, value, done, fixed, more }: ITask) => {
 
   return (
     <Fragment>
-      <p className="tasks__description">{value}</p>
+      <StyledTasksDescription>{value}</StyledTasksDescription>
       <div
         style={{
           display: 'grid',

@@ -29,6 +29,7 @@ import {
   addTask,
   deleteTask,
   selectCurrentId,
+  selectIsModalOpen,
   selectModalType,
   selectModalValue,
   taskEdit,
@@ -70,6 +71,7 @@ const Modal = () => {
   const currentId = useSelectorTyped(selectCurrentId);
   const modalType = useSelectorTyped(selectModalType);
   const modalValue = useSelectorTyped(selectModalValue);
+  const isModalOpen = useSelectorTyped(selectIsModalOpen);
 
   const [title, setTitle] = useState(modalValue);
   const { t } = useTranslation();
@@ -207,7 +209,7 @@ const Modal = () => {
   return (
     <Fragment>
       <StyledOverlay onClick={onCloseLinkClick} />
-      <StyledModal>
+      <StyledModal active={isModalOpen}>
         <StyledModalInfo>
           <StyledModalTitle>{modalTitle}</StyledModalTitle>
           <StyledModalLink href="#" onClick={onCloseLinkClick}>

@@ -8,6 +8,7 @@ import { useSelectorTyped } from '../../hooks';
 import { selectSearchData } from '../../features/search/searchSlice';
 import { selectFilter } from '../../features/filter/filterSlice';
 import { selectTasks } from '../../features/tasks/tasksSlice';
+import { StyledTasksList, StyledTasksTitle, StyledTasksItem } from './styled';
 
 const Tasks = () => {
   const itemsData = useSelectorTyped(selectTasks);
@@ -66,16 +67,16 @@ const Tasks = () => {
     }
 
     return (
-      <li key={id} className={tasksItemClassName}>
+      <StyledTasksItem key={id} className={tasksItemClassName}>
         <Task id={id} value={value} done={done} fixed={fixed} more={more} />
-      </li>
+      </StyledTasksItem>
     );
   });
 
   return (
-    <section className="tasks">
-      <h2 className="tasks__title">{tasksTitle}</h2>
-      <ul className="tasks__list">{taskItems}</ul>
+    <section>
+      <StyledTasksTitle>{tasksTitle}</StyledTasksTitle>
+      <StyledTasksList>{taskItems}</StyledTasksList>
     </section>
   );
 };
