@@ -11,6 +11,7 @@ import { selectMenu, menuSwitch } from '../../features/menu/menuSlice';
 import { selectFilter } from '../../features/filter/filterSlice';
 import { selectSearchData } from '../../features/search/searchSlice';
 import { selectTasks, ITask } from '../../features/tasks/tasksSlice';
+import { StyledMain } from './styled';
 
 const Main = () => {
   const itemsData = useSelectorTyped(selectTasks);
@@ -47,10 +48,10 @@ const Main = () => {
   return (
     // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events
-    <main className="main" onClick={onMainClick}>
+    <StyledMain className="main" onClick={onMainClick}>
       <Menu />
       <div className="container">{itemsDataToShow.length ? <Tasks /> : noTasks}</div>
-    </main>
+    </StyledMain>
   );
 };
 
