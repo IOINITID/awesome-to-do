@@ -10,6 +10,7 @@ import { useSelectorTyped } from '../../hooks';
 import { selectTheme } from '../../features/theme/themeSlice';
 import { selectLanguage } from '../../features/language/languageSlice';
 import { selectFilter } from '../../features/filter/filterSlice';
+import { StyledInfo, StyledInfoDescription, StyledTitle } from './styled';
 
 interface IInfoData {
   title: string;
@@ -48,14 +49,12 @@ const Info = () => {
       break;
   }
 
-  const infoClassName: string = searching ? 'info info--search' : 'info info--all';
-
   return (
-    <section className={infoClassName}>
-      <h2 className="info__title">{searching ? t('Поиск по задачам') : infoData.title}</h2>
+    <StyledInfo>
+      <StyledTitle>{searching ? t('Поиск по задачам') : infoData.title}</StyledTitle>
       {searching ? (
         <Fragment>
-          <p className="info__description">{t('Совпадений не найдено')}</p>
+          <StyledInfoDescription>{t('Совпадений не найдено')}</StyledInfoDescription>
           {theme === 'dark' ? (
             <NotFoundDarkIcon className="info__icon" />
           ) : (
@@ -64,14 +63,14 @@ const Info = () => {
         </Fragment>
       ) : (
         <Fragment>
-          <p className="info__description">
+          <StyledInfoDescription>
             {t('У Вас нет')} {infoData.description} {t('задач')}
-          </p>
-          <p className="info__description">{t('Добавьте задачу и она появится в этом списке')}</p>
+          </StyledInfoDescription>
+          <StyledInfoDescription>{t('Добавьте задачу и она появится в этом списке')}</StyledInfoDescription>
           {theme === 'dark' ? <NoTaskDarkIcon className="info__icon" /> : <NoTaskLightIcon className="info__icon" />}
         </Fragment>
       )}
-    </section>
+    </StyledInfo>
   );
 };
 
