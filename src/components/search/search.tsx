@@ -92,7 +92,7 @@ const Search = () => {
             autoFocus={true}
             onChange={onInputChange}
             onKeyDown={onEscKeyDownPress}
-            placeholder={t('Поиск по задачам')}
+            placeholder={t('searchBtTasks')}
           />
         )}
       </StyledSearchLabel>
