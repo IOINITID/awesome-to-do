@@ -33,28 +33,28 @@ const Info = () => {
 
   switch (filterType) {
     case 'all':
-      infoData = { title: t('Все задачи'), description: '' };
+      infoData = { title: t('menuAll'), description: 'noTasks' };
       break;
     case 'undone':
-      infoData = { title: t('Текущие'), description: t('активных') };
+      infoData = { title: t('menuCurrent'), description: t('noActiveTasks') };
       break;
     case 'done':
-      infoData = { title: t('Выполненные'), description: t('выполненных') };
+      infoData = { title: t('menuDone'), description: t('noDoneTasks') };
       break;
     case 'fixed':
-      infoData = { title: t('Закреплённые'), description: t('закреплённых') };
+      infoData = { title: t('menuFixed'), description: t('noFixedTasks') };
       break;
     default:
-      infoData = { title: t('Все задачи'), description: '' };
+      infoData = { title: t('menuAll'), description: 'noTasks' };
       break;
   }
 
   return (
     <StyledInfo>
-      <StyledTitle>{searching ? t('Поиск по задачам') : infoData.title}</StyledTitle>
+      <StyledTitle>{searching ? t('searchBtTasks') : infoData.title}</StyledTitle>
       {searching ? (
         <Fragment>
-          <StyledInfoDescription>{t('Совпадений не найдено')}</StyledInfoDescription>
+          <StyledInfoDescription>{t('noMatchFound')}</StyledInfoDescription>
           {theme === 'dark' ? (
             <NotFoundDarkIcon className="info__icon" />
           ) : (
@@ -63,10 +63,8 @@ const Info = () => {
         </Fragment>
       ) : (
         <Fragment>
-          <StyledInfoDescription>
-            {t('У Вас нет')} {infoData.description} {t('задач')}
-          </StyledInfoDescription>
-          <StyledInfoDescription>{t('Добавьте задачу и она появится в этом списке')}</StyledInfoDescription>
+          <StyledInfoDescription>{infoData.description}</StyledInfoDescription>
+          <StyledInfoDescription>{t('addTaskInfo')}</StyledInfoDescription>
           {theme === 'dark' ? <NoTaskDarkIcon className="info__icon" /> : <NoTaskLightIcon className="info__icon" />}
         </Fragment>
       )}

@@ -35,6 +35,7 @@ export const StyledGreetingTitle = styled.h2`
 `;
 
 export const StyledGreetingDescription = styled.p`
+  max-width: 690px;
   margin: 0;
   font-weight: 700;
   font-size: 48px;

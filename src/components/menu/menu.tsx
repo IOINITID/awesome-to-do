@@ -54,32 +54,32 @@ const Menu = () => {
       <StyledMenuList>
         <StyledMenuItem>
           <StyledMenuLink href="#" data-type="all" aria-label="Все задачи." onClick={onFilterItemClick}>
-            {t('Все задачи')}
+            {t('menuAll')}
             <StyledMenuQuantity>{itemsAll}</StyledMenuQuantity>
           </StyledMenuLink>
         </StyledMenuItem>
         <StyledMenuItem>
           <StyledMenuLink href="#" data-type="undone" aria-label="Текущие." onClick={onFilterItemClick}>
-            {t('Текущие')}
+            {t('menuCurrent')}
             <StyledMenuQuantity>{itemsNotDone}</StyledMenuQuantity>
           </StyledMenuLink>
         </StyledMenuItem>
         <StyledMenuItem>
           <StyledMenuLink href="#" data-type="done" aria-label="Выполненные." onClick={onFilterItemClick}>
-            {t('Выполненные')}
+            {t('menuDone')}
             <StyledMenuQuantity>{itemsDone}</StyledMenuQuantity>
           </StyledMenuLink>
         </StyledMenuItem>
         <StyledMenuItem fixed>
           <StyledMenuLink href="#" data-type="fixed" aria-label="Закреплённые." onClick={onFilterItemClick}>
             <FixedIcon className="menu__icon" width="17" height="17" />
-            {t('Закреплённые')}
+            {t('menuFixed')}
           </StyledMenuLink>
         </StyledMenuItem>
         <StyledMenuItem add>
           <StyledMenuLink href="#" aria-label="Добавить задачу." onClick={onAddLinkClick}>
             <AddIcon className="menu__icon" width="17" height="17" />
-            {t('Добавить задачу')}
+            {t('menuAdd')}
           </StyledMenuLink>
         </StyledMenuItem>
         <Switch

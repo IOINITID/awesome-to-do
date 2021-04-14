@@ -33,19 +33,19 @@ const Tasks = () => {
 
   switch (filterType) {
     case 'all':
-      tasksTitle = t('Все задачи');
+      tasksTitle = t('menuAll');
       break;
     case 'done':
-      tasksTitle = t('Выполненные');
+      tasksTitle = t('menuDone');
       break;
     case 'undone':
-      tasksTitle = t('Текущие');
+      tasksTitle = t('menuCurrent');
       break;
     case 'fixed':
-      tasksTitle = t('Закреплённые');
+      tasksTitle = t('menuFixed');
       break;
     default:
-      tasksTitle = t('Все задачи');
+      tasksTitle = t('menuAll');
       break;
   }
 

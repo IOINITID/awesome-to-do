@@ -128,13 +128,13 @@ const Modal = () => {
   }, []);
 
   let modalTitle: string;
-  let modalClassName: string;
+  // let modalClassName: string;
   let modalIcons: React.ReactElement;
 
   switch (true) {
     case modalType === 'add':
-      modalTitle = t('Добавить задачу');
-      modalClassName = 'modal modal--active modal--add';
+      modalTitle = t('menuAdd');
+      // modalClassName = 'modal modal--active modal--add';
       modalIcons = (
         <Fragment>
           {theme === 'dark' ? (
@@ -151,8 +151,8 @@ const Modal = () => {
       );
       break;
     case modalType === 'edit':
-      modalTitle = t('Редактировать задачу');
-      modalClassName = 'modal modal--active modal--edit';
+      modalTitle = t('editTask');
+      // modalClassName = 'modal modal--active modal--edit';
       modalIcons = (
         <Fragment>
           {theme === 'dark' ? (
@@ -169,8 +169,8 @@ const Modal = () => {
       );
       break;
     case modalType === 'delete':
-      modalTitle = t('Удалить задачу');
-      modalClassName = 'modal modal--active modal--delete';
+      modalTitle = t('deleteTask');
+      // modalClassName = 'modal modal--active modal--delete';
       modalIcons = (
         <Fragment>
           {theme === 'dark' ? (
@@ -187,8 +187,8 @@ const Modal = () => {
       );
       break;
     default:
-      modalTitle = t('Добавить задачу');
-      modalClassName = 'modal modal--active modal--add';
+      modalTitle = t('menuAdd');
+      // modalClassName = 'modal modal--active modal--add';
       modalIcons = (
         <Fragment>
           {theme === 'dark' ? (
@@ -224,7 +224,7 @@ const Modal = () => {
               id="task-field"
               value={title}
               autoFocus={true}
-              placeholder={t('Введите новую задачу')}
+              placeholder={t('addNewTask')}
               onChange={onInputChange}
               onKeyDown={onEscKeyDownPress}
               required

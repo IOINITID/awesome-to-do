@@ -21,10 +21,7 @@ const Greeting = () => {
     <StyledGreeting>
       <StyledGreetingInfo>
         <StyledGreetingTitle>Awesome to do</StyledGreetingTitle>
-        <StyledGreetingDescription>
-          {t('Ваш личный помощник')}
-          <br /> {t('в организации списка задач')}
-        </StyledGreetingDescription>
+        <StyledGreetingDescription>{t('title')}</StyledGreetingDescription>
       </StyledGreetingInfo>
       {theme === 'light' ? <GreetingLightIcon /> : <GreetingDarkIcon />}
     </StyledGreeting>

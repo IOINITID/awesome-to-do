@@ -83,7 +83,7 @@ const More = (props: IMore) => {
           <StyledMoreItem className="more__item more__item--undone">
             <StyledMoreLink className="more__link" href="#" onClick={onUndoneLinkClick}>
               <UndoneIcon className="more__icon" width="14" height="10" />
-              {t('Невыполненное')}
+              {t('undone')}
             </StyledMoreLink>
           </StyledMoreItem>
         ) : (
@@ -91,13 +91,13 @@ const More = (props: IMore) => {
             <StyledMoreItem className="more__item more__item--edit">
               <StyledMoreLink className="more__link" href="#" data-type="edit" onClick={onEditLinkClick}>
                 <EditIcon className="more__icon" width="10" height="10" />
-                {t('Редактировать')}
+                {t('edit')}
               </StyledMoreLink>
             </StyledMoreItem>
             <StyledMoreItem className="more__item more__item--fixed">
               <StyledMoreLink className="more__link" href="#" onClick={onFixedLinkClick}>
                 <FixedIcon className="more__icon" width="10" height="10" />
-                {fixed ? t('Открепить') : t('Закрепить')}
+                {fixed ? t('unfixed') : t('fixed')}
               </StyledMoreLink>
             </StyledMoreItem>
           </Fragment>
@@ -105,7 +105,7 @@ const More = (props: IMore) => {
         <StyledMoreItem className="more__item more__item--delete">
           <StyledMoreLink className="more__link" href="#" data-type="delete" onClick={onDeleteLinkClick}>
             <DeleteIcon className="more__icon" width="8" height="10" />
-            {t('Удалить')}
+            {t('delete')}
           </StyledMoreLink>
         </StyledMoreItem>
       </StyledMoreList>
