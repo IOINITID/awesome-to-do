@@ -84,10 +84,10 @@ const Menu = () => {
         </StyledMenuItem>
         <Switch
           style={{ margin: 'auto auto 0 0' }}
-          active={language === 'ru'}
+          active={language === 'en'}
           onClick={() => dispatch(languageChange())}
         >
-          {language === 'ru' ? <span>Eng</span> : <span>Ru</span>}
+          {language === 'en' ? <span>Eng</span> : <span>Ru</span>}
         </Switch>
       </StyledMenuList>
     </StyledMenu>

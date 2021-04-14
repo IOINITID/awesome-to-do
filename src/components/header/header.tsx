@@ -20,7 +20,7 @@ const Header = () => {
         <Navigation />
         <Search />
         <Switch active={theme === 'light'} label={'Переключить язык.'} onClick={switchClickHandler}>
-          {theme === 'light' ? <MoonIcon /> : <SunIcon />}
+          {theme === 'light' ? <SunIcon /> : <MoonIcon />}
         </Switch>
         <Logo />
       </StyledContainer>
