@@ -32,10 +32,47 @@ module.exports = {
         loader: 'ts-loader',
       },
       {
-        test: /\.scss$/,
+        test: /\.module\.(css|scss)$/,
         use: [
           'style-loader',
-          'css-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                localIdentName: '[folder]__[local]--[hash:base64:5]',
+              },
+              sourceMap: true,
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [['autoprefixer']],
+              },
+            },
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sassOptions: {
+                outputStyle: 'compressed',
+              },
+            },
+          },
+        ],
+      },
+      {
+        test: /\.(css|scss)$/,
+        exclude: /\.module\.(css|scss)$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
           {
             loader: 'postcss-loader',
             options: {
