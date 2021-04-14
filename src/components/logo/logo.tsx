@@ -1,8 +1,8 @@
 import React, { FormEvent, memo } from 'react';
 import LogoIcon from '../../assets/images/logo-icon.svg';
+import Link from '../link';
 import { useDispatchTyped } from '../../hooks';
 import { welcomeSwitch } from '../../features/welcome/welcomeSlice';
-import Link from '../link';
 
 const Logo = () => {
   const dispatch = useDispatchTyped();

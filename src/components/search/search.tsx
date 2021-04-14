@@ -1,14 +1,14 @@
 import React, { memo, RefObject, useEffect, useRef } from 'react';
 import SearchIcon from '../../assets/images/search-icon.svg';
 import i18n from 'i18next';
+import Button from '../button';
 import { useTranslation } from 'react-i18next';
-import { selectSearch, searchSwitch, searchClose } from '../../features/search/searchSlice';
 import { useDispatchTyped, useSelectorTyped } from '../../hooks';
+import { selectSearch, searchSwitch, searchClose } from '../../features/search/searchSlice';
 import { menuSwitch, selectMenu } from '../../features/menu/menuSlice';
 import { welcomeSwitch } from '../../features/welcome/welcomeSlice';
 import { onSearching, selectSearchData, onSearchChange } from '../../features/search/searchSlice';
 import { selectLanguage } from '../../features/language/languageSlice';
-import Button from '../button';
 import { StyledSearchForm, StyledSearchInput, StyledSearchLabel } from './styled';
 
 const Search = () => {

@@ -4,6 +4,7 @@
 import React, { memo, useEffect } from 'react';
 import FixedIcon from '../../assets/images/fixed-icon.svg';
 import AddIcon from '../../assets/images/add-icon.svg';
+import Switch from '../switch';
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
 import { useDispatchTyped, useSelectorTyped } from '../../hooks';
@@ -12,7 +13,6 @@ import { selectLanguage, languageChange } from '../../features/language/language
 import { filterChange } from '../../features/filter/filterSlice';
 import { welcomeSwitch } from '../../features/welcome/welcomeSlice';
 import { selectTasks, tasksModalSwitch } from '../../features/tasks/tasksSlice';
-import Switch from '../switch';
 import { StyledMenu, StyledMenuItem, StyledMenuLink, StyledMenuList, StyledMenuQuantity } from './styled';
 
 const Menu = () => {

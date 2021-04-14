@@ -1,17 +1,17 @@
 import styled, { createGlobalStyle } from 'styled-components';
 import theme from 'styled-theming';
 
-const themeAppWrapperBackground = theme('mode', {
+const themeAppBackground = theme('mode', {
   ligt: 'linear-gradient(123.75deg, #f6faff 19.07%, rgba(223, 233, 253, 0.78) 95.62%)',
   dark: 'linear-gradient(120.48deg, #3a3d4e 31.47%, #1f1523 71.66%)',
 });
 
-export const StyledAppWrapper = styled.div`
+export const StyledApp = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100%;
-  background: ${themeAppWrapperBackground};
+  background: ${themeAppBackground};
 `;
 
 export const GlobalStyles = createGlobalStyle`
@@ -28,7 +28,8 @@ export const GlobalStyles = createGlobalStyle`
     font-weight: 700;
     font-family: 'SF Pro Display';
     font-display: swap;
-    src: url('../fonts/SFProDisplay-Bold.woff2') format('woff2'), url('../fonts/SFProDisplay-Bold.woff') format('woff'),
+    src: url('../fonts/SFProDisplay-Bold.woff2') format('woff2'),
+      url('../fonts/SFProDisplay-Bold.woff') format('woff'),
       url('../fonts/SFProDisplay-Bold.ttf') format('truetype');
   }
 
@@ -37,7 +38,8 @@ export const GlobalStyles = createGlobalStyle`
     font-family: 'SF Pro Display';
     font-display: swap;
     src: url('../fonts/SFProDisplay-Heavy.woff2') format('woff2'),
-      url('../fonts/SFProDisplay-Heavy.woff') format('woff'), url('../fonts/SFProDisplay-Heavy.ttf') format('truetype');
+      url('../fonts/SFProDisplay-Heavy.woff') format('woff'),
+      url('../fonts/SFProDisplay-Heavy.ttf') format('truetype');
   }
 
   *,
@@ -56,17 +58,6 @@ export const GlobalStyles = createGlobalStyle`
     font-weight: 400;
     font-family: 'SF Pro Display', 'Arial', sans-serif;
     scroll-behavior: smooth;
-  }
-
-  .container {
-    max-width: 1380px;
-    margin: 0 auto;
-    padding: 0 40px;
-  }
-
-  .container--flex {
-    display: flex;
-    align-items: center;
   }
 
   .root {

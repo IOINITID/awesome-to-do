@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import Header from '../header';
-import Main from '../main/main';
-import Modal from '../modal/modal';
+import Main from '../main';
+import Modal from '../modal';
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import { selectTheme } from '../../features/theme/themeSlice';
@@ -9,7 +9,7 @@ import { selectIsModalOpen } from '../../features/tasks/tasksSlice';
 import { useSelectorTyped } from '../../hooks';
 import { ThemeProvider } from 'styled-components';
 import { Normalize } from 'styled-normalize';
-import { GlobalStyles, StyledAppWrapper } from './styled';
+import { GlobalStyles, StyledApp } from './styled';
 
 i18n.use(initReactI18next).init({
   resources: {
@@ -83,11 +83,11 @@ const App = () => {
     <ThemeProvider theme={{ mode: theme }}>
       <Normalize />
       <GlobalStyles />
-      <StyledAppWrapper>
+      <StyledApp>
         <Header />
         <Main />
         {isModalOpen && <Modal />}
-      </StyledAppWrapper>
+      </StyledApp>
     </ThemeProvider>
   );
 };

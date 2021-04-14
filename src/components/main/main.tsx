@@ -1,17 +1,17 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { memo, useEffect } from 'react';
 import Menu from '../menu';
-import Tasks from '../tasks/tasks';
+import Tasks from '../tasks';
 import Greeting from '../greeting';
-import Info from '../info/info';
+import Info from '../info';
 import { onSearch, onFilter } from '../../utils/common';
-import { selectWelcome, welcomeSwitch } from '../../features/welcome/welcomeSlice';
 import { useDispatchTyped, useSelectorTyped } from '../../hooks';
+import { selectWelcome, welcomeSwitch } from '../../features/welcome/welcomeSlice';
 import { selectMenu, menuSwitch } from '../../features/menu/menuSlice';
 import { selectFilter } from '../../features/filter/filterSlice';
 import { selectSearchData } from '../../features/search/searchSlice';
 import { selectTasks, ITask } from '../../features/tasks/tasksSlice';
-import { StyledMain } from './styled';
+import { StyledMain, StyledMainContainer } from './styled';
 
 const Main = () => {
   const itemsData = useSelectorTyped(selectTasks);
@@ -50,7 +50,7 @@ const Main = () => {
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events
     <StyledMain className="main" onClick={onMainClick}>
       <Menu />
-      <div className="container">{itemsDataToShow.length ? <Tasks /> : noTasks}</div>
+      <StyledMainContainer>{itemsDataToShow.length ? <Tasks /> : noTasks}</StyledMainContainer>
     </StyledMain>
   );
 };

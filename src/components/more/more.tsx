@@ -6,8 +6,8 @@ import FixedIcon from '../../assets/images/fixed-icon.svg';
 import DeleteIcon from '../../assets/images/delete-icon.svg';
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
-import { selectLanguage } from '../../features/language/languageSlice';
 import { useDispatchTyped, useSelectorTyped } from '../../hooks';
+import { selectLanguage } from '../../features/language/languageSlice';
 import { doneTask, fixedTask, taskMoreClose, taskMoreSwitch, tasksModalSwitch } from '../../features/tasks/tasksSlice';
 import { StyledMore, StyledMoreItem, StyledMoreLink, StyledMoreList } from './styled';
 
