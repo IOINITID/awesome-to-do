@@ -2,7 +2,7 @@ import styled, { createGlobalStyle } from 'styled-components';
 import theme from 'styled-theming';
 
 const themeAppBackground = theme('mode', {
-  ligt: 'linear-gradient(123.75deg, #f6faff 19.07%, rgba(223, 233, 253, 0.78) 95.62%)',
+  light: 'linear-gradient(123.75deg, #f6faff 19.07%, rgba(223, 233, 253, 0.78) 95.62%)',
   dark: 'linear-gradient(120.48deg, #3a3d4e 31.47%, #1f1523 71.66%)',
 });
 
