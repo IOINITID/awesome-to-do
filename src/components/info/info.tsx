@@ -33,7 +33,7 @@ const Info = () => {
 
   switch (filterType) {
     case 'all':
-      infoData = { title: t('menuAll'), description: 'noTasks' };
+      infoData = { title: t('menuAll'), description: t('noTasks') };
       break;
     case 'undone':
       infoData = { title: t('menuCurrent'), description: t('noActiveTasks') };
@@ -45,7 +45,7 @@ const Info = () => {
       infoData = { title: t('menuFixed'), description: t('noFixedTasks') };
       break;
     default:
-      infoData = { title: t('menuAll'), description: 'noTasks' };
+      infoData = { title: t('menuAll'), description: t('noTasks') };
       break;
   }
 
