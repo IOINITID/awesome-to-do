@@ -13,7 +13,14 @@ import { selectLanguage, languageChange } from '../../features/language/language
 import { filterChange } from '../../features/filter/filterSlice';
 import { welcomeSwitch } from '../../features/welcome/welcomeSlice';
 import { selectTasks, tasksModalSwitch } from '../../features/tasks/tasksSlice';
-import { StyledMenu, StyledMenuItem, StyledMenuLink, StyledMenuList, StyledMenuQuantity } from './styled';
+import {
+  StyledMenu,
+  StyledMenuItem,
+  StyledMenuLink,
+  StyledMenuLinkContainer,
+  StyledMenuList,
+  StyledMenuQuantity,
+} from './styled';
 
 const Menu = () => {
   const itemsData = useSelectorTyped(selectTasks);
@@ -72,14 +79,18 @@ const Menu = () => {
         </StyledMenuItem>
         <StyledMenuItem fixed>
           <StyledMenuLink href="#" data-type="fixed" aria-label="Закреплённые." onClick={onFilterItemClick}>
-            <FixedIcon className="menu__icon" width="17" height="17" />
-            {t('menuFixed')}
+            <StyledMenuLinkContainer>
+              <FixedIcon width="17px" height="17px" />
+              {t('menuFixed')}
+            </StyledMenuLinkContainer>
           </StyledMenuLink>
         </StyledMenuItem>
         <StyledMenuItem add>
           <StyledMenuLink href="#" aria-label="Добавить задачу." onClick={onAddLinkClick}>
-            <AddIcon className="menu__icon" width="17" height="17" />
-            {t('menuAdd')}
+            <StyledMenuLinkContainer>
+              <AddIcon width="17px" height="17px" />
+              {t('menuAdd')}
+            </StyledMenuLinkContainer>
           </StyledMenuLink>
         </StyledMenuItem>
         <Switch

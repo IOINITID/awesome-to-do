@@ -77,6 +77,13 @@ export const StyledMenuLink = styled.a`
   }
 `;
 
+export const StyledMenuLinkContainer = styled.div`
+  display: grid;
+  align-items: center;
+  grid-template-columns: 17px auto;
+  column-gap: 22px;
+`;
+
 export const StyledMenuQuantity = styled.sup`
   position: relative;
   top: 0;
