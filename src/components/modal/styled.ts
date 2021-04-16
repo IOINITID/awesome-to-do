@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import theme from 'styled-theming';
 
 const themeModalBackground = theme('mode', {
@@ -52,7 +52,7 @@ const themeModalFieldBoxShadow = theme('mode', {
   dark: '-4px -4px 16px rgba(88, 76, 98, 0.25), 3px 3px 12px rgba(0, 0, 0, 0.2), inset 4px 4px 8px rgba(0, 0, 0, 0.35)',
 });
 
-export const StyledModal = styled.div<{ active?: boolean }>`
+export const StyledModal = styled.div<{ active?: boolean; type: string }>`
   position: absolute;
   top: 50%;
   left: 50%;
@@ -64,6 +64,66 @@ export const StyledModal = styled.div<{ active?: boolean }>`
   border-radius: 8px;
   box-shadow: ${themeModalBoxShadow};
   transform: translate(-50%, -50%);
+
+  ${(props) =>
+    props.type === 'add' &&
+    css`
+      .modal__icon-first {
+        position: absolute;
+        bottom: -40px;
+        left: 25px;
+        width: 185px;
+        height: 233px;
+      }
+
+      .modal__icon-second {
+        position: absolute;
+        right: 23px;
+        bottom: 6px;
+        width: 352px;
+        height: 329px;
+      }
+    `}
+
+  ${(props) =>
+    props.type === 'edit' &&
+    css`
+      .modal__icon-first {
+        position: absolute;
+        bottom: -20px;
+        left: 25px;
+        width: 209px;
+        height: 337px;
+      }
+
+      .modal__icon-second {
+        position: absolute;
+        right: 25px;
+        bottom: 8px;
+        width: 286px;
+        height: 269px;
+      }
+    `}
+
+  ${(props) =>
+    props.type === 'delete' &&
+    css`
+      .modal__icon-first {
+        position: absolute;
+        bottom: 5px;
+        left: 17px;
+        width: 370px;
+        height: 243px;
+      }
+
+      .modal__icon-second {
+        position: absolute;
+        right: 24px;
+        bottom: 7px;
+        width: 300px;
+        height: 261px;
+      }
+    `}
 `;
 
 export const StyledModalInfo = styled.div`
@@ -135,51 +195,3 @@ export const StyledModalInput = styled.input`
     color: ${themeModalFieldPlaceholderColor};
   }
 `;
-
-// .modal--add .modal__icon-first {
-//   position: absolute;
-//   bottom: -40px;
-//   left: 25px;
-//   width: 185px;
-//   height: 233px;
-// }
-
-// .modal--add .modal__icon-second {
-//   position: absolute;
-//   right: 23px;
-//   bottom: 6px;
-//   width: 352px;
-//   height: 329px;
-// }
-
-// .modal--edit .modal__icon-first {
-//   position: absolute;
-//   bottom: -20px;
-//   left: 25px;
-//   width: 209px;
-//   height: 337px;
-// }
-
-// .modal--edit .modal__icon-second {
-//   position: absolute;
-//   right: 25px;
-//   bottom: 8px;
-//   width: 286px;
-//   height: 269px;
-// }
-
-// .modal--delete .modal__icon-first {
-//   position: absolute;
-//   bottom: 5px;
-//   left: 17px;
-//   width: 370px;
-//   height: 243px;
-// }
-
-// .modal--delete .modal__icon-second {
-//   position: absolute;
-//   right: 24px;
-//   bottom: 7px;
-//   width: 300px;
-//   height: 261px;
-// }
