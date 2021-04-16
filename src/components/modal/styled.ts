@@ -1,6 +1,11 @@
 import styled, { css } from 'styled-components';
 import theme from 'styled-theming';
 
+const themeOverlayBackground = theme('mode', {
+  light: 'rgba(0, 0, 0, 0.3)',
+  dark: 'rgba(252, 252, 252, 0.3)',
+});
+
 const themeModalBackground = theme('mode', {
   light: 'linear-gradient(94.91deg, #f6faff 54.23%, #dfe9fd 92.54%)',
   dark: 'linear-gradient(140.98deg, #3a3d4e 19.26%, #1f1523 66.6%)',
@@ -51,6 +56,16 @@ const themeModalFieldBoxShadow = theme('mode', {
     '-4px -3px 16px rgba(255, 255, 255, 0.7), -1px 3px 65px rgba(182, 194, 215, 0.49), inset 10px 10px 10px rgba(224, 235, 248, 0.2), inset 5px 5px 10px rgba(167, 172, 190, 0.7)',
   dark: '-4px -4px 16px rgba(88, 76, 98, 0.25), 3px 3px 12px rgba(0, 0, 0, 0.2), inset 4px 4px 8px rgba(0, 0, 0, 0.35)',
 });
+
+export const StyledOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 4;
+  width: 100%;
+  height: 100%;
+  background: ${themeOverlayBackground};
+`;
 
 export const StyledModal = styled.div<{ active?: boolean; type: string }>`
   position: absolute;

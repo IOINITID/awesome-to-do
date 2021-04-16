@@ -36,8 +36,6 @@ import {
   tasksModalSwitch,
 } from '../../features/tasks/tasksSlice';
 import Button from '../button';
-import styled from 'styled-components';
-import theme from 'styled-theming';
 import {
   StyledModal,
   StyledModalForm,
@@ -46,22 +44,8 @@ import {
   StyledModalLabel,
   StyledModalLink,
   StyledModalTitle,
+  StyledOverlay,
 } from './styled';
-
-const themeOverlayBackground = theme('mode', {
-  light: 'rgba(0, 0, 0, 0.3)',
-  dark: 'rgba(252, 252, 252, 0.3)',
-});
-
-const StyledOverlay = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 4;
-  width: 100%;
-  height: 100%;
-  background: ${themeOverlayBackground};
-`;
 
 const Modal = () => {
   const dispatch = useDispatchTyped();
