@@ -37,7 +37,12 @@ const themeStroke = theme('mode', {
   dark: '#ffffff',
 });
 
-export const StyledButton = styled.button<{ active: boolean; modal: boolean; outline: string }>`
+const themeSpanColor = theme('mode', {
+  light: '#5e647c',
+  dark: '#ffffff',
+});
+
+export const StyledButton = styled.button<{ active?: boolean; modal?: boolean; outline?: boolean }>`
   position: relative;
   display: grid;
   justify-content: center;
@@ -85,6 +90,7 @@ export const StyledButton = styled.button<{ active: boolean; modal: boolean; out
     position: absolute;
     top: 50%;
     left: 50%;
+    color: ${themeSpanColor};
     transform: translate(-50%, -50%);
   }
 
