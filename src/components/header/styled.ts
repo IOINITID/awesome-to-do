@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import theme from 'styled-theming';
-import { StyledLink } from '../link/styled';
 import { StyledSwitch } from '../switch/styled';
 import { StyledNavigation } from '../navigation/styled';
 import { StyledSearchForm } from '../search/styled';
+import { StyledLogoLink } from '../logo/styled';
 
 const themeHeaderBackground = theme('mode', {
   light: 'linear-gradient(124.48deg, #f6faff 28.86%, #dfe9fd 110.11%)',
@@ -33,7 +33,7 @@ export const StyledContainer = styled.div`
   margin: 0 auto;
   padding: 0 40px;
 
-  ${StyledLink} {
+  ${StyledLogoLink} {
     grid-column: 7/8;
   }
 
