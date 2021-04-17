@@ -4,7 +4,7 @@ export const translationRu = {
   menuDone: 'Выполненные',
   menuFixed: 'Закреплённые',
   menuAdd: 'Добавить задачу',
-  searchBtTasks: 'Поиск по задачам',
+  searchByTasks: 'Поиск по задачам',
   title: 'Ваш личный помощник в организации списка задач',
   noMatchFound: 'Совпадений не найдено',
   noTasks: 'У Вас нет задач',

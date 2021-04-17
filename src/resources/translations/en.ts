@@ -4,7 +4,7 @@ export const translationEn = {
   menuDone: 'Done',
   menuFixed: 'Fixed',
   menuAdd: 'Add task',
-  searchBtTasks: 'Search by tasks',
+  searchByTasks: 'Search by tasks',
   title: 'Your personal assistant in organizing the task list',
   noMatchFound: 'No matches found',
   noTasks: 'You do not have tasks',

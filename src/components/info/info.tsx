@@ -50,8 +50,8 @@ const Info = () => {
   }
 
   return (
-    <StyledInfo>
-      <StyledTitle>{searching ? t('searchBtTasks') : infoData.title}</StyledTitle>
+    <StyledInfo search={searching}>
+      <StyledTitle>{searching ? t('searchByTasks') : infoData.title}</StyledTitle>
       {searching ? (
         <Fragment>
           <StyledInfoDescription>{t('noMatchFound')}</StyledInfoDescription>

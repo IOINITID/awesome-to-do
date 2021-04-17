@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import theme from 'styled-theming';
 
 const themeInfoTitleColor = theme('mode', {
@@ -11,10 +11,30 @@ const themeInfoDescriptionColor = theme('mode', {
   dark: '#9f9f9f',
 });
 
-export const StyledInfo = styled.section`
+export const StyledInfo = styled.section<{ search?: boolean }>`
   position: relative;
   display: flex;
   flex-direction: column;
+
+  svg {
+    position: absolute;
+    top: 130px;
+    right: 81px;
+    width: 523px;
+    height: 488px;
+  }
+
+  ${(props) =>
+    props.search &&
+    css`
+      svg {
+        position: absolute;
+        top: 142px;
+        right: 90px;
+        width: 508px;
+        height: 476px;
+      }
+    `}
 `;
 
 export const StyledTitle = styled.h2`
@@ -45,27 +65,3 @@ export const StyledInfoIcon = styled.div<{ all?: boolean; search?: boolean; abou
   width: 523px;
   height: 488px;
 `;
-
-// .info--all .info__icon {
-//   position: absolute;
-//   top: 130px;
-//   right: 81px;
-//   width: 523px;
-//   height: 488px;
-// }
-
-// .info--search .info__icon {
-//   position: absolute;
-//   top: 142px;
-//   right: 90px;
-//   width: 508px;
-//   height: 476px;
-// }
-
-// .info--about .info__icon {
-//   position: absolute;
-//   top: 142px;
-//   right: 45px;
-//   width: 486px;
-//   height: 476px;
-// }
