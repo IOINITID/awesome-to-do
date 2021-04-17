@@ -166,11 +166,6 @@ export const StyledModalLink = styled.a`
   width: 21px;
   height: 21px;
   margin-left: auto;
-`;
-
-export const StyledModalIcon = styled.div`
-  width: 100%;
-  height: 100%;
 
   path {
     fill: ${themeModalIconPathFill};
