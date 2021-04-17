@@ -82,8 +82,8 @@ const Menu = () => {
             </StyledMenuLink>
           </StyledMenuItem>
           <StyledMenuItem fixed>
-            <StyledMenuLink href="#" data-type="fixed" aria-label="Закреплённые." onClick={onFilterItemClick}>
-              <StyledMenuLinkContainer>
+            <StyledMenuLink href="#" aria-label="Закреплённые." onClick={onFilterItemClick}>
+              <StyledMenuLinkContainer data-type="fixed">
                 <FixedIcon width="17px" height="17px" />
                 {t('menuFixed')}
               </StyledMenuLinkContainer>
