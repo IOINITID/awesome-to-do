@@ -1,5 +1,4 @@
 import React, { memo, RefObject, useEffect, useRef } from 'react';
-import SearchIcon from '../../assets/images/search-icon.svg';
 import i18n from 'i18next';
 import Button from '../button';
 import { useTranslation } from 'react-i18next';
@@ -10,6 +9,7 @@ import { welcomeSwitch } from '../../features/welcome/welcomeSlice';
 import { onSearching, selectSearchData, onSearchChange } from '../../features/search/searchSlice';
 import { selectLanguage } from '../../features/language/languageSlice';
 import { StyledSearchForm, StyledSearchInput, StyledSearchLabel } from './styled';
+import Icons from '../icons';
 
 const Search = () => {
   const { t } = useTranslation();
@@ -80,7 +80,7 @@ const Search = () => {
     <StyledSearchForm active={isSearchOpen} ref={searchRef} onSubmit={onSearchFormSubmit} autoComplete="off">
       <StyledSearchLabel htmlFor="search-field">
         <Button active={isSearchOpen} onClick={onSearchButtonClick} aria-label="Открыть поиск.">
-          <SearchIcon />
+          <Icons.SearchIcon />
         </Button>
         {isSearchOpen && (
           <StyledSearchInput

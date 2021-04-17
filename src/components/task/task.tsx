@@ -1,12 +1,11 @@
 import React, { Fragment, memo } from 'react';
-import More from '../more/more';
-import DoneIcon from '../../assets/images/done-icon.svg';
-import MoreIcon from '../../assets/images/more-icon.svg';
+import More from '../more';
 import { doneTask, taskMoreSwitch } from '../../features/tasks/tasksSlice';
 import Button from '../button';
 import { StyledTasksDescription } from '../tasks/styled';
 import { StyledTaskButtons } from './styled';
 import { useDispatchTyped } from '../../hooks';
+import Icons from '../icons';
 
 interface ITask {
   id: string;
@@ -33,11 +32,11 @@ const Task = ({ id, value, done, fixed, more }: ITask) => {
       <StyledTaskButtons>
         {!done && (
           <Button outline onClick={doneButtonClickHandler}>
-            <DoneIcon />
+            <Icons.DoneIcon />
           </Button>
         )}
         <Button active={more} outline onClick={moreButtonClickHandler}>
-          <MoreIcon />
+          <Icons.MoreIcon />
         </Button>
       </StyledTaskButtons>
       <More id={id} done={done} fixed={fixed} more={more} />

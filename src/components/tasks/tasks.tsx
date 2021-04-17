@@ -1,5 +1,5 @@
 import React, { memo, useEffect } from 'react';
-import Task from '../task/task';
+import Task from '../task';
 import i18n from 'i18next';
 import { onSearch, onFilter } from '../../utils/common';
 import { useTranslation } from 'react-i18next';

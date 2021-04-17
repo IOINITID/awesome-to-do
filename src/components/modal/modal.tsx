@@ -3,21 +3,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { Fragment, memo, useEffect, useState } from 'react';
-import CloseIcon from '../../assets/images/close-icon.svg';
-import DeleteIcon from '../../assets/images/delete-icon.svg';
-import DoneIcon from '../../assets/images/done-icon.svg';
-import ModalAddFirstDarkIcon from '../../assets/images/modal-add-first-dark-icon.svg';
-import ModalAddFirstLightIcon from '../../assets/images/modal-add-first-light-icon.svg';
-import ModalAddSecondDarkIcon from '../../assets/images/modal-add-second-dark-icon.svg';
-import ModalAddSecondLightIcon from '../../assets/images/modal-add-second-light-icon.svg';
-import ModalEditFirstDarkIcon from '../../assets/images/modal-edit-first-dark-icon.svg';
-import ModalEditFirstLightIcon from '../../assets/images/modal-edit-first-light-icon.svg';
-import ModalEditSecondDarkIcon from '../../assets/images/modal-edit-second-dark-icon.svg';
-import ModalEditSecondLightIcon from '../../assets/images/modal-edit-second-light-icon.svg';
-import ModalDeleteFirstDarkIcon from '../../assets/images/modal-delete-first-dark-icon.svg';
-import ModalDeleteFirstLightIcon from '../../assets/images/modal-delete-first-light-icon.svg';
-import ModalDeleteSecondDarkIcon from '../../assets/images/modal-delete-second-dark-icon.svg';
-import ModalDeleteSecondLightIcon from '../../assets/images/modal-delete-second-light-icon.svg';
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
 import { useDispatchTyped, useSelectorTyped } from '../../hooks';
@@ -46,6 +31,7 @@ import {
   StyledModalTitle,
   StyledOverlay,
 } from './styled';
+import Icons from '../icons';
 
 const Modal = () => {
   const dispatch = useDispatchTyped();
@@ -120,14 +106,14 @@ const Modal = () => {
       modalIcons = (
         <Fragment>
           {theme === 'dark' ? (
-            <ModalAddFirstDarkIcon className="modal__icon-first" />
+            <Icons.ModalAddFirstDarkIcon className="modal__icon-first" />
           ) : (
-            <ModalAddFirstLightIcon className="modal__icon-first" />
+            <Icons.ModalAddFirstLightIcon className="modal__icon-first" />
           )}
           {theme === 'dark' ? (
-            <ModalAddSecondDarkIcon className="modal__icon-second" />
+            <Icons.ModalAddSecondDarkIcon className="modal__icon-second" />
           ) : (
-            <ModalAddSecondLightIcon className="modal__icon-second" />
+            <Icons.ModalAddSecondLightIcon className="modal__icon-second" />
           )}
         </Fragment>
       );
@@ -137,14 +123,14 @@ const Modal = () => {
       modalIcons = (
         <Fragment>
           {theme === 'dark' ? (
-            <ModalEditFirstDarkIcon className="modal__icon-first" />
+            <Icons.ModalEditFirstDarkIcon className="modal__icon-first" />
           ) : (
-            <ModalEditFirstLightIcon className="modal__icon-first" />
+            <Icons.ModalEditFirstLightIcon className="modal__icon-first" />
           )}
           {theme === 'dark' ? (
-            <ModalEditSecondDarkIcon className="modal__icon-second" />
+            <Icons.ModalEditSecondDarkIcon className="modal__icon-second" />
           ) : (
-            <ModalEditSecondLightIcon className="modal__icon-second" />
+            <Icons.ModalEditSecondLightIcon className="modal__icon-second" />
           )}
         </Fragment>
       );
@@ -154,14 +140,14 @@ const Modal = () => {
       modalIcons = (
         <Fragment>
           {theme === 'dark' ? (
-            <ModalDeleteFirstDarkIcon className="modal__icon-first" />
+            <Icons.ModalDeleteFirstDarkIcon className="modal__icon-first" />
           ) : (
-            <ModalDeleteFirstLightIcon className="modal__icon-first" />
+            <Icons.ModalDeleteFirstLightIcon className="modal__icon-first" />
           )}
           {theme === 'dark' ? (
-            <ModalDeleteSecondDarkIcon className="modal__icon-second" />
+            <Icons.ModalDeleteSecondDarkIcon className="modal__icon-second" />
           ) : (
-            <ModalDeleteSecondLightIcon className="modal__icon-second" />
+            <Icons.ModalDeleteSecondLightIcon className="modal__icon-second" />
           )}
         </Fragment>
       );
@@ -171,14 +157,14 @@ const Modal = () => {
       modalIcons = (
         <Fragment>
           {theme === 'dark' ? (
-            <ModalAddFirstDarkIcon className="modal__icon-first" />
+            <Icons.ModalAddFirstDarkIcon className="modal__icon-first" />
           ) : (
-            <ModalAddFirstLightIcon className="modal__icon-first" />
+            <Icons.ModalAddFirstLightIcon className="modal__icon-first" />
           )}
           {theme === 'dark' ? (
-            <ModalAddSecondDarkIcon className="modal__icon-second" />
+            <Icons.ModalAddSecondDarkIcon className="modal__icon-second" />
           ) : (
-            <ModalAddSecondLightIcon className="modal__icon-second" />
+            <Icons.ModalAddSecondLightIcon className="modal__icon-second" />
           )}
         </Fragment>
       );
@@ -192,7 +178,7 @@ const Modal = () => {
         <StyledModalInfo>
           <StyledModalTitle>{modalTitle}</StyledModalTitle>
           <StyledModalLink href="#" onClick={onCloseLinkClick}>
-            <CloseIcon className="modal__icon" width="21" height="21" />
+            <Icons.CloseIcon className="modal__icon" width="21" height="21" />
           </StyledModalLink>
         </StyledModalInfo>
         <StyledModalForm onSubmit={onFormSubmit} autoComplete="off">
@@ -213,11 +199,11 @@ const Modal = () => {
           </StyledModalLabel>
           {modalType === 'delete' ? (
             <Button modal onClick={onDeleteButtonClick}>
-              <DeleteIcon />
+              <Icons.DeleteIcon />
             </Button>
           ) : (
             <Button modal outline type="submit">
-              <DoneIcon />
+              <Icons.DoneIcon />
             </Button>
           )}
         </StyledModalForm>

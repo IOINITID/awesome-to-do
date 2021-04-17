@@ -1,8 +1,4 @@
 import React, { Fragment, memo, useEffect } from 'react';
-import NoTaskDarkIcon from '../../assets/images/no-task-dark-icon.svg';
-import NoTaskLightIcon from '../../assets/images/no-task-light-icon.svg';
-import NotFoundDarkIcon from '../../assets/images/not-found-dark-icon.svg';
-import NotFoundLightIcon from '../../assets/images/not-found-light-icon.svg';
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
 import { useSelectorTyped } from '../../hooks';
@@ -11,6 +7,7 @@ import { selectTheme } from '../../features/theme/themeSlice';
 import { selectLanguage } from '../../features/language/languageSlice';
 import { selectFilter } from '../../features/filter/filterSlice';
 import { StyledInfo, StyledInfoDescription, StyledTitle } from './styled';
+import Icons from '../icons';
 
 interface IInfoData {
   title: string;
@@ -56,16 +53,20 @@ const Info = () => {
         <Fragment>
           <StyledInfoDescription>{t('noMatchFound')}</StyledInfoDescription>
           {theme === 'dark' ? (
-            <NotFoundDarkIcon className="info__icon" />
+            <Icons.NotFoundDarkIcon className="info__icon" />
           ) : (
-            <NotFoundLightIcon className="info__icon" />
+            <Icons.NotFoundLightIcon className="info__icon" />
           )}
         </Fragment>
       ) : (
         <Fragment>
           <StyledInfoDescription>{infoData.description}</StyledInfoDescription>
           <StyledInfoDescription>{t('addTaskInfo')}</StyledInfoDescription>
-          {theme === 'dark' ? <NoTaskDarkIcon className="info__icon" /> : <NoTaskLightIcon className="info__icon" />}
+          {theme === 'dark' ? (
+            <Icons.NoTaskDarkIcon className="info__icon" />
+          ) : (
+            <Icons.NoTaskLightIcon className="info__icon" />
+          )}
         </Fragment>
       )}
     </StyledInfo>

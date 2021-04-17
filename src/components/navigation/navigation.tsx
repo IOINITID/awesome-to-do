@@ -1,11 +1,10 @@
 import React, { memo } from 'react';
-import MenuIcon from '../../assets/images/menu-icon.svg';
-import AddIcon from '../../assets/images/add-icon.svg';
 import { useDispatchTyped, useSelectorTyped } from '../../hooks';
 import { menuSwitch, selectMenu } from '../../features/menu/menuSlice';
 import { selectIsModalOpen, tasksModalSwitch } from '../../features/tasks/tasksSlice';
 import Button from '../button';
 import { StyledNavigation, StyledNavigationItem, StyledNavigationList } from './styled';
+import Icons from '../icons';
 
 const Navigation = () => {
   const dispatch = useDispatchTyped();
@@ -29,12 +28,12 @@ const Navigation = () => {
       <StyledNavigationList>
         <StyledNavigationItem>
           <Button active={isMenuOpen} onClick={onMenuButtonClick} aria-label="Открыть меню.">
-            <MenuIcon />
+            <Icons.MenuIcon />
           </Button>
         </StyledNavigationItem>
         <StyledNavigationItem>
           <Button active={isModalOpen} data-type="add" onClick={onAddButtonClick} aria-label="Добавить задачу.">
-            <AddIcon />
+            <Icons.AddIcon />
           </Button>
         </StyledNavigationItem>
       </StyledNavigationList>

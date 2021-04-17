@@ -2,8 +2,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { memo, useEffect } from 'react';
-import FixedIcon from '../../assets/images/fixed-icon.svg';
-import AddIcon from '../../assets/images/add-icon.svg';
 import Switch from '../switch';
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
@@ -22,6 +20,7 @@ import {
   StyledMenuQuantity,
   StyledMenuContainer,
 } from './styled';
+import Icons from '../icons';
 
 const Menu = () => {
   const itemsData = useSelectorTyped(selectTasks);
@@ -84,7 +83,7 @@ const Menu = () => {
           <StyledMenuItem fixed>
             <StyledMenuLink href="#" aria-label="Закреплённые." onClick={onFilterItemClick}>
               <StyledMenuLinkContainer data-type="fixed">
-                <FixedIcon width="17px" height="17px" />
+                <Icons.FixedIcon width="17px" height="17px" />
                 {t('menuFixed')}
               </StyledMenuLinkContainer>
             </StyledMenuLink>
@@ -92,7 +91,7 @@ const Menu = () => {
           <StyledMenuItem add>
             <StyledMenuLink href="#" aria-label="Добавить задачу." onClick={onAddLinkClick}>
               <StyledMenuLinkContainer>
-                <AddIcon width="17px" height="17px" />
+                <Icons.AddIcon width="17px" height="17px" />
                 {t('menuAdd')}
               </StyledMenuLinkContainer>
             </StyledMenuLink>
