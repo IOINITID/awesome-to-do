@@ -21,7 +21,7 @@ export const StyledSwitch = styled.div<{ active: boolean }>`
   position: relative;
   width: 107px;
   height: 52px;
-  margin-left: auto;
+  /* margin-left: auto; */
   padding: 3px 5px;
   background: ${switchBackground};
   border-radius: 10px;

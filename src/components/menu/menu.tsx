@@ -20,6 +20,7 @@ import {
   StyledMenuLinkContainer,
   StyledMenuList,
   StyledMenuQuantity,
+  StyledMenuContainer,
 } from './styled';
 
 const Menu = () => {
@@ -52,55 +53,55 @@ const Menu = () => {
     dispatch(menuSwitch());
   };
 
+  const languageChangeHandler = () => dispatch(languageChange());
+
   useEffect(() => {
     i18n.changeLanguage(language);
   }, [language]);
 
   return (
     <StyledMenu className="menu" active={isMenuOpen}>
-      <StyledMenuList>
-        <StyledMenuItem>
-          <StyledMenuLink href="#" data-type="all" aria-label="Все задачи." onClick={onFilterItemClick}>
-            {t('menuAll')}
-            <StyledMenuQuantity>{itemsAll}</StyledMenuQuantity>
-          </StyledMenuLink>
-        </StyledMenuItem>
-        <StyledMenuItem>
-          <StyledMenuLink href="#" data-type="undone" aria-label="Текущие." onClick={onFilterItemClick}>
-            {t('menuCurrent')}
-            <StyledMenuQuantity>{itemsNotDone}</StyledMenuQuantity>
-          </StyledMenuLink>
-        </StyledMenuItem>
-        <StyledMenuItem>
-          <StyledMenuLink href="#" data-type="done" aria-label="Выполненные." onClick={onFilterItemClick}>
-            {t('menuDone')}
-            <StyledMenuQuantity>{itemsDone}</StyledMenuQuantity>
-          </StyledMenuLink>
-        </StyledMenuItem>
-        <StyledMenuItem fixed>
-          <StyledMenuLink href="#" data-type="fixed" aria-label="Закреплённые." onClick={onFilterItemClick}>
-            <StyledMenuLinkContainer>
-              <FixedIcon width="17px" height="17px" />
-              {t('menuFixed')}
-            </StyledMenuLinkContainer>
-          </StyledMenuLink>
-        </StyledMenuItem>
-        <StyledMenuItem add>
-          <StyledMenuLink href="#" aria-label="Добавить задачу." onClick={onAddLinkClick}>
-            <StyledMenuLinkContainer>
-              <AddIcon width="17px" height="17px" />
-              {t('menuAdd')}
-            </StyledMenuLinkContainer>
-          </StyledMenuLink>
-        </StyledMenuItem>
-        <Switch
-          style={{ margin: 'auto auto 0 0' }}
-          active={language === 'en'}
-          onClick={() => dispatch(languageChange())}
-        >
+      <StyledMenuContainer>
+        <StyledMenuList>
+          <StyledMenuItem>
+            <StyledMenuLink href="#" data-type="all" aria-label="Все задачи." onClick={onFilterItemClick}>
+              {t('menuAll')}
+              <StyledMenuQuantity>{itemsAll}</StyledMenuQuantity>
+            </StyledMenuLink>
+          </StyledMenuItem>
+          <StyledMenuItem>
+            <StyledMenuLink href="#" data-type="undone" aria-label="Текущие." onClick={onFilterItemClick}>
+              {t('menuCurrent')}
+              <StyledMenuQuantity>{itemsNotDone}</StyledMenuQuantity>
+            </StyledMenuLink>
+          </StyledMenuItem>
+          <StyledMenuItem>
+            <StyledMenuLink href="#" data-type="done" aria-label="Выполненные." onClick={onFilterItemClick}>
+              {t('menuDone')}
+              <StyledMenuQuantity>{itemsDone}</StyledMenuQuantity>
+            </StyledMenuLink>
+          </StyledMenuItem>
+          <StyledMenuItem fixed>
+            <StyledMenuLink href="#" data-type="fixed" aria-label="Закреплённые." onClick={onFilterItemClick}>
+              <StyledMenuLinkContainer>
+                <FixedIcon width="17px" height="17px" />
+                {t('menuFixed')}
+              </StyledMenuLinkContainer>
+            </StyledMenuLink>
+          </StyledMenuItem>
+          <StyledMenuItem add>
+            <StyledMenuLink href="#" aria-label="Добавить задачу." onClick={onAddLinkClick}>
+              <StyledMenuLinkContainer>
+                <AddIcon width="17px" height="17px" />
+                {t('menuAdd')}
+              </StyledMenuLinkContainer>
+            </StyledMenuLink>
+          </StyledMenuItem>
+        </StyledMenuList>
+        <Switch active={language === 'en'} onClick={languageChangeHandler}>
           {language === 'en' ? <span>Eng</span> : <span>Ru</span>}
         </Switch>
-      </StyledMenuList>
+      </StyledMenuContainer>
     </StyledMenu>
   );
 };

@@ -16,6 +16,16 @@ const themeMEnuLinkColor = theme('mode', {
   dark: '#ffffff',
 });
 
+const themeMenuItemIconFixedFill = theme('mode', {
+  light: '#6d90ff',
+  dark: '#f9e4b0',
+});
+
+const themeMenuItemIconAddFill = theme('mode', {
+  light: '#77c68d',
+  dark: '#85dc9d',
+});
+
 export const StyledMenu = styled.section<{ active?: boolean }>`
   position: absolute;
   top: 0;
@@ -29,34 +39,25 @@ export const StyledMenu = styled.section<{ active?: boolean }>`
   transition: 0.75s ease-in-out;
 `;
 
-export const StyledMenuList = styled.ul`
-  display: flex;
-  flex-direction: column;
+export const StyledMenuContainer = styled.div`
+  display: grid;
+  grid-template-rows: 1fr max-content;
   width: 100%;
   height: 100%;
-  margin: 0;
   padding: 50px 70px;
+`;
+
+export const StyledMenuList = styled.ul`
+  display: grid;
+  grid-auto-rows: max-content;
+  row-gap: 15px;
+  margin: 0;
+  padding: 0;
   list-style: none;
 `;
 
-const themeMenuItemIconFixedFill = theme('mode', {
-  light: '#6d90ff',
-  dark: '#f9e4b0',
-});
-
-const themeMenuItemIconAddFill = theme('mode', {
-  light: '#77c68d',
-  dark: '#85dc9d',
-});
-
 export const StyledMenuItem = styled.li<{ fixed?: boolean; add?: boolean }>`
-  display: flex;
-  margin-right: ${(props) => (props.fixed ? 18 : 0)}px;
-  margin-bottom: ${(props) => (props.fixed ? 10 : 15)}px;
-
-  &:last-child {
-    margin-bottom: 0;
-  }
+  display: grid;
 
   path {
     fill: ${(props) => (props.fixed ? themeMenuItemIconFixedFill : themeMenuItemIconAddFill)};
@@ -93,8 +94,4 @@ export const StyledMenuQuantity = styled.sup`
   line-height: 21px;
   font-family: 'SF Pro Display', 'Arial', sans-serif;
   vertical-align: super;
-`;
-
-export const StyledMenuIcon = styled.div`
-  margin-right: 18px;
 `;
