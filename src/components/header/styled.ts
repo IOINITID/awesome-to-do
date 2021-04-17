@@ -27,7 +27,7 @@ export const StyledContainer = styled.div`
   display: grid;
   align-items: center;
   grid-auto-flow: column;
-  grid-template-columns: auto 25px auto 1fr auto 80px auto;
+  grid-template-columns: auto 25px auto 1fr auto 90px auto;
   max-width: 1380px;
   min-height: 80px;
   margin: 0 auto;
