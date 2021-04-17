@@ -77,10 +77,10 @@ const More = (props: IMore) => {
   }, [more]);
 
   return (
-    <StyledMore active={more} ref={moreElement}>
+    <StyledMore active={more} done={done} ref={moreElement}>
       <StyledMoreList>
         {done ? (
-          <StyledMoreItem className="more__item more__item--undone">
+          <StyledMoreItem undone className="more__item more__item--undone">
             <StyledMoreLink className="more__link" href="#" onClick={onUndoneLinkClick}>
               <UndoneIcon className="more__icon" width="14" height="10" />
               {t('undone')}
@@ -88,13 +88,13 @@ const More = (props: IMore) => {
           </StyledMoreItem>
         ) : (
           <Fragment>
-            <StyledMoreItem className="more__item more__item--edit">
+            <StyledMoreItem edit className="more__item more__item--edit">
               <StyledMoreLink className="more__link" href="#" data-type="edit" onClick={onEditLinkClick}>
                 <EditIcon className="more__icon" width="10" height="10" />
                 {t('edit')}
               </StyledMoreLink>
             </StyledMoreItem>
-            <StyledMoreItem className="more__item more__item--fixed">
+            <StyledMoreItem fixed className="more__item more__item--fixed">
               <StyledMoreLink className="more__link" href="#" onClick={onFixedLinkClick}>
                 <FixedIcon className="more__icon" width="10" height="10" />
                 {fixed ? t('unfixed') : t('fixed')}
@@ -102,7 +102,7 @@ const More = (props: IMore) => {
             </StyledMoreItem>
           </Fragment>
         )}
-        <StyledMoreItem className="more__item more__item--delete">
+        <StyledMoreItem delete className="more__item more__item--delete">
           <StyledMoreLink className="more__link" href="#" data-type="delete" onClick={onDeleteLinkClick}>
             <DeleteIcon className="more__icon" width="8" height="10" />
             {t('delete')}

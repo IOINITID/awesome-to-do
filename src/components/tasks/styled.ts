@@ -77,26 +77,6 @@ const themeTaskItemBackground = theme('mode', {
   dark: '#f9e4b0',
 });
 
-const themeTasksItemDonePathFill = theme('mode', {
-  light: 'none',
-  dark: 'none',
-});
-
-const themeTasksItemDonePathStroke = theme('mode', {
-  light: '#5e647c',
-  dark: '#ffffff',
-});
-
-const themeTasksItemMorePathFill = theme('mode', {
-  light: '#5e647c',
-  dark: '#ffffff',
-});
-
-const themeTasksItemMorePathStroke = theme('mode', {
-  light: '#5e647c',
-  dark: '#ffffff',
-});
-
 const themeTasksItemDoneBackground = theme('mode', {
   light: 'linear-gradient(178deg, #f6faff 21.96%, rgba(177, 189, 216, 0.58) 116.73%)',
   dark: 'linear-gradient(178deg, #4d3c50 21.96%, #1a1523 100.49%)',
@@ -120,7 +100,9 @@ const themeTasksDescriptionColor = theme('mode', {
 
 export const StyledTasksItem = styled.li<{ fixed?: boolean; done?: boolean; more?: boolean }>`
   position: relative;
-  display: flex;
+  /* display: flex; */
+  display: grid;
+  grid-template-columns: 1fr max-content;
   align-items: center;
   max-width: 1130px;
   min-height: 60px;
@@ -134,16 +116,20 @@ export const StyledTasksItem = styled.li<{ fixed?: boolean; done?: boolean; more
     margin-bottom: 0;
   }
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 8px;
-    height: 100%;
-    background: ${themeTaskItemBackground};
-    border-radius: 10px 0 0 10px;
-  }
+  ${(props) =>
+    props.fixed &&
+    css`
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 8px;
+        height: 100%;
+        background: ${themeTaskItemBackground};
+        border-radius: 10px 0 0 10px;
+      }
+    `}
 
   ${(props) =>
     props.done &&
@@ -157,14 +143,10 @@ export const StyledTasksItem = styled.li<{ fixed?: boolean; done?: boolean; more
 
 export const StyledTasksDescription = styled.p`
   margin: 0;
-  margin-right: auto;
+  padding-right: 22px;
   font-weight: 400;
   font-size: 18px;
   line-height: 21px;
   font-family: 'SF Pro Display', 'Arial', sans-serif;
   color: ${themeTasksDescriptionColor};
-`;
-
-export const StyledTasksDone = styled.div`
-  margin-right: 30px;
 `;

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import theme from 'styled-theming';
 
 const themeMoreBackground = theme('mode', {
@@ -12,37 +12,134 @@ const themeMoreBoxShadow = theme('mode', {
   dark: '-4px -4px 16px rgba(88, 76, 98, 0.25), 3px 3px 12px rgba(0, 0, 0, 0.2), inset 4px 4px 8px rgba(0, 0, 0, 0.35)',
 });
 
-export const StyledMore = styled.div<{ active?: boolean }>`
+export const StyledMore = styled.div<{ active?: boolean; done?: boolean }>`
   position: absolute;
   top: 0;
   right: -140px;
   display: ${(props) => (props.active ? 'block' : 'none')};
   width: 135px;
-  height: 75px;
+  height: ${(props) => (props.done ? 53 : 75)}px;
   background: ${themeMoreBackground};
   border-radius: 10px;
   box-shadow: ${themeMoreBoxShadow};
 `;
 
 export const StyledMoreList = styled.ul`
+  display: grid;
+  row-gap: 5px;
   margin: 0;
-  padding: 7px 13px 7px 10px;
+  padding: 7px 10px;
   list-style: none;
 `;
 
-export const StyledMoreItem = styled.li`
-  display: flex;
-  align-items: center;
-  margin-bottom: 5px;
+const themeMoreItemEditPathFill = theme('mode', {
+  light: '#5e647c',
+  dark: '#ffffff',
+});
 
-  &:last-child {
-    margin-bottom: 0;
-  }
-`;
+const themeMoreItemFixedPathFill = theme('mode', {
+  light: '#6d90ff',
+  dark: '#f9e4b0',
+});
 
-export const StyledMoreIcon = styled.div`
-  position: absolute;
-  left: 10px;
+const themeMoreItemDeletePathFill = theme('mode', {
+  light: '#e06767',
+  dark: '#e06767',
+});
+
+const themeMoreItemUndonePathFill = theme('mode', {
+  light: '#5e647c',
+  dark: '#ffffff',
+});
+
+export const StyledMoreItem = styled.li<{ edit?: boolean; fixed?: boolean; delete?: boolean; undone?: boolean }>`
+  ${(props) =>
+    props.edit &&
+    css`
+      path {
+        fill: ${themeMoreItemEditPathFill};
+      }
+
+      a {
+        color: ${themeMoreItemEditPathFill};
+        opacity: 1;
+
+        &:hover,
+        &:focus {
+          opacity: 0.7;
+        }
+
+        &:active {
+          opacity: 1;
+        }
+      }
+    `}
+
+  ${(props) =>
+    props.fixed &&
+    css`
+      path {
+        fill: ${themeMoreItemFixedPathFill};
+      }
+
+      a {
+        color: ${themeMoreItemFixedPathFill};
+        opacity: 1;
+
+        &:hover,
+        &:focus {
+          opacity: 0.7;
+        }
+
+        &:active {
+          opacity: 1;
+        }
+      }
+    `}
+
+    ${(props) =>
+    props.delete &&
+    css`
+      path {
+        fill: ${themeMoreItemDeletePathFill};
+      }
+
+      a {
+        color: ${themeMoreItemDeletePathFill};
+        opacity: 1;
+
+        &:hover,
+        &:focus {
+          opacity: 0.7;
+        }
+
+        &:active {
+          opacity: 1;
+        }
+      }
+    `}
+
+    ${(props) =>
+    props.undone &&
+    css`
+      path {
+        fill: ${themeMoreItemUndonePathFill};
+      }
+
+      a {
+        color: ${themeMoreItemUndonePathFill};
+        opacity: 1;
+
+        &:hover,
+        &:focus {
+          opacity: 0.7;
+        }
+
+        &:active {
+          opacity: 1;
+        }
+      }
+    `}
 `;
 
 const themeMoreLinkColor = theme('mode', {
@@ -51,177 +148,18 @@ const themeMoreLinkColor = theme('mode', {
 });
 
 export const StyledMoreLink = styled.a`
-  display: flex;
+  display: grid;
   align-items: center;
-  margin-left: 20px;
+  grid-template-columns: 10px auto;
   font-weight: 300;
   font-size: 14px;
   line-height: 17px;
   font-family: 'SF Pro Display', 'Arial', sans-serif;
   color: ${themeMoreLinkColor};
   text-decoration: none;
+  column-gap: 10px;
+
+  svg {
+    justify-self: center;
+  }
 `;
-
-// .theme--dark .more__item--edit .more__icon path {
-//   fill: #ffffff;
-// }
-
-// .theme--light .more__item--edit .more__icon path {
-//   fill: #5e647c;
-// }
-
-// .theme--dark .more__item--fixed .more__icon path {
-//   fill: #ffffff;
-// }
-
-// .theme--light .more__item--fixed .more__icon path {
-//   fill: #5e647c;
-// }
-
-// .theme--dark .more__item--delete .more__icon path {
-//   fill: #ffffff;
-// }
-
-// .theme--light .more__item--delete .more__icon path {
-//   fill: #5e647c;
-// }
-
-// .theme--dark .more__item--undone .more__icon path {
-//   fill: #ffffff;
-// }
-
-// .theme--light .more__item--undone .more__icon path {
-//   fill: #5e647c;
-// }
-
-// .theme--dark .more__item--edit .more__link:hover,
-// .theme--dark .more__item--edit .more__link:focus {
-//   color: #f9e4b0;
-//   opacity: 0.7;
-// }
-
-// .theme--dark .more__item--edit .more__link:hover .more__icon path,
-// .theme--dark .more__item--edit .more__link:focus .more__icon path {
-//   fill: #f9e4b0;
-// }
-
-// .theme--dark .more__item--edit .more__link:active {
-//   color: #f9e4b0;
-//   opacity: 1;
-// }
-
-// .theme--light .more__item--edit .more__link:hover,
-// .theme--light .more__item--edit .more__link:focus {
-//   color: #6d90ff;
-//   opacity: 0.7;
-// }
-
-// .theme--light .more__item--edit .more__link:hover .more__icon path,
-// .theme--light .more__item--edit .more__link:focus .more__icon path {
-//   fill: #6d90ff;
-// }
-
-// .theme--light .more__item--edit .more__link:active {
-//   color: #6d90ff;
-//   opacity: 1;
-// }
-
-// .theme--dark .more__item--fixed .more__link:hover,
-// .theme--dark .more__item--fixed .more__link:focus {
-//   color: #f9e4b0;
-//   opacity: 0.7;
-// }
-
-// .theme--dark .more__item--fixed .more__link:hover .more__icon path,
-// .theme--dark .more__item--fixed .more__link:focus .more__icon path {
-//   fill: #f9e4b0;
-// }
-
-// .theme--dark .more__item--fixed .more__link:active {
-//   color: #f9e4b0;
-//   opacity: 1;
-// }
-
-// .theme--light .more__item--fixed .more__link:hover,
-// .theme--light .more__item--fixed .more__link:focus {
-//   color: #6d90ff;
-//   opacity: 0.7;
-// }
-
-// .theme--light .more__item--fixed .more__link:hover .more__icon path,
-// .theme--light .more__item--fixed .more__link:focus .more__icon path {
-//   fill: #6d90ff;
-// }
-
-// .theme--light .more__item--fixed .more__link:active {
-//   color: #6d90ff;
-//   opacity: 1;
-// }
-
-// .theme--dark .more__item--delete .more__link:hover,
-// .theme--dark .more__item--delete .more__link:focus {
-//   color: #e06767;
-//   opacity: 0.7;
-// }
-
-// .theme--dark .more__item--delete .more__link:hover .more__icon path,
-// .theme--dark .more__item--delete .more__link:focus .more__icon path {
-//   fill: #e06767;
-// }
-
-// .theme--dark .more__item--delete .more__link:active {
-//   color: #e06767;
-//   opacity: 1;
-// }
-
-// .theme--light .more__item--delete .more__link:hover,
-// .theme--light .more__item--delete .more__link:focus {
-//   color: #e06767;
-//   opacity: 0.7;
-// }
-
-// .theme--light .more__item--delete .more__link:hover .more__icon path,
-// .theme--light .more__item--delete .more__link:focus .more__icon path {
-//   fill: #e06767;
-// }
-
-// .theme--light .more__item--delete .more__link:active {
-//   color: #e06767;
-//   opacity: 1;
-// }
-
-// .tasks__item--done .more {
-//   height: 53px;
-// }
-
-// .theme--dark .more__item--undone .more__link:hover,
-// .theme--dark .more__item--undone .more__link:focus {
-//   color: #f9e4b0;
-//   opacity: 0.7;
-// }
-
-// .theme--dark .more__item--undone .more__link:active {
-//   color: #f9e4b0;
-//   opacity: 1;
-// }
-
-// .theme--dark .more__item--undone .more__link:hover .more__icon path,
-// .theme--dark .more__item--undone .more__link:focus .more__icon path {
-//   fill: #f9e4b0;
-// }
-
-// .theme--light .more__item--undone .more__link:hover,
-// .theme--light .more__item--undone .more__link:focus {
-//   color: #6d90ff;
-//   opacity: 0.7;
-// }
-
-// .theme--light .more__item--undone .more__link:active {
-//   color: #6d90ff;
-//   opacity: 1;
-// }
-
-// .theme--light .more__item--undone .more__link:hover .more__icon path,
-// .theme--light .more__item--undone .more__link:focus .more__icon path {
-//   fill: #6d90ff;
-// }

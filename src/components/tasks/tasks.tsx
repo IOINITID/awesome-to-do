@@ -53,7 +53,7 @@ const Tasks = () => {
     const { id, value, done, fixed, more } = item;
 
     return (
-      <StyledTasksItem key={id} done={done}>
+      <StyledTasksItem key={id} done={done} fixed={fixed}>
         <Task id={id} value={value} done={done} fixed={fixed} more={more} />
       </StyledTasksItem>
     );
