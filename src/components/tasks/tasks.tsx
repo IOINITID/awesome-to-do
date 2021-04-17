@@ -52,22 +52,8 @@ const Tasks = () => {
   const taskItems = itemsDataToShow.map((item) => {
     const { id, value, done, fixed, more } = item;
 
-    let tasksItemClassName: string;
-
-    switch (true) {
-      case fixed:
-        tasksItemClassName = 'tasks__item tasks__item--fixed';
-        break;
-      case done:
-        tasksItemClassName = 'tasks__item tasks__item--done';
-        break;
-      default:
-        tasksItemClassName = 'tasks__item';
-        break;
-    }
-
     return (
-      <StyledTasksItem key={id} className={tasksItemClassName}>
+      <StyledTasksItem key={id} done={done}>
         <Task id={id} value={value} done={done} fixed={fixed} more={more} />
       </StyledTasksItem>
     );

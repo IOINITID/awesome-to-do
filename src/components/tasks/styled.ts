@@ -1,21 +1,10 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import theme from 'styled-theming';
 
 const themeTasksTitleColor = theme('mode', {
   light: '#5e647c',
   dark: '#ffffff',
 });
-
-export const StyledTasksTitle = styled.h2`
-  margin: 0;
-  margin-top: 30px;
-  margin-bottom: 5px;
-  font-weight: 400;
-  font-size: 30px;
-  line-height: 36px;
-  font-family: 'SF Pro Display', 'Arial', sans-serif;
-  color: ${themeTasksTitleColor};
-`;
 
 const themeTasksListBackground = theme('mode', {
   light: 'linear-gradient(90.15deg, #ebf3fc 1.15%, #e2ecfd 100.11%)',
@@ -36,6 +25,17 @@ const themeTasksListThumbBorder = theme('mode', {
   light: '2px solid rgba(177, 188, 214, 0.7)',
   dark: '2px solid #1a1523',
 });
+
+export const StyledTasksTitle = styled.h2`
+  margin: 0;
+  margin-top: 30px;
+  margin-bottom: 5px;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 36px;
+  font-family: 'SF Pro Display', 'Arial', sans-serif;
+  color: ${themeTasksTitleColor};
+`;
 
 export const StyledTasksList = styled.ul`
   height: 560px;
@@ -72,7 +72,53 @@ const themeTasksItemBoxShadow = theme('mode', {
   dark: '-4px -4px 16px rgba(88, 76, 98, 0.25), 3px 3px 12px rgba(0, 0, 0, 0.2), inset 4px 4px 8px rgba(0, 0, 0, 0.35)',
 });
 
-export const StyledTasksItem = styled.li`
+const themeTaskItemBackground = theme('mode', {
+  light: '#6d90ff',
+  dark: '#f9e4b0',
+});
+
+const themeTasksItemDonePathFill = theme('mode', {
+  light: 'none',
+  dark: 'none',
+});
+
+const themeTasksItemDonePathStroke = theme('mode', {
+  light: '#5e647c',
+  dark: '#ffffff',
+});
+
+const themeTasksItemMorePathFill = theme('mode', {
+  light: '#5e647c',
+  dark: '#ffffff',
+});
+
+const themeTasksItemMorePathStroke = theme('mode', {
+  light: '#5e647c',
+  dark: '#ffffff',
+});
+
+const themeTasksItemDoneBackground = theme('mode', {
+  light: 'linear-gradient(178deg, #f6faff 21.96%, rgba(177, 189, 216, 0.58) 116.73%)',
+  dark: 'linear-gradient(178deg, #4d3c50 21.96%, #1a1523 100.49%)',
+});
+
+const themeTasksItemDoneBoxShadow = theme('mode', {
+  light:
+    '0 -1px 10px rgba(190, 201, 223, 0.5), 0 1px 30px rgba(189, 198, 219, 0), -3px -3px 4px rgba(255, 255, 255, 0), 5px 5px 16px rgba(177, 188, 214, 0)',
+  dark: '0 1px 10px #000000',
+});
+
+const themeTasksItemDoneBorder = theme('mode', {
+  light: '1px solid rgba(251, 252, 255, 0.45)',
+  dark: 'none',
+});
+
+const themeTasksDescriptionColor = theme('mode', {
+  light: '#5e647c',
+  dark: '#ffffff',
+});
+
+export const StyledTasksItem = styled.li<{ fixed?: boolean; done?: boolean; more?: boolean }>`
   position: relative;
   display: flex;
   align-items: center;
@@ -87,44 +133,27 @@ export const StyledTasksItem = styled.li`
   &:last-child {
     margin-bottom: 0;
   }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 8px;
+    height: 100%;
+    background: ${themeTaskItemBackground};
+    border-radius: 10px 0 0 10px;
+  }
+
+  ${(props) =>
+    props.done &&
+    css`
+      background: ${themeTasksItemDoneBackground};
+      border: ${themeTasksItemDoneBorder};
+      border-radius: 8px;
+      box-shadow: ${themeTasksItemDoneBoxShadow};
+    `}
 `;
-
-// .tasks__item--fixed::before {
-//   content: '';
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   width: 8px;
-//   height: 100%;
-//   border-radius: 10px 0 0 10px;
-// }
-
-// .theme--dark .tasks__item--fixed::before {
-//   background: #f9e4b0;
-// }
-
-// .theme--light .tasks__item--fixed::before {
-//   background: #6d90ff;
-// }
-
-// .theme--dark .tasks__item--done {
-//   background: linear-gradient(178deg, #4d3c50 21.96%, #1a1523 100.49%);
-//   border-radius: 8px;
-//   box-shadow: 0 1px 10px #000000;
-// }
-
-// .theme--light .tasks__item--done {
-//   background: linear-gradient(178deg, #f6faff 21.96%, rgba(177, 189, 216, 0.58) 116.73%);
-//   border: 1px solid rgba(251, 252, 255, 0.45);
-//   border-radius: 8px;
-//   box-shadow: 0 -1px 10px rgba(190, 201, 223, 0.5), 0 1px 30px rgba(189, 198, 219, 0),
-//     -3px -3px 4px rgba(255, 255, 255, 0), 5px 5px 16px rgba(177, 188, 214, 0);
-// }
-
-const themeTasksDescriptionColor = theme('mode', {
-  light: '#5e647c',
-  dark: '#ffffff',
-});
 
 export const StyledTasksDescription = styled.p`
   margin: 0;
@@ -139,23 +168,3 @@ export const StyledTasksDescription = styled.p`
 export const StyledTasksDone = styled.div`
   margin-right: 30px;
 `;
-
-// .theme--dark .tasks__item .tasks__done path {
-//   fill: none;
-//   stroke: #ffffff;
-// }
-
-// .theme--light .tasks__item .tasks__done path {
-//   fill: none;
-//   stroke: #5e647c;
-// }
-
-// .theme--dark .tasks__item .tasks__more path {
-//   fill: #ffffff;
-//   stroke: #ffffff;
-// }
-
-// .theme--light .tasks__item .tasks__more path {
-//   fill: #5e647c;
-//   stroke: #5e647c;
-// }
