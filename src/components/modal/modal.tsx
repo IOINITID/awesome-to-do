@@ -206,6 +206,7 @@ const Modal = () => {
               placeholder={t('addNewTask')}
               onChange={onInputChange}
               onKeyDown={onEscKeyDownPress}
+              maxLength={100}
               required
               disabled={modalType === 'delete' ? true : false}
             />
