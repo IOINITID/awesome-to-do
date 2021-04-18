@@ -28,27 +28,27 @@ export const GlobalStyles = createGlobalStyle`
     font-weight: 400;
     font-family: 'SF Pro Display';
     font-display: swap;
-    src: url('../fonts/SFProDisplay-Regular.woff2') format('woff2'),
-      url('../fonts/SFProDisplay-Regular.woff') format('woff'),
-      url('../fonts/SFProDisplay-Regular.ttf') format('truetype');
+    src: url(${SFProDisplayRegularWoff2}) format('woff2'),
+      url(${SFProDisplayRegularWoff}) format('woff'),
+      url(${SFProDisplayRegularTrueType}) format('truetype');
   }
 
   @font-face {
     font-weight: 700;
     font-family: 'SF Pro Display';
     font-display: swap;
-    src: url('../fonts/SFProDisplay-Bold.woff2') format('woff2'),
-      url('../fonts/SFProDisplay-Bold.woff') format('woff'),
-      url('../fonts/SFProDisplay-Bold.ttf') format('truetype');
+    src: url(${SFProDisplayBoldWoff2}) format('woff2'),
+      url(${SFProDisplayBoldWoff}) format('woff'),
+      url(${SFProDisplayBoldTrueType}) format('truetype');
   }
 
   @font-face {
     font-weight: 800;
     font-family: 'SF Pro Display';
     font-display: swap;
-    src: url('../fonts/SFProDisplay-Heavy.woff2') format('woff2'),
-      url('../fonts/SFProDisplay-Heavy.woff') format('woff'),
-      url('../fonts/SFProDisplay-Heavy.ttf') format('truetype');
+    src: url(${SFProDisplayHeavyWoff2}) format('woff2'),
+      url(${SFProDisplayHeavyWoff}) format('woff'),
+      url(${SFProDisplayHeavyTrueType}) format('truetype');
   }
 
   *,
