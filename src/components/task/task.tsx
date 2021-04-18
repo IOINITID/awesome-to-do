@@ -35,7 +35,7 @@ const Task = ({ id, value, done, fixed, more }: ITask) => {
             <Icons.DoneIcon />
           </Button>
         )}
-        <Button active={more} outline onClick={moreButtonClickHandler}>
+        <Button active={more} fill onClick={moreButtonClickHandler}>
           <Icons.MoreIcon />
         </Button>
       </StyledTaskButtons>

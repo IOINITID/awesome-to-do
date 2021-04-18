@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import theme from 'styled-theming';
 
 const themeBackground = theme('mode', {
@@ -37,7 +37,7 @@ const themeStroke = theme('mode', {
   dark: '#ffffff',
 });
 
-export const StyledButton = styled.button<{ active: boolean; modal: boolean; outline: string }>`
+export const StyledButton = styled.button<{ active: boolean; modal: boolean; outline: string; fill?: boolean }>`
   position: relative;
   display: grid;
   justify-content: center;
@@ -79,6 +79,15 @@ export const StyledButton = styled.button<{ active: boolean; modal: boolean; out
       fill: ${(props) => (props.outline ? 'none' : themeFill)};
       stroke: ${(props) => (props.outline ? themeStroke : '')};
     }
+
+    ${(props) =>
+      props.fill &&
+      css`
+        path {
+          fill: ${themeFill};
+          stroke: ${themeStroke};
+        }
+      `}
   }
 
   span {
