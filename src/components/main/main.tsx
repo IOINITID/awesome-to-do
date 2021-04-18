@@ -14,9 +14,8 @@ import { selectTasks, ITask } from '../../features/tasks/tasksSlice';
 import { StyledMain, StyledMainContainer } from './styled';
 
 const Main = () => {
-  const itemsData = useSelectorTyped(selectTasks);
-
   const dispatch = useDispatchTyped();
+  const itemsData = useSelectorTyped(selectTasks);
   const isWelcome = useSelectorTyped(selectWelcome);
   const isMenuOpen = useSelectorTyped(selectMenu);
   const filterType = useSelectorTyped(selectFilter);
