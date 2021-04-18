@@ -1,14 +1,5 @@
 import styled, { createGlobalStyle } from 'styled-components';
 import theme from 'styled-theming';
-import SFProDisplayRegularWoff2 from '../../assets/fonts/SFProDisplay-Regular.woff2';
-import SFProDisplayRegularWoff from '../../assets/fonts/SFProDisplay-Regular.woff';
-import SFProDisplayRegularTrueType from '../../assets/fonts/SFProDisplay-Regular.ttf';
-import SFProDisplayBoldWoff2 from '../../assets/fonts/SFProDisplay-Bold.woff2';
-import SFProDisplayBoldWoff from '../../assets/fonts/SFProDisplay-Bold.woff';
-import SFProDisplayBoldTrueType from '../../assets/fonts/SFProDisplay-Bold.ttf';
-import SFProDisplayHeavyWoff2 from '../../assets/fonts/SFProDisplay-Heavy.woff2';
-import SFProDisplayHeavyWoff from '../../assets/fonts/SFProDisplay-Heavy.woff';
-import SFProDisplayHeavyTrueType from '../../assets/fonts/SFProDisplay-Heavy.ttf';
 
 const themeAppBackground = theme('mode', {
   light: 'linear-gradient(123.75deg, #f6faff 19.07%, rgba(223, 233, 253, 0.78) 95.62%)',
