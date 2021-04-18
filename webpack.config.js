@@ -2,7 +2,6 @@ const path = require('path');
 const outputPath = path.join(__dirname, 'dist');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: './src/index.tsx',
@@ -130,14 +129,6 @@ module.exports = {
       inject: false,
       template: './src/index.html',
       filename: 'index.html',
-    }),
-    new CopyWebpackPlugin({
-      patterns: [
-        {
-          from: './src/assets/fonts',
-          to: './fonts',
-        },
-      ],
     }),
   ],
   devtool: 'source-map',
