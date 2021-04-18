@@ -48,6 +48,7 @@ export const tasksSlice = createSlice({
       state.value.forEach((task) => {
         if (task.id === action.payload) {
           task.done = !task.done;
+          task.more = false;
           task.fixed = false;
         }
       });
