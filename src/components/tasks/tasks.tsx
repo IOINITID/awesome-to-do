@@ -7,7 +7,7 @@ import { selectLanguage } from '../../features/language/languageSlice';
 import { useSelectorTyped } from '../../hooks';
 import { selectSearchData } from '../../features/search/searchSlice';
 import { selectFilter } from '../../features/filter/filterSlice';
-import { selectTasks } from '../../features/tasks/tasksSlice';
+import { ITask, selectTasks } from '../../features/tasks/tasksSlice';
 import { StyledTasksList, StyledTasksTitle, StyledTasksItem } from './styled';
 
 const Tasks = () => {
@@ -25,8 +25,8 @@ const Tasks = () => {
 
   const itemsDataSorted = itemsData
     .slice()
-    .sort((a: any, b: any) => b.fixed - a.fixed)
-    .sort((a: any, b: any) => a.done - b.done);
+    .sort((a: ITask, b: ITask) => Number(b.fixed) - Number(a.fixed))
+    .sort((a: ITask, b: ITask) => Number(a.done) - Number(b.done));
   const itemsDataToShow = onFilter(onSearch(itemsDataSorted, searchData), filterType);
 
   let tasksTitle: string;
@@ -49,7 +49,7 @@ const Tasks = () => {
       break;
   }
 
-  const taskItems = itemsDataToShow.map((item) => {
+  const taskItems = itemsDataToShow.map((item: ITask) => {
     const { id, value, done, fixed, more } = item;
 
     return (
