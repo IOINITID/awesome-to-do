@@ -2,7 +2,7 @@ import React, { Fragment, memo, useEffect } from 'react';
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
 import { useSelectorTyped } from '../../hooks';
-import { selectSearching } from '../../features/search/searchSlice';
+import { selectSearchData } from '../../features/search/searchSlice';
 import { selectTheme } from '../../features/theme/themeSlice';
 import { selectLanguage } from '../../features/language/languageSlice';
 import { selectFilter } from '../../features/filter/filterSlice';
@@ -17,10 +17,10 @@ interface IInfoData {
 const Info = () => {
   const { t } = useTranslation();
 
-  const searching = useSelectorTyped(selectSearching);
   const theme = useSelectorTyped(selectTheme);
   const language = useSelectorTyped(selectLanguage);
   const filterType = useSelectorTyped(selectFilter);
+  const searchData = useSelectorTyped(selectSearchData);
 
   useEffect(() => {
     i18n.changeLanguage(language);
@@ -47,9 +47,9 @@ const Info = () => {
   }
 
   return (
-    <StyledInfo search={searching}>
-      <StyledTitle>{searching ? t('searchByTasks') : infoData.title}</StyledTitle>
-      {searching ? (
+    <StyledInfo search={searchData}>
+      <StyledTitle>{searchData ? t('searchByTasks') : infoData.title}</StyledTitle>
+      {searchData ? (
         <Fragment>
           <StyledInfoDescription>{t('noMatchFound')}</StyledInfoDescription>
           {theme === 'dark' ? (

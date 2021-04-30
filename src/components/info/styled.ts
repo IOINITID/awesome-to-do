@@ -11,7 +11,7 @@ const themeInfoDescriptionColor = theme('mode', {
   dark: '#9f9f9f',
 });
 
-export const StyledInfo = styled.section<{ search?: boolean }>`
+export const StyledInfo = styled.section<{ search?: string }>`
   position: relative;
   display: flex;
   flex-direction: column;

@@ -6,7 +6,7 @@ import { useDispatchTyped, useSelectorTyped } from '../../hooks';
 import { selectSearch, searchSwitch, searchClose } from '../../features/search/searchSlice';
 import { menuSwitch, selectMenu } from '../../features/menu/menuSlice';
 import { welcomeSwitch } from '../../features/welcome/welcomeSlice';
-import { onSearching, selectSearchData, onSearchChange } from '../../features/search/searchSlice';
+import { selectSearchData, onSearchChange } from '../../features/search/searchSlice';
 import { selectLanguage } from '../../features/language/languageSlice';
 import { StyledSearchForm, StyledSearchInput, StyledSearchLabel } from './styled';
 import Icons from '../icons';
@@ -29,12 +29,6 @@ const Search = () => {
   const onInputChange = (evt: React.ChangeEvent<HTMLInputElement>): void => {
     const searchDataValue = evt.target.value;
 
-    if (searchDataValue.length) {
-      dispatch(onSearching(true));
-    } else {
-      dispatch(onSearching(false));
-    }
-
     dispatch(welcomeSwitch(false));
     dispatch(onSearchChange(searchDataValue));
   };
@@ -52,7 +46,6 @@ const Search = () => {
   const onSearchFieldClose = (evt): void => {
     if (!searchRef.current.contains(evt.target)) {
       dispatch(onSearchChange(''));
-      dispatch(onSearching(false));
       dispatch(searchClose());
     }
   };
