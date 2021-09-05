@@ -4,7 +4,7 @@ Project name: **Awesome To-Do**
 
 ---
 
-Main page: 🖥️ https://ioinitid.github.io/awesome-to-do
+Main page: 🖥️ https://ioinitid.github.io/awesome-to-do/
 
 ---
 
