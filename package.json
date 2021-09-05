@@ -2,12 +2,34 @@
   "name": "awesome-to-do",
   "version": "1.0.0",
   "private": true,
-  "description": "Awesome To-Do application.",
-  "license": "MIT",
+  "description": "Awesome To-Do - to-do list application.",
   "scripts": {
     "build": "webpack --mode production",
     "start": "webpack-dev-server"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IOINITID/awesome-to-do.git"
+  },
+  "keywords": [
+    "TypeScript",
+    "React",
+    "Redux-Toolkit",
+    "Styled-Components",
+    "Webpack",
+    "i18n",
+    "Awesome",
+    "To-Do",
+    "Light-Theme",
+    "Dark-Theme",
+    "Localization"
+  ],
+  "author": "Igor Orishchenko <ioinitid@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/IOINITID/awesome-to-do/issues"
+  },
+  "homepage": "https://github.com/IOINITID/awesome-to-do#readme",
   "devDependencies": {
     "@babel/core": "^7.13.15",
     "@babel/preset-env": "^7.13.15",

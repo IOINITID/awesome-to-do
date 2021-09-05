@@ -1,13 +1,14 @@
-Название: **Awesome To-Do**
+Project name: **Awesome To-Do**
+
 [![Build Status](https://travis-ci.com/IOINITID/awesome-to-do.svg?branch=master)](https://travis-ci.com/IOINITID/awesome-to-do)
 
 ---
 
-Главная страница сайта: 🖥️ https://ioinitid.github.io/awesome-to-do/index.html
+Main page: 🖥️ https://ioinitid.github.io/awesome-to-do
 
 ---
 
-**Превью:**
+**Preview:**
 
 ---
 
@@ -15,14 +16,14 @@
 
 ---
 
-Сделано с ❤️
+Made with ❤️
 
-> Дизайн: _[Волковая Виктория](https://www.behance.net/awwwewolf): "Awesome To-Do"_
+> Designed by: _[Волковая Виктория](https://www.behance.net/awwwewolf): "Awesome To-Do"_
 
 ---
 
-**Папка с исходными файлами — `src/`.**
+**Source files folder — `src/`.**
 
-- [contributing.md](contributing.md) — руководство по сборке проекта.
+- [contributing.md](contributing.md) — project build guide.
 
 ---
